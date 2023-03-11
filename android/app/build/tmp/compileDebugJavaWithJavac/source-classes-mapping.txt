@@ -1,0 +1,14 @@
+com/wditechy/truckie/MainActivity.java
+ com.wditechy.truckie.MainActivity
+com/wditechy/truckie/ReactNativeFlipper.java
+ com.wditechy.truckie.ReactNativeFlipper
+ com.wditechy.truckie.ReactNativeFlipper$1
+ com.wditechy.truckie.ReactNativeFlipper$2
+ com.wditechy.truckie.ReactNativeFlipper$2$1
+com/wditechy/truckie/MainApplication.java
+ com.wditechy.truckie.MainApplication
+ com.wditechy.truckie.MainApplication$1
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/wditechy/truckie/BuildConfig.java
+ com.wditechy.truckie.BuildConfig

@@ -1,0 +1,108 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.wditechy.truckie"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="30" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->D:\React Native\android\app\src\debug\AndroidManifest.xml:5:5-77
+11-->D:\React Native\android\app\src\debug\AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->D:\React Native\android\app\src\main\AndroidManifest.xml:4:5-67
+12-->D:\React Native\android\app\src\main\AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\4d7b778dbfd394b64071d94d86bc4780\jetified-flipper-0.99.0\AndroidManifest.xml:16:5-76
+13-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\4d7b778dbfd394b64071d94d86bc4780\jetified-flipper-0.99.0\AndroidManifest.xml:16:22-73
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->[:react-native-community_netinfo] D:\React Native\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+14-->[:react-native-community_netinfo] D:\React Native\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+15    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+15-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+15-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
+16
+17    <uses-feature
+17-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+18        android:glEsVersion="0x00020000"
+18-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+19        android:required="true" />
+19-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+20
+21    <application
+21-->D:\React Native\android\app\src\main\AndroidManifest.xml:6:5-26:19
+22        android:name="com.wditechy.truckie.MainApplication"
+22-->D:\React Native\android\app\src\main\AndroidManifest.xml:7:7-38
+23        android:allowBackup="false"
+23-->D:\React Native\android\app\src\main\AndroidManifest.xml:10:7-34
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\cc5e9dcdc56dc39042f72c501235e83f\core-1.5.0\AndroidManifest.xml:24:18-86
+25        android:debuggable="true"
+26        android:icon="@mipmap/ic_launcher"
+26-->D:\React Native\android\app\src\main\AndroidManifest.xml:9:7-41
+27        android:label="@string/app_name"
+27-->D:\React Native\android\app\src\main\AndroidManifest.xml:8:7-39
+28        android:theme="@style/AppTheme"
+28-->D:\React Native\android\app\src\main\AndroidManifest.xml:11:7-38
+29        android:usesCleartextTraffic="true" >
+29-->D:\React Native\android\app\src\debug\AndroidManifest.xml:8:9-44
+30        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+30-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:9-86
+30-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:19-83
+31        <activity
+31-->D:\React Native\android\app\src\main\AndroidManifest.xml:12:7-22:18
+32            android:name="com.wditechy.truckie.MainActivity"
+32-->D:\React Native\android\app\src\main\AndroidManifest.xml:13:9-37
+33            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+33-->D:\React Native\android\app\src\main\AndroidManifest.xml:15:9-86
+34            android:label="@string/app_name"
+34-->D:\React Native\android\app\src\main\AndroidManifest.xml:14:9-41
+35            android:launchMode="singleTask"
+35-->D:\React Native\android\app\src\main\AndroidManifest.xml:16:9-40
+36            android:windowSoftInputMode="adjustResize" >
+36-->D:\React Native\android\app\src\main\AndroidManifest.xml:17:9-51
+37            <intent-filter>
+37-->D:\React Native\android\app\src\main\AndroidManifest.xml:18:9-21:25
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\React Native\android\app\src\main\AndroidManifest.xml:19:13-65
+38-->D:\React Native\android\app\src\main\AndroidManifest.xml:19:21-62
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\React Native\android\app\src\main\AndroidManifest.xml:20:13-73
+40-->D:\React Native\android\app\src\main\AndroidManifest.xml:20:23-70
+41            </intent-filter>
+42        </activity>
+43
+44        <meta-data
+44-->D:\React Native\android\app\src\main\AndroidManifest.xml:23:7-25:63
+45            android:name="com.google.android.geo.API_KEY"
+45-->D:\React Native\android\app\src\main\AndroidManifest.xml:24:7-52
+46            android:value="AIzaSyCOKXBz_YM85k4KcFzNxPUvEArDjhipX8c" /> <!-- Needs to be explicitly declared on P+ -->
+46-->D:\React Native\android\app\src\main\AndroidManifest.xml:25:6-61
+47        <uses-library
+47-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+48            android:name="org.apache.http.legacy"
+48-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+49            android:required="false" />
+49-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+50
+51        <activity
+51-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\16fec408ce938816983d0134c390d125\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+52            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+52-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\16fec408ce938816983d0134c390d125\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+53            android:exported="false"
+53-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\16fec408ce938816983d0134c390d125\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+54            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+54-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\16fec408ce938816983d0134c390d125\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+55
+56        <meta-data
+56-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\3bd47cd0cbc033840efb0f55a32df796\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+57            android:name="com.google.android.gms.version"
+57-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\3bd47cd0cbc033840efb0f55a32df796\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+58            android:value="@integer/google_play_services_version" />
+58-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\3bd47cd0cbc033840efb0f55a32df796\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+59    </application>
+60
+61</manifest>
