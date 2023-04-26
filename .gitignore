@@ -252,6 +252,15 @@ render.experimental.xml
 google-services.json
 
 # Android Profiling
+android/
 *.hprof
+
+java_pid16656.hprof
+
+java_pid17076.hprof
+
+D:\React Native\android\java_pid16656.hprof
+D:\React Native\android\java_pid17076.hprof
+
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative
