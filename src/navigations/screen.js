@@ -204,6 +204,10 @@ const Navigator = () => {
           component={require("@screen/Driver/Settlement").default}
         />
         <Stack.Screen
+          name="DriverPermissions"
+          component={require("@screen/Driver/Permissions").default}
+        />
+        <Stack.Screen
           name="DriverMyTrips"
           component={require("@screen/Driver/MyTrips").default}
         />

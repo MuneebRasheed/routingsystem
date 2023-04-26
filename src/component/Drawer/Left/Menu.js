@@ -89,7 +89,7 @@ export const Data3 = [
     iconType: "Fontisto",
   },
   {
-    name: "Settlement",
+    name: "Transaction History",
     route: "DriverSettlement",
     iconName: "gears",
     iconType: "FontAwesome",
