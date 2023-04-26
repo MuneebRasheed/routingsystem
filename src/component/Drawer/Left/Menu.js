@@ -38,7 +38,7 @@ export const Data2 = [
     iconType: "Fontisto",
   },
   {
-    name: "Manage Profile",
+    name: "Profile",
     route: "CustomerManageProfile",
     iconName: "account",
     iconType: "MaterialCommunityIcons",
@@ -48,6 +48,13 @@ export const Data2 = [
     route: "CustomerNotification",
     iconName: "bell",
     iconType: "Entypo",
+  }
+  ,
+  {
+    name: "Payment",
+    route: "CustomerAllPayments",
+    iconName: "account",
+    iconType: "MaterialCommunityIcons",
   },
   {
     name: "Logout",
@@ -70,7 +77,7 @@ export const Data3 = [
   //   iconType: "FontAwesome",
   // },
   {
-    name: "Manage Profile",
+    name: "Profile",
     route: "DriverManageProfile",
     iconName: "account",
     iconType: "MaterialCommunityIcons",
@@ -81,12 +88,12 @@ export const Data3 = [
     iconName: "truck",
     iconType: "Fontisto",
   },
-  // {
-  //   name: "Settlement",
-  //   route: "DriverSettlement",
-  //   iconName: "gears",
-  //   iconType: "FontAwesome",
-  // },
+  {
+    name: "Settlement",
+    route: "DriverSettlement",
+    iconName: "gears",
+    iconType: "FontAwesome",
+  },
   {
     name: "My Routes",
     route: "DriverRoutes",
@@ -95,7 +102,7 @@ export const Data3 = [
   },
   {
     name: "Notification",
-    route: "CustomerNotification",
+    route: "DriverNotification",
     iconName: "bell",
     iconType: "Entypo",
   },
@@ -105,4 +112,10 @@ export const Data3 = [
     iconName: "logout",
     iconType: "AntDesign",
   },
+  // {
+  //   name: "Payments",
+  //   route: "CustomerAllPayments",
+  //   iconName: "logout",
+  //   iconType: "AntDesign",
+  // },
 ];

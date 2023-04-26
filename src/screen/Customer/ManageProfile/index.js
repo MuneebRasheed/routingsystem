@@ -1,118 +1,185 @@
-import React, { useState } from "react";
-import { View, ScrollView, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, ScrollView, Image, AppRegistry } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch, Checkbox } from "@component/Form";
-
+import ImagePicker from "react-native-image-crop-picker";
 import Modal from "react-native-modalbox";
-
+import { CreditCardInput } from "react-native-credit-card-input";
 import styles from "./styles";
 import theme from "@theme/styles";
-
+import axios from "axios";
 import Header from "@component/Header";
 import Support from "@component/Support";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
-
+import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 export default function ManageProfile() {
-  const [selected, setSelected] = useState("");
-  const [values, setValues] = useState({});
+  const [information, setInformation] = useState({});
+  const[name,setName]=useState();
+  const[gender,setGender]=useState()
+  const [values, setValues] = useState();
   const [isOpen, setIsOpen] = useState(false);
+  const [CardInput, setCardInput] = useState({});
   const [tabSelected, setTabSelected] = useState("profile");
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     selected: "",
-  //     values: {},
-  //     tabSelected: "profile",
-  //   };
 
-  //   bind(this);
-
-  //   this.renderProfile = this.renderProfile.bind(this);
-  //   this.renderPermission = this.renderPermission.bind(this);
-  //   this.renderInsurance = this.renderInsurance.bind(this);
-
-  //   this.onChangeText = this.onChangeText.bind(this);
-  //   this.validate = this.validate.bind(this);
-  //   this.onSubmit = this.onSubmit.bind(this);
-  // }
   const [PaymentTabSelected, setPaymentTabSelected] = useState("card");
 
-  async function onSubmit() {
-    await Support.showSuccess({
-      title: __("Success!"),
-      message: __("Transaction success"),
-      onHide: () => {
-        navigateReset("");
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  const postData = async()=>{
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    console.log(datas);
+
+    const res = axios
+    .put(
+      ` http://18.232.210.115:3000/v1/users/update-user`,{
+        first_name:name,
+        gender:gender,
+        avatar_file: values,
+       
       },
-      hideDelay: 2500,
+      {
+        headers: {
+          Authorization: `Bearer ${datas.access_token}`,
+        },
+      }
+    )
+    .then((data) => {
+      console.log("res", data.data);
+     
+     
+    })
+    .catch((err) => {
+      console.log(("error", err));
+    });
+
+  }
+
+  const fetchData = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    console.log(datas);
+   
+    const res = axios
+      .get(
+        `  http://18.232.210.115:3000/v1/users/user-by-id/${datas._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("res", data.data);
+       
+        setInformation(data.data.data);
+        setName(data.data.data?.first_name)
+        setGender(data.data.data?.gender)
+      })
+      .catch((err) => {
+        console.log(("error", err));
+      });
+  };  
+
+  async function onDisplayNotification() {
+    console.log("name",name);
+    const channelId = await notifee.createChannel({
+      id: "important",
+      name: "Important Notifications",
+      importance: AndroidImportance.HIGH,
+    });
+
+    // await notifee.displayNotification({
+    //   title: 'Your account requires attention',
+    //   body: 'You are overdue payment on one or more of your accounts!',
+    //   android: {
+    //     channelId,
+    //       largeIcon: require('../../../../assets/images/fb.png'),
+    //     importance: AndroidImportance.HIGH,
+    //     // ongoing: true,
+    //   },
+    // });
+    // notifee.displayNotification({
+    //   title: 'New notification',
+    //   android: {
+    //     channelId,
+    //     pressAction: {
+    //       id: 'default',
+    //       launchActivity: 'com.awesome.app.CustomActivity',
+    //     },
+    //   },
+    // });
+
+    notifee.displayNotification({
+      title: "Suzuki Wagon R",
+      body: "Muzafar \n 4.8(613)",
+      data: {
+        chatId: "123",
+      },
+      android: {
+        largeIcon: require("../../../../assets/images/avatar.png"),
+        importance: AndroidImportance.HIGH,
+        channelId,
+        actions: [
+          {
+            title: "Accept",
+            icon: "https://my-cdn.com/icons/open-chat.png",
+            pressAction: {
+              id: "Accept",
+              launchActivity: "default",
+            },
+          },
+          {
+            title: "Delete",
+            icon: "https://my-cdn.com/icons/open-chat.png",
+            pressAction: {
+              id: "Delete",
+              launchActivity: "default",
+            },
+          },
+        ],
+      },
+    });
+
+    notifee.onForegroundEvent(({ type, detail }) => {
+      if (type === EventType.ACTION_PRESS && detail.pressAction.id) {
+        console.log(
+          "User pressed an action with the id: ",
+          detail.pressAction.id
+        );
+        if (detail.pressAction.id == "Accept") {
+          // fetchData();
+          navigate("CustomerPayment")
+        } else {
+          alert("you decline");
+        }
+   
+      }
     });
   }
 
-  function renderCard() {
-    return (
-      <View>
-        <View style={styles.paymentForm}>
-          <View style={styles.formRow}>
-            <Text style={styles.formText}>{__("NAME ON CARD")}</Text>
-            <TextInput
-              placeholder="Carol cartex"
-              placeholderTextColor="#000"
-              style={styles.formInput}
-            />
-          </View>
-          <View style={styles.formRow}>
-            <Text style={styles.formText}>{__("CARD NUMBER")}</Text>
-            <TextInput
-              placeholder="0000 3434 7867 9523"
-              keyboardType="numeric"
-              placeholderTextColor="#000"
-              style={styles.formInput}
-            />
-          </View>
-          <View style={styles.cardInfo}>
-            <View style={styles.formRow2}>
-              <Text style={styles.formText}>{__("EXPIRY DATE")}</Text>
-              <TextInput
-                placeholder="19 / 2019"
-                placeholderTextColor="#000"
-                keyboardType="numeric"
-                style={styles.formInput}
-              />
-            </View>
-            <View style={styles.formRow}>
-              <Text style={styles.formText}>{__("CVV")}</Text>
-              <TextInput
-                placeholder="657"
-                placeholderTextColor="#000"
-                keyboardType="numeric"
-                style={styles.formInput}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  function renderPayPal() {
-    return (
-      <View style={styles.payPalInfo}>
-        <Button>
-          <Image
-            style={styles.cardImg}
-            source={require("@asset/images/downloadicon.png")}
-          />
-        </Button>
-      </View>
-    );
-  }
-  function onValueChange() {
-    setSelected("");
+  async function onSubmit() {
+    if (CardInput.valid == false || typeof CardInput.valid == "undefined") {
+      alert("Invalid Credit Card");
+      return false;
+    } else {
+      await Support.showSuccess({
+        title: __("Success!"),
+        message: __("Transaction success"),
+        onHide: () => {
+          navigateReset("");
+        },
+        hideDelay: 2500,
+      });
+    }
   }
 
   function renderProfile() {
@@ -123,14 +190,24 @@ export default function ManageProfile() {
             <View style={styles.profileBgImg}>
               <Image
                 source={{
-                  uri: "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                // uri: "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                uri: values,
+                // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
                 }}
+                // source={require(values)}
                 style={styles.profileImg}
               />
               <Button
                 style={styles.iconDetail}
                 onPress={() => {
-                  navigate("CustomerEditProfile");
+                  ImagePicker.openPicker({
+                    width: 300,
+                    height: 400,
+                    cropping: true,
+                  }).then((image) => {
+                    setValues(image.path);
+                    console.log(image);
+                  });
                 }}
               >
                 <Icon
@@ -144,29 +221,35 @@ export default function ManageProfile() {
           <View style={styles.formRow}>
             <Text style={styles.formText}>{__("NAME")}</Text>
             <TextInput
-              placeholder="Shan Johnson"
+              placeholder="Enter The Name"
               placeholderTextColor="rgba(42,33,77,1)"
+              value={name}
+              onChangeText={(e)=>{setName(e)}}
               style={styles.formInput}
             />
           </View>
           <View style={styles.formRow}>
-            <Text style={styles.formText}>{__("EMAIL ADDRESS")}</Text>
+            <Text style={styles.formText}>{__("Gender")}</Text>
             <TextInput
-              placeholder="Shan.Johnson123@gmail.com"
+              placeholder="Enter The Gender"
               placeholderTextColor="rgba(42,33,77,1)"
+              value={gender}
+              onChangeText={(e)=>{setGender(e)}}
               style={styles.formInput}
             />
           </View>
           <View style={styles.formRow}>
             <Text style={styles.formText}>{__("MOBILE NUMBER")}</Text>
             <TextInput
-              placeholder="+91 9845725624"
+              placeholder="Enter The Phone Number"
+              value={information?.phone}
               placeholderTextColor="rgba(42,33,77,1)"
               keyboardType="numeric"
+              editable={false}
               style={styles.formInput}
             />
           </View>
-          <Button style={styles.saveBtn}>
+          <Button style={styles.saveBtn} onPress={postData}>
             <Text style={styles.saveBtnText}>{__("SAVE")}</Text>
           </Button>
         </View>
@@ -217,7 +300,7 @@ export default function ManageProfile() {
   function renderInsurance() {
     return (
       <Container>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.tabInfo}>
             <Button
               style={
@@ -263,7 +346,24 @@ export default function ManageProfile() {
               ? renderPayPal()
               : null}
           </View>
-        </ScrollView>
+        </ScrollView> */}
+        <View style={styles.payPalInfo}>
+          {/* <Image
+         style={styles.cardImg}
+         source={require("@asset/images/downloadicon.png")}
+       /> */}
+
+          <CreditCardInput
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            labelStyle={styles.labelStyle}
+            validColor="#fff"
+            placeholderColor="#ccc"
+            onChange={(data) => {
+              setCardInput(data);
+            }}
+          />
+        </View>
         <Button style={styles.payBtn} onPress={onSubmit}>
           <Text style={styles.payBtnText}>{__("MAKE A PAYMENT")}</Text>
         </Button>
@@ -350,49 +450,6 @@ export default function ManageProfile() {
           </ScrollView>
         </View>
       </Content>
-      {/* <Modal
-        ref={"modalBooking"}
-        position={"center"}
-        isOpen={isOpen}
-        onClosed={() => setIsOpen(false)}
-        style={styles.modalSort}
-      >
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.modalDetail}>
-            <Button
-              style={styles.closeHiddenDesc}
-              onPress={() => this.refs.modalBooking.close()}
-            >
-              <Icon
-                name="close"
-                type="MaterialIcons"
-                style={[theme.SIZE_20, theme.GREY]}
-              />
-            </Button>
-            <Text style={styles.modalTitle}>{__("Local Ride @ $100")}</Text>
-            <Text style={styles.modalDesc}>
-              {__(
-                "Integer pellentesque enim nec sem aliquam porttitor. Duis et nunc at est euismod convallis sit amet vitae risus. In non orci eu risus aliquet volutpat ut non erat."
-              )}
-            </Text>
-            <Text style={styles.modalDesc}>
-              {__(
-                " Aenean sem sapien, vestibulum eu elit dignissim, sodales scelerisque lectus. Duis eu tempor metus. Vivamus luctus erat eget pellentesque rutrum."
-              )}
-            </Text>
-            <Text style={styles.modalDesc}>
-              {__(
-                "  Sed blandit, eros sed cursus tempor, nibh nisi sodales elit, nec consequat nunc quam quis odio. Morbi bibendum mi lobortis luctus placerat. Nulla facilisis metus odio."
-              )}
-            </Text>
-            <Text style={styles.modalDesc}>
-              {__(
-                "Integer pellentesque enim nec sem aliquam porttitor. Duis et nunc at est euismod convallis sit amet vitae risus. In non orci eu risus aliquet volutpat ut non erat.  Aenean sem sapien, vestibulum eu elit dignissim, sodales scelerisque lectus.   Duis eu tempor metus. Vivamus luctus erat eget pellentesque rutrum.  Sed blandit, eros sed cursus tempor, nibh nisi sodales elit, nec consequat nunc quam quis odio. Morbi bibendum mi lobortis luctus placerat."
-              )}
-            </Text>
-          </View>
-        </ScrollView>
-      </Modal> */}
     </Container>
   );
 }

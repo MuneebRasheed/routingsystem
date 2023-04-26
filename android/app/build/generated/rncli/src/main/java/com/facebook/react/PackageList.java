@@ -11,12 +11,16 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// @notifee/react-native
+import io.invertase.notifee.NotifeePackage;
 // @react-native-async-storage/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // @react-native-community/clipboard
 import com.reactnativecommunity.clipboard.ClipboardPackage;
 // @react-native-community/datetimepicker
 import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
+// @react-native-community/geolocation
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 // @react-native-community/netinfo
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 // @react-native-picker/picker
@@ -25,8 +29,16 @@ import com.reactnativecommunity.picker.RNCPickerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 // react-native-date-picker
 import com.henninghall.date_picker.DatePickerPackage;
+// react-native-document-picker
+import com.reactnativedocumentpicker.DocumentPickerPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-image-crop-picker
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 // react-native-linear-gradient
 import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-maps
@@ -88,14 +100,20 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new NotifeePackage(),
       new AsyncStoragePackage(),
       new ClipboardPackage(),
       new RNDateTimePickerPackage(),
+      new GeolocationPackage(),
       new NetInfoPackage(),
       new RNCPickerPackage(),
       new ReactNativeConfigPackage(),
       new DatePickerPackage(),
+      new DocumentPickerPackage(),
+      new RNFSPackage(),
+      new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
+      new PickerPackage(),
       new LinearGradientPackage(),
       new MapsPackage(),
       new ReanimatedPackage(),

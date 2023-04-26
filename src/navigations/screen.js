@@ -1,11 +1,12 @@
-import React from "react";
+import React ,{useState,useEffect}from "react";
 import { Dimensions, I18nManager } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import DrawerLeft from "@component/Drawer/Left";
 import { navigationRef, onReady, onLastScreenLeave } from "@navigation";
+import { useSelector } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -22,9 +23,41 @@ const listeners = ({ navigation, route }) => ({
   },
 });
 
-const DrawerNav = ({ navigation }) => {
+const DrawerNavUser = ({ navigation }) => {
+  const data = useSelector((state)=>state)
+  console.log('cveer', data.session)
+  
   return (
+
     <Drawer.Navigator
+    screenOptions={{
+      headerShown: false,
+      drawerWidth: WIDTH_DRAWER,
+      drawerStyle: { width: "75%" },
+      drawerPosition: I18nManager.isRTL ? "right" : "left",
+    }}
+    drawerContent={(props) => <DrawerLeft {...props} />}
+    minSwipeDistance={width}
+  >
+    {data.session.bool?<Stack.Screen
+        name="PublicHome"
+        component={require("@screen/Driver/Home").default}
+      />:
+  <Stack.Screen
+    name="PublicHome"
+    component={require("@screen/Public/Home").default}
+  />}
+  </Drawer.Navigator>
+  
+    
+  );
+};
+
+
+const DrawerNavDriver = ({ navigation }) => {
+  
+  
+  return (<Drawer.Navigator
       screenOptions={{
         headerShown: false,
         drawerWidth: WIDTH_DRAWER,
@@ -35,10 +68,11 @@ const DrawerNav = ({ navigation }) => {
       minSwipeDistance={width}
     >
       <Stack.Screen
-        name="PublicHome"
-        component={require("@screen/Public/Home").default}
+        name="DriverHome"
+        component={require("@screen/Driver/Home").default}
       />
     </Drawer.Navigator>
+    
   );
 };
 
@@ -47,6 +81,7 @@ const NavRoot = ({ navigation }) => {
 };
 
 const Navigator = () => {
+ 
   return (
     <NavigationContainer ref={navigationRef} onReady={onReady}>
       <Stack.Navigator
@@ -57,7 +92,8 @@ const Navigator = () => {
         screenListeners={listeners}
       >
         <Stack.Screen name="NavRoot" component={NavRoot} />
-        <Stack.Screen name="DrawerNav" component={DrawerNav} />
+        <Stack.Screen name="DrawerNav" component={DrawerNavUser} />
+        {/* <Stack.Screen name="DrawerNav" component={DrawerNavDriver} /> */}
 
         <Stack.Screen
           name="PublicIntro"
@@ -75,6 +111,7 @@ const Navigator = () => {
           name="PublicVerification"
           component={require("@screen/Public/Verification").default}
         />
+        
         <Stack.Screen
           name="PublicAboutUs"
           component={require("@screen/Public/AboutUs").default}
@@ -113,6 +150,10 @@ const Navigator = () => {
           component={require("@screen/Customer/BookingComplete").default}
         />
         <Stack.Screen
+          name="DriverBookingComplete"
+          component={require("@screen/Driver/BookingComplete").default}
+        />
+        <Stack.Screen
           name="CustomerBookingConfirm"
           component={require("@screen/Customer/BookingConfirm").default}
         />
@@ -132,6 +173,10 @@ const Navigator = () => {
           name="CustomerNotification"
           component={require("@screen/Customer/Notification").default}
         />
+        <Stack.Screen
+          name="CustomerAllPayments"
+          component={require("@screen/Customer/AllPayments").default}
+        />
 
         <Stack.Screen
           name="DriverManageProfile"
@@ -144,6 +189,10 @@ const Navigator = () => {
         <Stack.Screen
           name="DriverRoutes"
           component={require("@screen/Driver/MyAllRoute").default}
+        />
+        <Stack.Screen
+          name="DriverNotification"
+          component={require("@screen/Driver/Notification").default}
         />
 
         <Stack.Screen

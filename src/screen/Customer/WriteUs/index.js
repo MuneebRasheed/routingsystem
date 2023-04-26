@@ -15,51 +15,53 @@ import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 
-export default class extends React.Component {
-  constructor(props) {
-    super(props);
+export default function WriteUs (){
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      values: {},
-      value: 50,
-      book: [{ label: "Order Tracking", value: 0 }],
-    };
+  //   this.state = {
+  //     values: {},
+  //     value: 50,
+  //    
+  //   };
 
-    bind(this);
+  //   bind(this);
 
-    this.onChangeText = this.onChangeText.bind(this);
-    this.validate = this.validate.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+  //   this.onChangeText = this.onChangeText.bind(this);
+  //   this.validate = this.validate.bind(this);
+  //   this.onSubmit = this.onSubmit.bind(this);
+  // }
 
-  onChangeText(n, v) {
-    this.setState({
-      values: { ...this.state.values, [n]: v },
-    });
-  }
+  // onChangeText(n, v) {
+  //   this.setState({
+  //     values: { ...this.state.values, [n]: v },
+  //   });
+  // }
 
-  validate() {
-    const isEmpty = (key) => {
-      return !(
-        typeof this.state.values[key] !== "undefined" &&
-        this.state.values[key] !== ""
-      );
-    };
-    const errors = [];
+  // validate() {
+  //   const isEmpty = (key) => {
+  //     return !(
+  //       typeof this.state.values[key] !== "undefined" &&
+  //       this.state.values[key] !== ""
+  //     );
+  //   };
+  //   const errors = [];
 
-    if (isEmpty("comment")) {
-      errors.push("Please enter your Comment");
-    }
+  //   if (isEmpty("comment")) {
+  //     errors.push("Please enter your Comment");
+  //   }
 
-    if (errors.length) {
-      throw new Error(errors.join("\n"));
-    }
-  }
+  //   if (errors.length) {
+  //     throw new Error(errors.join("\n"));
+  //   }
+  // }
 
-  async onSubmit() {
+ const book=[{ label: "Order Tracking", value: 0 }];
+
+  async function onSubmit() {
     await Support.showLoading();
     try {
-      this.validate();
+     
 
       await Support.showSuccess({
         title: __("Thank you !"),
@@ -75,7 +77,7 @@ export default class extends React.Component {
     await Support.hideLoading();
   }
 
-  render() {
+ 
     return (
       <Container>
         <DarkStatusBar />
@@ -91,7 +93,8 @@ export default class extends React.Component {
             <View style={styles.writeUsInfo}>
               <Text style={styles.writeUsTitle}>{__("BOOKING ID")}</Text>
               <View style={styles.picker}>
-                <Picker items={this.state.book} onChange={this.onChangeValue} />
+                <Picker items={book}  />
+                {/* onChange={this.onChangeValue} */}
               </View>
             </View>
             <View style={styles.formRow}>
@@ -103,11 +106,11 @@ export default class extends React.Component {
                 numberOfLines={7}
                 textAlignVertical={"top"}
                 // placeholder='Please write your comments'
-                onChangeText={(v) => this.onChangeText("comment", v)}
+                // onChangeText={(v) => this.onChangeText("comment", v)}
                 style={styles.formInput}
               />
             </View>
-            <Button style={styles.sendBtn} onPress={this.onSubmit}>
+            <Button style={styles.sendBtn} onPress={onSubmit}>
               <Text style={styles.sendBtnText}>{__("SEND")}</Text>
             </Button>
           </View>
@@ -115,4 +118,4 @@ export default class extends React.Component {
       </Container>
     );
   }
-}
+

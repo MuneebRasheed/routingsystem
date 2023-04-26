@@ -192,6 +192,7 @@ export default {
     width: "90%",
     height: 400,
     borderRadius: 10,
+    zIndex: 2,
   },
   modalRatingContainer: {
     marginHorizontal: 15,
@@ -310,27 +311,59 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 5,
   },
+  senderPic: {
+    marginHorizontal: 10,
+  },
+  reciverPic: {
+    marginHorizontal: 10,
+  },
+  wrapimg: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  profileImg: {
+    width: 32,
+    height: 32,
+    borderRadius: 45,
+  },
+
   sender: {
+    minWidth: "1%",
+    maxWidth: "80%",
     alignItems: "flex-end",
     backgroundColor: COLOR.GREY,
-
     marginTop: 5,
     paddingBottom: 5,
+    marginLeft: "auto",
     paddingTop: 5,
-    paddingRight: 7,
-    marginLeft: 70,
-    fontSize: SIZE.SIZE_12,
-    borderRadius: 6,
+    paddingRight: 10,
+    borderRadius: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
   },
+  chatText: {
+    fontFamily: FAMILY.REGULAR,
+    fontSize: SIZE.SIZE_12,
+    color: COLOR.LIGHT,
+  },
+
   reciver: {
-    backgroundColor: COLOR.GREYVIOLET,
+    minWidth: "1%",
+    maxWidth: "80%",
     marginTop: 5,
     paddingBottom: 5,
     borderRadius: 6,
     paddingTop: 5,
     paddingLeft: 7,
-    marginRight: 70,
+    marginRight: "auto",
     fontSize: SIZE.SIZE_12,
+    backgroundColor: COLOR.BLUE,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
   },
   formInput3: {
     width: "90%",
@@ -342,4 +375,11 @@ export default {
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
+  
+  
+  balanceBtnText1: {
+  
+    backgroundColor: COLOR.GREEN,
+    
+  }
 };

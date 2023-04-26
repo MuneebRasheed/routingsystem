@@ -15,61 +15,77 @@ import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
+
 
 export default function MyTrip() {
   const [tabSelected, setTabSelected] = useState("all");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    if(isFocused){ 
+      console.log("UseEffect Call")
+      submit();
+  }
+    
+  }, [isFocused]);
+
+  async function submit() {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    const res = axios
+      .get(
+        `  https://testing.explorelogix.com/v1/routes?page=1&limit=10
+        `,
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("res get all route", data.data.docs.length);
+        setData(data.data.docs);
+      })
+      .catch((err) => {
+        console.log(("error", err));
+      });
+  }
 
   function renderAll() {
     return (
       <View>
         <View style={styles.accordionLayout}>
-          <View style={styles.accordion}>
-            <Button disabled style={styles.accordionBtn}>
-              <Text style={styles.accordionTitle}>{"ROUTE ID #X876895"}</Text>
-              <View style={styles.accordionInfo}>
-                <View style={styles.accordionItem}>
-                  <Text style={styles.accordionInactiveText}>{"Edit"}</Text>
+          <ScrollView>
+            {data.map((val) => {
+              return (
+                <View style={styles.accordion}>
+                  <Button disabled style={styles.accordionBtn}>
+                    <Text style={styles.accordionTitle}>
+                      {"ROUTE ID #X876895"}
+                    </Text>
+                    <View style={styles.accordionInfo}>
+                      <View style={styles.accordionItem}>
+                        <Text style={styles.accordionInactiveText}>
+                          {"Edit"}
+                        </Text>
+                      </View>
+                      <Icon
+                        name="delete"
+                        type="MaterialCommunityIcons"
+                        style={[theme.SIZE_20, theme.DARKBLUE]}
+                      />
+                    </View>
+                  </Button>
                 </View>
-                <Icon
-                  name="delete"
-                  type="MaterialCommunityIcons"
-                  style={[theme.SIZE_20, theme.DARKBLUE]}
-                />
-              </View>
-            </Button>
-          </View>
-          <View style={styles.accordion}>
-            <Button disabled style={styles.accordionBtn}>
-              <Text style={styles.accordionTitle}>{"ROUTE ID #X876895"}</Text>
-              <View style={styles.accordionInfo}>
-                <View style={styles.accordionItem}>
-                  <Text style={styles.accordionInactiveText}>{"Edit"}</Text>
-                </View>
-                <Icon
-                  name="delete"
-                  type="MaterialCommunityIcons"
-                  style={[theme.SIZE_20, theme.DARKBLUE]}
-                />
-              </View>
-            </Button>
-          </View>
-          <View style={styles.accordion}>
-            <Button disabled style={styles.accordionBtn}>
-              <Text style={styles.accordionTitle}>{"ROUTE ID #X876895"}</Text>
-              <View style={styles.accordionInfo}>
-                <View style={styles.accordionItem}>
-                  <Text style={styles.accordionInactiveText}>{"Edit"}</Text>
-                </View>
-                <Icon
-                  name="delete"
-                  type="MaterialCommunityIcons"
-                  style={[theme.SIZE_20, theme.DARKBLUE]}
-                />
-              </View>
-            </Button>
-          </View>
+              );
+            })}
+          </ScrollView>
         </View>
       </View>
     );
@@ -80,19 +96,34 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
-            <Button disabled style={styles.accordionBtn}>
-              <Text style={styles.accordionTitle}>{"ROUTE ID #X876895"}</Text>
-              <View style={styles.accordionInfo}>
-                <View style={styles.accordionItem}>
-                  <Text style={styles.accordionInactiveText}>{"Edit"}</Text>
-                </View>
-                <Icon
-                  name="delete"
-                  type="MaterialCommunityIcons"
-                  style={[theme.SIZE_20, theme.DARKBLUE]}
-                />
-              </View>
-            </Button>
+          <ScrollView>
+            {data.map((val) => {
+              if(val.isActive){
+                return (
+                  <View style={styles.accordion}>
+                    <Button disabled style={styles.accordionBtn}>
+                      <Text style={styles.accordionTitle}>
+                        {"ROUTE ID #X876895"}
+                      </Text>
+                      <View style={styles.accordionInfo}>
+                        <View style={styles.accordionItem}>
+                          <Text style={styles.accordionInactiveText}>
+                            {"Edit"}
+                          </Text>
+                        </View>
+                        <Icon
+                          name="delete"
+                          type="MaterialCommunityIcons"
+                          style={[theme.SIZE_20, theme.DARKBLUE]}
+                        />
+                      </View>
+                    </Button>
+                  </View>
+                );
+              }
+              
+            })}
+          </ScrollView>
           </View>
         </View>
       </View>
@@ -104,19 +135,32 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
-            <Button disabled style={styles.accordionBtn}>
-              <Text style={styles.accordionTitle}>{"ROUTE ID #X876895"}</Text>
-              <View style={styles.accordionInfo}>
-                <View style={styles.accordionItem}>
-                  <Text style={styles.accordionInactiveText}>{"Edit"}</Text>
-                </View>
-                <Icon
-                  name="delete"
-                  type="MaterialCommunityIcons"
-                  style={[theme.SIZE_20, theme.DARKBLUE]}
-                />
-              </View>
-            </Button>
+          {data.map((val) => {
+              if(!val.isActive){
+                return (
+                  <View style={styles.accordion}>
+                    <Button disabled style={styles.accordionBtn}>
+                      <Text style={styles.accordionTitle}>
+                        {"ROUTE ID #X876895"}
+                      </Text>
+                      <View style={styles.accordionInfo}>
+                        <View style={styles.accordionItem}>
+                          <Text style={styles.accordionInactiveText}>
+                            {"Edit"}
+                          </Text>
+                        </View>
+                        <Icon
+                          name="delete"
+                          type="MaterialCommunityIcons"
+                          style={[theme.SIZE_20, theme.DARKBLUE]}
+                        />
+                      </View>
+                    </Button>
+                  </View>
+                );
+              }
+              
+            })}
           </View>
         </View>
       </View>

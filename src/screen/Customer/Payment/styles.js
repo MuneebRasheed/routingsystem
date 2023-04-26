@@ -69,43 +69,43 @@ export default {
   /** -- Card -- **/
   payPalInfo: {
     marginHorizontal: 20,
-    marginVertical: 15
+    marginVertical: 15,
   },
   cardImg: {
     width: 70,
-    height: 50
+    height: 50,
   },
   paymentForm: {
     paddingHorizontal: 30,
     paddingVertical: 30,
   },
   formRow: {
-    marginVertical: 10
-},
+    marginVertical: 10,
+  },
   formRow2: {
     flex: 5,
-    marginRight: 10
+    marginRight: 10,
   },
   inputInfo: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   formText: {
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_10,
     color: COLOR.SMOKEVIOLET,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   formInput: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_14,
     color: COLOR.DARK,
-    borderColor: 'rgba(42,33,77,0.1)',
+    borderColor: "rgba(42,33,77,0.1)",
     borderBottomWidth: 1,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   cardInfo: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center",
   },
   payBtn: {
     alignItems: 'center',
@@ -119,5 +119,35 @@ export default {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT
+  },
+  button : {
+    backgroundColor:'#2471A3',
+    width:150,
+    height:45,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:20,
+    borderRadius:5
+  },
+  buttonText : {
+    fontSize: 15,
+    color: '#f4f4f4',
+    fontWeight:'bold',
+    textTransform:'uppercase'
+  },
+  inputContainerStyle : {
+    backgroundColor:'#fff',
+    borderRadius:5
+  },
+  inputStyle : {
+    backgroundColor:'#222242',
+    paddingLeft:15,
+    borderRadius:5,
+    color:'#fff'
+  },
+  labelStyle : {
+    marginBottom:5,
+    fontSize:12
   }
 }

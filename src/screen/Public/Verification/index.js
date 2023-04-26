@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, ScrollView, Image } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import styles from "./styles";
 import theme from "@theme/styles";
+
 
 import Header from "@component/Header";
 import Support from "@component/Support";
@@ -14,25 +15,142 @@ import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
-import CountDown from 'react-native-countdown-component';
+import CountDown from "react-native-countdown-component";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
-export default function Verification() {
-  const [text1, setText1] = useState("");
-  const [text2, setText2] = useState("");
-  const [text3, setText3] = useState("");
-  const [text4, setText4] = useState("");
-  const[code,setCode]=useState("")
-
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/reducers/session";
+export default function Verification(props) {
+  const [data, setData] = useState({});
+  console.log("props", props.route);
+  useEffect(() => {
+    setData(props.route.params.values);
+  }, []);
+var temp =0;
+  const [code, setCode] = useState("");
+  const[token,setToken]= useState("")
+const dispatch = useDispatch()
   async function onSubmit() {
-    await Support.showSuccess({
-      title: __('Thank You'),
-      message: __('Your phone number can be verified'),
-      onHide: () => {
-        navigateReset('PublicHome')
-      },
-      hideDelay: 2500
-    })
-    console.log(text1, text2, text3, text4);
+    var datas = {
+      first_name: data.firstName,
+      last_name: data.lastName,
+      password: code,
+      phone: data.phonenum,
+      country: "Pakistan",
+      city: "lahore",
+      gender: data.gender,
+      role: ["user"],
+    };
+
+    axios
+      .post("http://18.232.210.115:3000/v1/auth/signup", datas)
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 201) {
+          console.log("datas",datas);
+          Support.showSuccess({
+            title: __("Thank You"),
+            message: __("Your phone number can be verified"),
+            onHide: () => {
+              navigateReset("PublicHome");
+            },
+            hideDelay: 2500,
+          });
+        } else {
+          Support.showError({
+            title: __("OOPs"),
+            message: __("You cant be login"),
+            // onHide: () => {
+            //   navigateReset('PublicHome')
+            // },
+            hideDelay: 2500,
+          });
+        }
+      })
+      .catch((err) => {
+        // Support.showError({
+        //   title: __('OOPs'),
+        //   message: __('You cant be login'),
+        //   // onHide: () => {
+        //   //   navigateReset('PublicHome')
+        //   // },
+        //   hideDelay: 2500
+        // })
+      });
+  }
+ async function logins() {
+  
+    var cd={
+      identifier: data,
+      password: code,
+    }
+
+    axios.post("http://18.232.210.115:3000/v1/auth/login", cd)
+      .then((response) => {
+        setToken(response?.data);
+       
+        if (response.status === 201) {
+          if(props.route.params.role && response?.data.roles[0]!='user' ){
+            temp=2;
+            dispatch(login({}))
+            Support.showSuccess({
+              title: __("Thank You"),
+              message: __("Your phone number can be verified Login as driver"),
+              onHide: async() => {
+                navigateReset("PublicHome");
+               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
+               await AsyncStorage.setItem('role',"User");
+                
+              },
+              hideDelay: 2500,
+            });
+          
+          }
+
+          if( !props.route.params.role && response?.data.roles[0]=='user' ){
+            temp=2;
+            Support.showSuccess({
+              title: __("Thank You"),
+              message: __("Your phone number can be verified Login as user"),
+              onHide: async() => {
+                navigateReset("PublicHome");
+               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
+               await AsyncStorage.setItem('role',"User");
+                
+              },
+              hideDelay: 2500,
+            });
+            
+          }
+          if(temp!=2){
+            Support.showError({
+              title: __("OOPs"),
+              message: __("You cant be login"),
+              hideDelay: 2500,
+            });
+          }
+          
+
+          
+        } else {
+          
+          Support.showError({
+            title: __("OOPs"),
+            message: __("You cant be login"),
+            hideDelay: 2500,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error",err)
+        Support.showError({
+          title: __('OOPs'),
+          message: __('You cant be login Server Error'),
+          
+          hideDelay: 2500
+        })
+      });
+   
   }
 
   return (
@@ -62,7 +180,6 @@ export default function Verification() {
               </Text>
             </View>
 
-          
             <View>
               {/* <View style={styles.formRow}>
                 <TextInput
@@ -108,37 +225,40 @@ export default function Verification() {
                   style={styles.formInput}
                 />
               </View> */}
-                <OTPInputView
-              style={{ width: "74%", height: 200 }}
-              pinCount={4}
-              code={code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-              onCodeChanged = {cod => { setCode(cod)}}
-              autoFocusOnLoad
-              codeInputFieldStyle={styles.underlineStyleBase}
-              codeInputHighlightStyle={styles.underlineStyleHighLighted}
-              onCodeFilled={(cod) => {
-                console.log(`Code is ${cod}, you are good to go!`);
-               
-              }}
-
-              editable={true}
-            />
-              <Button style={styles.confirmBtn} onPress={onSubmit}>
+              <OTPInputView
+                style={{ width: "74%", height: 200 }}
+                pinCount={4}
+                code={code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
+                onCodeChanged={(cod) => {
+                  setCode(cod);
+                }}
+                autoFocusOnLoad
+                codeInputFieldStyle={styles.underlineStyleBase}
+                codeInputHighlightStyle={styles.underlineStyleHighLighted}
+                onCodeFilled={(cod) => {
+                  console.log(`Code is ${cod}, you are good to go!`);
+                }}
+                editable={true}
+              />
+              <Button
+                style={styles.confirmBtn}
+                onPress={props.route.params.screen ? logins : onSubmit}
+              >
                 <Text style={styles.confirmBtnText}>{__("CONFIRM")}</Text>
               </Button>
             </View>
             <View style={styles.verificationTimeInfo}>
               <Text style={styles.resendText}>{__("RESEND CODE IN")}</Text>
               <CountDown
-        until={30}
-        // onFinish={() => alert('finished')}
-        // onPress={() => alert('hello')}
-        size={22}
-        timeToShow={['S']}
-        timeLabels={{ s: null}}
-        digitStyle={styles.resendTime}
-        digitTxtStyle={{color: 'rgba(255, 178, 41, 1)'}}
-      />
+                until={30}
+                // onFinish={() => alert('finished')}
+                // onPress={() => alert('hello')}
+                size={22}
+                timeToShow={["S"]}
+                timeLabels={{ s: null }}
+                digitStyle={styles.resendTime}
+                digitTxtStyle={{ color: "rgba(255, 178, 41, 1)" }}
+              />
               {/* <Text style={styles.resendTime}>{__("30")}</Text> */}
               <Text style={styles.resendText}>{__("SEC")}</Text>
             </View>

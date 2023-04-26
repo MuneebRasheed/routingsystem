@@ -4,7 +4,7 @@
             "outputFile": "D:\\React Native\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v21\\values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\cc5e9dcdc56dc39042f72c501235e83f\\core-1.5.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\3732dbaed7efee9bf6fb58da2e28e003\\core-1.6.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

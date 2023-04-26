@@ -1,7 +1,7 @@
 package com.wditechy.truckie;
-
+import com.rnfs.RNFSPackage;
 import com.facebook.react.ReactActivity;
-
+import io.invertase.notifee.NotifeeApiModule;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -10,6 +10,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Truckie";
+   new RNFSPackage();
+    return NotifeeApiModule.getMainComponent("Truckie");
   }
 }

@@ -1,49 +1,128 @@
 import React, { useState, useRef } from "react";
-import { View, ScrollView, Image ,TouchableOpacity} from "react-native";
+import { View, Image } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import CheckBox from "react-native-check-box";
-import { COLOR, FAMILY, SIZE } from "@theme/typography";
-import Modal from "react-native-modalbox";
+import { COLOR } from "@theme/typography";
 
 import styles from "./styles";
 
 import theme from "@theme/styles";
 
 import Header from "@component/Header";
-import Support from "@component/Support";
 
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
-import request from "@utility/request";
-import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 import PhoneInput from "react-native-phone-number-input";
-import CountryPicker, { DARK_THEME } from 'react-native-country-picker-modal'
+import Support from "@component/Support";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/reducers/session";
+import { initilizeSocket } from "../../../store/reducers/socketReducer";
 
 export default function SignUp() {
   const [isSelected, setSelection] = useState(false);
   const [value, setValue] = useState("");
-  const [valid, setValid] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [password, setPassword] = useState("");
+  const [valid, setValid] = useState(true);
+  const dispatch = useDispatch()
+  var temp =0;
   const phoneInput = useRef();
+  async function logins() {
+  
+    var cd={
+      identifier: value,
+      password
+    }
 
-  const countryInput = useRef();
+    axios.post("http://18.232.210.115:3000/v1/auth/login", cd)
+      .then((response) => {
+     
+     
+        if (response.status === 201) {
+          if( isSelected&& response?.data.roles[0]!='user' ){
+            temp=2;
+            dispatch(login({}))
+            dispatch(initilizeSocket(response.data.access_token))
+            Support.showSuccess({
+              title: __("Thank You"),
+              message: __("Your phone number can be verified Login as driver"),
+              onHide: async() => {
+                navigateReset("PublicHome");
+               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
+               await AsyncStorage.setItem('role',"User");
+                
+              },
+              hideDelay: 2500,
+            });
+          
+          }
+
+          if( !isSelected && response?.data.roles[0]=='user' ){
+            dispatch(initilizeSocket(response.data.access_token))
+            temp=2;
+            Support.showSuccess({
+              title: __("Thank You"),
+              message: __("Your phone number can be verified Login as user"),
+              onHide: async() => {
+                navigateReset("PublicHome");
+            
+               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
+               await AsyncStorage.setItem('role',"User");
+                
+              },
+              hideDelay: 2500,
+            });
+            
+          }
+          if(temp!=2){
+            Support.showError({
+              title: __("OOPs"),
+              message: __("You cant be login"),
+              hideDelay: 2500,
+            });
+          }
+          
+
+          
+        } else {
+          
+          Support.showError({
+            title: __("OOPs"),
+            message: __("You cant be login"),
+            hideDelay: 2500,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log("error",err)
+        Support.showError({
+          title: __('OOPs'),
+          message: __('You cant be login Server Error'),
+          
+          hideDelay: 2500
+        })
+      });
+   
+  }
+
   const onSubmit = () => {
-    navigateReset("PublicVerification");
+    const checkValid = phoneInput.current?.isValidNumber(value);
+    
+    if (checkValid) {
+      // navigate("PublicVerification", {
+      //   values: value,
+      //   screen: true,
+      //   role: isSelected,
+      // });
+      console.log(password,value)
+      logins();
+    } else {
+      alert("Invalid Phone Number");
+    }
   };
-
-  const [countryCode, setCountryCode] = useState('');
-  const [country, setCountry] = useState('');
-  const [userName, setUserName] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [isLoading, setLoading] = useState(false);
-
-  const onSelect = country => {
-    console.log(country);
-    setCountryCode(country.cca2);
-    setCountry(country);
-   };
 
   return (
     <Container>
@@ -71,66 +150,43 @@ export default function SignUp() {
               </Text>
             </View>
             <View>
-            <PhoneInput
-            ref={phoneInput}
-            defaultValue={value}
-            defaultCode="IN"
-            textInputStyle={{padding:5}}
-            containerStyle={{width:370,height:60,borderRadius:3}}
-            textContainerStyle={styles.formInput4}
-            onChangeFormattedText={(text) => {
-              setValue(text);
-            }}
-            // withDarkTheme
-            withShadow
-            autoFocus
-          />
-  {/* <CountryPicker
-         containerButtonStyle={{
-          height: 40,
-          marginTop: 5,
-          justifyContent: 'center',
-         }}
-         countryCode={countryCode}
-         withCountryNameButton={true}
-         visible={false}
-         withFlag={true}
-         withCloseButton={true}
-         withAlphaFilter={true}
-         withCallingCode={true}
-          //  withCurrency={true}
-         withEmoji={true}
-        //  withCountryNameButton={true}
-         //   withCurrencyButton={true}
-         //   withCallingCodeButton={true}
-         withFilter={true}
-         withModal={true}
-         onSelect={onSelect}
-        /> */}
-{/* <CountryPicker theme={DARK_THEME}  withFlag={true} ref={countryInput}/> */}
+              <PhoneInput
+                ref={phoneInput}
+                defaultValue={value}
+                defaultCode="PK"
+                textInputStyle={{ padding: 5 }}
+                containerStyle={{ width: 370, height: 60, borderRadius: 3 }}
+                textContainerStyle={styles.formInput4}
+                onChangeFormattedText={(text) => {
+                  setValue(text);
+                }}
+                withShadow
+                autoFocus
+              />
 
+              <View style={{  postion: "relative" }}>
+                <TextInput
+                  placeholder="Password"
+                  secureTextEntry={valid}
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholderTextColor="rgba(0,0,0,0.7)"
+                  style={[styles.formInput3, { marginTop: 15 }]}
+                />
 
-{/* <TouchableOpacity
-  style={styles.button}
-  onPress={() => {
-           const checkValid = phoneInput.current?.isValidNumber(value);
-           setValid(checkValid ? checkValid : false);
-           console.log(countryInput.current)
-          //proceed
-          }}>
-  <Text>Check</Text>
-</TouchableOpacity> */}
-              {/* <TextInput
-                placeholder="Mobile Number"
-                placeholderTextColor="rgba(0,0,0,0.7)"
-                style={styles.formInput3}
-              /> */}
-              {/* <TextInput
-                placeholder="Password"
-                placeholderTextColor="rgba(0,0,0,0.7)"
-                style={[styles.formInput3,{marginTop:15}]}
-              /> */}
-
+                <Icon
+                  name={valid ? "eye-slash" : "eye"}
+                  type="FontAwesome"
+                  style={[
+                    theme.SIZE_18,
+                    theme.PRIMARY,
+                    { postion: "absolute", right: -333, bottom: 52 },
+                  ]}
+                  onPress={() => {
+                    setValid((val) => !val);
+                  }}
+                />
+              </View>
               <Button style={styles.signUpBtn} onPress={onSubmit}>
                 <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
               </Button>
@@ -166,18 +222,6 @@ export default function SignUp() {
                   rightText={"SIGN IN AS DRIVER"}
                 />
               </View>
-
-              {/* <View style={styles.smnItem}>
-                <Button style={[styles.smnBtn, styles.smnFacebook]}>
-                  <Icon name='facebook' type='FontAwesome' style={[theme.SIZE_18, theme.PRIMARY]} />
-                </Button>
-                <Button style={[styles.smnBtn, styles.smnTwitter]}>
-                  <Icon name='twitter' type='FontAwesome' style={[theme.SIZE_18, theme.PRIMARY]} />
-                </Button>
-                <Button style={[styles.smnBtn, styles.smnGooglePlus]}>
-                  <Icon name='google-plus' type='FontAwesome' style={[theme.SIZE_18, theme.PRIMARY]} />
-                </Button>
-              </View> */}
             </View>
             <Text style={styles.termText}>
               {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}

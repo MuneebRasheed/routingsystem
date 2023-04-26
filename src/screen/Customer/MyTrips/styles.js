@@ -9,6 +9,11 @@ export default {
     paddingHorizontal: 15,
     paddingBottom: 20,
   },
+  balanceBtnText1: {
+  
+    backgroundColor: COLOR.GREEN,
+    
+  },
   myTripHeaderTitle: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_20,

@@ -63,7 +63,8 @@ export default {
   },
   formRow: {
     flexDirection: "row",
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    
   },
   formInput: {
     // flex: 1,

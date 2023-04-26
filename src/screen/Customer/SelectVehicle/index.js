@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { View, ScrollView, Image } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch } from "@component/Form";
-
+import axios from "axios";
 import styles from "./styles";
 import theme from "@theme/styles";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "@component/Header";
 import Accordion from "./Accordion";
-
+import Modal from "react-native-modalbox";
+import DropDownPicker from "react-native-dropdown-picker";
+import DocumentPicker from 'react-native-document-picker';
 import CalendarStrip from "react-native-calendar-strip";
 
 import { navigate } from "@navigation";
@@ -17,46 +19,301 @@ import { __ } from "@utility/translation";
 import { DarkStatusBar } from "@component/StatusBar";
 import { connect } from "react-redux";
 import DatePicker from "react-native-date-picker";
+import ImagePicker from "react-native-image-crop-picker";
+import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 
-function SelectVehicle() {
+function SelectVehicle(params) {
+  // console.log(params.route.params);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState();
+  const [fare, setfare] = useState();
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+  const [length, setLength] = useState();
+  const [weight, setWeight] = useState();
+  const [mainModel,setMainModel]=useState(false);
+  const [openModel, setOpenModel] = useState(false);
+  const [items, setItems] = useState([
+    { label: "Solid", value: "solid" },
+    { label: "Metal", value: "metal" },
+    { label: "Wood", value: "wood" },
+    { label: "Fragile", value: "fragile" },
+    { label: "Other Items", value: "otherItems" },
+  ]);
+  const[itemsType,setItemsType]=useState("solid")
+
+  const ModalNotification = useRef();
+  const getPhotoFromCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+    });
+  };
+  const UploadData=async()=>{
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setImages(res[0])
+      console.log(
+        res[0]
+      );
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
+    }
+
+    
+  }
+
+  const MainModel =()=>{
+
+    return(<Modal
+      ref={ModalNotification}
+      isOpen={true}
+      entry={"top"}
+      swipeToClose={false}
+      style={{ height:180,width:400,borderRadius:10,alignItems:'center'}}
+      backdropPressToClose={false}
+    >
+      <View style={{borderRadius:50}}>
+        <View  style={{flexDirection:'row'}}>
+          <View style={{width:'20%'}}>
+          <Image source={require('@asset/images/avatar.png')} resizeMode='cover' style={{width:50,height:50,borderRadius:25,margin:10}} />
+           
+          </View>
+          <View style={{width:'80%'}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between',margin:5,fontSize:20}}>
+            <Text >
+              {__("Suzuki Wagon R")}
+            </Text>
+            <Text >
+              {__("PKR 650)")}
+            </Text>
+
+            </View>
+            <View style={{flexDirection:'row',justifyContent:'space-between',margin:5,fontSize:20}}>
+            <Text >
+              {__("Muzafar")}
+            </Text>
+            <Text >
+              {__("2 min)")}
+            </Text>
+              
+            </View>
+            <View style={{flexDirection:'row',justifyContent:'space-between',margin:5,fontSize:20}}>
+            <Text >
+              {__("4.8(2454)")}
+            </Text>
+            <Text >
+              {__("406 m)")}
+            </Text>
+              
+            </View>
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <Button
+            style={[styles.bookingBtn, { width: "40%" }]}
+            onPress={() => {
+              // navigate("CustomerPayment");
+            }}
+          >
+            <Text style={styles.bookingBtnText}>{__("Decline")}</Text>
+          </Button>
+          <Button
+            style={[styles.bookingBtn, { width: "40%" }]}
+            onPress={() => {
+              navigate("CustomerPayment");
+            }}
+          >
+            <Text style={styles.bookingBtnText}>{__("Accept")}</Text>
+          </Button>
+        </View>
+      </View>
+    </Modal>)
+  }
+  const getPhotoFromGallery = () => {
+    // ImagePicker.openPicker({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true
+    // }).then(image => {
+    //   console.log(image);
+    // });
+
+    // ImagePicker.openPicker({
+    //   multiple: true,
+    // }).then((image) => {
+    //   console.log(image);
+    //   setImages(image);
+    // });
+    UploadData();
+  };
+
+const fetchData = async () => {
+    
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+const formData= new FormData()
+formData.append("files",images)
+formData.append("from_location",JSON.stringify(params.route.params.form))
+formData.append("to_location",JSON.stringify(params.route.params.to))
+formData.append("height",height)
+formData.append("fare",fare)
+formData.append("width",width)
+formData.append("time","2023-12-06")
+formData.append("length",length)
+formData.append("weight",weight)
+formData.append("parcel_type","wood")
+
+console.log("FormData",formData);
+
+const requestOptions = {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${datas.access_token}`,
+    'Content-Type':'multipart/form-data'
+  },
+  body: formData
+};
+try {
+  const res = await fetch('https://testing.explorelogix.com/v1/parcel', requestOptions);
+  const result = await res.json();
+  console.log('RESULT', result);
+} catch (err) {
+  console.log('ERROR');
+}
+
+  };
+
+  async function onDisplayNotification() {
+    const channelId = await notifee.createChannel({
+      id: "important",
+      name: "Important Notifications",
+      importance: AndroidImportance.HIGH,
+    });
+
+    // await notifee.displayNotification({
+    //   title: 'Your account requires attention',
+    //   body: 'You are overdue payment on one or more of your accounts!',
+    //   android: {
+    //     channelId,
+    //       largeIcon: require('../../../../assets/images/fb.png'),
+    //     importance: AndroidImportance.HIGH,
+    //     // ongoing: true,
+    //   },
+    // });
+    // notifee.displayNotification({
+    //   title: 'New notification',
+    //   android: {
+    //     channelId,
+    //     pressAction: {
+    //       id: 'default',
+    //       launchActivity: 'com.awesome.app.CustomActivity',
+    //     },
+    //   },
+    // });
+
+    notifee.displayNotification({
+      title: "Suzuki Wagon R",
+      body: "Muzafar \n 4.8(613)",
+      data: {
+        chatId: "123",
+      },
+      android: {
+        largeIcon: require("../../../../assets/images/avatar.png"),
+        importance: AndroidImportance.HIGH,
+        channelId,
+        actions: [
+          {
+            title: "Accept",
+            icon: "https://my-cdn.com/icons/open-chat.png",
+            pressAction: {
+              id: "Accept",
+              launchActivity: "default",
+            },
+          },
+          {
+            title: "Delete",
+            icon: "https://my-cdn.com/icons/open-chat.png",
+            pressAction: {
+              id: "Delete",
+              launchActivity: "default",
+            },
+          },
+        ],
+      },
+    });
+
+    notifee.onForegroundEvent(({ type, detail }) => {
+      if (type === EventType.ACTION_PRESS && detail.pressAction.id) {
+        console.log(
+          "User pressed an action with the id: ",
+          detail.pressAction.id
+        );
+        if (detail.pressAction.id == "Accept") {
+          // fetchData();
+          navigate("CustomerPayment");
+        } else {
+          alert("you decline");
+        }
+      }
+    });
+  }
   return (
     <Container style={theme.layoutFx}>
+        <Modal
+         isOpen={mainModel}
+         entry={"top"}
+         backdropOpacity={0.3}
+         >
+         <View style={{height:'30%'}}>
+         <MainModel/>
+          </View>
+          <View style={{height:'30%'}}>
+          <MainModel/>
+          </View>
+          <View style={{height:'30%'}}>
+          <MainModel/>
+          </View>
+      
+          <Button
+                style={[styles.bookingBtn,{backgroundColor:'grey'}]}
+                onPress={() => {
+                  // getPhotoFromGallery();
+                  // navigate("CustomerPayment");
+                  setMainModel(false);
+                }}
+              >
+                <Text style={styles.bookingBtnText}>
+                  {__("Cancel")}
+                </Text>
+              </Button>
+        </Modal>
       <DarkStatusBar />
       <Header leftType="back" title={"Booking"} />
-      {/* <View>
-        <CalendarStrip
-          calendarAnimation={{ type: 'sequence', duration: 30 }}
-          daySelectionAnimation={{ type: 'background', duration: 300, highlightColor: 'rgb(53,190,224)', fontFamily: 'Montserrat-SemiBold' }}
-          style={{ height: 140, paddingVertical: 10, backgroundColor: 'rgba(89,73,158,1)' }}
-          calendarHeaderStyle={{ color: '#FFF' }}
-          calendarColor={'#FFF'}
-          dateNumberStyle={{ color: '#FFF' }}
-          dateNameStyle={{ color: '#FFF' }}
-          highlightDateNameStyle={{ color: '#FFF' }}
-          highlightDateNumberStyle={{ color: '#FFF' }}
-          iconContainer={{ flex: 0.1 }}
-        />
-      </View> */}
+
       <Content contentContainerStyle={theme.layoutDf}>
+     
+     
+            
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.selectVehicleContainer}>
+          <View style={[styles.selectVehicleContainer,{height:600}]}>
             <View style={styles.selectVehicleContent}>
-              {/* <View style={styles.formRow}>
-                <TextInput
-                  placeholder='Pickup From'
-                  placeholderTextColor='rgba(89, 73, 158, 0.5)'
-                  style={styles.formInput} />
-                <Icon name='location-pin' type='Entypo' style={[theme.SIZE_20, theme.DARKBLUE]} />
-              </View>
-              <View style={styles.formRow}>
-                <TextInput
-                  placeholder='Drop at'
-                  placeholderTextColor='rgba(89, 73, 158, 0.5)'
-                  style={styles.formInput} />
-                <Icon name='location-pin' type='Entypo' style={[theme.SIZE_20, theme.DARKBLUE]} />
-              </View> */}
+              
               <Accordion
                 title="Select Time"
                 renderContent={() => (
@@ -82,6 +339,7 @@ function SelectVehicle() {
                 onConfirm={(date) => {
                   setOpen(false);
                   setDate(date);
+                  console.log(JSON.stringify(date));
                 }}
                 onCancel={() => {
                   setOpen(false);
@@ -90,145 +348,102 @@ function SelectVehicle() {
 
               <View style={styles.formRow}>
                 <TextInput
-                  placeholder="Affordable price"
+                  placeholder="Enter The Fare"
+                  value={fare}
                   placeholderTextColor="rgba(89, 73, 158, 0.5)"
+                  onChangeText={(text) => {
+                    setfare(text);
+                  }}
+                  keyboardType="numeric"
                   style={styles.formInput}
                 />
               </View>
               <View style={styles.formRow}>
                 <TextInput
+                  type="number"
                   placeholder="Height"
-                  placeholderTextColor="rgba(0,0,0,0.7)"
+                  placeholderTextColor="rgba(89, 73, 158, 0.5)"
                   style={styles.formInput}
+                  value={height}
+                  onChangeText={(text) => {
+                    setHeight(text);
+                  }}
+                  keyboardType="numeric"
+                  maxValue={100}
                 />
+                {/* "rgba(0,0,0,0.7)" */}
                 <TextInput
                   placeholder="Width"
-                  placeholderTextColor="rgba(0,0,0,0.7)"
+                  placeholderTextColor="rgba(89, 73, 158, 0.5)"
+                  keyboardType="numeric"
+                  value={width}
+                  onChangeText={(text) => {
+                    setWidth(text);
+                  }}
                   style={[styles.formInput, styles.formInput2]}
                 />
               </View>
-              {/* <Image
-                source={require("@asset/images/pluss.png")}
-                style={styles.signUpImg}
-              /> */}
-              <Button style={styles.bookingBtn}>
+              <View style={styles.formRow}>
+                <TextInput
+                  type="number"
+                  placeholder="Length"
+                  placeholderTextColor="rgba(89, 73, 158, 0.5)"
+                  style={styles.formInput}
+                  value={length}
+                  onChangeText={(text) => {
+                    setLength(text);
+                  }}
+                  keyboardType="numeric"
+                  maxValue={100}
+                />
+                <TextInput
+                  placeholder="Weight"
+                  placeholderTextColor="rgba(89, 73, 158, 0.5)"
+                  keyboardType="numeric"
+                  value={weight}
+                  onChangeText={(text) => {
+                    setWeight(text);
+                  }}
+                  style={[styles.formInput, styles.formInput2]}
+                />
+              </View>
+              
+                    
+                      <DropDownPicker
+                        open={openModel}
+                        items={items}
+                        setOpen={setOpenModel}
+                        value={itemsType}
+                        onSelectItem={(e) => setItemsType(e.value)}
+                        // setValue={handleChange("gender")}
+                        setItems={setItems}
+                        style={{marginBottom:5,borderWidth:0}}
+                      />
+                     
+                  
+                  
+              <Button
+                style={styles.bookingBtn}
+                onPress={() => {
+                  getPhotoFromGallery();
+                  // navigate("CustomerPayment");
+                }}
+              >
                 <Text style={styles.bookingBtnText}>
                   {__("UPLOAD THE PHOTOS")}
                 </Text>
               </Button>
             </View>
-            <View style={styles.accordionLayout}>
-              {/* <Accordion
-                title='Select Vehicle Type'
-                renderContent={() => (
-                  <View style={styles.accOrderInfo}>
-                    <Button>
-                      <Text style={styles.accText}>{__('Dump truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Garbage truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Log carrier')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Refrigerator truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Tank truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Concrete transport truck (cement mixer)')}</Text>
-                    </Button>
-                  </View>
-                )}
-              /> */}
-              {/* <Accordion
-                title='Select Material Type'
-                renderContent={() => (
-                  <View style={styles.accOrderInfo}>
-                    <Button>
-                      <Text style={styles.accText}>{__('Dump truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Garbage truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Log carrier')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Refrigerator truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Tank truck.')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Concrete transport truck (cement mixer)')}</Text>
-                    </Button>
-                  </View>
-                )}
-              />
-              <Accordion
-                title='Select Delivery Floor'
-                renderContent={() => (
-                  <View style={styles.accOrderInfo}>
-                    <Button>
-                      <Text style={styles.accText}>{__('Dump truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Garbage truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Log carrier')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Refrigerator truck')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Tank truck.')}</Text>
-                    </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__('Concrete transport truck (cement mixer)')}</Text>
-                    </Button>
-                  </View>
-                )}
-              /> */}
-            </View>
-            {/* <View style={styles.switchInfo}>
-              <Text style={styles.switchText}>{__('Unloading Manpower')}</Text>
-              <ToggleSwitch
-              />
-            </View>
-            <View>
-              <View style={styles.selectVehicleDetail}>
-                <View>
-                  <Text style={styles.vehicleTitle}>{__('Tata ACE')}</Text>
-                </View>
-                <View style={styles.vehicleInfo}>
-                  <Text style={styles.vehicleText}>{__('PAY LOAD')}</Text>
-                  <Text style={styles.vehicleItemText}>{__('71 KG')}</Text>
-                </View>
-                <View style={styles.vehicleInfo}>
-                  <Text style={styles.vehicleText}>{__('CARGO BOX')}</Text>
-                  <Text style={styles.vehicleItemText}>{__('7.2 ft X 4/2 Ft X 1 Ft')}</Text>
-                </View>
-                <View style={styles.vehicleInfo}>
-                  <Text style={styles.vehicleText}>{__('TYPE')}</Text>
-                  <Text style={styles.vehicleItemText}>{__('Heavy Duty')}</Text>
-                </View>
-                <View style={styles.costInfo}>
-                  <Text style={styles.vehicleText}>{__('COST')}</Text>
-                  <Text style={styles.vehicleItemText}>{__('$1200')}</Text>
-                </View>
-              </View>
-            </View> */}
+            
+            
           </View>
         </ScrollView>
       </Content>
       <Button
         style={styles.bookingBtn}
         onPress={() => {
-          navigate("CustomerPayment");
+          fetchData()
+          setMainModel(true)
         }}
       >
         <Text style={styles.bookingBtnText}>{__("BOOK NOW")}</Text>

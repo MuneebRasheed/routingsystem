@@ -1,3 +1,5 @@
+com/wditechy/truckie/CustomActivity.java
+ CustomActivity
 com/wditechy/truckie/MainActivity.java
  com.wditechy.truckie.MainActivity
 com/wditechy/truckie/ReactNativeFlipper.java

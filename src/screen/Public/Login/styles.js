@@ -88,7 +88,7 @@ export default {
   },formInput4:{
     width: "100%",
     fontFamily: FAMILY.REGULAR,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_30,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
@@ -101,7 +101,8 @@ export default {
     backgroundColor: COLOR.GREEN,
     borderRadius: 5,
     paddingVertical: 15,
-    marginVertical:15
+    marginTop:-16
+   
   },
   signUpBtnText: {
     fontFamily: FAMILY.BOLD,

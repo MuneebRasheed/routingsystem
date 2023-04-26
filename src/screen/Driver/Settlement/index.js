@@ -1,124 +1,97 @@
-import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { Container, Content, Text, Icon } from '@component/Basic'
-import { Button } from '@component/Form'
+import React from "react";
+import { View, ScrollView } from "react-native";
+import { Container, Content, Text } from "@component/Basic";
+import styles from "./styles";
+import theme from "@theme/styles";
 
-import styles from './styles'
-import theme from '@theme/styles'
+import Header from "@component/Header";
+import Accordion from "./Accordion";
+import { __ } from "@utility/translation";
+import { DarkStatusBar } from "@component/StatusBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import Header from '@component/Header'
-import Accordion from './Accordion'
+export default function TransactionHistory() {
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getTransactionHistory();
+  }, []);
+  const getTransactionHistory = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
 
-import { navigate } from '@navigation'
-import { __ } from '@utility/translation'
-import request from '@utility/request'
-import { bind } from '@utility/component'
-import { DarkStatusBar } from '@component/StatusBar'
-
-export default class extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isDisabled: false,
-      isOpen: false
-    }
-  }
-
-  render() {
-    const item = this.props.item
-
-    return <Container>
+    const res = axios
+      .post(
+        ` https://testing.explorelogix.com/v1/payment/platform-transactions?limit=100`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("history", data.data.data[0]);
+        setData(data.data.data);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+  return (
+    <Container>
       <DarkStatusBar />
-      <Header
-        leftType='back' />
+      <Header leftType="back" />
       <View style={styles.settlementHeader}>
-        <Text style={styles.settlementHeaderTitle}>{__('SETTLEMENT')}</Text>
-        <Text style={styles.settlementHeaderText}>{__('SETTLEMENT FOR TRIPS')}</Text>
+        <Text style={styles.settlementHeaderTitle}>
+          {__("TRANSACTION HISTORY")}
+        </Text>
+        <Text style={styles.settlementHeaderText}>
+          {__("TRANSACTION HISTORY")}
+        </Text>
       </View>
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.settlementContainer} >
-            <View style={styles.accordionLayout}>
-              <Accordion
-                title='BOOKING ID #X876895'
-                text='open'
-                style={{ backgroundColor: 'rgba(92,186,71,1)' }}
-                renderContent={() => (
-                  <View style={styles.accordionContent}>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('TRIP COST')}</Text>
-                      <Text style={styles.bookingCost}>{__('$1300 USD')}</Text>
+          <View style={styles.settlementContainer}>
+            {data.map((val) => {
+              return( <View style={styles.accordionLayout}>
+                <Accordion
+                  title="BOOKING ID #X876895"
+                  text="open"
+                  style={{ backgroundColor: "rgba(92,186,71,1)" }}
+                  renderContent={() => (
+                    <View style={styles.accordionContent}>
+                      <View style={[styles.bookingItem, styles.bookingItem2]}>
+                        <Text style={styles.bookingText}>
+                          {__("Transation Amount")}
+                        </Text>
+                        <Text style={styles.bookingCost}>
+                          {__(`${val.amount}`)}
+                        </Text>
+                      </View>
+                      <View style={[styles.bookingItem, styles.bookingItem2]}>
+                        <Text style={styles.bookingText}>{__("Fee")}</Text>
+                        <Text style={styles.bookingCost}>{__(`${val.fee} CAD`)}</Text>
+                      </View>
+                      <View style={[styles.bookingItem, styles.bookingItem2]}>
+                        <Text style={styles.bookingText}>{__("Net Amount")}</Text>
+                        <Text style={styles.bookingCost}>{__(`${val.net} CAD`)}</Text>
+                      </View>
+                      <View style={styles.bookingItem}>
+                        <Text style={styles.bookingText}>{__("Status")}</Text>
+                        <Text style={styles.bookingCost}>{__(`${val.status}`)}</Text>
+                      </View>
                     </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('ADVANCE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$500 USD')}</Text>
-                    </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('PAID')}</Text>
-                      <Text style={styles.bookingCost}>{__('$700 USD')}</Text>
-                    </View>
-                    <View style={styles.bookingItem}>
-                      <Text style={styles.bookingText}>{__('DUE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$100 USD')}</Text>
-                    </View>
-                  </View>
-                )}
-              />
-              <Accordion
-                title='BOOKING ID #X876895'
-                text='complete'
-                style={{ backgroundColor: 'rgba(92,186,71,1)' }}
-                renderContent={() => (
-                  <View style={styles.accordionContent}>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('TRIP COST')}</Text>
-                      <Text style={styles.bookingCost}>{__('$1500 USD')}</Text>
-                    </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('ADVANCE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$300 USD')}</Text>
-                    </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('PAID')}</Text>
-                      <Text style={styles.bookingCost}>{__('$100 USD')}</Text>
-                    </View>
-                    <View style={styles.bookingItem}>
-                      <Text style={styles.bookingText}>{__('DUE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$800 USD')}</Text>
-                    </View>
-                  </View>
-                )}
-              />
-              <Accordion
-                title='BOOKING ID #X876885'
-                text='complete'
-                style={{ backgroundColor: 'rgba(0,0,0,1)' }}
-                renderContent={() => (
-                  <View style={styles.accordionContent}>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('TRIP COST')}</Text>
-                      <Text style={styles.bookingCost}>{__('$1500 USD')}</Text>
-                    </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('ADVANCE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$300 USD')}</Text>
-                    </View>
-                    <View style={[styles.bookingItem, styles.bookingItem2]}>
-                      <Text style={styles.bookingText}>{__('PAID')}</Text>
-                      <Text style={styles.bookingCost}>{__('$100 USD')}</Text>
-                    </View>
-                    <View style={styles.bookingItem}>
-                      <Text style={styles.bookingText}>{__('DUE')}</Text>
-                      <Text style={styles.bookingCost}>{__('$800 USD')}</Text>
-                    </View>
-                  </View>
-                )}
-              />
-
-            </View>
+                  )}
+                />
+              </View>)
+            })}
           </View>
         </ScrollView>
       </Content>
     </Container>
-  }
+  );
 }
