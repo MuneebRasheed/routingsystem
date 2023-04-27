@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "773229303892",
+    "project_id": "pushnotifications-7413c",
+    "storage_bucket": "pushnotifications-7413c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773229303892:android:b414cb0ea0b57f4882f5c1",
+        "android_client_info": {
+          "package_name": "com.wditechy.truckie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773229303892-6j5p50vor9mqqh8vo3ev7d82nq9tltfp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2BXN-LnogTqAzNYp82Z2b30D5pWw6K6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773229303892-6j5p50vor9mqqh8vo3ev7d82nq9tltfp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
