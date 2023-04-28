@@ -23,6 +23,10 @@ import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 import com.reactnativecommunity.geolocation.GeolocationPackage;
 // @react-native-community/netinfo
 import com.reactnativecommunity.netinfo.NetInfoPackage;
+// @react-native-firebase/app
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+// @react-native-firebase/messaging
+import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 // @react-native-picker/picker
 import com.reactnativecommunity.picker.RNCPickerPackage;
 // react-native-config
@@ -106,6 +110,8 @@ public class PackageList {
       new RNDateTimePickerPackage(),
       new GeolocationPackage(),
       new NetInfoPackage(),
+      new ReactNativeFirebaseAppPackage(),
+      new ReactNativeFirebaseMessagingPackage(),
       new RNCPickerPackage(),
       new ReactNativeConfigPackage(),
       new DatePickerPackage(),

@@ -8,6 +8,8 @@ import { setLandingScreen, goBack } from '@navigation'
 import Navigator from '@navigation/screen'
 import { store, persistor } from '@store'
 
+import {requestUserPermission} from '../helper/pushnotification_helper'
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -22,6 +24,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    requestUserPermission()
     this.storage()
     console.log("Component Did mount syycfully before navidation")
     BackHandler.addEventListener('hardwareBackPress', function () {
@@ -29,6 +32,8 @@ export default class App extends React.Component {
       goBack()
       return true
     })
+
+
 
     this.initiate()
   }
@@ -56,7 +61,7 @@ export default class App extends React.Component {
   async  storage() {
   
     let mun= await AsyncStorage.getItem("role")=="Driver";
-    console.log("call in async storage",mun)
+    
    this.setState({bool:mun});
 
   }

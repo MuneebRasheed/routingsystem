@@ -4,7 +4,7 @@
             "outputFile": "D:\\React Native\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\b44bddfa1b77841b09ef84cb52df29d4\\work-runtime-2.8.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\8ed144cf18f33a017b3ba32b2eb9868f\\work-runtime-2.8.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,26 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\204d56b624e751e7990ccfa8a11e8889\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\59926a8675d3bce99aeacffce0543090\\material-1.1.0\\res\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,320",
+                        "endLines": "5,9",
+                        "endColumns": "10,10",
+                        "endOffsets": "315,588"
+                    },
+                    "to": {
+                        "startLines": "55,59",
+                        "startColumns": "4,4",
+                        "startOffsets": "3803,4068",
+                        "endLines": "58,62",
+                        "endColumns": "10,10",
+                        "endOffsets": "4063,4336"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\4a6dcfa509fd93de71a66932f8f48dec\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -33,7 +52,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\77c7b97873973e149b09819f46c0a153\\appcompat-1.3.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\e37b1799e79a745880d7639bb537165c\\appcompat-1.3.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -49,25 +68,6 @@
                         "endLines": "4,5,6,7,21,35,36,37,40,44,45,46,47,51",
                         "endColumns": "134,134,74,86,12,12,118,126,12,12,114,106,112,12",
                         "endOffsets": "314,449,524,611,1495,2391,2510,2637,2859,3083,3198,3305,3418,3648"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Muneeb\\.gradle\\caches\\transforms-2\\files-2.1\\dcb71d9e241694395b1f513d3d3a8b55\\material-1.1.0\\res\\values-v23\\values-v23.xml",
-                    "from": {
-                        "startLines": "2,6",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,320",
-                        "endLines": "5,9",
-                        "endColumns": "10,10",
-                        "endOffsets": "315,588"
-                    },
-                    "to": {
-                        "startLines": "55,59",
-                        "startColumns": "4,4",
-                        "startOffsets": "3803,4068",
-                        "endLines": "58,62",
-                        "endColumns": "10,10",
-                        "endOffsets": "4063,4336"
                     }
                 }
             ]

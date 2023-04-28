@@ -35,482 +35,693 @@
 21-->D:\React Native\android\app\src\main\AndroidManifest.xml:12:60-84
 22
 23    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-23-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\4d7b778dbfd394b64071d94d86bc4780\jetified-flipper-0.99.0\AndroidManifest.xml:16:5-76
-23-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\4d7b778dbfd394b64071d94d86bc4780\jetified-flipper-0.99.0\AndroidManifest.xml:16:22-73
+23-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\25ae2cb016c7827acf69699ce7032c45\jetified-flipper-0.99.0\AndroidManifest.xml:16:5-76
+23-->[com.facebook.flipper:flipper:0.99.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\25ae2cb016c7827acf69699ce7032c45\jetified-flipper-0.99.0\AndroidManifest.xml:16:22-73
 24    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 24-->[:react-native-fs] D:\React Native\node_modules\react-native-fs\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-81
 24-->[:react-native-fs] D:\React Native\node_modules\react-native-fs\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-78
 25    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 25-->[:react-native-community_netinfo] D:\React Native\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
 25-->[:react-native-community_netinfo] D:\React Native\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
-26
-27    <queries>
-27-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-13:15
-28        <intent>
-28-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:18
-29            <action android:name="android.media.action.IMAGE_CAPTURE" />
-29-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-73
-29-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:21-70
-30        </intent>
-31    </queries>
-32
-33    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-33-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
-33-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
-34    <uses-permission android:name="android.permission.WAKE_LOCK" />
-34-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:23:5-68
-34-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:23:22-65
+26    <uses-permission android:name="android.permission.WAKE_LOCK" />
+26-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-68
+26-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-65
+27
+28    <queries>
+28-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-13:15
+29        <intent>
+29-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:18
+30            <action android:name="android.media.action.IMAGE_CAPTURE" />
+30-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-73
+30-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:21-70
+31        </intent>
+32    </queries>
+33
+34    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+34-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+34-->[:react-native-maps] D:\React Native\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
 35    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-35-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:25:5-81
-35-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:25:22-78
+35-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:25:5-81
+35-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:25:22-78
 36    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-36-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:26:5-77
-36-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:26:22-74
-37
-38    <uses-feature
-38-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
-39        android:glEsVersion="0x00020000"
-39-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
-40        android:required="true" />
-40-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
-41
-42    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-42-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:9:5-77
-42-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:9:22-74
-43    <uses-permission android:name="android.permission.VIBRATE" />
-43-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:13:5-66
-43-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:13:22-63
-44    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-44-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:16:5-81
-44-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:16:22-78
-45    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-45-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:17:5-79
-45-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:17:22-76
-46    <uses-permission
-46-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:18:5-20:38
-47        android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS"
-47-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:19:9-73
-48        android:maxSdkVersion="30" /> <!-- For Xiaomi devices to enable heads-up notifications as default (https://github.com/invertase/notifee/issues/296) -->
-48-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:20:9-35
-49    <uses-permission
-49-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:22:5-24:38
-50        android:name="android.permission.ACCESS_NOTIFICATION_POLICY"
-50-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:23:9-69
-51        android:minSdkVersion="23" />
-51-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:24:9-35
-52
-53    <application
-53-->D:\React Native\android\app\src\main\AndroidManifest.xml:13:5-36:19
-54        android:name="com.wditechy.truckie.MainApplication"
-54-->D:\React Native\android\app\src\main\AndroidManifest.xml:14:7-38
-55        android:allowBackup="false"
-55-->D:\React Native\android\app\src\main\AndroidManifest.xml:17:7-34
-56        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-56-->[androidx.core:core:1.6.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\3732dbaed7efee9bf6fb58da2e28e003\core-1.6.0\AndroidManifest.xml:24:18-86
-57        android:debuggable="true"
-58        android:icon="@mipmap/ic_launcher"
-58-->D:\React Native\android\app\src\main\AndroidManifest.xml:16:7-41
-59        android:label="@string/app_name"
-59-->D:\React Native\android\app\src\main\AndroidManifest.xml:15:7-39
-60        android:theme="@style/AppTheme"
-60-->D:\React Native\android\app\src\main\AndroidManifest.xml:18:7-38
-61        android:usesCleartextTraffic="true" >
-61-->D:\React Native\android\app\src\debug\AndroidManifest.xml:8:9-44
-62        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-62-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:9-86
-62-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:19-83
-63        <activity
-63-->D:\React Native\android\app\src\main\AndroidManifest.xml:19:7-30:18
-64            android:name="com.wditechy.truckie.MainActivity"
-64-->D:\React Native\android\app\src\main\AndroidManifest.xml:20:9-37
-65            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
-65-->D:\React Native\android\app\src\main\AndroidManifest.xml:23:9-86
-66            android:exported="true"
-66-->D:\React Native\android\app\src\main\AndroidManifest.xml:22:10-33
-67            android:label="@string/app_name"
-67-->D:\React Native\android\app\src\main\AndroidManifest.xml:21:9-41
-68            android:launchMode="singleTask"
-68-->D:\React Native\android\app\src\main\AndroidManifest.xml:24:9-40
-69            android:windowSoftInputMode="adjustResize" >
-69-->D:\React Native\android\app\src\main\AndroidManifest.xml:25:9-51
-70            <intent-filter>
-70-->D:\React Native\android\app\src\main\AndroidManifest.xml:26:9-29:25
-71                <action android:name="android.intent.action.MAIN" />
-71-->D:\React Native\android\app\src\main\AndroidManifest.xml:27:13-65
-71-->D:\React Native\android\app\src\main\AndroidManifest.xml:27:21-62
-72
-73                <category android:name="android.intent.category.LAUNCHER" />
-73-->D:\React Native\android\app\src\main\AndroidManifest.xml:28:13-73
-73-->D:\React Native\android\app\src\main\AndroidManifest.xml:28:23-70
-74            </intent-filter>
-75        </activity>
-76
-77        <meta-data
-77-->D:\React Native\android\app\src\main\AndroidManifest.xml:31:7-33:63
-78            android:name="com.google.android.geo.API_KEY"
-78-->D:\React Native\android\app\src\main\AndroidManifest.xml:32:7-52
-79            android:value="AIzaSyCOKXBz_YM85k4KcFzNxPUvEArDjhipX8c" />
-79-->D:\React Native\android\app\src\main\AndroidManifest.xml:33:6-61
-80
-81        <provider
-81-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:40
-82            android:name="io.invertase.notifee.NotifeeInitProvider"
-82-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-68
-83            android:authorities="com.wditechy.truckie.notifee-init-provider"
-83-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-73
-84            android:exported="false"
-84-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
-85            android:initOrder="-100" />
-85-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-37
-86        <provider
-86-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-26:20
-87            android:name="com.reactnative.ivpusic.imagepicker.IvpusicImagePickerFileProvider"
-87-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-94
-88            android:authorities="com.wditechy.truckie.provider"
-88-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-60
-89            android:exported="false"
-89-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
-90            android:grantUriPermissions="true" >
-90-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-47
-91            <meta-data
-91-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-25:78
-92                android:name="android.support.FILE_PROVIDER_PATHS"
-92-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:17-67
-93                android:resource="@xml/ivpusic_imagepicker_provider_paths" />
-93-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:17-75
-94        </provider>
-95
-96        <activity
-96-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-30:72
-97            android:name="com.yalantis.ucrop.UCropActivity"
-97-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-60
-98            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-98-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-69
-99
-100        <provider
-100-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:29:9-37:20
-101            android:name="androidx.startup.InitializationProvider"
-101-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:30:13-67
-102            android:authorities="com.wditechy.truckie.androidx-startup"
-102-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:31:13-68
-103            android:exported="false" >
-103-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:32:13-37
-104            <meta-data
-104-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:34:13-36:52
-105                android:name="androidx.work.WorkManagerInitializer"
-105-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:35:17-68
-106                android:value="androidx.startup" />
-106-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:36:17-49
-107        </provider>
-108
-109        <service
-109-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:39:9-45:35
-110            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
-110-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:40:13-88
-111            android:directBootAware="false"
-111-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:41:13-44
-112            android:enabled="@bool/enable_system_alarm_service_default"
-112-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:42:13-72
-113            android:exported="false" />
-113-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:43:13-37
-114        <service
-114-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:46:9-52:35
-115            android:name="androidx.work.impl.background.systemjob.SystemJobService"
-115-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:47:13-84
-116            android:directBootAware="false"
-116-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:48:13-44
-117            android:enabled="@bool/enable_system_job_service_default"
-117-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:49:13-70
-118            android:exported="true"
-118-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:50:13-36
-119            android:permission="android.permission.BIND_JOB_SERVICE" />
-119-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:51:13-69
-120        <service
-120-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:53:9-59:35
-121            android:name="androidx.work.impl.foreground.SystemForegroundService"
-121-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:54:13-81
-122            android:directBootAware="false"
-122-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:55:13-44
-123            android:enabled="@bool/enable_system_foreground_service_default"
-123-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:56:13-77
-124            android:exported="false" />
-124-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:57:13-37
-125
-126        <receiver
-126-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:61:9-66:35
-127            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
-127-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:62:13-88
-128            android:directBootAware="false"
-128-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:63:13-44
-129            android:enabled="true"
-129-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:64:13-35
-130            android:exported="false" />
-130-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:65:13-37
-131        <receiver
-131-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:67:9-77:20
-132            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
-132-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:68:13-106
-133            android:directBootAware="false"
-133-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:69:13-44
-134            android:enabled="false"
-134-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:70:13-36
-135            android:exported="false" >
-135-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:71:13-37
-136            <intent-filter>
-136-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:73:13-76:29
-137                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-137-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:74:17-87
-137-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:74:25-84
-138                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-138-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:75:17-90
-138-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:75:25-87
-139            </intent-filter>
-140        </receiver>
-141        <receiver
-141-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:78:9-88:20
-142            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
-142-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:79:13-104
-143            android:directBootAware="false"
-143-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:80:13-44
-144            android:enabled="false"
-144-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:81:13-36
-145            android:exported="false" >
-145-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:82:13-37
-146            <intent-filter>
-146-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:84:13-87:29
-147                <action android:name="android.intent.action.BATTERY_OKAY" />
-147-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:85:17-77
-147-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:85:25-74
-148                <action android:name="android.intent.action.BATTERY_LOW" />
-148-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:86:17-76
-148-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:86:25-73
-149            </intent-filter>
-150        </receiver>
-151        <receiver
-151-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:89:9-99:20
-152            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
-152-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:90:13-104
-153            android:directBootAware="false"
-153-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:91:13-44
-154            android:enabled="false"
-154-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:92:13-36
-155            android:exported="false" >
-155-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:93:13-37
-156            <intent-filter>
-156-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:95:13-98:29
-157                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
-157-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:96:17-83
-157-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:96:25-80
-158                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
-158-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:97:17-82
-158-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:97:25-79
-159            </intent-filter>
-160        </receiver>
-161        <receiver
-161-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:100:9-109:20
-162            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
-162-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:101:13-103
-163            android:directBootAware="false"
-163-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:102:13-44
-164            android:enabled="false"
-164-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:103:13-36
-165            android:exported="false" >
-165-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:104:13-37
-166            <intent-filter>
-166-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:106:13-108:29
-167                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-167-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:107:17-79
-167-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:107:25-76
-168            </intent-filter>
-169        </receiver>
-170        <receiver
-170-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:110:9-121:20
-171            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
-171-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:111:13-88
-172            android:directBootAware="false"
-172-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:112:13-44
-173            android:enabled="false"
-173-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:113:13-36
-174            android:exported="false" >
-174-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:114:13-37
-175            <intent-filter>
-175-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:116:13-120:29
-176                <action android:name="android.intent.action.BOOT_COMPLETED" />
-176-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
-176-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
-177                <action android:name="android.intent.action.TIME_SET" />
-177-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:118:17-73
-177-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:118:25-70
-178                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-178-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:119:17-81
-178-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:119:25-78
-179            </intent-filter>
-180        </receiver>
-181        <receiver
-181-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:122:9-131:20
-182            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
-182-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:123:13-99
-183            android:directBootAware="false"
-183-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:124:13-44
-184            android:enabled="@bool/enable_system_alarm_service_default"
-184-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:125:13-72
-185            android:exported="false" >
-185-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:126:13-37
-186            <intent-filter>
-186-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:128:13-130:29
-187                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
-187-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:129:17-98
-187-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:129:25-95
-188            </intent-filter>
-189        </receiver>
-190        <receiver
-190-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:132:9-142:20
-191            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
-191-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:133:13-78
-192            android:directBootAware="false"
-192-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:134:13-44
-193            android:enabled="true"
-193-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:135:13-35
-194            android:exported="true"
-194-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:136:13-36
-195            android:permission="android.permission.DUMP" >
-195-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:137:13-57
-196            <intent-filter>
-196-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:139:13-141:29
-197                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
-197-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:140:17-88
-197-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:140:25-85
-198            </intent-filter>
-199        </receiver>
-200
-201        <service
-201-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e07a6657c21bd1f926408a4ed804ec2\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
-202            android:name="androidx.room.MultiInstanceInvalidationService"
-202-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e07a6657c21bd1f926408a4ed804ec2\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
-203            android:directBootAware="true"
-203-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e07a6657c21bd1f926408a4ed804ec2\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
-204            android:exported="false" /> <!-- Needs to be explicitly declared on P+ -->
-204-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e07a6657c21bd1f926408a4ed804ec2\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
-205        <uses-library
-205-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
-206            android:name="org.apache.http.legacy"
-206-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
-207            android:required="false" />
-207-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c80d25033dd7e7d8d5ec241f1fb3d87b\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
-208
-209        <activity
-209-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5b21e6d67c332e4584f822caa02bbf52\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
-210            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-210-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5b21e6d67c332e4584f822caa02bbf52\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
-211            android:exported="false"
-211-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5b21e6d67c332e4584f822caa02bbf52\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
-212            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-212-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5b21e6d67c332e4584f822caa02bbf52\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
-213
-214        <meta-data
-214-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\2469143832a3c02cd375d484262128cd\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
-215            android:name="com.google.android.gms.version"
-215-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\2469143832a3c02cd375d484262128cd\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
-216            android:value="@integer/google_play_services_version" /> <!-- Receiver Service -->
-216-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\2469143832a3c02cd375d484262128cd\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
-217        <service
-217-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:29:9-31:40
-218            android:name="app.notifee.core.ReceiverService"
-218-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:30:13-60
-219            android:exported="false" />
-219-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:31:13-37
-220
-221        <activity
-221-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:33:9-39:75
-222            android:name="app.notifee.core.NotificationReceiverActivity"
-222-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:34:13-73
-223            android:excludeFromRecents="true"
-223-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:35:13-46
-224            android:exported="true"
-224-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:36:13-36
-225            android:noHistory="true"
-225-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:37:13-37
-226            android:taskAffinity=""
-226-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:38:13-36
-227            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- Foreground Service -->
-227-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:39:13-72
-228        <service
-228-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:42:9-44:40
-229            android:name="app.notifee.core.ForegroundService"
-229-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:43:13-62
-230            android:exported="false" />
-230-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:44:13-37
-231
-232        <receiver
-232-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:46:9-54:20
-233            android:name="app.notifee.core.RebootBroadcastReceiver"
-233-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:47:13-68
-234            android:exported="false" >
-234-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:48:13-37
-235            <intent-filter>
-235-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:49:13-53:29
-236                <action android:name="android.intent.action.BOOT_COMPLETED" />
-236-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
-236-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
-237                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-237-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:51:17-82
-237-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:51:25-79
-238                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-238-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:52:17-82
-238-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:52:25-79
-239            </intent-filter>
-240        </receiver>
-241        <receiver
-241-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:55:9-61:20
-242            android:name="app.notifee.core.AlarmPermissionBroadcastReceiver"
-242-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:56:13-77
-243            android:exported="true" >
-243-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:57:13-36
+36-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:26:5-77
+36-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:26:22-74
+37    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+37-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:25:5-77
+37-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:25:22-74
+38    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+38-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:28:5-82
+38-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:28:22-79
+39
+40    <uses-feature
+40-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+41        android:glEsVersion="0x00020000"
+41-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+42        android:required="true" />
+42-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+43
+44    <uses-permission android:name="android.permission.VIBRATE" />
+44-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:13:5-66
+44-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:13:22-63
+45    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+45-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:16:5-81
+45-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:16:22-78
+46    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+46-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:17:5-79
+46-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:17:22-76
+47    <uses-permission
+47-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:18:5-20:38
+48        android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS"
+48-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:19:9-73
+49        android:maxSdkVersion="30" /> <!-- For Xiaomi devices to enable heads-up notifications as default (https://github.com/invertase/notifee/issues/296) -->
+49-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:20:9-35
+50    <uses-permission
+50-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:22:5-24:38
+51        android:name="android.permission.ACCESS_NOTIFICATION_POLICY"
+51-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:23:9-69
+52        android:minSdkVersion="23" />
+52-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:24:9-35
+53
+54    <application
+54-->D:\React Native\android\app\src\main\AndroidManifest.xml:13:5-37:19
+55        android:name="com.wditechy.truckie.MainApplication"
+55-->D:\React Native\android\app\src\main\AndroidManifest.xml:15:7-38
+56        android:allowBackup="false"
+56-->D:\React Native\android\app\src\main\AndroidManifest.xml:18:7-34
+57        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+57-->[androidx.core:core:1.6.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\d3c30bb2fa2ae76a6437f8b29a14865c\core-1.6.0\AndroidManifest.xml:24:18-86
+58        android:debuggable="true"
+59        android:icon="@mipmap/ic_launcher"
+59-->D:\React Native\android\app\src\main\AndroidManifest.xml:17:7-41
+60        android:label="@string/app_name"
+60-->D:\React Native\android\app\src\main\AndroidManifest.xml:16:7-39
+61        android:theme="@style/AppTheme"
+61-->D:\React Native\android\app\src\main\AndroidManifest.xml:19:7-38
+62        android:usesCleartextTraffic="true" >
+62-->D:\React Native\android\app\src\main\AndroidManifest.xml:14:5-40
+63        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+63-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:9-86
+63-->D:\React Native\android\app\src\debug\AndroidManifest.xml:11:19-83
+64        <activity
+64-->D:\React Native\android\app\src\main\AndroidManifest.xml:20:7-31:18
+65            android:name="com.wditechy.truckie.MainActivity"
+65-->D:\React Native\android\app\src\main\AndroidManifest.xml:21:9-37
+66            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+66-->D:\React Native\android\app\src\main\AndroidManifest.xml:24:9-86
+67            android:exported="true"
+67-->D:\React Native\android\app\src\main\AndroidManifest.xml:23:10-33
+68            android:label="@string/app_name"
+68-->D:\React Native\android\app\src\main\AndroidManifest.xml:22:9-41
+69            android:launchMode="singleTask"
+69-->D:\React Native\android\app\src\main\AndroidManifest.xml:25:9-40
+70            android:windowSoftInputMode="adjustResize" >
+70-->D:\React Native\android\app\src\main\AndroidManifest.xml:26:9-51
+71            <intent-filter>
+71-->D:\React Native\android\app\src\main\AndroidManifest.xml:27:9-30:25
+72                <action android:name="android.intent.action.MAIN" />
+72-->D:\React Native\android\app\src\main\AndroidManifest.xml:28:13-65
+72-->D:\React Native\android\app\src\main\AndroidManifest.xml:28:21-62
+73
+74                <category android:name="android.intent.category.LAUNCHER" />
+74-->D:\React Native\android\app\src\main\AndroidManifest.xml:29:13-73
+74-->D:\React Native\android\app\src\main\AndroidManifest.xml:29:23-70
+75            </intent-filter>
+76        </activity>
+77
+78        <meta-data
+78-->D:\React Native\android\app\src\main\AndroidManifest.xml:32:7-34:63
+79            android:name="com.google.android.geo.API_KEY"
+79-->D:\React Native\android\app\src\main\AndroidManifest.xml:33:7-52
+80            android:value="AIzaSyCOKXBz_YM85k4KcFzNxPUvEArDjhipX8c" />
+80-->D:\React Native\android\app\src\main\AndroidManifest.xml:34:6-61
+81
+82        <provider
+82-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:40
+83            android:name="io.invertase.notifee.NotifeeInitProvider"
+83-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-68
+84            android:authorities="com.wditechy.truckie.notifee-init-provider"
+84-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-73
+85            android:exported="false"
+85-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+86            android:initOrder="-100" />
+86-->[:notifee_react-native] D:\React Native\node_modules\@notifee\react-native\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-37
+87
+88        <service
+88-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-16:40
+89            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService"
+89-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-103
+90            android:exported="false" />
+90-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-37
+91        <service
+91-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-23:19
+92            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
+92-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-95
+93            android:exported="false" >
+93-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-37
+94            <intent-filter>
+94-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-22:29
+95                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+95-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:17-78
+95-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:25-75
+96            </intent-filter>
+97        </service>
+98
+99        <receiver
+99-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:9-32:20
+100            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
+100-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-96
+101            android:exported="true"
+101-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-36
+102            android:permission="com.google.android.c2dm.permission.SEND" >
+102-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-73
+103            <intent-filter>
+103-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-31:29
+104                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+104-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-81
+104-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:25-78
+105            </intent-filter>
+106        </receiver>
+107
+108        <meta-data
+108-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:9-36:36
+109            android:name="firebase_messaging_auto_init_enabled"
+109-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-64
+110            android:value="true" />
+110-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-33
+111        <meta-data
+111-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:9-39:32
+112            android:name="com.google.firebase.messaging.default_notification_channel_id"
+112-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-89
+113            android:value="" />
+113-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:13-29
+114        <meta-data
+114-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:9-42:47
+115            android:name="com.google.firebase.messaging.default_notification_color"
+115-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:13-84
+116            android:resource="@color/white" />
+116-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:13-44
+117        <meta-data
+117-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-13:36
+118            android:name="app_data_collection_default_enabled"
+118-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-63
+119            android:value="true" />
+119-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-33
+120
+121        <service
+121-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-23:19
+122            android:name="com.google.firebase.components.ComponentDiscoveryService"
+122-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-84
+123            android:directBootAware="true"
+123-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-43
+124            android:exported="false" >
+124-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-37
+125            <meta-data
+125-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-22:85
+126                android:name="com.google.firebase.components:io.invertase.firebase.app.ReactNativeFirebaseAppRegistrar"
+126-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:17-120
+127                android:value="com.google.firebase.components.ComponentRegistrar" />
+127-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:17-82
+128            <meta-data
+128-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:55:13-57:85
+129                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+129-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:56:17-119
+130                android:value="com.google.firebase.components.ComponentRegistrar" />
+130-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:57:17-82
+131            <meta-data
+131-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c105279a650dfea1d36380d8320a257f\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:27:13-29:85
+132                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+132-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c105279a650dfea1d36380d8320a257f\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:28:17-115
+133                android:value="com.google.firebase.components.ComponentRegistrar" />
+133-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c105279a650dfea1d36380d8320a257f\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:29:17-82
+134            <meta-data
+134-->[com.google.firebase:firebase-installations:17.1.3] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\ab23eea5db08b1e63e9361a6b7572344\jetified-firebase-installations-17.1.3\AndroidManifest.xml:17:13-19:85
+135                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+135-->[com.google.firebase:firebase-installations:17.1.3] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\ab23eea5db08b1e63e9361a6b7572344\jetified-firebase-installations-17.1.3\AndroidManifest.xml:18:17-127
+136                android:value="com.google.firebase.components.ComponentRegistrar" />
+136-->[com.google.firebase:firebase-installations:17.1.3] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\ab23eea5db08b1e63e9361a6b7572344\jetified-firebase-installations-17.1.3\AndroidManifest.xml:19:17-82
+137        </service>
+138
+139        <provider
+139-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:9-29:38
+140            android:name="io.invertase.firebase.app.ReactNativeFirebaseAppInitProvider"
+140-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-88
+141            android:authorities="com.wditechy.truckie.reactnativefirebaseappinitprovider"
+141-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-86
+142            android:exported="false"
+142-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-37
+143            android:initOrder="99" />
+143-->[:react-native-firebase_app] D:\React Native\node_modules\@react-native-firebase\app\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-35
+144        <provider
+144-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-26:20
+145            android:name="com.reactnative.ivpusic.imagepicker.IvpusicImagePickerFileProvider"
+145-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-94
+146            android:authorities="com.wditechy.truckie.provider"
+146-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-60
+147            android:exported="false"
+147-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+148            android:grantUriPermissions="true" >
+148-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-47
+149            <meta-data
+149-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-25:78
+150                android:name="android.support.FILE_PROVIDER_PATHS"
+150-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:17-67
+151                android:resource="@xml/ivpusic_imagepicker_provider_paths" />
+151-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:17-75
+152        </provider>
+153
+154        <activity
+154-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-30:72
+155            android:name="com.yalantis.ucrop.UCropActivity"
+155-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-60
+156            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+156-->[:react-native-image-crop-picker] D:\React Native\node_modules\react-native-image-crop-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-69
+157
+158        <provider
+158-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:29:9-37:20
+159            android:name="androidx.startup.InitializationProvider"
+159-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:30:13-67
+160            android:authorities="com.wditechy.truckie.androidx-startup"
+160-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:31:13-68
+161            android:exported="false" >
+161-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:32:13-37
+162            <meta-data
+162-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:34:13-36:52
+163                android:name="androidx.work.WorkManagerInitializer"
+163-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:35:17-68
+164                android:value="androidx.startup" />
+164-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:36:17-49
+165        </provider>
+166
+167        <service
+167-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:39:9-45:35
+168            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+168-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:40:13-88
+169            android:directBootAware="false"
+169-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:41:13-44
+170            android:enabled="@bool/enable_system_alarm_service_default"
+170-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:42:13-72
+171            android:exported="false" />
+171-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:43:13-37
+172        <service
+172-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:46:9-52:35
+173            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+173-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:47:13-84
+174            android:directBootAware="false"
+174-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:48:13-44
+175            android:enabled="@bool/enable_system_job_service_default"
+175-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:49:13-70
+176            android:exported="true"
+176-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:50:13-36
+177            android:permission="android.permission.BIND_JOB_SERVICE" />
+177-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:51:13-69
+178        <service
+178-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:53:9-59:35
+179            android:name="androidx.work.impl.foreground.SystemForegroundService"
+179-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:54:13-81
+180            android:directBootAware="false"
+180-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:55:13-44
+181            android:enabled="@bool/enable_system_foreground_service_default"
+181-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:56:13-77
+182            android:exported="false" />
+182-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:57:13-37
+183
+184        <receiver
+184-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:61:9-66:35
+185            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+185-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:62:13-88
+186            android:directBootAware="false"
+186-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:63:13-44
+187            android:enabled="true"
+187-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:64:13-35
+188            android:exported="false" />
+188-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:65:13-37
+189        <receiver
+189-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:67:9-77:20
+190            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+190-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:68:13-106
+191            android:directBootAware="false"
+191-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:69:13-44
+192            android:enabled="false"
+192-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:70:13-36
+193            android:exported="false" >
+193-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:71:13-37
+194            <intent-filter>
+194-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:73:13-76:29
+195                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+195-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:74:17-87
+195-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:74:25-84
+196                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+196-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:75:17-90
+196-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:75:25-87
+197            </intent-filter>
+198        </receiver>
+199        <receiver
+199-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:78:9-88:20
+200            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+200-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:79:13-104
+201            android:directBootAware="false"
+201-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:80:13-44
+202            android:enabled="false"
+202-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:81:13-36
+203            android:exported="false" >
+203-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:82:13-37
+204            <intent-filter>
+204-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:84:13-87:29
+205                <action android:name="android.intent.action.BATTERY_OKAY" />
+205-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:85:17-77
+205-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:85:25-74
+206                <action android:name="android.intent.action.BATTERY_LOW" />
+206-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:86:17-76
+206-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:86:25-73
+207            </intent-filter>
+208        </receiver>
+209        <receiver
+209-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:89:9-99:20
+210            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+210-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:90:13-104
+211            android:directBootAware="false"
+211-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:91:13-44
+212            android:enabled="false"
+212-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:92:13-36
+213            android:exported="false" >
+213-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:93:13-37
+214            <intent-filter>
+214-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:95:13-98:29
+215                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+215-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:96:17-83
+215-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:96:25-80
+216                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+216-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:97:17-82
+216-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:97:25-79
+217            </intent-filter>
+218        </receiver>
+219        <receiver
+219-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:100:9-109:20
+220            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+220-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:101:13-103
+221            android:directBootAware="false"
+221-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:102:13-44
+222            android:enabled="false"
+222-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:103:13-36
+223            android:exported="false" >
+223-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:104:13-37
+224            <intent-filter>
+224-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:106:13-108:29
+225                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+225-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:107:17-79
+225-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:107:25-76
+226            </intent-filter>
+227        </receiver>
+228        <receiver
+228-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:110:9-121:20
+229            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+229-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:111:13-88
+230            android:directBootAware="false"
+230-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:112:13-44
+231            android:enabled="false"
+231-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:113:13-36
+232            android:exported="false" >
+232-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:114:13-37
+233            <intent-filter>
+233-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:116:13-120:29
+234                <action android:name="android.intent.action.BOOT_COMPLETED" />
+234-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
+234-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
+235                <action android:name="android.intent.action.TIME_SET" />
+235-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:118:17-73
+235-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:118:25-70
+236                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+236-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:119:17-81
+236-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:119:25-78
+237            </intent-filter>
+238        </receiver>
+239        <receiver
+239-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:122:9-131:20
+240            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+240-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:123:13-99
+241            android:directBootAware="false"
+241-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:124:13-44
+242            android:enabled="@bool/enable_system_alarm_service_default"
+242-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:125:13-72
+243            android:exported="false" >
+243-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:126:13-37
 244            <intent-filter>
-244-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:58:13-60:29
-245                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
-245-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:59:17-107
-245-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:59:25-104
+244-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:128:13-130:29
+245                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+245-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:129:17-98
+245-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:129:25-95
 246            </intent-filter>
 247        </receiver>
 248        <receiver
-248-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:62:9-70:20
-249            android:name="app.notifee.core.NotificationAlarmReceiver"
-249-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:63:13-70
-250            android:exported="false" >
-250-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:64:13-37
-251            <intent-filter>
-251-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:49:13-53:29
-252                <action android:name="android.intent.action.BOOT_COMPLETED" />
-252-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
-252-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b44bddfa1b77841b09ef84cb52df29d4\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
-253                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-253-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:51:17-82
-253-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:51:25-79
-254                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-254-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:52:17-82
-254-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:52:25-79
-255            </intent-filter>
-256        </receiver> <!-- Broadcast Receiver -->
-257        <receiver
-257-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:73:9-81:20
-258            android:name="app.notifee.core.BlockStateBroadcastReceiver"
-258-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:74:13-72
-259            android:exported="false" >
-259-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:75:13-37
-260            <intent-filter>
-260-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:76:13-80:29
-261                <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
-261-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:77:17-85
-261-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:77:25-82
-262                <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
-262-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:78:17-102
-262-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:78:25-99
-263                <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
-263-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:79:17-108
-263-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ffad52b2e3c55d2562dec36d50b2c09\jetified-core-202108261754\AndroidManifest.xml:79:25-105
-264            </intent-filter>
-265        </receiver>
-266    </application>
-267
-268</manifest>
+248-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:132:9-142:20
+249            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+249-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:133:13-78
+250            android:directBootAware="false"
+250-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:134:13-44
+251            android:enabled="true"
+251-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:135:13-35
+252            android:exported="true"
+252-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:136:13-36
+253            android:permission="android.permission.DUMP" >
+253-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:137:13-57
+254            <intent-filter>
+254-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:139:13-141:29
+255                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+255-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:140:17-88
+255-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:140:25-85
+256            </intent-filter>
+257        </receiver>
+258
+259        <service
+259-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6ac3296de612a4cf2d73ef7018d87d56\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+260            android:name="androidx.room.MultiInstanceInvalidationService"
+260-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6ac3296de612a4cf2d73ef7018d87d56\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
+261            android:directBootAware="true"
+261-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6ac3296de612a4cf2d73ef7018d87d56\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+262            android:exported="false" />
+262-->[androidx.room:room-runtime:2.5.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6ac3296de612a4cf2d73ef7018d87d56\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+263
+264        <receiver
+264-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:31:9-38:20
+265            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+265-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:32:13-78
+266            android:exported="true"
+266-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:33:13-36
+267            android:permission="com.google.android.c2dm.permission.SEND" >
+267-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:34:13-73
+268            <intent-filter>
+268-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-31:29
+269                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+269-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-81
+269-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:25-78
+270            </intent-filter>
+271        </receiver>
+272        <!--
+273             FirebaseMessagingService performs security checks at runtime,
+274             but set to not exported to explicitly avoid allowing another app to call it.
+275        -->
+276        <service
+276-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:44:9-51:19
+277            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+277-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:45:13-82
+278            android:directBootAware="true"
+278-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:46:13-43
+279            android:exported="false" >
+279-->[com.google.firebase:firebase-messaging:23.1.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\0e8a829ac70d48dcfc1e432f9357701c\jetified-firebase-messaging-23.1.2\AndroidManifest.xml:47:13-37
+280            <intent-filter android:priority="-500" >
+280-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-22:29
+281                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+281-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:17-78
+281-->[:react-native-firebase_messaging] D:\React Native\node_modules\@react-native-firebase\messaging\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:25-75
+282            </intent-filter>
+283        </service>
+284        <service
+284-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:28:9-34:19
+285            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+285-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:29:13-103
+286            android:exported="false" >
+286-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:30:13-37
+287            <meta-data
+287-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:31:13-33:39
+288                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+288-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:32:17-94
+289                android:value="cct" />
+289-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\b7893b55e20c63eca3796abd766f3b77\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:33:17-36
+290        </service>
+291        <service
+291-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:26:9-30:19
+292            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+292-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:27:13-117
+293            android:exported="false"
+293-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:28:13-37
+294            android:permission="android.permission.BIND_JOB_SERVICE" >
+294-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:29:13-69
+295        </service>
+296
+297        <receiver
+297-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:32:9-34:40
+298            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+298-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:33:13-132
+299            android:exported="false" />
+299-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\e248bd57579a8c6b51bee196a1f1ecf9\jetified-transport-runtime-3.1.8\AndroidManifest.xml:34:13-37
+300
+301        <provider
+301-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:25:9-30:39
+302            android:name="com.google.firebase.provider.FirebaseInitProvider"
+302-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:26:13-77
+303            android:authorities="com.wditechy.truckie.firebaseinitprovider"
+303-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:27:13-72
+304            android:directBootAware="true"
+304-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:28:13-43
+305            android:exported="false"
+305-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:29:13-37
+306            android:initOrder="100" />
+306-->[com.google.firebase:firebase-common:20.3.2] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\6b0e4d48e5e6f696b9eed12f5df99883\jetified-firebase-common-20.3.2\AndroidManifest.xml:30:13-36
+307
+308        <activity
+308-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:23:9-27:75
+309            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+309-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:24:13-93
+310            android:excludeFromRecents="true"
+310-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:25:13-46
+311            android:exported="false"
+311-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:26:13-37
+312            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+312-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:27:13-72
+313        <!--
+314            Service handling Google Sign-In user revocation. For apps that do not integrate with
+315            Google Sign-In, this service will never be started.
+316        -->
+317        <service
+317-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:33:9-37:51
+318            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+318-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:34:13-89
+319            android:exported="true"
+319-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:35:13-36
+320            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+320-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:36:13-107
+321            android:visibleToInstantApps="true" /> <!-- Needs to be explicitly declared on P+ -->
+321-->[com.google.android.gms:play-services-auth:20.3.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\84899765b96502cf76c4be1f254d95ae\jetified-play-services-auth-20.3.0\AndroidManifest.xml:37:13-48
+322        <uses-library
+322-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+323            android:name="org.apache.http.legacy"
+323-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+324            android:required="false" />
+324-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\28077ebf287a4c2ea203e27e204eb418\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+325
+326        <activity
+326-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5d53cfea3f3e7c224c4bc40ff8881638\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+327            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+327-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5d53cfea3f3e7c224c4bc40ff8881638\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+328            android:exported="false"
+328-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5d53cfea3f3e7c224c4bc40ff8881638\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+329            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+329-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\5d53cfea3f3e7c224c4bc40ff8881638\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+330
+331        <meta-data
+331-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\09bcd54834df0bd39ec34454453aa108\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+332            android:name="com.google.android.gms.version"
+332-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\09bcd54834df0bd39ec34454453aa108\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+333            android:value="@integer/google_play_services_version" /> <!-- Receiver Service -->
+333-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\09bcd54834df0bd39ec34454453aa108\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+334        <service
+334-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:29:9-31:40
+335            android:name="app.notifee.core.ReceiverService"
+335-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:30:13-60
+336            android:exported="false" />
+336-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:31:13-37
+337
+338        <activity
+338-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:33:9-39:75
+339            android:name="app.notifee.core.NotificationReceiverActivity"
+339-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:34:13-73
+340            android:excludeFromRecents="true"
+340-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:35:13-46
+341            android:exported="true"
+341-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:36:13-36
+342            android:noHistory="true"
+342-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:37:13-37
+343            android:taskAffinity=""
+343-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:38:13-36
+344            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- Foreground Service -->
+344-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:39:13-72
+345        <service
+345-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:42:9-44:40
+346            android:name="app.notifee.core.ForegroundService"
+346-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:43:13-62
+347            android:exported="false" />
+347-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:44:13-37
+348
+349        <receiver
+349-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:46:9-54:20
+350            android:name="app.notifee.core.RebootBroadcastReceiver"
+350-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:47:13-68
+351            android:exported="false" >
+351-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:48:13-37
+352            <intent-filter>
+352-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:49:13-53:29
+353                <action android:name="android.intent.action.BOOT_COMPLETED" />
+353-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
+353-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
+354                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+354-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:51:17-82
+354-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:51:25-79
+355                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+355-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:52:17-82
+355-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:52:25-79
+356            </intent-filter>
+357        </receiver>
+358        <receiver
+358-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:55:9-61:20
+359            android:name="app.notifee.core.AlarmPermissionBroadcastReceiver"
+359-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:56:13-77
+360            android:exported="true" >
+360-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:57:13-36
+361            <intent-filter>
+361-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:58:13-60:29
+362                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+362-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:59:17-107
+362-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:59:25-104
+363            </intent-filter>
+364        </receiver>
+365        <receiver
+365-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:62:9-70:20
+366            android:name="app.notifee.core.NotificationAlarmReceiver"
+366-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:63:13-70
+367            android:exported="false" >
+367-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:64:13-37
+368            <intent-filter>
+368-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:49:13-53:29
+369                <action android:name="android.intent.action.BOOT_COMPLETED" />
+369-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
+369-->[androidx.work:work-runtime:2.8.0] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\8ed144cf18f33a017b3ba32b2eb9868f\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
+370                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+370-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:51:17-82
+370-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:51:25-79
+371                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+371-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:52:17-82
+371-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:52:25-79
+372            </intent-filter>
+373        </receiver> <!-- Broadcast Receiver -->
+374        <receiver
+374-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:73:9-81:20
+375            android:name="app.notifee.core.BlockStateBroadcastReceiver"
+375-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:74:13-72
+376            android:exported="false" >
+376-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:75:13-37
+377            <intent-filter>
+377-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:76:13-80:29
+378                <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED" />
+378-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:77:17-85
+378-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:77:25-82
+379                <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED" />
+379-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:78:17-102
+379-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:78:25-99
+380                <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED" />
+380-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:79:17-108
+380-->[app.notifee:core:202108261754] C:\Users\Muneeb\.gradle\caches\transforms-2\files-2.1\c9802303468fbf4c5b28e331d64a6a6b\jetified-core-202108261754\AndroidManifest.xml:79:25-105
+381            </intent-filter>
+382        </receiver>
+383    </application>
+384
+385</manifest>

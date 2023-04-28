@@ -21,6 +21,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/reducers/session";
 import { initilizeSocket } from "../../../store/reducers/socketReducer";
+import { getFCMToken } from "../../../helper/pushnotification_helper";
 
 export default function SignUp() {
   const [isSelected, setSelection] = useState(false);
@@ -31,6 +32,8 @@ export default function SignUp() {
   var temp =0;
   const phoneInput = useRef();
   async function logins() {
+
+    
   
     var cd={
       identifier: value,
@@ -42,6 +45,8 @@ export default function SignUp() {
      
      
         if (response.status === 201) {
+
+        
           if( isSelected&& response?.data.roles[0]!='user' ){
             temp=2;
             dispatch(login({}))

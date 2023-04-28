@@ -8,6 +8,8 @@
 
 import React from 'react';
 import type {Node} from 'react';
+import { useEffect } from 'react';
+import {requestUserPermission} from './src/helper/pushnotification_helper'
 import {
   SafeAreaView,
   ScrollView,
@@ -28,6 +30,8 @@ import {
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -54,7 +58,9 @@ const Section = ({children, title}): Node => {
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
+  useEffect(()=>{
+    requestUserPermission();
+  },[])
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };

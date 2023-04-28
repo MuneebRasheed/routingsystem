@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, ScrollView, Image } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch } from "@component/Form";
@@ -15,7 +15,7 @@ import CalendarStrip from "react-native-calendar-strip";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
-
+import messaging from "@react-native-firebase/messaging";
 import { DarkStatusBar } from "@component/StatusBar";
 import { connect } from "react-redux";
 import DatePicker from "react-native-date-picker";
@@ -72,6 +72,32 @@ function SelectVehicle(params) {
 
     
   }
+
+  useEffect(()=>{
+    // getFCMToken();
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      console.log(
+        "Notification caused app to open from background state:",
+        remoteMessage.notification
+      );
+    });
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        if (remoteMessage) {
+          console.log(
+            "Notification caused app to open from quit state:",
+            remoteMessage.notification
+          );
+        }
+      });
+    messaging().onMessage(async (remoteMessage) => {
+      setMainModel(pre=>!pre)
+      console.log(" on delected vehical notification on foreground state....", remoteMessage);
+    });
+
+  },[])
 
   const MainModel =()=>{
 
@@ -167,6 +193,11 @@ const fetchData = async () => {
     
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
+
+
+    var fcmToken = await AsyncStorage.getItem("fcmtoken");
+    // var fcmToken1 = JSON.parse(fcmToken);
+    console.log(fcmToken)
 const formData= new FormData()
 formData.append("files",images)
 formData.append("from_location",JSON.stringify(params.route.params.form))
@@ -443,7 +474,7 @@ try {
         style={styles.bookingBtn}
         onPress={() => {
           fetchData()
-          setMainModel(true)
+          // setMainModel(true)
         }}
       >
         <Text style={styles.bookingBtnText}>{__("BOOK NOW")}</Text>

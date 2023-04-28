@@ -5,7 +5,7 @@ import { Button } from '@component/Form'
 import { useSelector,useDispatch } from "react-redux";
 import styles from './styles'
 import theme from '@theme/styles'
-
+import messaging from "@react-native-firebase/messaging";
 import Header from '@component/Header'
 
 import { navigate } from '@navigation'
@@ -14,10 +14,33 @@ import request from '@utility/request'
 import { bind } from '@utility/component'
 import { DarkStatusBar } from '@component/StatusBar'  
 import { logout } from '../../../store/reducers/session';
+import { getFCMToken } from '../../../helper/pushnotification_helper';
 
 export default function Intro() {
   const dispatch = useDispatch();
   useEffect(()=>{
+    getFCMToken();
+    // messaging().onNotificationOpenedApp((remoteMessage) => {
+    //   console.log(
+    //     "Notification caused app to open from background state:",
+    //     remoteMessage.notification
+    //   );
+    // });
+    // // Check whether an initial notification is available
+    // messaging()
+    //   .getInitialNotification()
+    //   .then((remoteMessage) => {
+    //     if (remoteMessage) {
+    //       console.log(
+    //         "Notification caused app to open from quit state:",
+    //         remoteMessage.notification
+    //       );
+    //     }
+    //   });
+    // messaging().onMessage(async (remoteMessage) => {
+    //   console.log("notification on foreground state....", remoteMessage);
+    // });
+
     dispatch(logout())
   },[])
   
