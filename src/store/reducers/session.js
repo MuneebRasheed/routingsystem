@@ -4,6 +4,7 @@ const initialState = {
   token: '',
   isLoggedIn: false,
   user: null,
+  bool:false,
   address: {
     billing: {},
     shipping: {}
@@ -16,12 +17,18 @@ const updateToken_ = (state, action) => {
 
 const login_ = (state, action) => {
   state.isLoggedIn = true
-  state.user = action.payload.user
+  // state.user = action.payload.user
+  state.bool =true
 }
 
 const logout_ = (state, action) => {
-  return { ...initialState, token: state.token }
+  return { ...initialState, token: state.token}
 }
+
+const logout1_ = (state, action) => {
+  state.bool =false
+}
+
 
 const updateUser_ = (state, action) => {
   state.user = action.payload.user
@@ -39,6 +46,7 @@ const slice = createSlice({
     updateToken: updateToken_,
     login: login_,
     logout: logout_,
+    logout1: logout1_,
     updateUser: updateUser_,
     updateAddress: updateAddress_
   }
@@ -50,6 +58,7 @@ export const {
   updateToken,
   login,
   logout,
+  logout1,
   updateUser,
   updateAddress
 } = actions

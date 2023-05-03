@@ -23,18 +23,21 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   const { socket } = useSelector((state) => state.socket);
   const listRef = useRef(null);
 
+  const Token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEcml2ZXIiLCJlbWFpbCI6ImpvaG4yMzEyMzEyQGdtYWlsLmNvbSIsInBob25lIjoiMDMzNTQzNTIwMDEiLCJfaWQiOiI2NDM5MDJmYWIyNTk0YmMxODNmODZkNDYiLCJhdmF0YXIiOiJcdGh0dHBzOi8vc3RhdGljLnZlY3RlZXp5LmNvbS9zeXN0ZW0vcmVzb3VyY2VzL3ByZXZp4oCmLzQ4Ny85MTcvb3JpZ2luYWwvbWFuLWF2YXRhci1pY29uLWZyZWUtdmVjdG9yLmpwZyIsInNvY2tldElkIjoiIiwicm9sZSI6WyJ1c2VyIl0sImlhdCI6MTY4MTg4OTY5NSwiZXhwIjoxNjgxOTc2MDk1fQ.9sA75mdj3bjsOFhtJT-biQHqMDfZnkKZCC0r2HXOumg"
   const getConversationId = async (selectedUserId) => {
     console.log("SELECTED", selectedUserId);
     try {
       const responseOne = await axios.get(
-        `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedUserId}`,
+        `https://testing.explorelogix.com/v1/chat/conversation?member=64391ae4b2594bc183f86d47`,
         {
           headers: {
             authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEcml2ZXIiLCJlbWFpbCI6ImpvaG4yMzEyMzEyQGdtYWlsLmNvbSIsInBob25lIjoiMDMzNTQzNTIwMDEiLCJfaWQiOiI2NDM5MDJmYWIyNTk0YmMxODNmODZkNDYiLCJhdmF0YXIiOiJcdGh0dHBzOi8vc3RhdGljLnZlY3RlZXp5LmNvbS9zeXN0ZW0vcmVzb3VyY2VzL3ByZXZp4oCmLzQ4Ny85MTcvb3JpZ2luYWwvbWFuLWF2YXRhci1pY29uLWZyZWUtdmVjdG9yLmpwZyIsInNvY2tldElkIjoiIiwicm9sZSI6WyJ1c2VyIl0sImlhdCI6MTY4MTc5OTQ3OCwiZXhwIjoxNjgxODg1ODc4fQ.fjjuBUD28Ew7A17pd214MbnHzKu3P9HGmcNstf2aTr0",
+              "Bearer "+Token,
           },
         }
       );
+
+      console.log('resp',responseOne.data);
 
       if (responseOne.status === 200) {
         console.log("CONVERSTION RESP =>", responseOne.data);
@@ -45,7 +48,7 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
         setMessages(responseTwo?.data?.docs || []);
       }
     } catch (err) {
-      console.log("ERROR IN GET CONVERSATION ID", err.message);
+      console.log("ERROR IN GET CONVERSATION ID", err.response.data);
     }
   };
 
@@ -57,7 +60,7 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
         {
           headers: {
             authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEcml2ZXIiLCJlbWFpbCI6ImpvaG4yMzEyMzEyQGdtYWlsLmNvbSIsInBob25lIjoiMDMzNTQzNTIwMDEiLCJfaWQiOiI2NDM5MDJmYWIyNTk0YmMxODNmODZkNDYiLCJhdmF0YXIiOiJcdGh0dHBzOi8vc3RhdGljLnZlY3RlZXp5LmNvbS9zeXN0ZW0vcmVzb3VyY2VzL3ByZXZp4oCmLzQ4Ny85MTcvb3JpZ2luYWwvbWFuLWF2YXRhci1pY29uLWZyZWUtdmVjdG9yLmpwZyIsInNvY2tldElkIjoiIiwicm9sZSI6WyJ1c2VyIl0sImlhdCI6MTY4MTc5OTQ3OCwiZXhwIjoxNjgxODg1ODc4fQ.fjjuBUD28Ew7A17pd214MbnHzKu3P9HGmcNstf2aTr0",
+              "Bearer "+Token,
           },
         }
       );
@@ -70,7 +73,7 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
 
   const sendMessage = async () => {
     let sendMsg = {
-      to: selectedUserId,
+      to: "64391ae4b2594bc183f86d47",
       message: text,
     };
 
@@ -86,7 +89,7 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
           {
             headers: {
               authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEcml2ZXIiLCJlbWFpbCI6ImpvaG4yMzEyMzEyQGdtYWlsLmNvbSIsInBob25lIjoiMDMzNTQzNTIwMDEiLCJfaWQiOiI2NDM5MDJmYWIyNTk0YmMxODNmODZkNDYiLCJhdmF0YXIiOiJcdGh0dHBzOi8vc3RhdGljLnZlY3RlZXp5LmNvbS9zeXN0ZW0vcmVzb3VyY2VzL3ByZXZp4oCmLzQ4Ny85MTcvb3JpZ2luYWwvbWFuLWF2YXRhci1pY29uLWZyZWUtdmVjdG9yLmpwZyIsInNvY2tldElkIjoiIiwicm9sZSI6WyJ1c2VyIl0sImlhdCI6MTY4MTc5OTQ3OCwiZXhwIjoxNjgxODg1ODc4fQ.fjjuBUD28Ew7A17pd214MbnHzKu3P9HGmcNstf2aTr0",
+                "Bearer "+Token,
             },
           }
         );
@@ -110,16 +113,14 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   };
 
   useEffect(() => {
-    if (selectedUserId) {
-      console.log("REQUEST INTIATE==> IN FIRST");
-      getConversationId(selectedUserId);
-    }
+    console.log("REQUEST INTIATE==> IN FIRST");
+    getConversationId("64391ae4b2594bc183f86d47");
 
     socket.on("receive_message", (incomingMsg) => {
       console.log("NEW MESS", incomingMsg);
       setMessages((prevMessages) => [...prevMessages, incomingMsg]);
     });
-  }, [selectedUserId]);
+  }, []);
 
   // useEffect(() => {
   //   if (messages.length === 1 && isNewConversation) {
@@ -153,7 +154,7 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   return (
     <Modal
       position={"center"}
-      isOpen={Boolean(isOpen) && Boolean(selectedUserId)}
+      isOpen={Boolean(isOpen)}
       onClosed={() => setIsOpen(false)}
       style={styles.modalRating}
     >

@@ -114,12 +114,6 @@ export default {
     fontSize: SIZE.SIZE_12,
     color: COLOR.GREYDARK,
   },
-  errormsg: {
-    fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.RED,
-    paddingTop: "10",
-  },
   formRow: {
     marginBottom: 20,
   },
@@ -356,4 +350,34 @@ export default {
     fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
   },
+  button : {
+    backgroundColor:'#2471A3',
+    width:150,
+    height:45,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:20,
+    borderRadius:5
+  },
+  buttonText : {
+    fontSize: 15,
+    color: '#f4f4f4',
+    fontWeight:'bold',
+    textTransform:'uppercase'
+  },
+  inputContainerStyle : {
+    backgroundColor:'#fff',
+    borderRadius:5
+  },
+  inputStyle : {
+    backgroundColor:'#222242',
+    paddingLeft:15,
+    borderRadius:5,
+    color:'#fff'
+  },
+  labelStyle : {
+    marginBottom:5,
+    fontSize:12
+  }
 };

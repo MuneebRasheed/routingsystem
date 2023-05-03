@@ -1,27 +1,25 @@
-import React, { Component } from "react";
+import React, { Component,useEffect,useState } from "react";
 import { Image, TouchableOpacity, ScrollView, Text, View } from "react-native";
 import { connect } from "react-redux";
 
 import styles from "./styles";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as MENU from "./Menu";
 
 import { Icon } from "@component/Basic";
 import { closeDrawer, navigate, navigateReset } from "@navigation";
 import theme from "@theme/styles";
 import { __ } from "@utility/translation";
+import { useDispatch,useSelector } from "react-redux";
 
-class MenuLeft extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shadowOffsetWidth: 1,
-      shadowRadius: 4,
-    };
-    this.renderMenuList = this.renderMenuList.bind(this);
-  }
 
-  renderMenuList(menus) {
+
+
+function MenuLeft() {
+
+  const data = useSelector((state)=>state)
+  
+ function renderMenuList(menus) {
     return menus.map((menu) => {
       return (
         <TouchableOpacity
@@ -31,6 +29,7 @@ class MenuLeft extends Component {
           onPress={() => {
             closeDrawer();
             if (menu.route === "UserLogout") {
+                   
               navigateReset(menu.route);
             } else {
               navigate(menu.route, menu.params || {});
@@ -52,7 +51,7 @@ class MenuLeft extends Component {
     });
   }
 
-  render() {
+  
     let img =
       "https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500}}";
     let username = __("Allen John");
@@ -67,11 +66,11 @@ class MenuLeft extends Component {
               style={styles.headerImg}
             />
             <View
-              onPress={() =>
-                navigate(
-                  this.props.session.isLoggedIn ? "UserHome" : "UserLogin"
-                )
-              }
+              // onPress={() =>
+              //   navigate(
+              //     this.props.session.isLoggedIn ? "UserHome" : "UserLogin"
+              //   )
+              // }
             >
               <View style={theme.row}>
                 <Text style={styles.headerName}>{username}</Text>
@@ -85,7 +84,8 @@ class MenuLeft extends Component {
               {/* <Text style={styles.navHeader}>Public</Text> */}
               {/* {this.renderMenuList(MENU.Data1)} */}
               {/* <Text style={styles.navHeader}>Customer</Text> */}
-              {this.renderMenuList(MENU.Data2)}
+              {data.session.bool?renderMenuList(MENU.Data3):renderMenuList(MENU.Data2)}
+              
               {/* <Text style={styles.navHeader}>Driver</Text> */}
               {/* {this.renderMenuList(MENU.Data3)} */}
             </ScrollView>
@@ -94,6 +94,6 @@ class MenuLeft extends Component {
       </View>
     );
   }
-}
+
 
 export default connect(({ session }) => ({ session }))(MenuLeft);

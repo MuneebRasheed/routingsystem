@@ -8,16 +8,84 @@ import theme from "@theme/styles";
 import Accordion from "./Accordion";
 
 import Header from "@component/Header";
+// import ImagePicker from "react-native-image-crop-picker";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
-
-export default function BookingComplete() {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DocumentPicker from "react-native-document-picker";
+export default function BookingComplete(props) {
+  console.log(props.route.params.val);
+  const val = props.route.params.val;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [images, setImages] = useState();
+  const [description, setDescription] = useState();
+
+  const UploadData = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setImages(res[0]);
+      console.log(res[0]);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
+    }
+  };
+  const fetchData = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    const formData = new FormData();
+    formData.append("complain_against", datas._id);
+    formData.append("files", images);
+    formData.append("description", description);
+
+    console.log("FormData", formData);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${datas.access_token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    };
+    try {
+      const res = await fetch(
+        "https://testing.explorelogix.com/v1/complaints",
+        requestOptions
+      );
+      const result = await res.json();
+      console.log("RESULT", result);
+    } catch (err) {
+      console.log("ERROR");
+    }
+  };
+
+  const getPhotoFromGallery = () => {
+    // ImagePicker.openPicker({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true
+    // }).then(image => {
+    //   console.log(image);
+    // });
+
+    ImagePicker.openPicker({
+      multiple: true,
+    }).then((image) => {
+      console.log(image);
+      setImages(image);
+    });
+  };
   return (
     <Container>
       <DarkStatusBar />
@@ -34,7 +102,7 @@ export default function BookingComplete() {
             <View style={styles.bookingContent}>
               <View style={styles.bookingDetail}>
                 <Text style={styles.bookingIdText}>
-                  {__("BOOKING ID:#Z83764")}
+                  {__(`BOOKING ID:${val?._id}`)}
                 </Text>
                 <Button>
                   <Text style={styles.completeBtn}>{__("Complete")}</Text>
@@ -42,26 +110,24 @@ export default function BookingComplete() {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PAID")}</Text>
-                <Text style={styles.bookingText}>{__("$1200 USD")}</Text>
+                <Text style={styles.bookingText}>{__(`${val?.fare} USD`)}</Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PICKUP")}</Text>
-                <Text style={styles.bookingText}>
-                  {__("25 Jan,2019 | 02.00 PM")}
-                </Text>
+                <Text style={styles.bookingText}>{__(val?.time)}</Text>
               </View>
-              <View style={styles.bookingItem}>
+              {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("VEHICLE TYPE")}</Text>
                 <Text style={styles.bookingText}>{__("Tata Ace")}</Text>
-              </View>
-              <View style={styles.bookingItem}>
+              </View> */}
+              {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("MATERIAL TYPE")}</Text>
                 <Text style={styles.bookingText}>{__("Eletronics")}</Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("DELIVERY FLOOR")}</Text>
                 <Text style={styles.bookingText}>{__("1")}</Text>
-              </View>
+              </View> */}
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>
                   {__("UNLOADING MANPOWER")}
@@ -88,7 +154,7 @@ export default function BookingComplete() {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTextDark}>
-                  {__("7.2 ft * 4/2 ft*1 ft")}
+                  {__(`${val?.width} ft * ${val?.height}ft*1 ft`)}
                 </Text>
                 <Text style={styles.bookingTextDark}>{__("20 Nos")}</Text>
               </View>
@@ -187,20 +253,48 @@ export default function BookingComplete() {
               style={[theme.SIZE_20, theme.DARKVIOLET]}
             />
           </Button>
-          <Accordion
-            title="Reason"
-            renderContent={() => (
-              <View style={styles.accOrderInfo}>
-                <Button>
-                  <Text style={styles.accText}>{__("Miss Behave")}</Text>
-                </Button>
-                <Button>
-                  <Text style={styles.accText}>{__("Personal")}</Text>
-                </Button>
-              </View>
-            )}
-          />
-          <View
+
+          <View style={styles.formRow}>
+            <Text style={styles.formText}>{__("DESCRIPTION")}</Text>
+            <TextInput
+              placeholder=""
+              placeholderTextColor="#ccc"
+              multiline
+              numberOfLines={7}
+              textAlignVertical={"top"}
+              value={description}
+              onChangeText={(text) => {
+                setDescription(text);
+              }}
+              // placeholder='Please write your comments'
+              // onChangeText={(v) => this.onChangeText("comment", v)}
+              style={styles.formInput}
+            />
+          </View>
+
+          <View style={{ width: "100%", height: 50 }}>
+            <Button
+              style={styles.mailBtn}
+              onPress={() => {
+                UploadData();
+              }}
+            >
+              <Text style={styles.tripText}>{__("ATTACH FILE HERE")}</Text>
+            </Button>
+          </View>
+          <View style={{ width: "100%", height: 50, marginTop: 10 }}>
+            <Button
+              style={styles.mailBtn}
+              onPress={() => {
+                fetchData();
+                setIsOpen(false);
+              }}
+            >
+              <Text style={styles.tripText}>{__("SEND")}</Text>
+            </Button>
+          </View>
+
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -219,7 +313,7 @@ export default function BookingComplete() {
               type="FontAwesome"
               style={[theme.SIZE_30, theme.DARKVIOLET]}
             />
-          </View>
+          </View> */}
         </View>
       </Modal>
       <View style={styles.mailBtnInfo}>

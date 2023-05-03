@@ -325,7 +325,8 @@ export default {
   },
   sender: {
     alignItems: "flex-end",
-    
+    backgroundColor: COLOR.GREY,
+
     marginTop: 5,
     paddingBottom: 5,
     paddingTop: 5,
@@ -336,10 +337,9 @@ export default {
   },
   reciver: {
     backgroundColor: COLOR.GREYVIOLET,
-    color:COLOR.LIGHT,
     marginTop: 5,
     paddingBottom: 5,
-    borderRadius: 2,
+    borderRadius: 6,
     paddingTop: 5,
     paddingLeft: 7,
     marginRight: 70,

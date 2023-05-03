@@ -180,4 +180,14 @@ export default {
     height: 150,
     borderRadius: 15,
   },
+  // / --map--//
+  mMap: {
+  
+    borderColor: COLOR.LIGHT,
+    borderWidth: 1
+  },
+  mMapImg: {
+    flex: 1.2,
+    zIndex: -99
+  }
 };

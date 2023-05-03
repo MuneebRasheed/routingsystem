@@ -2,90 +2,116 @@ import React, { useState } from "react";
 import { View, ScrollView, Image } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
-
+// import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 import styles from "./styles";
-import theme from "@theme/styles";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CreditCardInput } from "react-native-credit-card-input";
 import Header from "@component/Header";
 import Support from "@component/Support";
-
+import axios from "axios";
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
-import request from "@utility/request";
-import { bind } from "@utility/component";
+
 import { DarkStatusBar } from "@component/StatusBar";
 
 export default function Payment() {
-  const [PaymentTabSelected, setPaymentTabSelected] = useState("card");
+  const [CardInput, setCardInput] = useState({});
 
+  const postData = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    console.log(CardInput.values.expiry.split("/"));
+
+    const res = axios
+      .post(
+        ` https://testing.explorelogix.com/v1/payment`,
+        {
+          card_number: CardInput.values.number,
+          card_exp_month: CardInput.values.expiry.split("/")[0],
+          card_exp_year: CardInput.values.expiry.split("/")[1],
+          card_cvc: CardInput.values.cvc,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("res", data.data.payment_method);
+
+        makePaymentByUser(data.data.payment_method);
+      })
+      .catch((err) => {
+        console.log(("error", err));
+      });
+  };
+
+  const makePaymentByUser = async (method) => {
+    console.log("Method in paymentByUser ", method);
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    // console.log(datas);
+
+    axios
+      .post(
+        ` https://testing.explorelogix.com/v1/payment/transfer`,
+        {
+          paymentMethod: method,
+          currency: "cad",
+          amount: "250",
+          rider_account: "acct_1MwmIbPu2iasesq5",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("result to make payment", data.data);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
   async function onSubmit() {
-    await Support.showSuccess({
-      title: __("Success!"),
-      message: __("Transaction success"),
-      onHide: () => {
-        navigateReset("");
-      },
-      hideDelay: 2500,
+    if (CardInput.valid == false || typeof CardInput.valid == "undefined") {
+      alert("Invalid Credit Card");
+      return false;
+    } else {
+      await Support.showSuccess({
+        title: __("Success!"),
+        message: __("Transaction success"),
+        onHide: () => {
+          console.log(CardInput);
+          // makePaymentByUser();
+          postData();
+          // onDisplayNotification();
+          // navigateReset("PublicHome");
+        },
+        hideDelay: 2500,
+      });
+    }
+  }
+
+  async function onDisplayNotification() {
+    const channelId = await notifee.createChannel({
+      id: "important",
+      name: "Important Notifications",
+      importance: AndroidImportance.HIGH,
     });
-  }
 
-  function renderCard() {
-    return (
-      <View>
-        <View style={styles.paymentForm}>
-          <View style={styles.formRow}>
-            <Text style={styles.formText}>{__("NAME ON CARD")}</Text>
-            <TextInput
-              placeholder="Carol cartex"
-              placeholderTextColor="#000"
-              style={styles.formInput}
-            />
-          </View>
-          <View style={styles.formRow}>
-            <Text style={styles.formText}>{__("CARD NUMBER")}</Text>
-            <TextInput
-              placeholder="0000 3434 7867 9523"
-              keyboardType="numeric"
-              placeholderTextColor="#000"
-              style={styles.formInput}
-            />
-          </View>
-          <View style={styles.cardInfo}>
-            <View style={styles.formRow2}>
-              <Text style={styles.formText}>{__("EXPIRY DATE")}</Text>
-              <TextInput
-                placeholder="19 / 2019"
-                placeholderTextColor="#000"
-                keyboardType="numeric"
-                style={styles.formInput}
-              />
-            </View>
-            <View style={styles.formRow}>
-              <Text style={styles.formText}>{__("CVV")}</Text>
-              <TextInput
-                placeholder="657"
-                placeholderTextColor="#000"
-                keyboardType="numeric"
-                style={styles.formInput}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  function renderPayPal() {
-    return (
-      <View style={styles.payPalInfo}>
-        <Button>
-          <Image
-            style={styles.cardImg}
-            source={require("@asset/images/downloadicon.png")}
-          />
-        </Button>
-      </View>
-    );
+    await notifee.displayNotification({
+      title: "Your New Order Is Ready ",
+      body: "You can see you order requirment going to in my Trip",
+      android: {
+        channelId,
+        // largeIcon: require('../../../../assets/images/fb.png'),
+        importance: AndroidImportance.HIGH,
+        // ongoing: true,
+      },
+    });
   }
 
   return (
@@ -98,13 +124,13 @@ export default function Payment() {
           {__("CHOOSE YOUR PAYMENT")}
         </Text>
       </View>
-      <Content contentContainerStyle={theme.layoutDf}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <Container>
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.tabInfo}>
             <Button
               style={
                 PaymentTabSelected === "card"
-                  ? styles.tabActive
+                  ? styles.tabActive1
                   : styles.tabInactive
               }
               onPress={() => setPaymentTabSelected("card")}
@@ -122,7 +148,7 @@ export default function Payment() {
             <Button
               style={
                 PaymentTabSelected === "paypal"
-                  ? styles.tabActive
+                  ? styles.tabActive1
                   : styles.tabInactive
               }
               onPress={() => setPaymentTabSelected("paypal")}
@@ -145,9 +171,31 @@ export default function Payment() {
               ? renderPayPal()
               : null}
           </View>
-        </ScrollView>
-      </Content>
-      <Button style={styles.payBtn} onPress={onSubmit}>
+        </ScrollView> */}
+        <View style={styles.payPalInfo}>
+          {/* <Image
+         style={styles.cardImg}
+         source={require("@asset/images/downloadicon.png")}
+       /> */}
+
+          <CreditCardInput
+            inputContainerStyle={styles.inputContainerStyle}
+            inputStyle={styles.inputStyle}
+            labelStyle={styles.labelStyle}
+            validColor="#fff"
+            placeholderColor="#ccc"
+            onChange={(data) => {
+              setCardInput(data);
+            }}
+          />
+        </View>
+      </Container>
+      <Button
+        style={styles.payBtn}
+        onPress={() => {
+          onSubmit();
+        }}
+      >
         <Text style={styles.payBtnText}>{__("MAKE A PAYMENT")}</Text>
       </Button>
     </Container>

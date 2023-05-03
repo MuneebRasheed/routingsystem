@@ -9,6 +9,8 @@ export async function requestUserPermission() {
 
   if (enabled) {
     console.log("Authorization status:", authStatus);
+  }else{
+    console.log("Not Authorization status:", authStatus);
   }
 }
 

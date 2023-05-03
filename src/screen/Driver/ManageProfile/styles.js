@@ -135,6 +135,7 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 15,
     margin: 20,
+ 
   },
   saveBtnText: {
     fontFamily: FAMILY.BOLD,
@@ -258,7 +259,7 @@ export default {
   formInput: {
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_12,
-    color: COLOR.PRIMARY,
+    color: COLOR.DARKBLUE,
     borderBottomWidth: 1,
     borderColor: COLOR.SMOKELIGHT,
   },
@@ -282,7 +283,15 @@ export default {
   /* --permission-- */
   profileInputDetail: {
     marginBottom: 20,
+    paddingTop:10
   },
+  profileform:{
+    flex : 1,
+    flexDirection: 'column',
+   
+    
+  },
+  
   permissionText: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,

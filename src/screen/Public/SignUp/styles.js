@@ -38,14 +38,14 @@ export default {
     alignSelf: "center",
     marginTop: 30,
     marginBottom: 15,
-  },
-  formInput4: {
+  },formInput4:{
     width: "100%",
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_12,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
+  
   },
   signUpTitle: {
     fontFamily: FAMILY.BOLD,
@@ -63,19 +63,11 @@ export default {
   },
   formRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  formInputError: {
-    flex: 1,
-    fontFamily: FAMILY.REGULAR,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.RED,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    marginBottom: 15,
+    justifyContent:'space-between',
+    
   },
   formInput: {
-    flex: 1,
+    // flex: 1,
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_12,
     color: COLOR.DARK,
@@ -84,6 +76,7 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 15,
     marginBottom: 15,
+    
   },
   formInput3: {
     width: "100%",
@@ -130,12 +123,11 @@ export default {
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_14,
-    color: COLOR.LIGHT,
+    fontSize: SIZE.SIZE_12,
+    color: COLOR.DARK,
     alignSelf: "center",
     letterSpacing: 0.5,
     paddingBottom: 10,
-    textDecorationLine: "underline",
   },
   smnItem: {
     flexDirection: "row",
@@ -167,8 +159,7 @@ export default {
     alignSelf: "center",
     textAlign: "center",
     lineHeight: 19,
-  },
-  accordionBtn: {
+  },accordionBtn: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -193,8 +184,8 @@ export default {
     borderRadius: 5,
   },
   accordion: {
-    width: "100%",
-    marginBottom: 5,
+    width: '100%',
+    marginBottom: 5
   },
   accText: {
     fontFamily: FAMILY.REGULAR,
