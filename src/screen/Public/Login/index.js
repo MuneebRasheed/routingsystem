@@ -16,7 +16,7 @@ import { __ } from "@utility/translation";
 import { DarkStatusBar } from "@component/StatusBar";
 import PhoneInput from "react-native-phone-number-input";
 import Support from "@component/Support";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/reducers/session";
@@ -28,72 +28,70 @@ export default function SignUp() {
   const [value, setValue] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState(true);
-  const dispatch = useDispatch()
-  var temp =0;
+  const dispatch = useDispatch();
+  var temp = 0;
   const phoneInput = useRef();
   async function logins() {
+    var cd = {
+      identifier: "03001234567",
+      password: "test1234",
+    };
 
-    
-  
-    var cd={
-      identifier: value,
-      password
-    }
-
-    axios.post("http://18.232.210.115:3000/v1/auth/login", cd)
+    // * DRIVER
+    // var cd = {
+    //   identifier: "03024507900",
+    //   password: "test1234",
+    // };
+    console.log("PROJECT====>", cd);
+    axios
+      .post("https://testing.explorelogix.com/v1/auth/login", cd)
       .then((response) => {
-     
-     
         if (response.status === 201) {
-
-        
-          if( isSelected&& response?.data.roles[0]!='user' ){
-            temp=2;
-            dispatch(login({}))
-            dispatch(initilizeSocket(response.data.access_token))
+          if (isSelected && response?.data.roles[0] != "user") {
+            temp = 2;
+            dispatch(login({}));
+            dispatch(initilizeSocket(response.data.access_token));
             Support.showSuccess({
               title: __("Thank You"),
               message: __("Your phone number can be verified Login as driver"),
-              onHide: async() => {
+              onHide: async () => {
                 navigateReset("PublicHome");
-               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
-               await AsyncStorage.setItem('role',"User");
-                
+                await AsyncStorage.setItem(
+                  "response",
+                  JSON.stringify(response?.data)
+                );
+                await AsyncStorage.setItem("role", "User");
               },
               hideDelay: 2500,
             });
-          
           }
 
-          if( !isSelected && response?.data.roles[0]=='user' ){
-            dispatch(initilizeSocket(response.data.access_token))
-            temp=2;
+          if (!isSelected && response?.data.roles[0] == "user") {
+            dispatch(initilizeSocket(response.data.access_token));
+            temp = 2;
             Support.showSuccess({
               title: __("Thank You"),
               message: __("Your phone number can be verified Login as user"),
-              onHide: async() => {
+              onHide: async () => {
                 navigateReset("PublicHome");
-            
-               await AsyncStorage.setItem('response',JSON.stringify(response?.data));
-               await AsyncStorage.setItem('role',"User");
-                
+
+                await AsyncStorage.setItem(
+                  "response",
+                  JSON.stringify(response?.data)
+                );
+                await AsyncStorage.setItem("role", "User");
               },
               hideDelay: 2500,
             });
-            
           }
-          if(temp!=2){
+          if (temp != 2) {
             Support.showError({
               title: __("OOPs"),
               message: __("You cant be login"),
               hideDelay: 2500,
             });
           }
-          
-
-          
         } else {
-          
           Support.showError({
             title: __("OOPs"),
             message: __("You cant be login"),
@@ -102,27 +100,25 @@ export default function SignUp() {
         }
       })
       .catch((err) => {
-        console.log("error",err)
+        console.log("error", err);
         Support.showError({
-          title: __('OOPs'),
-          message: __('You cant be login Server Error'),
-          
-          hideDelay: 2500
-        })
+          title: __("OOPs"),
+          message: __("You cant be login Server Error"),
+          hideDelay: 2500,
+        });
       });
-   
   }
 
   const onSubmit = () => {
     const checkValid = phoneInput.current?.isValidNumber(value);
-    
+
     if (checkValid) {
       // navigate("PublicVerification", {
       //   values: value,
       //   screen: true,
       //   role: isSelected,
       // });
-      console.log(password,value)
+      console.log(password, value);
       logins();
     } else {
       alert("Invalid Phone Number");
@@ -169,7 +165,7 @@ export default function SignUp() {
                 autoFocus
               />
 
-              <View style={{  postion: "relative" }}>
+              <View style={{ postion: "relative" }}>
                 <TextInput
                   placeholder="Password"
                   secureTextEntry={valid}

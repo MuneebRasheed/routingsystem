@@ -37,7 +37,7 @@ export default function Home() {
       userId: "123",
       tripId: "1",
       IsActive: true,
-      IsBidding:true
+      IsBidding: true,
     },
     {
       id: 2,
@@ -52,12 +52,11 @@ export default function Home() {
       userId: "123",
       tripId: "1",
       IsActive: true,
-      IsBidding:false
+      IsBidding: false,
     },
   ]);
 
-  useEffect(()=>{
- 
+  useEffect(() => {
     messaging().onNotificationOpenedApp((remoteMessage) => {
       console.log(
         "Notification caused app to open from background state:",
@@ -78,14 +77,11 @@ export default function Home() {
     messaging().onMessage(async (remoteMessage) => {
       console.log("Driver side on foreground state....", remoteMessage);
     });
-
-   
-  },[])
+  }, []);
 
   function CloseModelBaseOnId(id) {
     console.log("Here Is Id ", Structure.length);
     if (Structure.length == 1) {
-     
       setMainModel(false);
     }
     setStructure((previous) => {
@@ -95,15 +91,15 @@ export default function Home() {
     });
   }
 
-  function showBiddingField(id){
+  function showBiddingField(id) {
     setStructure((previous) => {
       return previous.map((value) => {
-        var temp={}
+        var temp = {};
 
-        if(value.id==id){
-          temp = {...value,IsBidding:!value.IsBidding}
-        }else{
-          temp=value
+        if (value.id == id) {
+          temp = { ...value, IsBidding: !value.IsBidding };
+        } else {
+          temp = value;
         }
         return temp;
       });
@@ -222,24 +218,33 @@ export default function Home() {
                       { width: "25%", marginLeft: -10 },
                     ]}
                     onPress={() => {
-                      
-                      showBiddingField(val.id)
+                      showBiddingField(val.id);
                       // navigate("CustomerPayment");
                     }}
                   >
                     <Text style={styles.bookingBtnText}>{__("Bidding")}</Text>
                   </Button>
                 </View>
-                {val.IsBidding&&<View style={{flexDirection:'row',alignItems:'center'}}>
-                <TextInput placeholder="Enter The Bidding" style={{width:300,borderRadius:10,paddingLeft:10,marginLeft:20}}></TextInput>
-                  <TouchableOpacity>
-                    <Icon
-                      name="send"
-                      type="FontAwesome"
-                      style={[theme.SIZE_25, theme.DARKVIOLET]}
-                    />
-                  </TouchableOpacity>
-                </View>}
+                {val.IsBidding && (
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TextInput
+                      placeholder="Enter The Bidding"
+                      style={{
+                        width: 300,
+                        borderRadius: 10,
+                        paddingLeft: 10,
+                        marginLeft: 20,
+                      }}
+                    ></TextInput>
+                    <TouchableOpacity>
+                      <Icon
+                        name="send"
+                        type="FontAwesome"
+                        style={[theme.SIZE_25, theme.DARKVIOLET]}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                )}
               </View>
             )
           );

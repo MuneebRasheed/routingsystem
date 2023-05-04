@@ -1,4 +1,4 @@
-import React, { useState, useRef ,useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, ScrollView, Image, Dimensions } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
@@ -17,8 +17,11 @@ import MapView from "react-native-maps";
 import { DarkStatusBar } from "@component/StatusBar";
 
 import MapViewDirections from "react-native-maps-directions";
-import Geolocation from 'react-native-geolocation-service';
-
+import Geolocation from "react-native-geolocation-service";
+import {
+  getUserCurrentPosition,
+  locationPermission,
+} from "../../../helper/getCurrentLocation";
 
 export default function Home() {
   const [region, setRegion] = useState();
@@ -34,9 +37,7 @@ export default function Home() {
     },
   ];
 
-  
   const mapRef = useRef();
- 
 
   const handleRegionChangeComplete = (region) => {
     // console.log('Current Region:', region);
@@ -85,33 +86,49 @@ export default function Home() {
     }
   };
 
-  useEffect(()=>{
-    Geolocation.getCurrentPosition(
-      (position) => {
-          console.log(position);
-          setRegion(position?.coords)
-      },
-      (error) => {
-        console.log("map error: ",error);
-          console.log(error.code, error.message);
-      },
-      {
-       enableHighAccuracy: true,
-       timeout: 5000,
+  useEffect(() => {
+    getCurrentLocation();
+    // Geolocation.getCurrentPosition(
+    //   (position) => {
+    //     console.log("POSITION==>", position);
+    //     setRegion(position?.coords);
+    //   },
+    //   (error) => {
+    //     console.log("map error: ", error);
+    //     console.log(error.code, error.message);
+    //   },
+    //   {
+    //     enableHighAccuracy: true,
+    //     timeout: 5000,
+    //   }
+    // );
+  }, []);
 
-   }
-   );
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getCurrentLocation();
+    }, 4000);
 
-  },[])
+    return () => clearInterval(interval);
+  });
 
-  console.log(region);
+  const getCurrentLocation = async () => {
+    const isLocationOn = await locationPermission();
+    if (isLocationOn) {
+      const res = await getUserCurrentPosition();
+      console.log("GET LIVE LOCATION AFTER 5 SEC");
+      setStart(res);
+      console.log("CURRENT POSITION=====>", res);
+    }
+  };
+
   const homePlace = {
-    description: 'Current Location',
-    geometry: { location: { lat: region?.latitude, lng:region?.longitude} },
+    description: "Current Location",
+    geometry: { location: { lat: region?.latitude, lng: region?.longitude } },
   };
   const workPlace = {
-    description: 'Work',
-    geometry: { location: { lat: region?.latitude, lng:region?.longitude} },
+    description: "Work",
+    geometry: { location: { lat: region?.latitude, lng: region?.longitude } },
   };
 
   return (
@@ -121,13 +138,12 @@ export default function Home() {
       <Content>
         <View style={styles.homeContainer}>
           <View style={styles.formRow}>
-            
             <GooglePlacesAutocomplete
               placeholder="Pickup"
               currentLocation={true}
               predefinedPlaces={[homePlace]}
-              currentLocationLabel='Current location'
-              onPress={(data, details = null) => {     
+              currentLocationLabel="Current location"
+              onPress={(data, details = null) => {
                 // console.log("data", "details");
                 console.log(
                   "LOcation",
@@ -145,13 +161,13 @@ export default function Home() {
                   latitudeDelta: LATITUDE_DELTA,
                   longitudeDelta: LONGITUDE_DELTA,
                 };
-                  console.log("Test",test)
+                console.log("Test", test);
                 setStart(test);
                 setForm({
                   coordinates: test,
                   locationName: data?.structured_formatting?.main_text,
                 });
-                moveTo(test);
+                // moveTo(test);
               }}
               query={{
                 key: "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA",
@@ -166,14 +182,11 @@ export default function Home() {
             />
           </View>
           <View style={styles.formRow}>
-           
             <GooglePlacesAutocomplete
-
               placeholder="Drop"
               currentLocation={true}
               predefinedPlaces={[homePlace]}
               onPress={(data, details = null) => {
-               
                 console.log(data, details);
                 console.log(
                   "LOcation",
@@ -200,7 +213,6 @@ export default function Home() {
               returnKeyType={"default"}
               fetchDetails={true}
               enablePoweredByContainer={false}
-              
               currentLocationLabel="Current location"
             />
           </View>
@@ -242,20 +254,25 @@ export default function Home() {
                   }
                   destination={end}
                   apikey={GOOGLE_MAPS_APIKEY}
-                  
                   onStart={(params) => {
                     console.log(
                       `Started routing between "${params.origin}" and "${params.destination}"`
                     );
                   }}
                   onReady={(result) => {
+                    mapRef.current.fitToCoordinates(result.coordinates, {
+                      edgePadding: {
+                        // right: 30,
+                        // bottom: 300,
+                        // left: 30,
+                        // top: 100,
+                      },
+                    });
                     console.log(`Distance: ${result.distance} km`);
                     console.log(`Duration: ${result.duration} min.`);
-
-                    
                   }}
                   onError={(errorMessage) => {
-                    console.log('GOT AN ERROR');
+                    console.log("GOT AN ERROR");
                   }}
                 />
               )}
@@ -269,13 +286,12 @@ export default function Home() {
             style={styles.selectBtn}
             onPress={() => {
               onClick();
-            
+
               // traceRoute();
             }}
           >
-            <Text style={styles.shareBtnText}>{__("Select Driving Host")}</Text>
+            <Text style={styles.shareBtnText}>hELLO</Text>
           </Button>
-          
         </View>
       </View>
     </Container>

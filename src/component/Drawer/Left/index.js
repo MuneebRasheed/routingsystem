@@ -1,6 +1,6 @@
-import React, { Component,useEffect,useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Image, TouchableOpacity, ScrollView, Text, View } from "react-native";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import styles from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -10,16 +10,13 @@ import { Icon } from "@component/Basic";
 import { closeDrawer, navigate, navigateReset } from "@navigation";
 import theme from "@theme/styles";
 import { __ } from "@utility/translation";
-import { useDispatch,useSelector } from "react-redux";
-
-
-
+import { useDispatch } from "react-redux";
 
 function MenuLeft() {
+  const data = useSelector((state) => state);
+  const { socket } = useSelector((state) => state.socket);
 
-  const data = useSelector((state)=>state)
-  
- function renderMenuList(menus) {
+  function renderMenuList(menus) {
     return menus.map((menu) => {
       return (
         <TouchableOpacity
@@ -29,7 +26,7 @@ function MenuLeft() {
           onPress={() => {
             closeDrawer();
             if (menu.route === "UserLogout") {
-                   
+              socket.disconnect();
               navigateReset(menu.route);
             } else {
               navigate(menu.route, menu.params || {});
@@ -51,49 +48,49 @@ function MenuLeft() {
     });
   }
 
-  
-    let img =
-      "https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500}}";
-    let username = __("Allen John");
+  let img =
+    "https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500}}";
+  let username = __("Allen John");
 
-    return (
-      <View style={styles.drawer}>
-        <View style={styles.headerBg}>
-          <View style={styles.header}>
-            <Image
-              source={{ uri: img }}
-              resizeMode="cover"
-              style={styles.headerImg}
-            />
-            <View
-              // onPress={() =>
-              //   navigate(
-              //     this.props.session.isLoggedIn ? "UserHome" : "UserLogin"
-              //   )
-              // }
-            >
-              <View style={theme.row}>
-                <Text style={styles.headerName}>{username}</Text>
-              </View>
+  return (
+    <View style={styles.drawer}>
+      <View style={styles.headerBg}>
+        <View style={styles.header}>
+          <Image
+            source={{ uri: img }}
+            resizeMode="cover"
+            style={styles.headerImg}
+          />
+          <View
+          // onPress={() =>
+          //   navigate(
+          //     this.props.session.isLoggedIn ? "UserHome" : "UserLogin"
+          //   )
+          // }
+          >
+            <View style={theme.row}>
+              <Text style={styles.headerName}>{username}</Text>
             </View>
           </View>
         </View>
-        <View style={styles.content}>
-          <View style={styles.navMenu}>
-            <ScrollView>
-              {/* <Text style={styles.navHeader}>Public</Text> */}
-              {/* {this.renderMenuList(MENU.Data1)} */}
-              {/* <Text style={styles.navHeader}>Customer</Text> */}
-              {data.session.bool?renderMenuList(MENU.Data3):renderMenuList(MENU.Data2)}
-              
-              {/* <Text style={styles.navHeader}>Driver</Text> */}
-              {/* {this.renderMenuList(MENU.Data3)} */}
-            </ScrollView>
-          </View>
+      </View>
+      <View style={styles.content}>
+        <View style={styles.navMenu}>
+          <ScrollView>
+            {/* <Text style={styles.navHeader}>Public</Text> */}
+            {/* {this.renderMenuList(MENU.Data1)} */}
+            {/* <Text style={styles.navHeader}>Customer</Text> */}
+            {data.session.bool
+              ? renderMenuList(MENU.Data3)
+              : renderMenuList(MENU.Data2)}
+
+            {/* <Text style={styles.navHeader}>Driver</Text> */}
+            {/* {this.renderMenuList(MENU.Data3)} */}
+          </ScrollView>
         </View>
       </View>
-    );
-  }
-
+    </View>
+  );
+}
 
 export default connect(({ session }) => ({ session }))(MenuLeft);
