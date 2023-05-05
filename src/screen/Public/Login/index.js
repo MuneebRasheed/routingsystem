@@ -32,15 +32,16 @@ export default function SignUp() {
   var temp = 0;
   const phoneInput = useRef();
   async function logins() {
+    // * USER
     var cd = {
-      identifier: "03001234567",
-      password: "test1234",
+      identifier: "+923074461165",
+      password: "1234",
     };
 
     // * DRIVER
     // var cd = {
-    //   identifier: "03024507900",
-    //   password: "test1234",
+    //   identifier: "+923074461166",
+    //   password: "1234",
     // };
     console.log("PROJECT====>", cd);
     axios
@@ -100,7 +101,7 @@ export default function SignUp() {
         }
       })
       .catch((err) => {
-        console.log("error", err);
+        console.log("error", err, err.response);
         Support.showError({
           title: __("OOPs"),
           message: __("You cant be login Server Error"),

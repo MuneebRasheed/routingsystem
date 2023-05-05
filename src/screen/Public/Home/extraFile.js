@@ -198,74 +198,29 @@ export default function Home() {
           </View>
           <View style={styles.mMap}>
             <MapView
-              style={styles.mMapImg}
-              initialRegion={{
-                latitude: start?.latitude == undefined ? 0 : start?.latitude,
-                longitude: start?.longitude == undefined ? 0 : start?.longitude,
-                latitudeDelta: LATITUDE_DELTA,
-                longitudeDelta: LONGITUDE_DELTA,
-              }}
               ref={mapRef}
-              region={{
-                latitude: start?.latitude == undefined ? 0 : start?.latitude,
-                longitude: start?.longitude == undefined ? 0 : start?.longitude,
-                latitudeDelta: LATITUDE_DELTA,
-                longitudeDelta: LONGITUDE_DELTA,
-              }}
-              onRegionChangeComplete={handleRegionChangeComplete}
-              // onRegionChange={start}
+              style={StyleSheet.absoluteFill}
+              initialRegion={pickupCords}
             >
-              {start && (
-                <MapView.Marker
-                  key={`coordinate_1`}
-                  coordinate={start}
-                  image={require("../../../../assets/images/Oval2x.png")}
-                />
-              )}
-              {end && (
-                <MapView.Marker
-                  key={`coordinate_2`}
-                  coordinate={end}
-                  image={require("../../../../assets/images/greenMarker2x.png")}
-                />
-              )}
-
-              {start && end && (
-                <MapViewDirections
-                  strokeWidth={3}
-                  strokeColor="hotpink"
-                  optimizeWaypoints={true}
-                  timePrecision={"now"}
-                  origin={start}
-                  waypoints={
-                    coordinates.length > 2
-                      ? coordinates.slice(1, -1)
-                      : undefined
-                  }
-                  destination={end}
-                  apikey={GOOGLE_MAPS_APIKEY}
-                  onStart={(params) => {
-                    console.log(
-                      `Started routing between "${params.origin}" and "${params.destination}"`
-                    );
-                  }}
-                  onReady={(result) => {
-                    mapRef.current.fitToCoordinates(result.coordinates, {
-                      edgePadding: {
-                        // right: 30,
-                        // bottom: 300,
-                        // left: 30,
-                        // top: 100,
-                      },
-                    });
-                    console.log(`Distance: ${result.distance} km`);
-                    console.log(`Duration: ${result.duration} min.`);
-                  }}
-                  onError={(errorMessage) => {
-                    console.log("GOT AN ERROR");
-                  }}
-                />
-              )}
+              <Marker
+                coordinate={pickupCords}
+                image={require("../../../../assets/images/Oval2x.png")}
+              />
+              <Marker
+                coordinate={droplocationCords}
+                image={require("../../../../assets/images/greenMarker2x.png")}
+              />
+              <MapViewDirections
+                origin={pickupCords}
+                destination={droplocationCords}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeWidth={6}
+                strokeColor="purple"
+                optimizeWaypoints={true}
+                onReady={(result) => {
+                  mapRef.current.fitToCoordinates(result.coordinates);
+                }}
+              />
             </MapView>
           </View>
         </View>
