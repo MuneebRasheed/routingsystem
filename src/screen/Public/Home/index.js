@@ -236,9 +236,19 @@ export default function Home() {
               // onRegionChange={start}
             >
               {start && (
-                <MapView.Marker key={`coordinate_1`} coordinate={start} />
+                <MapView.Marker
+                  key={`coordinate_1`}
+                  coordinate={start}
+                  image={require("../../../../assets/images/Oval2x.png")}
+                />
               )}
-              {end && <MapView.Marker key={`coordinate_2`} coordinate={end} />}
+              {end && (
+                <MapView.Marker
+                  key={`coordinate_2`}
+                  coordinate={end}
+                  image={require("../../../../assets/images/greenMarker2x.png")}
+                />
+              )}
 
               {start && end && (
                 <MapViewDirections
