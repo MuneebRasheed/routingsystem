@@ -8,6 +8,7 @@ export const getUserCurrentPosition = () => {
         const coords = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
+          heading: position.coords.heading,
         };
 
         resolve(coords);
