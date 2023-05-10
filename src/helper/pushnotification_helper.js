@@ -9,7 +9,7 @@ export async function requestUserPermission() {
 
   if (enabled) {
     console.log("Authorization status:", authStatus);
-  }else{
+  } else {
     console.log("Not Authorization status:", authStatus);
   }
 }
@@ -26,10 +26,13 @@ export async function getFCMToken() {
       if (fcmtoken) {
         console.log("new token", fcmtoken);
         await AsyncStorage.setItem("fcmtoken", fcmtoken);
+        return fcmtoken;
       } else {
       }
     } catch (err) {
       console.log("ERROR IN GETTING FCM TOKEN", err);
     }
+  } else {
+    return fcmtoken;
   }
 }

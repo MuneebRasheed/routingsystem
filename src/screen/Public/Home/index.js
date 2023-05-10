@@ -82,13 +82,13 @@ export default function Home() {
     getCurrentLocation();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getCurrentLocation();
-    }, 6000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getCurrentLocation();
+  //   }, 6000);
 
-    return () => clearInterval(interval);
-  });
+  //   return () => clearInterval(interval);
+  // });
 
   return (
     <Container>

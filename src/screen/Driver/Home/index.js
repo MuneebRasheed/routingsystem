@@ -56,28 +56,28 @@ export default function Home() {
     },
   ]);
 
-  useEffect(() => {
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
-    // Check whether an initial notification is available
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-        }
-      });
-    messaging().onMessage(async (remoteMessage) => {
-      console.log("Driver side on foreground state....", remoteMessage);
-    });
-  }, []);
+  // useEffect(() => {
+  //   messaging().onNotificationOpenedApp((remoteMessage) => {
+  //     console.log(
+  //       "Notification caused app to open from background state:",
+  //       remoteMessage.notification
+  //     );
+  //   });
+  //   // Check whether an initial notification is available
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then((remoteMessage) => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           "Notification caused app to open from quit state:",
+  //           remoteMessage.notification
+  //         );
+  //       }
+  //     });
+  //   messaging().onMessage(async (remoteMessage) => {
+  //     console.log("Driver side on foreground state....", remoteMessage);
+  //   });
+  // }, []);
 
   function CloseModelBaseOnId(id) {
     console.log("Here Is Id ", Structure.length);

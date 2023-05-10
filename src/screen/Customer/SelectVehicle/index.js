@@ -131,30 +131,30 @@ function SelectVehicle(params) {
 
   useEffect(() => {
     // getFCMToken();
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
-    // Check whether an initial notification is available
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-        }
-      });
-    messaging().onMessage(async (remoteMessage) => {
-      setMainModel((pre) => !pre);
-      console.log(
-        " on delected vehical notification on foreground state....",
-        remoteMessage
-      );
-    });
+    // messaging().onNotificationOpenedApp((remoteMessage) => {
+    //   console.log(
+    //     "Notification caused app to open from background state:",
+    //     remoteMessage.notification
+    //   );
+    // });
+    // // Check whether an initial notification is available
+    // messaging()
+    //   .getInitialNotification()
+    //   .then((remoteMessage) => {
+    //     if (remoteMessage) {
+    //       console.log(
+    //         "Notification caused app to open from quit state:",
+    //         remoteMessage.notification
+    //       );
+    //     }
+    //   });
+    // messaging().onMessage(async (remoteMessage) => {
+    //   setMainModel((pre) => !pre);
+    //   console.log(
+    //     " on delected vehical notification on foreground state....",
+    //     remoteMessage
+    //   );
+    // });
   }, []);
 
   const MainModel = ({ value }) => {

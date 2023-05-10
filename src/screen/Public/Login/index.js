@@ -92,6 +92,8 @@ export default function SignUp() {
               hideDelay: 2500,
             });
           }
+
+          return response.data;
         } else {
           Support.showError({
             title: __("OOPs"),
@@ -99,6 +101,23 @@ export default function SignUp() {
             hideDelay: 2500,
           });
         }
+      })
+      .then(async (userDetails) => {
+        const firebaseToken = await getFCMToken();
+        const notificationResponse = await axios.post(
+          `https://testing.explorelogix.com/v1/notifications/accept`,
+          {
+            notification_token: firebaseToken,
+            device_type: "mobile_device",
+          },
+          {
+            headers: {
+              authorization: `Bearer ${userDetails.access_token}`,
+            },
+          }
+        );
+
+        console.log("CURRENT USER YAY!!! ===>", notificationResponse.data);
       })
       .catch((err) => {
         console.log("error", err, err.response);
