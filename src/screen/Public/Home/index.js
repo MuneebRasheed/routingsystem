@@ -3,6 +3,8 @@ import { View, StyleSheet, Dimensions, Platform, Image } from "react-native";
 import { Container, Content, Text } from "@component/Basic";
 import { DarkStatusBar } from "@component/StatusBar";
 import { Button } from "@component/Form";
+import { navigate } from "@navigation";
+import { __ } from "@utility/translation";
 import styles from "./styles";
 
 import MapView, { Marker, AnimatedRegion } from "react-native-maps";
@@ -75,6 +77,20 @@ export default function Home() {
       }
     } else {
       coordinate.timing(newCoordinate).start();
+    }
+  };
+
+  const handleNavigation = () => {
+    if (
+      Object.values(state.pickupCords).length > 0 &&
+      Object.values(state.droplocationCords).length > 0
+    ) {
+      navigate("CustomerSelectVehicle", {
+        to: state.pickupCords,
+        form: state.droplocationCords,
+      });
+    } else {
+      alert("Please Fill the Start and Destination Location");
     }
   };
 
@@ -198,20 +214,18 @@ export default function Home() {
           </View>
         </View>
       </Content>
-      {/* <View style={styles.footerBtn}>
+      <View style={styles.footerBtn}>
         <View style={styles.footerBtnInfo}>
           <Button
             style={styles.selectBtn}
             onPress={() => {
-              onClick();
-
-              // traceRoute();
+              handleNavigation();
             }}
           >
-            <Text style={styles.shareBtnText}>hELLO</Text>
+            <Text style={styles.shareBtnText}>{__("Select Driving Host")}</Text>
           </Button>
         </View>
-      </View> */}
+      </View>
     </Container>
   );
 }

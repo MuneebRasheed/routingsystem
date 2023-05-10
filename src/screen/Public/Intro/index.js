@@ -42,7 +42,7 @@ export default function Intro() {
       console.log("notification on foreground state....", remoteMessage);
     });
 
-    // dispatch(logout());
+    dispatch(logout());
   }, []);
 
   return (
