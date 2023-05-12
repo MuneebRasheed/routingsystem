@@ -12,6 +12,7 @@ import Modal from "react-native-modalbox";
 import DropDownPicker from "react-native-dropdown-picker";
 import DocumentPicker from "react-native-document-picker";
 import CalendarStrip from "react-native-calendar-strip";
+import { useSelector } from "react-redux";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
@@ -24,6 +25,13 @@ import DatePicker from "react-native-date-picker";
 
 function SelectVehicle(params) {
   // console.log(params.route.params);
+  console.log("CURRENT PARAMS ===>", params.route.params);
+
+  const from_location_cor = `${params.route.params.form.latitude}, ${params.route.params.form.longitude}`;
+
+  const to_location_cor = `${params.route.params.to.latitude}, ${params.route.params.to.longitude}`;
+
+  const [bids, setBids] = useState([]);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState();
@@ -42,6 +50,7 @@ function SelectVehicle(params) {
     { label: "Other Items", value: "otherItems" },
   ]);
   const [itemsType, setItemsType] = useState("solid");
+  const { socket } = useSelector((state) => state.socket);
 
   const [Structure, setStructure] = useState([
     {
@@ -130,34 +139,56 @@ function SelectVehicle(params) {
   };
 
   useEffect(() => {
-    // getFCMToken();
-    // messaging().onNotificationOpenedApp((remoteMessage) => {
-    //   console.log(
-    //     "Notification caused app to open from background state:",
-    //     remoteMessage.notification
-    //   );
-    // });
-    // // Check whether an initial notification is available
-    // messaging()
-    //   .getInitialNotification()
-    //   .then((remoteMessage) => {
-    //     if (remoteMessage) {
-    //       console.log(
-    //         "Notification caused app to open from quit state:",
-    //         remoteMessage.notification
-    //       );
-    //     }
-    //   });
-    // messaging().onMessage(async (remoteMessage) => {
-    //   setMainModel((pre) => !pre);
-    //   console.log(
-    //     " on delected vehical notification on foreground state....",
-    //     remoteMessage
-    //   );
-    // });
+    socket.on("bidding", (incomingBid) => {
+      console.log("CURRENT BIDDING", incomingBid);
+      const incomingBidId = incomingBid.bidder.ID;
+
+      const updatedBids =
+        bids.length > 0
+          ? bids.map((bid) =>
+              bid.bidder.ID === incomingBidId ? incomingBid : bid
+            )
+          : [incomingBid];
+
+      setBids(updatedBids);
+      if (!mainModel) {
+        setMainModel(true);
+      }
+    });
   }, []);
 
   const MainModel = ({ value }) => {
+    const acceptRide = async (value) => {
+      try {
+        var data = await AsyncStorage.getItem("response");
+        var datas = JSON.parse(data);
+
+        const formData = new FormData();
+        formData.append("rider_id", value.bidder._id);
+
+        const requestOptions = {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+            // "Content-Type": "multipart/form-data",
+          },
+          body: formData,
+        };
+        const resp = await axios.patch(
+          `https://testing.explorelogix.com/v1/parcel/${value.parcel._id}`,
+          requestOptions.body,
+          {
+            headers: {
+              Authorization: `Bearer ${datas.access_token}`,
+            },
+          }
+        );
+
+        console.log("RESPPPP==>", resp);
+      } catch (err) {
+        console.log("ERROR WHILE ACCEPTING THE RIDE!", err.message);
+      }
+    };
+
     return (
       <Modal
         ref={ModalNotification}
@@ -176,8 +207,9 @@ function SelectVehicle(params) {
         <View style={{ borderRadius: 50 }}>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "20%" }}>
+              {console.log("CURRENT IMG==>", value.bidder.avatar)}
               <Image
-                source={value.image}
+                source={{ uri: value.bidder.cover_image }}
                 resizeMode="cover"
                 style={{ width: 50, height: 50, borderRadius: 25, margin: 10 }}
               />
@@ -192,7 +224,7 @@ function SelectVehicle(params) {
                 }}
               >
                 <Text>{__(value.vehicalName)}</Text>
-                <Text>{__(value.price)}</Text>
+                <Text>{value.bid_amount}</Text>
               </View>
               <View
                 style={{
@@ -202,7 +234,7 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>{__("Muzafar")}</Text>
+                <Text>{`${value.bidder.first_name} ${value.bidder.last_name}`}</Text>
                 <Text>{__(value.time)}</Text>
               </View>
               <View
@@ -213,7 +245,9 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>{__(value.rating + `(${value.totalRides})`)}</Text>
+                <Text>
+                  {value.bidder.rating + `(${value.totalRides || 0})`}
+                </Text>
                 <Text>{__(value.distance)}</Text>
               </View>
             </View>
@@ -236,7 +270,8 @@ function SelectVehicle(params) {
             <Button
               style={[styles.bookingBtn, { width: "40%" }]}
               onPress={() => {
-                navigate("CustomerPayment");
+                acceptRide(value);
+                // navigate("CustomerPayment");
               }}
             >
               <Text style={styles.bookingBtnText}>{__("Accept")}</Text>
@@ -254,13 +289,18 @@ function SelectVehicle(params) {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
 
-    var fcmToken = await AsyncStorage.getItem("fcmtoken");
-    // var fcmToken1 = JSON.parse(fcmToken);
-    console.log(fcmToken);
     const formData = new FormData();
     formData.append("files", images);
     formData.append("from_location", JSON.stringify(params.route.params.form));
     formData.append("to_location", JSON.stringify(params.route.params.to));
+    formData.append(
+      "from_location_cor",
+      `${params.route.params.form.latitude}, ${params.route.params.form.longitude}`
+    );
+    formData.append(
+      "to_location_cor",
+      `${params.route.params.to.latitude}, ${params.route.params.to.longitude}`
+    );
     formData.append("height", height);
     formData.append("fare", fare);
     formData.append("width", width);
@@ -365,6 +405,9 @@ function SelectVehicle(params) {
       }
     });
   }
+
+  console.log("BIDD====>", bids);
+
   return (
     <Container style={theme.layoutFx}>
       <Modal
@@ -373,13 +416,11 @@ function SelectVehicle(params) {
         backdropOpacity={0.3}
         swipeToClose={false}
       >
-        {Structure.map((val) => {
+        {bids.map((val) => {
           return (
-            val.IsActive && (
-              <View style={{ height: "30%" }}>
-                <MainModel value={val} />
-              </View>
-            )
+            <View style={{ height: "30%" }}>
+              <MainModel value={val} />
+            </View>
           );
         })}
 
@@ -524,8 +565,8 @@ function SelectVehicle(params) {
       <Button
         style={styles.bookingBtn}
         onPress={() => {
-          // fetchData()
-          setMainModel(true);
+          fetchData();
+          // setMainModel(true);
         }}
       >
         <Text style={styles.bookingBtnText}>{__("BOOK NOW")}</Text>
