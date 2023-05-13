@@ -10,44 +10,47 @@ import { Text, Icon } from "@component/Basic";
 import { Button, TextInput } from "@component/Form";
 import Modal from "react-native-modalbox";
 import { useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import axios from "axios";
 import styles from "./styles";
 import theme from "@theme/styles";
-import axios from "axios";
 
-const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
-
-  const currentLoggedInUser = "64391ae4b2594bc183f86d47";
+const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
+  const [currentLoggedInUserDetails, setCurrentLoggedInUserDetails] =
+    useState(null);
   const [text, setText] = useState("");
   const [conversationId, setConversationId] = useState(null);
   const [messages, setMessages] = useState([]);
   const { socket } = useSelector((state) => state.socket);
   const listRef = useRef(null);
 
-  const UserId="643902fab2594bc183f86d46"
-
-  const Token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBSRUFMIERSSVZFUiIsImVtYWlsIjoiam9objIzMTIzMTIxMUBnbWFpbC5jb20iLCJwaG9uZSI6IjAzMzU0MzUyMDAyIiwiX2lkIjoiNjQzOTFhZTRiMjU5NGJjMTgzZjg2ZDQ3IiwiYXZhdGFyIjoiXHRodHRwczovL3N0YXRpYy52ZWN0ZWV6eS5jb20vc3lzdGVtL3Jlc291cmNlcy9wcmV2aeKApi80ODcvOTE3L29yaWdpbmFsL21hbi1hdmF0YXItaWNvbi1mcmVlLXZlY3Rvci5qcGciLCJzb2NrZXRJZCI6IiIsInJvbGUiOlsicmlkZXIiXSwiaWF0IjoxNjgxODkwMTg1LCJleHAiOjE2ODE5NzY1ODV9.-Nbow0WRyFWvayhDi1kHqYDorf5iqh1esHsrcvrYGzc"
-  const getConversationId = async (selectedUserId) => {
-    console.log("SELECTED", selectedUserId);
+  const getConversationId = async (userInfo) => {
+    console.log("UUUUU =>", selectedParcel);
+    const selectedMemberId =
+      userInfo._id.toString() === selectedParcel.customer_id.toString()
+        ? selectedParcel.rider_id
+        : selectedParcel.customer_id;
 
     try {
       const responseOne = await axios.get(
-        `https://testing.explorelogix.com/v1/chat/conversation?member=`+UserId,
+        `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedMemberId}`,
         {
           headers: {
-            authorization:
-              "Bearer "+Token,
+            authorization: `Bearer ${userInfo?.token}`,
           },
         }
       );
 
-      console.log('resp',responseOne.data);
+      console.log("resp", responseOne.data);
 
       if (responseOne.status === 200) {
         console.log("CONVERSTION RESP =>", responseOne.data);
         setConversationId(responseOne?.data?._id);
-
-        const responseTwo = await getChatsOfConversation(responseOne.data._id);
+        const responseTwo = await getChatsOfConversation(
+          responseOne.data._id,
+          userInfo
+        );
         console.log("CHATS RESP =>", responseTwo.data);
         setMessages(responseTwo?.data?.docs || []);
       }
@@ -56,15 +59,14 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
     }
   };
 
-  const getChatsOfConversation = async (convoId) => {
+  const getChatsOfConversation = async (convoId, userInfo) => {
     console.log("COVERSATION ID:", convoId);
     try {
       const response = await axios.get(
         `https://testing.explorelogix.com/v1/chat?conversationId=${convoId}&page=1&limit=200&sort=createdAt-1`,
         {
           headers: {
-            authorization:
-              "Bearer "+Token,
+            authorization: `Bearer ${userInfo?.token}`,
           },
         }
       );
@@ -76,8 +78,14 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   };
 
   const sendMessage = async () => {
+    const selectedMemberId =
+      currentLoggedInUserDetails._id.toString() ===
+      selectedParcel.customer_id.toString()
+        ? selectedParcel.rider_id
+        : selectedParcel.customer_id;
+
     let sendMsg = {
-      to: UserId,
+      to: selectedMemberId,
       message: text,
     };
 
@@ -89,11 +97,10 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
       if (messages.length > 0 && !conversationId) {
         console.log("IN NESTED IF====>");
         const convoResp = await axios.get(
-          `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedUserId}`,
+          `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedMemberId}`,
           {
             headers: {
-              authorization:
-                "Bearer "+Token,
+              authorization: `Bearer ${currentLoggedInUserDetails?.token}`,
             },
           }
         );
@@ -103,22 +110,57 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
 
         socket.emit("send_message", sendMsg);
         sendMsg._id = Math.random();
-        sendMsg.sender = currentLoggedInUser;
+        sendMsg.sender = currentLoggedInUserDetails?._id;
         setMessages((prevMessages) => [...prevMessages, sendMsg]);
         setText("");
       } else {
         socket.emit("send_message", sendMsg);
         sendMsg._id = Math.random();
-        sendMsg.sender = currentLoggedInUser;
+        sendMsg.sender = currentLoggedInUserDetails?._id;
         setMessages((prevMessages) => [...prevMessages, sendMsg]);
         setText("");
       }
     }
   };
 
+  const getCurrentLoggedInUserDetails = async () => {
+    try {
+      let data = await AsyncStorage.getItem("response");
+      let datas = JSON.parse(data);
+
+      console.log("CURRENT OFF DATA===>", datas);
+
+      const userDetails = {
+        _id: datas._id,
+        token: datas.access_token,
+      };
+
+      setCurrentLoggedInUserDetails(userDetails);
+      return userDetails;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const intializeChatFunctionality = async () => {
+    try {
+      const isUserDetailsFetchedFromAsyncStorage =
+        await getCurrentLoggedInUserDetails();
+
+      console.log("MY RESULT===>", isUserDetailsFetchedFromAsyncStorage);
+      if (isUserDetailsFetchedFromAsyncStorage) {
+        getConversationId(isUserDetailsFetchedFromAsyncStorage);
+      }
+    } catch (err) {
+      console.log("ERROR IN INTIALIZING CHAT FUNCTIONALITY", err.message);
+    }
+  };
+
   useEffect(() => {
-    console.log("REQUEST INTIATE==> IN FIRST");
-    getConversationId(UserId);
+    intializeChatFunctionality();
+    // getCurrentLoggedInUserDetails();
+    // console.log("REQUEST INTIATE==> IN FIRST UNCOMMENT BELOW API");
+    // getConversationId("64391ae4b2594bc183f86d47");
 
     socket.on("receive_message", (incomingMsg) => {
       console.log("NEW MESS", incomingMsg);
@@ -130,8 +172,8 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   return (
     <Modal
       position={"center"}
-      isOpen={Boolean(isOpen)}
-      onClosed={() => setIsOpen(false)}
+      isOpen={Boolean(selectedParcel)}
+      onClosed={() => setSelectedParcel(null)}
       style={styles.modalRating}
     >
       <View style={styles.modalRatingContainer}>
@@ -149,7 +191,8 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
               keyExtractor={(message) => message._id.toString()}
               renderItem={({ item, index, seperators }) => {
                 if (
-                  item?.sender?.toString() === currentLoggedInUser.toString()
+                  item?.sender?.toString() ===
+                  currentLoggedInUserDetails?._id?.toString()
                 ) {
                   return (
                     <View style={styles.wrapimg}>
@@ -223,4 +266,4 @@ const ChatsModal = ({ isOpen, setIsOpen, selectedUserId }) => {
   );
 };
 
-export default ChatsModal;
+export default RiderChatsModal;

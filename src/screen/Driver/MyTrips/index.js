@@ -26,11 +26,11 @@ export default function MyTrip() {
   const fetchData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log("asuync storage data", datas);
+
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `http://18.232.210.115:3000/v1/parcel?page=2&limit=5&sort=-1&customer_id=${"6412f0faf432ae2f820d4f6d"}`,
+        `https://testing.explorelogix.com/v1/parcel?page=3&limit=40&sort=-1&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -47,7 +47,7 @@ export default function MyTrip() {
   };
 
   const [users, setUsers] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const dispatch = useDispatch();
   const { socket } = useSelector((state) => state.socket);
 
@@ -163,7 +163,8 @@ export default function MyTrip() {
                       <Button
                         style={{ width: 100, marginRight: 25 }}
                         onPress={() => {
-                          setIsOpen(true);
+                          console.log("CURRENT PAR===>", val);
+                          setSelectedParcel(val);
                         }}
                       >
                         <Text
@@ -289,7 +290,7 @@ export default function MyTrip() {
                         <Button
                           style={styles.balanceBtn}
                           onPress={() => {
-                            setIsOpen(true);
+                            // setIsOpen(true);
                           }}
                         >
                           <Text style={styles.balanceBtnText}>
@@ -390,7 +391,12 @@ export default function MyTrip() {
         </ScrollView>
       </Content>
 
-      {isOpen && <RiderChatsModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {selectedParcel && (
+        <RiderChatsModal
+          selectedParcel={selectedParcel}
+          setSelectedParcel={setSelectedParcel}
+        />
+      )}
     </Container>
   );
 }

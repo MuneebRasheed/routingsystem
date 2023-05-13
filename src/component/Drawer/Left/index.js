@@ -11,8 +11,10 @@ import { closeDrawer, navigate, navigateReset } from "@navigation";
 import theme from "@theme/styles";
 import { __ } from "@utility/translation";
 import { useDispatch } from "react-redux";
+import { removeSocketConnection } from "../../../store/reducers/socketReducer";
 
 function MenuLeft() {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state);
   const { socket } = useSelector((state) => state.socket);
 
@@ -25,8 +27,14 @@ function MenuLeft() {
           underlayColor="transparent"
           onPress={() => {
             closeDrawer();
-            if (menu.route === "UserLogout") {
+
+            if (menu.route === "PublicIntro") {
               socket.disconnect();
+              dispatch(removeSocketConnection());
+              alert("Logout successfully!");
+            }
+
+            if (menu.route === "UserLogout") {
               navigateReset(menu.route);
             } else {
               navigate(menu.route, menu.params || {});

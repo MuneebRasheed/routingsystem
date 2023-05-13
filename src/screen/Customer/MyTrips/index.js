@@ -20,7 +20,6 @@ import ChatsModal from "./ChatsModal";
 export default function MyTrip() {
   const [tabSelected, setTabSelected] = useState("all");
   const [isDisabled, setIsDisabled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
@@ -30,7 +29,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `http://18.232.210.115:3000/v1/parcel?page=2&limit=5&sort=-1&customer_id=${datas._id}`,
+        `https://testing.explorelogix.com/v1/parcel?page=2&limit=40&sort=desc&customer_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -47,7 +46,7 @@ export default function MyTrip() {
   };
 
   const [users, setUsers] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const dispatch = useDispatch();
   const { socket } = useSelector((state) => state.socket);
 
@@ -84,9 +83,7 @@ export default function MyTrip() {
                   <View style={styles.accordionContent}>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("TRIP COST")}</Text>
-                      <Text style={styles.bookingText}>
-                        {__(`${val?.fare} USD`)}
-                      </Text>
+                      <Text style={styles.bookingText}>{val?.fare}</Text>
                     </View>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
@@ -96,15 +93,16 @@ export default function MyTrip() {
                       <Text style={styles.bookingTitle}>
                         {__("PICK UP FROM")}
                       </Text>
-                      <Text style={styles.bookingText}>
-                        {__(`${JSON.parse(val?.from_location)?.locationName}`)}
-                      </Text>
+
+                      {/* <Text style={styles.bookingText}>
+                        {"`${JSON.parse(val?.from_location)?.locationName}`"}
+                      </Text> */}
                     </View>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                      <Text style={styles.bookingText}>
-                        {__(`${JSON.parse(val?.to_location)?.locationName}`)}
-                      </Text>
+                      {/* <Text style={styles.bookingText}>
+                        {`${JSON.parse(val?.to_location)?.locationName}`}
+                      </Text> */}
                     </View>
 
                     <View style={styles.bookingInfo}>
@@ -163,7 +161,8 @@ export default function MyTrip() {
                       <Button
                         style={{ width: 100, marginRight: 25 }}
                         onPress={() => {
-                          setIsOpen(true);
+                          console.log("CURRENT PARCEL==>", val);
+                          setSelectedParcel(val);
                         }}
                       >
                         <Text
@@ -286,12 +285,7 @@ export default function MyTrip() {
                             </Text>
                           </Button>
                         </View>
-                        <Button
-                          style={styles.balanceBtn}
-                          onPress={() => {
-                            setIsOpen(true);
-                          }}
-                        >
+                        <Button style={styles.balanceBtn} onPress={() => {}}>
                           <Text style={styles.balanceBtnText}>
                             {__("CHAT")}
                           </Text>
@@ -390,7 +384,12 @@ export default function MyTrip() {
         </ScrollView>
       </Content>
 
-      {isOpen && <ChatsModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {selectedParcel && (
+        <ChatsModal
+          selectedParcel={selectedParcel}
+          setSelectedParcel={setSelectedParcel}
+        />
+      )}
     </Container>
   );
 }
