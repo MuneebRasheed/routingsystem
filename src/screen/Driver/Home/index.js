@@ -298,7 +298,9 @@ export default function Home() {
               setMainModel(true);
             }}
           >
-            <Text style={styles.shareBtnText}>{__("Select Driving Host")}</Text>
+            <Text style={styles.shareBtnText}>
+              {__("Select Driving Host")} MYHH
+            </Text>
           </Button>
         </View>
       </View>

@@ -16,7 +16,7 @@ import { DarkStatusBar } from "@component/StatusBar";
 import { logout } from "../../../store/reducers/session";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
 
-export default function Intro() {
+export default function Intro({ navigation }) {
   const dispatch = useDispatch();
   useEffect(() => {
     // * HERE GET FCM TOKEN FUNC WAS INVOKING
@@ -26,6 +26,7 @@ export default function Intro() {
         "Notification caused app to open from background state:",
         remoteMessage.notification
       );
+      navigation.navigate("DriverManageProfile");
     });
     // Check whether an initial notification is available
     messaging()
@@ -40,10 +41,13 @@ export default function Intro() {
       });
     messaging().onMessage(async (remoteMessage) => {
       console.log("notification on foreground state....", remoteMessage);
+      console.log("NAVIGATION PROP", navigation);
     });
 
     dispatch(logout());
   }, []);
+
+  console.log("navigation===> PROP", navigation);
 
   return (
     <Container>

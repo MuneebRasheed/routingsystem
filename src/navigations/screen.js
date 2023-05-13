@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions, I18nManager } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -24,40 +24,38 @@ const listeners = ({ navigation, route }) => ({
 });
 
 const DrawerNavUser = ({ navigation }) => {
-  const data = useSelector((state)=>state)
-  console.log('cveer', data.session)
-  
-  return (
+  const data = useSelector((state) => state);
+  console.log("cveer", data.session);
 
+  return (
     <Drawer.Navigator
-    screenOptions={{
-      headerShown: false,
-      drawerWidth: WIDTH_DRAWER,
-      drawerStyle: { width: "75%" },
-      drawerPosition: I18nManager.isRTL ? "right" : "left",
-    }}
-    drawerContent={(props) => <DrawerLeft {...props} />}
-    minSwipeDistance={width}
-  >
-    {data.session.bool?<Stack.Screen
-        name="PublicHome"
-        component={require("@screen/Driver/Home").default}
-      />:
-  <Stack.Screen
-    name="PublicHome"
-    component={require("@screen/Public/Home").default}
-  />}
-  </Drawer.Navigator>
-  
-    
+      screenOptions={{
+        headerShown: false,
+        drawerWidth: WIDTH_DRAWER,
+        drawerStyle: { width: "75%" },
+        drawerPosition: I18nManager.isRTL ? "right" : "left",
+      }}
+      drawerContent={(props) => <DrawerLeft {...props} />}
+      minSwipeDistance={width}
+    >
+      {data.session.bool ? (
+        <Stack.Screen
+          name="PublicHome"
+          component={require("@screen/Driver/Home").default}
+        />
+      ) : (
+        <Stack.Screen
+          name="PublicHome"
+          component={require("@screen/Public/Home").default}
+        />
+      )}
+    </Drawer.Navigator>
   );
 };
 
-
 const DrawerNavDriver = ({ navigation }) => {
-  
-  
-  return (<Drawer.Navigator
+  return (
+    <Drawer.Navigator
       screenOptions={{
         headerShown: false,
         drawerWidth: WIDTH_DRAWER,
@@ -72,7 +70,6 @@ const DrawerNavDriver = ({ navigation }) => {
         component={require("@screen/Driver/Home").default}
       />
     </Drawer.Navigator>
-    
   );
 };
 
@@ -81,7 +78,6 @@ const NavRoot = ({ navigation }) => {
 };
 
 const Navigator = () => {
- 
   return (
     <NavigationContainer ref={navigationRef} onReady={onReady}>
       <Stack.Navigator
@@ -111,7 +107,7 @@ const Navigator = () => {
           name="PublicVerification"
           component={require("@screen/Public/Verification").default}
         />
-        
+
         <Stack.Screen
           name="PublicAboutUs"
           component={require("@screen/Public/AboutUs").default}
