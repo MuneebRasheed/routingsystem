@@ -32,13 +32,13 @@ import MapView from "react-native-maps";
 
 import MapViewDirections from "react-native-maps-directions";
 
-function MyRoute({navigation}) {
+function MyRoute({ navigation }) {
   const [opens, setOpens] = useState(false);
   const [value, setValue] = useState([]);
   const [items, setItems] = useState([
     { label: "All Days", value: "AllDays" },
     { label: "Monday", value: "monday" },
-   
+
     { label: "Tuesday", value: "tuesday" },
     { label: "Wednesday", value: "wednesday" },
 
@@ -47,7 +47,6 @@ function MyRoute({navigation}) {
 
     { label: "Saturday", value: "saturday" },
     { label: "Sunday", value: "sunday" },
-   
   ]);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -104,8 +103,8 @@ function MyRoute({navigation}) {
     var cd = {
       from: form.locationName,
       to: to.locationName,
-      from_cord: JSON.stringify(form.coordinates),
-      to_cord: JSON.stringify(to.coordinates),
+      from_cord: `${form.coordinates.latitude}, ${form.coordinates.longitude}`,
+      to_cord: `${to.coordinates.latitude}, ${to.coordinates.longitude}`,
       time: "2023-04-16",
       status: true,
       has_diversion: divert,
@@ -115,6 +114,8 @@ function MyRoute({navigation}) {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
     console.log(datas);
+
+    console.log("POSTING DATA==>", cd);
 
     const res = axios
       .post(`  https://testing.explorelogix.com/v1/routes`, cd, {
@@ -127,12 +128,14 @@ function MyRoute({navigation}) {
         Support.showSuccess({
           title: __("Thank You"),
           message: __("Route Has Been Added Succefully!"),
-          onHide: async () => {navigation.pop()},
+          onHide: async () => {
+            navigation.pop();
+          },
           hideDelay: 2500,
         });
       })
       .catch((err) => {
-        console.log(("error", err));
+        console.log("ERROR WHILE ADDING ROUTE", err.response.data);
       });
   }
 
@@ -163,7 +166,6 @@ function MyRoute({navigation}) {
               <GooglePlacesAutocomplete
                 placeholder="Drop"
                 currentLocation={true}
-                
                 onPress={(data, details = null) => {
                   console.log(data, details);
                   console.log(
@@ -330,7 +332,6 @@ function MyRoute({navigation}) {
         style={styles.bookingBtn}
         onPress={() => {
           submit();
-          
         }}
       >
         <Text style={styles.bookingBtnText}>{__("ADD ROUTE")}</Text>

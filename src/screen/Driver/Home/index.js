@@ -1,26 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  View,
-  ScrollView,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import theme from "@theme/styles";
 import styles from "./styles";
 
+import axios from "axios";
 import Modal from "react-native-modalbox";
 import Header from "@component/Header";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
 import ApplicationCard from "./ApplicationCard";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DarkStatusBar } from "@component/StatusBar";
-import messaging from "@react-native-firebase/messaging";
+import BiddingCard from "./BiddingCard";
 
 export default function Home() {
   const [Structure, setStructure] = useState([
@@ -56,29 +49,6 @@ export default function Home() {
     },
   ]);
 
-  // useEffect(() => {
-  //   messaging().onNotificationOpenedApp((remoteMessage) => {
-  //     console.log(
-  //       "Notification caused app to open from background state:",
-  //       remoteMessage.notification
-  //     );
-  //   });
-  //   // Check whether an initial notification is available
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then((remoteMessage) => {
-  //       if (remoteMessage) {
-  //         console.log(
-  //           "Notification caused app to open from quit state:",
-  //           remoteMessage.notification
-  //         );
-  //       }
-  //     });
-  //   messaging().onMessage(async (remoteMessage) => {
-  //     console.log("Driver side on foreground state....", remoteMessage);
-  //   });
-  // }, []);
-
   function CloseModelBaseOnId(id) {
     console.log("Here Is Id ", Structure.length);
     if (Structure.length == 1) {
@@ -105,12 +75,24 @@ export default function Home() {
       });
     });
   }
-  const [open, setOpen] = useState(false);
-  const [mainModel, setMainModel] = useState(false);
-  const [data, setData] = useState([]);
-  let img =
-    "https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500}}";
-  let username = __("Allen John");
+
+  const handleBid = async (bidValue) => {
+    try {
+      const responseOne = await axios.post(
+        "https://testing.explorelogix.com/v1/bid",
+        {
+          bid_amount: Number(bidValue),
+          parcel: "645c8d782cf653a35a6d19e8",
+          bidder: "6413665dd905a0bb6e203f2b",
+          description: "string",
+        }
+      );
+    } catch (error) {
+      alert("Something went wrong while bidding...!");
+    }
+  };
+
+  const [mainModel, setMainModel] = useState(true);
   const ModalNotification = useRef();
 
   const MainModel = () => {
@@ -121,8 +103,6 @@ export default function Home() {
         entry={"top"}
         swipeToClose={false}
         style={{
-          height: 200,
-          width: 400,
           borderRadius: 10,
           alignItems: "center",
         }}
@@ -131,121 +111,12 @@ export default function Home() {
         {Structure.map((val) => {
           return (
             val.IsActive && (
-              <View style={{ borderRadius: 50 }}>
-                <View style={{ flexDirection: "row" }}>
-                  <View style={{ width: "20%" }}>
-                    <Image
-                      source={require("@asset/images/avatar.png")}
-                      resizeMode="cover"
-                      style={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 25,
-                        margin: 10,
-                      }}
-                    />
-                  </View>
-                  <View style={{ width: "80%" }}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        margin: 5,
-                        fontSize: 20,
-                      }}
-                    >
-                      <Text>{__("Suzuki Wagon R")}</Text>
-                      <Text>{__("PKR 650)")}</Text>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        margin: 5,
-                        fontSize: 20,
-                      }}
-                    >
-                      <Text>{__("Muzafar")}</Text>
-                      <Text>{__("2 min)")}</Text>
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        margin: 5,
-                        fontSize: 20,
-                      }}
-                    >
-                      <Text>{__("4.8(2454)")}</Text>
-                      <Text>{__("406 m)")}</Text>
-                    </View>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Button
-                    style={[
-                      styles.bookingBtn,
-                      { width: "25%", backgroundColor: "red" },
-                    ]}
-                    onPress={(va) => {
-                      console.log("Muneeb click on Decline");
-                      CloseModelBaseOnId(val.id);
-                      // setOpen(false);
-                    }}
-                  >
-                    <Text style={styles.bookingBtnText}>{__("Decline")}</Text>
-                  </Button>
-                  <Button
-                    style={[
-                      styles.bookingBtn,
-                      { width: "25%", marginLeft: -10 },
-                    ]}
-                    onPress={() => {
-                      console.log("Muneeb click on Accept");
-                      navigate("CustomerPayment");
-                    }}
-                  >
-                    <Text style={styles.bookingBtnText}>{__("Accepts")}</Text>
-                  </Button>
-                  <Button
-                    style={[
-                      styles.bookingBtn,
-                      { width: "25%", marginLeft: -10 },
-                    ]}
-                    onPress={() => {
-                      showBiddingField(val.id);
-                      // navigate("CustomerPayment");
-                    }}
-                  >
-                    <Text style={styles.bookingBtnText}>{__("Bidding")}</Text>
-                  </Button>
-                </View>
-                {val.IsBidding && (
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <TextInput
-                      placeholder="Enter The Bidding"
-                      style={{
-                        width: 300,
-                        borderRadius: 10,
-                        paddingLeft: 10,
-                        marginLeft: 20,
-                      }}
-                    ></TextInput>
-                    <TouchableOpacity>
-                      <Icon
-                        name="send"
-                        type="FontAwesome"
-                        style={[theme.SIZE_25, theme.DARKVIOLET]}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
+              <BiddingCard
+                val={val}
+                CloseModelBaseOnId={CloseModelBaseOnId}
+                showBiddingField={showBiddingField}
+                handleBid={handleBid}
+              />
             )
           );
         })}
@@ -258,7 +129,11 @@ export default function Home() {
 
       <Header leftType="menu" title={"Dashboard"} />
       <Modal isOpen={mainModel} entry={"top"} backdropOpacity={0.3}>
-        <View style={{ height: "25%" }}>
+        <View
+          style={{
+            flex: 1,
+          }}
+        >
           <MainModel />
         </View>
 
