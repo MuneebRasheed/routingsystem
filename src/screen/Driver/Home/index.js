@@ -1,99 +1,134 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, ScrollView } from "react-native";
-import { Container, Content, Text, Icon } from "@component/Basic";
-import { TextInput, Button } from "@component/Form";
-import theme from "@theme/styles";
+import { useSelector } from "react-redux";
+import { Container, Content, Text } from "@component/Basic";
+import { Button } from "@component/Form";
 import styles from "./styles";
 
 import axios from "axios";
 import Modal from "react-native-modalbox";
 import Header from "@component/Header";
 
-import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
 import ApplicationCard from "./ApplicationCard";
 import { DarkStatusBar } from "@component/StatusBar";
 import BiddingCard from "./BiddingCard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Home() {
-  const [Structure, setStructure] = useState([
-    {
-      id: 1,
-      image: require("@asset/images/avatar.png"),
-      vehicalName: "Suzuki Wagon R",
-      cityName: "Lahore",
-      rating: "4.8",
-      totalRides: "2454",
-      price: "650",
-      time: "2",
-      distance: "406",
-      userId: "123",
-      tripId: "1",
-      IsActive: true,
-      IsBidding: true,
-    },
-    {
-      id: 2,
-      image: require("@asset/images/avatar.png"),
-      vehicalName: "Suzuki Wagon R",
-      cityName: "Lahore",
-      rating: "4.8",
-      totalRides: "2454",
-      price: "650",
-      time: "2",
-      distance: "406",
-      userId: "123",
-      tripId: "1",
-      IsActive: true,
-      IsBidding: false,
-    },
-  ]);
+export default function Home({ route }) {
+  console.log("ICOMIN DATA===>", route);
 
-  function CloseModelBaseOnId(id) {
+  const { socket } = useSelector((state) => state.socket);
+
+  const closeModelBaseOnId = (id) => {
     console.log("Here Is Id ", Structure.length);
-    if (Structure.length == 1) {
+    if (incomingParcelNotifications.length == 1) {
       setMainModel(false);
     }
-    setStructure((previous) => {
+    setIncomingParcelNotifications((previous) => {
       return previous.filter((value) => {
         return value.id != id;
       });
     });
-  }
+  };
 
-  function showBiddingField(id) {
-    setStructure((previous) => {
-      return previous.map((value) => {
-        var temp = {};
+  const handleBid = async (bidValue, selectedParcel) => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
 
-        if (value.id == id) {
-          temp = { ...value, IsBidding: !value.IsBidding };
-        } else {
-          temp = value;
-        }
-        return temp;
-      });
-    });
-  }
+    const requestPayload = {
+      bid_amount: Number(bidValue),
+      parcel: selectedParcel._id,
+      bidder: datas._id,
+      description: "string",
+    };
 
-  const handleBid = async (bidValue) => {
     try {
       const responseOne = await axios.post(
         "https://testing.explorelogix.com/v1/bid",
+        requestPayload,
         {
-          bid_amount: Number(bidValue),
-          parcel: "645c8d782cf653a35a6d19e8",
-          bidder: "6413665dd905a0bb6e203f2b",
-          description: "string",
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
         }
       );
+
+      console.log("SUCCESSFULL RESPONSE ==>", responseOne.data);
+
+      socket.emit("bidding", requestPayload);
     } catch (error) {
       alert("Something went wrong while bidding...!");
     }
   };
 
-  const [mainModel, setMainModel] = useState(true);
+  const [mainModel, setMainModel] = useState(false);
+  const [incomingParcelNotifications, setIncomingParcelNotifications] =
+    useState([
+      {
+        id: 1,
+        image: require("@asset/images/avatar.png"),
+        vehicalName: "Suzuki Wagon R",
+        cityName: "Lahore",
+        rating: "4.8",
+        totalRides: "2454",
+        price: "650",
+        time: "2",
+        distance: "406",
+        userId: "123",
+        tripId: "1",
+        IsActive: true,
+        IsBidding: true,
+
+        customer_id: {
+          first_name: "Faisal",
+          last_name: "Chaudhry",
+          phone: "+923354352012",
+          city: "Lahore",
+        },
+        fare: 70,
+      },
+    ]);
   const ModalNotification = useRef();
+
+  const getParcelById = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    console.log(datas);
+    try {
+      const id = "6461c8eec20c73f5cba902f1";
+      const responseOne = await axios.get(
+        `https://testing.explorelogix.com/v1/parcel/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      );
+
+      setIncomingParcelNotifications([
+        ...incomingParcelNotifications,
+        responseOne.data,
+      ]);
+      if (!mainModel) {
+        setMainModel(true);
+      }
+    } catch (err) {
+      alert("Something went wrong whil fetching parcel");
+      console.log(err.response);
+    }
+  };
+
+  useEffect(() => {
+    if (route?.params && route?.params?.data) {
+      const result = info.data.split("Id: ")[1].split(" has")[0];
+      setIncomingParcelNotifications([...incomingParcelNotifications]);
+    }
+  }, []);
+
+  useEffect(() => {
+    getParcelById();
+  }, []);
 
   const MainModel = () => {
     return (
@@ -108,21 +143,20 @@ export default function Home() {
         }}
         backdropPressToClose={false}
       >
-        {Structure.map((val) => {
+        {incomingParcelNotifications.map((val) => {
           return (
-            val.IsActive && (
-              <BiddingCard
-                val={val}
-                CloseModelBaseOnId={CloseModelBaseOnId}
-                showBiddingField={showBiddingField}
-                handleBid={handleBid}
-              />
-            )
+            <BiddingCard
+              val={val}
+              CloseModelBaseOnId={closeModelBaseOnId}
+              handleBid={handleBid}
+            />
           );
         })}
       </Modal>
     );
   };
+
+  console.log("STATET ===>", incomingParcelNotifications);
   return (
     <Container>
       <DarkStatusBar />

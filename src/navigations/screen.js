@@ -25,7 +25,7 @@ const listeners = ({ navigation, route }) => ({
 
 const DrawerNavUser = ({ navigation }) => {
   const data = useSelector((state) => state);
-  console.log("cveer", data.session);
+  console.log("cveer1", data.session);
 
   return (
     <Drawer.Navigator
@@ -78,6 +78,8 @@ const NavRoot = ({ navigation }) => {
 };
 
 const Navigator = () => {
+  const data = useSelector((state) => state);
+  console.log("cveer2", data.session);
   return (
     <NavigationContainer ref={navigationRef} onReady={onReady}>
       <Stack.Navigator
@@ -90,7 +92,6 @@ const Navigator = () => {
         <Stack.Screen name="NavRoot" component={NavRoot} />
         <Stack.Screen name="DrawerNav" component={DrawerNavUser} />
         {/* <Stack.Screen name="DrawerNav" component={DrawerNavDriver} /> */}
-
         <Stack.Screen
           name="PublicIntro"
           component={require("@screen/Public/Intro").default}
@@ -107,7 +108,6 @@ const Navigator = () => {
           name="PublicVerification"
           component={require("@screen/Public/Verification").default}
         />
-
         <Stack.Screen
           name="PublicAboutUs"
           component={require("@screen/Public/AboutUs").default}
@@ -116,15 +116,21 @@ const Navigator = () => {
           name="PublicContact"
           component={require("@screen/Public/Contact").default}
         />
-        <Stack.Screen
-          name="PublicHome"
-          component={require("@screen/Public/Home").default}
-        />
+        {data.session.bool ? (
+          <Stack.Screen
+            name="PublicHome"
+            component={require("@screen/Driver/Home").default}
+          />
+        ) : (
+          <Stack.Screen
+            name="PublicHome"
+            component={require("@screen/Public/Home").default}
+          />
+        )}
         <Stack.Screen
           name="PublicSplash"
           component={require("@screen/Public/Splash").default}
         />
-
         <Stack.Screen
           name="CustomerLanguage"
           component={require("@screen/Customer/Language").default}
@@ -173,7 +179,6 @@ const Navigator = () => {
           name="CustomerAllPayments"
           component={require("@screen/Customer/AllPayments").default}
         />
-
         <Stack.Screen
           name="DriverManageProfile"
           component={require("@screen/Driver/ManageProfile").default}
@@ -190,7 +195,6 @@ const Navigator = () => {
           name="DriverNotification"
           component={require("@screen/Driver/Notification").default}
         />
-
         <Stack.Screen
           name="DriverBooking"
           component={require("@screen/Driver/Booking").default}

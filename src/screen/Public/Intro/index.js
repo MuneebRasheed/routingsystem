@@ -22,17 +22,24 @@ export default function Intro({ navigation }) {
     // * HERE GET FCM TOKEN FUNC WAS INVOKING
     // getFCMToken();
     messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-      navigation.navigate("DriverManageProfile");
+      if (remoteMessage) {
+        console.log(
+          "Notification caused app to open from background state:",
+          remoteMessage.notification
+        );
+        navigation.navigate("PublicHome", {
+          data: remoteMessage.notification.body,
+        });
+      }
     });
     // Check whether an initial notification is available
     messaging()
       .getInitialNotification()
       .then((remoteMessage) => {
         if (remoteMessage) {
+          navigation.navigate("PublicHome", {
+            data: remoteMessage.notification.body,
+          });
           console.log(
             "Notification caused app to open from quit state:",
             remoteMessage.notification
@@ -40,8 +47,12 @@ export default function Intro({ navigation }) {
         }
       });
     messaging().onMessage(async (remoteMessage) => {
-      console.log("notification on foreground state....", remoteMessage);
-      console.log("NAVIGATION PROP", navigation);
+      if (remoteMessage) {
+        navigation.navigate("PublicHome", {
+          data: remoteMessage.notification.body,
+        });
+        console.log("notification on foreground state....", remoteMessage);
+      }
     });
 
     dispatch(logout());

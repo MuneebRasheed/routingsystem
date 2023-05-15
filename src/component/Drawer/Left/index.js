@@ -25,12 +25,14 @@ function MenuLeft() {
           key={menu.name}
           style={styles.item}
           underlayColor="transparent"
-          onPress={() => {
+          onPress={async () => {
             closeDrawer();
 
             if (menu.route === "PublicIntro") {
               socket.disconnect();
               dispatch(removeSocketConnection());
+              await AsyncStorage.removeItem("response");
+              await AsyncStorage.removeItem("role");
               alert("Logout successfully!");
             }
 
