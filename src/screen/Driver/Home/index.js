@@ -16,8 +16,6 @@ import BiddingCard from "./BiddingCard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home({ route }) {
-  console.log("ICOMIN DATA===>", route);
-
   const { socket } = useSelector((state) => state.socket);
 
   const closeModelBaseOnId = (id) => {
@@ -64,41 +62,16 @@ export default function Home({ route }) {
 
   const [mainModel, setMainModel] = useState(false);
   const [incomingParcelNotifications, setIncomingParcelNotifications] =
-    useState([
-      {
-        id: 1,
-        image: require("@asset/images/avatar.png"),
-        vehicalName: "Suzuki Wagon R",
-        cityName: "Lahore",
-        rating: "4.8",
-        totalRides: "2454",
-        price: "650",
-        time: "2",
-        distance: "406",
-        userId: "123",
-        tripId: "1",
-        IsActive: true,
-        IsBidding: true,
-
-        customer_id: {
-          first_name: "Faisal",
-          last_name: "Chaudhry",
-          phone: "+923354352012",
-          city: "Lahore",
-        },
-        fare: 70,
-      },
-    ]);
+    useState([]);
   const ModalNotification = useRef();
 
-  const getParcelById = async () => {
+  const getParcelById = async (parcelId) => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+
     try {
-      const id = "6461c8eec20c73f5cba902f1";
       const responseOne = await axios.get(
-        `https://testing.explorelogix.com/v1/parcel/${id}`,
+        `https://testing.explorelogix.com/v1/parcel/${parcelId}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -121,13 +94,10 @@ export default function Home({ route }) {
 
   useEffect(() => {
     if (route?.params && route?.params?.data) {
-      const result = info.data.split("Id: ")[1].split(" has")[0];
-      setIncomingParcelNotifications([...incomingParcelNotifications]);
-    }
-  }, []);
+      const id = route?.params?.data?.split("Id: ")[1].split(" has")[0];
 
-  useEffect(() => {
-    getParcelById();
+      getParcelById(id);
+    }
   }, []);
 
   const MainModel = () => {
