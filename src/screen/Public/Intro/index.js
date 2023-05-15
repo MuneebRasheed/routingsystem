@@ -18,11 +18,14 @@ import { getFCMToken } from "../../../helper/pushnotification_helper";
 
 export default function Intro({ navigation }) {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.session);
+
   useEffect(() => {
     // * HERE GET FCM TOKEN FUNC WAS INVOKING
     // getFCMToken();
+
     messaging().onNotificationOpenedApp((remoteMessage) => {
-      if (remoteMessage) {
+      if (remoteMessage && user && user?.roles?.includes("driver")) {
         console.log(
           "Notification caused app to open from background state:",
           remoteMessage.notification
@@ -36,7 +39,7 @@ export default function Intro({ navigation }) {
     messaging()
       .getInitialNotification()
       .then((remoteMessage) => {
-        if (remoteMessage) {
+        if (remoteMessage && user && user?.roles?.includes("driver")) {
           navigation.navigate("PublicHome", {
             data: remoteMessage.notification.body,
           });
@@ -47,7 +50,7 @@ export default function Intro({ navigation }) {
         }
       });
     messaging().onMessage(async (remoteMessage) => {
-      if (remoteMessage) {
+      if (remoteMessage && user && user?.roles?.includes("driver")) {
         navigation.navigate("PublicHome", {
           data: remoteMessage.notification.body,
         });
@@ -55,7 +58,7 @@ export default function Intro({ navigation }) {
       }
     });
 
-    dispatch(logout());
+    // dispatch(logout());
   }, []);
 
   console.log("navigation===> PROP", navigation);

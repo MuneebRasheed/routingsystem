@@ -12,6 +12,7 @@ import theme from "@theme/styles";
 import { __ } from "@utility/translation";
 import { useDispatch } from "react-redux";
 import { removeSocketConnection } from "../../../store/reducers/socketReducer";
+import { logout } from "../../../store/reducers/session";
 
 function MenuLeft() {
   const dispatch = useDispatch();
@@ -30,10 +31,11 @@ function MenuLeft() {
 
             if (menu.route === "PublicIntro") {
               socket.disconnect();
+              dispatch(logout());
               dispatch(removeSocketConnection());
+              alert("Logout successfully!");
               await AsyncStorage.removeItem("response");
               await AsyncStorage.removeItem("role");
-              alert("Logout successfully!");
             }
 
             if (menu.route === "UserLogout") {

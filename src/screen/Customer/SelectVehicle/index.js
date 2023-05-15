@@ -325,6 +325,7 @@ function SelectVehicle(params) {
         requestOptions
       );
       const result = await res.json();
+      alert("Parcel Created Successfully!. Wait for drivers to bid");
       console.log("RESULT", result);
     } catch (err) {
       console.log("ERROR");

@@ -19,7 +19,7 @@ import Support from "@component/Support";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login } from "../../../store/reducers/session";
+import { login, updateUser } from "../../../store/reducers/session";
 import { initilizeSocket } from "../../../store/reducers/socketReducer";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
 
@@ -51,6 +51,7 @@ export default function SignUp() {
           if (isSelected && response?.data.roles[0] != "user") {
             temp = 2;
             dispatch(login({}));
+            dispatch(updateUser(response.data));
             dispatch(initilizeSocket(response.data.access_token));
             Support.showSuccess({
               title: __("Thank You"),
@@ -69,6 +70,7 @@ export default function SignUp() {
 
           if (!isSelected && response?.data.roles[0] == "user") {
             dispatch(initilizeSocket(response.data.access_token));
+            dispatch(updateUser(response.data));
             temp = 2;
             Support.showSuccess({
               title: __("Thank You"),

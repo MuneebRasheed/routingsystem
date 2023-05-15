@@ -1,46 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: '',
+  token: "",
   isLoggedIn: false,
   user: null,
-  bool:false,
+  bool: false,
   address: {
     billing: {},
-    shipping: {}
-  }
-}
+    shipping: {},
+  },
+};
 
 const updateToken_ = (state, action) => {
-  state.token = action.payload.token
-}
+  state.token = action.payload.token;
+};
 
 const login_ = (state, action) => {
-  state.isLoggedIn = true
+  state.isLoggedIn = true;
   // state.user = action.payload.user
-  state.bool =true
-}
+  state.bool = true;
+};
 
 const logout_ = (state, action) => {
-  return { ...initialState, token: state.token}
-}
+  // return { ...initialState, token: state.token };
+  return {
+    token: "",
+    isLoggedIn: false,
+    user: null,
+    bool: false,
+    address: {
+      billing: {},
+      shipping: {},
+    },
+  };
+};
 
 const logout1_ = (state, action) => {
-  state.bool =false
-}
-
+  state.bool = false;
+};
 
 const updateUser_ = (state, action) => {
-  state.user = action.payload.user
-}
+  state.user = action.payload;
+};
 
 const updateAddress_ = (state, action) => {
-  state.address.billing = action.payload.billing || {}
-  state.address.shipping = action.payload.shipping || {}
-}
+  state.address.billing = action.payload.billing || {};
+  state.address.shipping = action.payload.shipping || {};
+};
 
 const slice = createSlice({
-  name: 'session',
+  name: "session",
   initialState: { ...initialState },
   reducers: {
     updateToken: updateToken_,
@@ -48,11 +57,11 @@ const slice = createSlice({
     logout: logout_,
     logout1: logout1_,
     updateUser: updateUser_,
-    updateAddress: updateAddress_
-  }
-})
+    updateAddress: updateAddress_,
+  },
+});
 
-const { actions, reducer } = slice
+const { actions, reducer } = slice;
 
 export const {
   updateToken,
@@ -60,7 +69,7 @@ export const {
   logout,
   logout1,
   updateUser,
-  updateAddress
-} = actions
+  updateAddress,
+} = actions;
 
-export default reducer
+export default reducer;
