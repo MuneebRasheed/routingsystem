@@ -61,8 +61,6 @@ export default function Intro({ navigation }) {
     // dispatch(logout());
   }, []);
 
-  console.log("navigation===> PROP", navigation);
-
   return (
     <Container>
       <DarkStatusBar />

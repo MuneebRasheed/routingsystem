@@ -1,77 +1,69 @@
-import React from 'react'
-import { BackHandler } from 'react-native'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
+import React from "react";
+import { BackHandler } from "react-native";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Support from '@component/Support'
-import { setLandingScreen, goBack } from '@navigation'
-import Navigator from '@navigation/screen'
-import { store, persistor } from '@store'
+import Support from "@component/Support";
+import { setLandingScreen, goBack } from "@navigation";
+import Navigator from "@navigation/screen";
+import { store, persistor } from "@store";
 
-import {requestUserPermission} from '../helper/pushnotification_helper'
+import { requestUserPermission } from "../helper/pushnotification_helper";
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       storeLoaded: false,
-      loading: true,bool:false
-    }
+      loading: true,
+      bool: false,
+    };
 
-    this.initiate = this.initiate.bind(this)
-    this.onBeforeLift = this.onBeforeLift.bind(this)
+    this.initiate = this.initiate.bind(this);
+    this.onBeforeLift = this.onBeforeLift.bind(this);
   }
 
   componentDidMount() {
-    requestUserPermission()
-    this.storage()
-    console.log("Component Did mount syycfully before navidation")
-    BackHandler.addEventListener('hardwareBackPress', function () {
-     
-      goBack()
-      return true
-    })
+    requestUserPermission();
+    this.storage();
 
+    BackHandler.addEventListener("hardwareBackPress", function () {
+      goBack();
+      return true;
+    });
 
-
-    this.initiate()
+    this.initiate();
   }
 
   componentWillUnmount() {
-    console.log("Component Did mount syycfully before navidation")
-    BackHandler.removeEventListener('hardwareBackPress', function () {
-    })
+    BackHandler.removeEventListener("hardwareBackPress", function () {});
   }
 
   async initiate() {
-    if (!(this.state.storeLoaded)) {
-      setTimeout(this.initiate, 1000)
-      return
+    if (!this.state.storeLoaded) {
+      setTimeout(this.initiate, 1000);
+      return;
     }
 
-    const routeData = {}
+    const routeData = {};
 
     this.setState({
-      loading: false
-    })
+      loading: false,
+    });
   }
 
+  async storage() {
+    let mun = (await AsyncStorage.getItem("role")) == "Driver";
 
-  async  storage() {
-  
-    let mun= await AsyncStorage.getItem("role")=="Driver";
-    
-   this.setState({bool:mun});
-
+    this.setState({ bool: mun });
   }
 
   onBeforeLift() {
-    this.setState({ storeLoaded: true })
+    this.setState({ storeLoaded: true });
   }
 
   render() {
-    console.log("Component Did mount syycfully before render",this.state.bool)
     return (
       <Provider store={store}>
         <PersistGate
@@ -83,6 +75,6 @@ export default class App extends React.Component {
         </PersistGate>
         <Support />
       </Provider>
-    )
+    );
   }
 }

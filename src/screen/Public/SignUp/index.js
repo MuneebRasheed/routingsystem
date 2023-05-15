@@ -8,7 +8,7 @@ import PhoneInput from "react-native-phone-number-input";
 import styles from "./styles";
 import theme from "@theme/styles";
 import DropDownPicker from "react-native-dropdown-picker";
-import Header from "@component/Header"
+import Header from "@component/Header";
 
 import axios from "axios";
 
@@ -23,12 +23,9 @@ export default function SignUp() {
     firstName: Yup.string().required("Required"),
     lastName: Yup.string().required("Required"),
     gender: Yup.string().required("Please Select the gender"),
-    phonenum: Yup.string()
-      .required("Please Enter Your Mobile Number"),
-      password:Yup.string()
-      .required("Please Enter Your Password"),
-      newPassword:Yup.string()
-      .required("Please Enter Your Confirm Password"),
+    phonenum: Yup.string().required("Please Enter Your Mobile Number"),
+    password: Yup.string().required("Please Enter Your Password"),
+    newPassword: Yup.string().required("Please Enter Your Confirm Password"),
   });
   const phoneInput = useRef();
   const [value, setValue] = useState("");
@@ -37,18 +34,14 @@ export default function SignUp() {
   };
   const [isSelected, setSelection] = useState(false);
   const [valid, setValid] = useState(false);
-  const[eye1,setEye1]=useState(true);
-  const[eye2,setEye2]=useState(true);
-  
- 
-  
+  const [eye1, setEye1] = useState(true);
+  const [eye2, setEye2] = useState(true);
+
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
   ]);
-
-  
 
   return (
     <Container>
@@ -81,22 +74,23 @@ export default function SignUp() {
                 lastName: "",
                 phonenum: "",
                 gender: "",
-                password:"",
-                newPassword:""
+                password: "",
+                newPassword: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 const checkValid = phoneInput.current?.isValidNumber(value);
-           setValid(checkValid ? checkValid : false);
-           console.log(values)
-          //  navigateReset("PublicVerification",{values});
-          //  if(checkValid){
-          //   setData(values);
-           
-          //  }else{
-          //   alert("Please enter the correct phone number")
-          //  }
-                console.log(values,valid)}}
+                setValid(checkValid ? checkValid : false);
+                console.log(values);
+                //  navigateReset("PublicVerification",{values});
+                //  if(checkValid){
+                //   setData(values);
+
+                //  }else{
+                //   alert("Please enter the correct phone number")
+                //  }
+                console.log(values, valid);
+              }}
             >
               {({
                 values,
@@ -109,8 +103,8 @@ export default function SignUp() {
                 handleSubmit,
               }) => (
                 <View>
-                  <View style={[styles.formRow,{marginTop:-20}]}>
-                    <View style={{width:180}}>
+                  <View style={[styles.formRow, { marginTop: -20 }]}>
+                    <View style={{ width: 180 }}>
                       <TextInput
                         placeholder="First Name"
                         placeholderTextColor="rgba(0,0,0,0.7)"
@@ -118,30 +112,46 @@ export default function SignUp() {
                         value={values.firstName}
                         onChangeText={handleChange("firstName")}
                       />
-                      {errors.firstName && <Text style={{marginBottom:5,color:'red',fontSize:15,marginTop:-10}}>{errors.firstName}</Text>}
+                      {errors.firstName && (
+                        <Text
+                          style={{
+                            marginBottom: 5,
+                            color: "red",
+                            fontSize: 15,
+                            marginTop: -10,
+                          }}
+                        >
+                          {errors.firstName}
+                        </Text>
+                      )}
                     </View>
-                    <View style={{width:180}}
-                    >
+                    <View style={{ width: 180 }}>
                       <TextInput
                         placeholder="Last Name"
                         placeholderTextColor="rgba(0,0,0,0.7)"
-                        style={[
-                          styles.formInput,
-                          
-                        ]}
+                        style={[styles.formInput]}
                         value={values.lastName}
                         onChangeText={handleChange("lastName")}
                       />
 
-                      {errors.lastName && <Text style={{marginBottom:5,color:'red',fontSize:15,marginTop:-10}}>{errors.lastName}</Text>}
+                      {errors.lastName && (
+                        <Text
+                          style={{
+                            marginBottom: 5,
+                            color: "red",
+                            fontSize: 15,
+                            marginTop: -10,
+                          }}
+                        >
+                          {errors.lastName}
+                        </Text>
+                      )}
                     </View>
                   </View>
                   <View style={styles.formRow}>
                     <View
                       style={{
-
                         width: "100%",
-                    
                       }}
                     >
                       <DropDownPicker
@@ -152,9 +162,13 @@ export default function SignUp() {
                         onSelectItem={(e) => setFieldValue("gender", e.value)}
                         // setValue={handleChange("gender")}
                         setItems={setItems}
-                        style={{marginBottom:5}}
+                        style={{ marginBottom: 5 }}
                       />
-                      {errors.gender && <Text style={{color:'red',fontSize:15}}>{errors.gender}</Text>}
+                      {errors.gender && (
+                        <Text style={{ color: "red", fontSize: 15 }}>
+                          {errors.gender}
+                        </Text>
+                      )}
                     </View>
                   </View>
                   <PhoneInput
@@ -173,7 +187,7 @@ export default function SignUp() {
                     value={values.phonenum}
                     // onChangeText={handleChange("phonenum")}
                     onChangeFormattedText={(text) => {
-                      setFieldValue("phonenum",text)
+                      setFieldValue("phonenum", text);
                       // setValue(text);
                     }}
                     // withDarkTheme
@@ -181,60 +195,93 @@ export default function SignUp() {
                     autoFocus
                   />
                   {errors.phonenum && (
-                    <Text style={{marginBottom:5,color:'red',fontSize:15,marginTop:-10}}>{errors.phonenum}</Text>
+                    <Text
+                      style={{
+                        marginBottom: 5,
+                        color: "red",
+                        fontSize: 15,
+                        marginTop: -10,
+                      }}
+                    >
+                      {errors.phonenum}
+                    </Text>
                   )}
-                  <View style={{  postion: "relative" }}>
-                <TextInput
-                  placeholder="Password"
-                  secureTextEntry={eye2}
-                 
-                  placeholderTextColor="rgba(0,0,0,0.7)"
-                  style={[styles.formInput3]}
-                  value={values.password}
-                  onChangeText={handleChange("password")}
-                />
-                {errors.password && <Text style={{marginBottom:5,color:'red',fontSize:15,marginTop:-10}}>{errors.password}</Text>}
+                  <View>
+                    <TextInput
+                      placeholder="Password"
+                      secureTextEntry={eye2}
+                      placeholderTextColor="rgba(0,0,0,0.7)"
+                      style={[styles.formInput3]}
+                      value={values.password}
+                      onChangeText={handleChange("password")}
+                    />
+                    {errors.password && (
+                      <Text
+                        style={{
+                          marginBottom: 5,
+                          color: "red",
+                          fontSize: 15,
+                          marginTop: -10,
+                        }}
+                      >
+                        {errors.password}
+                      </Text>
+                    )}
 
-                <Icon
-                  name={eye2 ? "eye-slash" : "eye"}
-                  type="FontAwesome"
-                  style={[
-                    theme.SIZE_18,
-                    theme.PRIMARY,
-                    { postion: "absolute", right: -333, bottom: 55 },
-                  ]}
-                  onPress={() => {
-                    setEye2((val) => !val);
-                  }}
-                />
-              </View>
+                    <Icon
+                      name={eye2 ? "eye-slash" : "eye"}
+                      type="FontAwesome"
+                      style={[
+                        theme.SIZE_18,
+                        theme.PRIMARY,
+                        { right: -333, bottom: 55 },
+                      ]}
+                      onPress={() => {
+                        setEye2((val) => !val);
+                      }}
+                    />
+                  </View>
 
-              <View style={{  postion: "relative",marginTop:-18 }}>
-                <TextInput
-                  placeholder="Confirm Password"
-                  secureTextEntry={eye1}
-                  value={values.newPassword}
-                  onChangeText={handleChange("newPassword")}
-                  placeholderTextColor="rgba(0,0,0,0.7)"
-                  style={[styles.formInput3]}
-                />
-                {errors.newPassword && <Text style={{marginBottom:5,color:'red',fontSize:15,marginTop:-10}}>{errors.newPassword}</Text>}
+                  <View style={{ marginTop: -18 }}>
+                    <TextInput
+                      placeholder="Confirm Password"
+                      secureTextEntry={eye1}
+                      value={values.newPassword}
+                      onChangeText={handleChange("newPassword")}
+                      placeholderTextColor="rgba(0,0,0,0.7)"
+                      style={[styles.formInput3]}
+                    />
+                    {errors.newPassword && (
+                      <Text
+                        style={{
+                          marginBottom: 5,
+                          color: "red",
+                          fontSize: 15,
+                          marginTop: -10,
+                        }}
+                      >
+                        {errors.newPassword}
+                      </Text>
+                    )}
 
-                <Icon
-                  name={eye1 ? "eye-slash" : "eye"}
-                  type="FontAwesome"
-                  style={[
-                    theme.SIZE_18,
-                    theme.PRIMARY,
-                    { postion: "absolute", right: -333, bottom: 55 },
-                  ]}
-                  onPress={() => {
-                    setEye1((val) => !val);
-                  }}
-                />
-              </View>
+                    <Icon
+                      name={eye1 ? "eye-slash" : "eye"}
+                      type="FontAwesome"
+                      style={[
+                        theme.SIZE_18,
+                        theme.PRIMARY,
+                        { right: -333, bottom: 55 },
+                      ]}
+                      onPress={() => {
+                        setEye1((val) => !val);
+                      }}
+                    />
+                  </View>
 
-                  <Button style={[styles.signUpBtn,{marginTop:-18}]} onPress={handleSubmit}>
+                  <Button
+                    style={[styles.signUpBtn, { marginTop: -18 }]}
+                    onPress={handleSubmit}
+                  >
                     <Text style={styles.signUpBtnText}>{__("SIGN UP")}</Text>
                   </Button>
                   {/* <Button onPress={handleSubmit} title="Submit" /> */}

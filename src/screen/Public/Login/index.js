@@ -33,16 +33,16 @@ export default function SignUp() {
   const phoneInput = useRef();
   async function logins() {
     // * USER
-    var cd = {
-      identifier: "+923074461165",
-      password: "1234",
-    };
-
-    // * DRIVER
     // var cd = {
-    //   identifier: "+923074461166",
+    //   identifier: "+923074461165",
     //   password: "1234",
     // };
+
+    // * DRIVER
+    var cd = {
+      identifier: "+923074461166",
+      password: "1234",
+    };
     console.log("PROJECT====>", cd);
     axios
       .post("https://testing.explorelogix.com/v1/auth/login", cd)
@@ -187,7 +187,7 @@ export default function SignUp() {
                 autoFocus
               />
 
-              <View style={{ postion: "relative" }}>
+              <View>
                 <TextInput
                   placeholder="Password"
                   secureTextEntry={valid}
@@ -203,7 +203,7 @@ export default function SignUp() {
                   style={[
                     theme.SIZE_18,
                     theme.PRIMARY,
-                    { postion: "absolute", right: -333, bottom: 52 },
+                    { right: -333, bottom: 52 },
                   ]}
                   onPress={() => {
                     setValid((val) => !val);

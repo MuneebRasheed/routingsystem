@@ -52,65 +52,15 @@ function SelectVehicle(params) {
   const [itemsType, setItemsType] = useState("solid");
   const { socket } = useSelector((state) => state.socket);
 
-  const [Structure, setStructure] = useState([
-    {
-      id: 1,
-      image: require("@asset/images/avatar.png"),
-      vehicalName: "Suzuki Wagon R",
-      cityName: "Lahore",
-      rating: "4.8",
-      totalRides: "2454",
-      price: "650",
-      time: "2",
-      distance: "406",
-      userId: "123",
-      tripId: "1",
-      IsActive: true,
-      IsBidding: true,
-    },
-    {
-      id: 2,
-      image: require("@asset/images/avatar.png"),
-      vehicalName: "Cultus",
-      cityName: "Lahore",
-      rating: "4.8",
-      totalRides: "2454",
-      price: "650",
-      time: "2",
-      distance: "406",
-      userId: "123",
-      tripId: "1",
-      IsActive: true,
-      IsBidding: false,
-    },
-    {
-      id: 3,
-      image: require("@asset/images/avatar.png"),
-      vehicalName: "Civic",
-      cityName: "Lahore",
-      rating: "4.8",
-      totalRides: "2454",
-      price: "650",
-      time: "23",
-      distance: "4000",
-      userId: "123",
-      tripId: "1",
-      IsActive: true,
-      IsBidding: false,
-    },
-  ]);
+  const handleRejection = (bid) => {
+    const filteredBids = bids.filter((b) => b._id !== bid._id);
 
-  function CloseModelBaseOnId(id) {
-    console.log("Here Is Id ", Structure.length);
-    if (Structure.length == 1) {
+    if (filteredBids.length === 0) {
       setMainModel(false);
     }
-    setStructure((previous) => {
-      return previous.filter((value) => {
-        return value.id != id;
-      });
-    });
-  }
+
+    setBids(filteredBids);
+  };
 
   const ModalNotification = useRef();
   const getPhotoFromCamera = () => {
@@ -141,12 +91,12 @@ function SelectVehicle(params) {
   useEffect(() => {
     socket.on("bidding", (incomingBid) => {
       console.log("CURRENT BIDDING", incomingBid);
-      const incomingBidId = incomingBid.bidder.ID;
+      const incomingBidId = incomingBid.bidder._id;
 
       const updatedBids =
         bids.length > 0
           ? bids.map((bid) =>
-              bid.bidder.ID === incomingBidId ? incomingBid : bid
+              bid.bidder._id === incomingBidId ? incomingBid : bid
             )
           : [incomingBid];
 
@@ -169,7 +119,7 @@ function SelectVehicle(params) {
         const requestOptions = {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
-            // "Content-Type": "multipart/form-data",
+            "Content-Type": "multipart/form-data",
           },
           body: formData,
         };
@@ -179,11 +129,15 @@ function SelectVehicle(params) {
           {
             headers: {
               Authorization: `Bearer ${datas.access_token}`,
+              "Content-Type": "multipart/form-data",
             },
           }
         );
 
-        console.log("RESPPPP==>", resp);
+        setMainModel(false);
+        setBids([]);
+        alert("You have chosen ur driver. He is on his way!");
+        console.log("RESPPPP==>", resp.data);
       } catch (err) {
         console.log("ERROR WHILE ACCEPTING THE RIDE!", err.message);
       }
@@ -209,7 +163,7 @@ function SelectVehicle(params) {
             <View style={{ width: "20%" }}>
               {console.log("CURRENT IMG==>", value.bidder.avatar)}
               <Image
-                source={{ uri: value.bidder.cover_image }}
+                source={require("@asset/images/avatar.png")}
                 resizeMode="cover"
                 style={{ width: 50, height: 50, borderRadius: 25, margin: 10 }}
               />
@@ -262,7 +216,7 @@ function SelectVehicle(params) {
               style={[styles.bookingBtn, { width: "40%" }]}
               onPress={() => {
                 // navigate("CustomerPayment");
-                CloseModelBaseOnId(value.id);
+                handleRejection(value);
               }}
             >
               <Text style={styles.bookingBtnText}>{__("Decline")}</Text>

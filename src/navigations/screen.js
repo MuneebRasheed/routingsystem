@@ -79,7 +79,7 @@ const NavRoot = ({ navigation }) => {
 
 const Navigator = () => {
   const data = useSelector((state) => state);
-  console.log("cveer2", data.session);
+
   return (
     <NavigationContainer ref={navigationRef} onReady={onReady}>
       <Stack.Navigator
