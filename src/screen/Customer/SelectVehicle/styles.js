@@ -19,6 +19,7 @@ export default {
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 15,
+    marginVertical: 10,
   },
   formInput2: {
     marginLeft: 15,
@@ -138,6 +139,43 @@ export default {
     color: COLOR.LIGHT,
     textAlign: "center",
     paddingVertical: 15,
+  },
+  uploadBtn: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: COLOR.LIGHT,
+    borderRadius: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 6,
+    marginVertical: 10,
+  },
+  labelContainer: {
+    alignItems: "center",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  bookingDeclineBtn: {
+    backgroundColor: "#af4035",
+    borderRadius: 5,
+    marginVertical: 10,
+    marginHorizontal: 20,
+  },
+
+  label: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_30,
+    color: COLOR.GRAY,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+  },
+  uploadBtnText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_12,
+    color: COLOR.DARKBLUE,
+    paddingVertical: 15,
+    paddingLeft: 20,
   },
   signUpImg: {
     width: 100,

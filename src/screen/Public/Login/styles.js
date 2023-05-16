@@ -85,14 +85,14 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 15,
     marginBottom: 15,
-  },formInput4:{
+  },
+  formInput4: {
     width: "100%",
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_30,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
-  
   },
   formInput2: {
     marginLeft: 15,
@@ -101,8 +101,7 @@ export default {
     backgroundColor: COLOR.GREEN,
     borderRadius: 5,
     paddingVertical: 15,
-    marginTop:-16
-   
+    marginTop: -16,
   },
   signUpBtnText: {
     fontFamily: FAMILY.BOLD,
@@ -123,8 +122,8 @@ export default {
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.DARK,
+    fontSize: SIZE.SIZE_16,
+    color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
     paddingBottom: 10,

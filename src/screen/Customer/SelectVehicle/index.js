@@ -151,24 +151,29 @@ function SelectVehicle(params) {
         swipeToClose={false}
         style={{
           height: 180,
-          width: 400,
+          width: 380,
           borderRadius: 10,
           alignItems: "center",
         }}
         swipeArea={300}
         backdropPressToClose={false}
       >
-        <View style={{ borderRadius: 50 }}>
+        <View style={{ margin: 10, borderRadius: 10 }}>
           <View style={{ flexDirection: "row" }}>
-            <View style={{ width: "20%" }}>
+            <View style={{ width: "20%", marginTop: 20 }}>
               {console.log("CURRENT IMG==>", value.bidder.avatar)}
               <Image
-                source={require("@asset/images/avatar.png")}
+                source={require("@asset/images/driver.jpeg")}
                 resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 25, margin: 10 }}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 25,
+                  margin: 10,
+                }}
               />
             </View>
-            <View style={{ width: "80%" }}>
+            <View style={{ paddingTop: 20, width: "70%" }}>
               <View
                 style={{
                   flexDirection: "row",
@@ -177,8 +182,8 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>{__(value.vehicalName)}</Text>
-                <Text>{value.bid_amount}</Text>
+                <Text>Mehran</Text>
+                <Text>55</Text>
               </View>
               <View
                 style={{
@@ -188,8 +193,8 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>{`${value.bidder.first_name} ${value.bidder.last_name}`}</Text>
-                <Text>{__(value.time)}</Text>
+                <Text>Faisal Ahmad</Text>
+                <Text>25</Text>
               </View>
               <View
                 style={{
@@ -199,10 +204,8 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>
-                  {value.bidder.rating + `(${value.totalRides || 0})`}
-                </Text>
-                <Text>{__(value.distance)}</Text>
+                <Text>Black</Text>
+                <Text>#FFF</Text>
               </View>
             </View>
           </View>
@@ -213,7 +216,7 @@ function SelectVehicle(params) {
             }}
           >
             <Button
-              style={[styles.bookingBtn, { width: "40%" }]}
+              style={[styles.bookingDeclineBtn, { width: "40%" }]}
               onPress={() => {
                 // navigate("CustomerPayment");
                 handleRejection(value);
@@ -373,14 +376,17 @@ function SelectVehicle(params) {
       >
         {bids.map((val) => {
           return (
-            <View style={{ height: "30%" }}>
+            <View style={{ height: "28%" }}>
               <MainModel value={val} />
             </View>
           );
         })}
 
         <Button
-          style={[styles.bookingBtn, { backgroundColor: "grey" }]}
+          style={[
+            styles.bookingBtn,
+            { backgroundColor: "grey", marginTop: 40 },
+          ]}
           onPress={() => {
             // getPhotoFromGallery();
             // navigate("CustomerPayment");
@@ -395,8 +401,11 @@ function SelectVehicle(params) {
 
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={[styles.selectVehicleContainer, { height: 600 }]}>
+          <View style={[styles.selectVehicleContainer, { height: 750 }]}>
             <View style={styles.selectVehicleContent}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Book Your Parcel</Text>
+              </View>
               <Accordion
                 title="Select Time"
                 renderContent={() => (
@@ -490,29 +499,41 @@ function SelectVehicle(params) {
                   style={[styles.formInput, styles.formInput2]}
                 />
               </View>
-
-              <DropDownPicker
-                open={openModel}
-                items={items}
-                setOpen={setOpenModel}
-                value={itemsType}
-                onSelectItem={(e) => setItemsType(e.value)}
-                // setValue={handleChange("gender")}
-                setItems={setItems}
-                style={{ marginBottom: 5, borderWidth: 0 }}
-              />
-
-              <Button
-                style={styles.bookingBtn}
-                onPress={() => {
-                  getPhotoFromGallery();
-                  // navigate("CustomerPayment");
-                }}
-              >
-                <Text style={styles.bookingBtnText}>
-                  {__("UPLOAD THE PHOTOS")}
-                </Text>
-              </Button>
+              <View style={styles.accordion}>
+                <DropDownPicker
+                  open={openModel}
+                  items={items}
+                  setOpen={setOpenModel}
+                  value={itemsType}
+                  onSelectItem={(e) => setItemsType(e.value)}
+                  // setValue={handleChange("gender")}
+                  setItems={setItems}
+                  style={{
+                    paddingVertical: 19,
+                    marginTop: 10,
+                    marginBottom: 5,
+                    borderWidth: 0,
+                  }}
+                />
+              </View>
+              <View style={styles.accordion}>
+                <Button
+                  style={styles.uploadBtn}
+                  onPress={() => {
+                    getPhotoFromGallery();
+                    // navigate("CustomerPayment");
+                  }}
+                >
+                  <Text style={styles.uploadBtnText}>
+                    {__("UPLOAD THE PHOTOS")}
+                  </Text>
+                  <Icon
+                    name="upload"
+                    type="AntDesign"
+                    style={[theme.SIZE_24, theme.DARKBLUE]}
+                  />
+                </Button>
+              </View>
             </View>
           </View>
         </ScrollView>
