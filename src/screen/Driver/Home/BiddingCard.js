@@ -7,16 +7,9 @@ import theme from "@theme/styles";
 
 import styles from "./styles";
 
-const BiddingCard = ({
-  val,
-  CloseModelBaseOnId,
-  showBiddingField,
-  handleBid,
-}) => {
+const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
   const [biddingValue, setBiddingValue] = useState("");
   const [isBidFormShow, setBidFormShow] = useState(false);
-
-  console.log("CURRENT CHID===>", val);
 
   return (
     <View style={{ borderRadius: 50 }}>

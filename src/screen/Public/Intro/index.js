@@ -19,7 +19,7 @@ import { getFCMToken } from "../../../helper/pushnotification_helper";
 export default function Intro({ navigation }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.session);
-
+  console.log("USER===>", user);
   useEffect(() => {
     // * HERE GET FCM TOKEN FUNC WAS INVOKING
     // getFCMToken();
@@ -50,7 +50,9 @@ export default function Intro({ navigation }) {
         }
       });
     messaging().onMessage(async (remoteMessage) => {
+      console.log("FOREGOURND===>");
       if (remoteMessage && user && user?.roles?.includes("driver")) {
+        console.log("MY CURRENT USER===>", user);
         navigation.navigate("PublicHome", {
           data: remoteMessage.notification.body,
         });
