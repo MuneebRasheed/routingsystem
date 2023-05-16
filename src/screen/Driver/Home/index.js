@@ -19,7 +19,6 @@ export default function Home({ route }) {
   const { socket } = useSelector((state) => state.socket);
 
   const closeModelBaseOnId = (id) => {
-    console.log("Here Is Id ", Structure.length);
     if (incomingParcelNotifications.length == 1) {
       setMainModel(false);
     }

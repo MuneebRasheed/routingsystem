@@ -29,8 +29,8 @@ export default function Home() {
   const markerRef = useRef(null);
   const [state, setState] = useState({
     pickupCords: {
-      latitude: 31.5204,
-      longitude: 74.3587,
+      // latitude: 31.5204,
+      // longitude: 74.3587,
     },
     droplocationCords: {
       // latitude: 31.4504,
@@ -94,9 +94,9 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    getCurrentLocation();
-  }, []);
+  // useEffect(() => {
+  //   getCurrentLocation();
+  // }, []);
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -171,13 +171,17 @@ export default function Home() {
             <MapView
               ref={mapRef}
               style={StyleSheet.absoluteFill}
-              initialRegion={{
-                ...pickupCords,
-                latitudeDelta: LATITUDE_DELTA,
-                longitudeDelta: LONGITUDE_DELTA,
-              }}
+              initialRegion={
+                Object.values(pickupCords).length > 0
+                  ? {
+                      ...pickupCords,
+                      latitudeDelta: LATITUDE_DELTA,
+                      longitudeDelta: LONGITUDE_DELTA,
+                    }
+                  : null
+              }
             >
-              {Object.values(state.pickupCords).length > 0 && (
+              {/* {Object.values(state.pickupCords).length > 0 && (
                 <Marker.Animated ref={markerRef} coordinate={coordinate}>
                   <Image
                     source={require("../../../../assets/images/bike.png")}
@@ -189,6 +193,12 @@ export default function Home() {
                     resizeMode="contain"
                   />
                 </Marker.Animated>
+              )} */}
+              {Object.values(state.pickupCords).length > 0 && (
+                <Marker
+                  coordinate={pickupCords}
+                  image={require("../../../../assets/images/Oval2x.png")}
+                />
               )}
               {Object.values(state.droplocationCords).length > 0 && (
                 <Marker
@@ -206,7 +216,7 @@ export default function Home() {
                     strokeColor="hotpink"
                     optimizeWaypoints={true}
                     onReady={(result) => {
-                      // mapRef.current.fitToCoordinates(result.coordinates);
+                      mapRef.current.fitToCoordinates(result.coordinates);
                     }}
                   />
                 )}

@@ -58,6 +58,8 @@ export default function Intro({ navigation }) {
       }
     });
 
+    console.log("APP INITIALZED");
+
     // dispatch(logout());
   }, []);
 
