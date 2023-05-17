@@ -1,11 +1,9 @@
-import React, { useState, useRef } from "react";
-import { View, StyleSheet, Dimensions, Platform } from "react-native";
-import { COLOR } from "@theme/typography";
-
+import React, { useState, useRef, useEffect } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker, AnimatedRegion } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
+import { COLOR } from "@theme/typography";
 const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 
 const screen = Dimensions.get("window");
@@ -14,7 +12,8 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-const TrackingScreen = () => {
+const TrackingScreen = ({ route }) => {
+  console.log("COMPLETE DATA===>", route?.params?.data);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [state, setState] = useState({
@@ -37,6 +36,16 @@ const TrackingScreen = () => {
   });
 
   const { pickupCords, droplocationCords, coordinate, heading } = state;
+
+  useEffect(() => {
+    if (route?.params?.data) {
+      setState({
+        ...state,
+        pickupCords: JSON.parse(route?.params?.data?.from_location),
+        droplocationCords: JSON.parse(route?.params?.data?.to_location),
+      });
+    }
+  }, []);
 
   return (
     <View>
@@ -73,6 +82,7 @@ const TrackingScreen = () => {
               image={require("../../../assets/images/Oval2x.png")}
             />
           )}
+
           {Object.values(state.droplocationCords).length > 0 && (
             <Marker
               coordinate={droplocationCords}

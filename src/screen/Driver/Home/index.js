@@ -100,6 +100,7 @@ export default function Home({ route }) {
       getParcelById(id);
     }
   }, []);
+  console.log("INCOMDOMG PARCELS===>", incomingParcelNotifications);
 
   const MainModel = () => {
     return (
