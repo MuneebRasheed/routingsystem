@@ -116,7 +116,8 @@ export default function SignUp() {
                         <Text
                           style={{
                             marginBottom: 5,
-                            color: "red",
+                            color: COLOR.LIGHT,
+                            fontFamily: FAMILY.BOLD,
                             fontSize: 15,
                             marginTop: -10,
                           }}
@@ -138,8 +139,9 @@ export default function SignUp() {
                         <Text
                           style={{
                             marginBottom: 5,
-                            color: "red",
+                            color: COLOR.LIGHT,
                             fontSize: 15,
+                            fontFamily: FAMILY.BOLD,
                             marginTop: -10,
                           }}
                         >
@@ -165,7 +167,13 @@ export default function SignUp() {
                         style={{ marginBottom: 5 }}
                       />
                       {errors.gender && (
-                        <Text style={{ color: "red", fontSize: 15 }}>
+                        <Text
+                          style={{
+                            fontFamily: FAMILY.BOLD,
+                            color: COLOR.LIGHT,
+                            fontSize: 15,
+                          }}
+                        >
                           {errors.gender}
                         </Text>
                       )}
@@ -175,9 +183,9 @@ export default function SignUp() {
                     ref={phoneInput}
                     defaultValue={value}
                     defaultCode="PK"
-                    textInputStyle={{ padding: 5 }}
+                    textInputStyle={{ padding: 2 }}
                     containerStyle={{
-                      width: 370,
+                      width: "100%",
                       height: 60,
                       borderRadius: 3,
                       marginBottom: 15,
@@ -198,7 +206,8 @@ export default function SignUp() {
                     <Text
                       style={{
                         marginBottom: 5,
-                        color: "red",
+                        color: COLOR.LIGHT,
+                        fontFamily: FAMILY.BOLD,
                         fontSize: 15,
                         marginTop: -10,
                       }}
@@ -219,8 +228,9 @@ export default function SignUp() {
                       <Text
                         style={{
                           marginBottom: 5,
-                          color: "red",
+                          color: COLOR.LIGHT,
                           fontSize: 15,
+                          fontFamily: FAMILY.BOLD,
                           marginTop: -10,
                         }}
                       >
@@ -234,7 +244,7 @@ export default function SignUp() {
                       style={[
                         theme.SIZE_18,
                         theme.PRIMARY,
-                        { right: -333, bottom: 55 },
+                        { right: "-88%", bottom: "60%" },
                       ]}
                       onPress={() => {
                         setEye2((val) => !val);
@@ -255,7 +265,8 @@ export default function SignUp() {
                       <Text
                         style={{
                           marginBottom: 5,
-                          color: "red",
+                          color: COLOR.LIGHT,
+                          fontFamily: FAMILY.BOLD,
                           fontSize: 15,
                           marginTop: -10,
                         }}
@@ -270,7 +281,7 @@ export default function SignUp() {
                       style={[
                         theme.SIZE_18,
                         theme.PRIMARY,
-                        { right: -333, bottom: 55 },
+                        { right: "-88%", bottom: "60%" },
                       ]}
                       onPress={() => {
                         setEye1((val) => !val);
@@ -292,7 +303,7 @@ export default function SignUp() {
               <Text style={styles.connectText}>{__("OR")}</Text>
               <View>
                 <Text style={styles.connectText}>
-                  {__("If you Have already Login")}
+                  {__("If you Have already account ")}
                   <Text
                     onPress={() => {
                       navigateReset("PublicLogin");
@@ -300,7 +311,7 @@ export default function SignUp() {
                     }}
                     style={styles.connectTextLink}
                   >
-                    {__("    Login")}
+                    {__("LOGIN")}
                   </Text>
                 </Text>
               </View>
@@ -308,7 +319,7 @@ export default function SignUp() {
               <View
                 style={{
                   justifyContent: "center",
-                  marginLeft: 100,
+                  marginLeft: "24%",
                 }}
               >
                 <CheckBox
@@ -321,10 +332,10 @@ export default function SignUp() {
                   rightText={"SIGN UP AS DRIVER"}
                 />
               </View>
+              <Text style={styles.termText}>
+                {__("By Sign up I Agree to\nTerms of Use & Privacy Policy")}
+              </Text>
             </View>
-            <Text style={styles.termText}>
-              {__("By Sign up I Agree to\nTerms of Use & Privacy Policy")}
-            </Text>
           </View>
         </Content>
       </View>
