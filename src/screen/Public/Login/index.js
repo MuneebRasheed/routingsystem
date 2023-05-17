@@ -218,14 +218,14 @@ export default function SignUp() {
               <View>
                 <Text style={styles.connectText}>{__("OR")}</Text>
                 <Text style={styles.connectText}>
-                  {__("If you not have account")}
+                  {__("If you not have account ")}
                   <Text
                     onPress={() => {
                       navigateReset("PublicSignUp");
                     }}
                     style={styles.connectTextLink}
                   >
-                    {__("    Signup")}
+                    {__("Signup")}
                   </Text>
                 </Text>
               </View>
