@@ -34,7 +34,7 @@ export default function Home({ route }) {
     var datas = JSON.parse(data);
 
     const requestPayload = {
-      bid_amount: Number(bidValue),
+      bid_amount: bidValue,
       parcel: selectedParcel._id,
       bidder: datas._id,
       description: "string",
@@ -52,7 +52,7 @@ export default function Home({ route }) {
       );
 
       console.log("SUCCESSFULL RESPONSE ==>", responseOne.data);
-
+      alert("You successfully bid on this parcel");
       socket.emit("bidding", requestPayload);
     } catch (error) {
       alert("Something went wrong while bidding...!");
@@ -78,6 +78,8 @@ export default function Home({ route }) {
         }
       );
 
+      console.log("RESONSE ====>", responseOne);
+
       setIncomingParcelNotifications([
         ...incomingParcelNotifications,
         responseOne.data,
@@ -94,7 +96,7 @@ export default function Home({ route }) {
   useEffect(() => {
     if (route?.params && route?.params?.data) {
       const id = route?.params?.data?.split("Id: ")[1].split(" has")[0];
-
+      console.log("ID ===>", id);
       getParcelById(id);
     }
   }, []);
