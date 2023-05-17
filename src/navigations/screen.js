@@ -211,6 +211,10 @@ const Navigator = () => {
           name="DriverMyTrips"
           component={require("@screen/Driver/MyTrips").default}
         />
+        <Stack.Screen
+          name="CustomerDriverTracking"
+          component={require("@screen/Tracking").default}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
