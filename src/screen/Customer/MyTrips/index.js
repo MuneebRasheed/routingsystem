@@ -29,7 +29,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://testing.explorelogix.com/v1/parcel?page=2&limit=40&sort=desc&customer_id=${datas._id}`,
+        `https://testing.explorelogix.com/v1/parcel?page=1&limit=500&sort=desc&customer_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -37,7 +37,7 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("res", data.data);
+        console.log("res", data?.data?.docs);
         setData(data.data.docs);
       })
       .catch((err) => {
@@ -63,8 +63,6 @@ export default function MyTrip() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log("CRRENT USERS", users);
 
   function renderAll() {
     return (
