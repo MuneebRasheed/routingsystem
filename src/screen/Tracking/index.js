@@ -2,18 +2,25 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import MapView, { Marker, AnimatedRegion } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+import { useSelector } from "react-redux";
+import {
+  getUserCurrentPosition,
+  locationPermission,
+} from "../../helper/getCurrentLocation";
 
 import { COLOR } from "@theme/typography";
-const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 
+const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 const screen = Dimensions.get("window");
 const ASPECT_RATIO = screen.width / screen.height;
-// const LATITUDE_DELTA = 0.0922;
 const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const TrackingScreen = ({ route }) => {
   console.log("COMPLETE DATA===>", route?.params?.data);
+
+  const { user } = useSelector((state) => state.session);
+  const { socket } = useSelector((state) => state.socket);
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [state, setState] = useState({
@@ -37,6 +44,27 @@ const TrackingScreen = ({ route }) => {
 
   const { pickupCords, droplocationCords, coordinate, heading } = state;
 
+  const getCurrentLocation = async () => {
+    const isLocationOn = await locationPermission();
+    if (isLocationOn) {
+      const res = await getUserCurrentPosition();
+      console.log("GET LIVE LOCATION AFTER 5 SEC");
+      // animate(res.latitude, res.longitude);
+      // setState({
+      //   ...state,
+      //   pickupCords: res,
+      //   coordinate: {
+      //     ...res,
+      //     latitudeDelta: LATITUDE_DELTA,
+      //     longitudeDelta: LONGITUDE_DELTA,
+      //   },
+      //   heading: res.heading,
+      // });
+
+      console.log("CURRENT POSITION=====>", res);
+    }
+  };
+
   useEffect(() => {
     if (route?.params?.data) {
       setState({
@@ -45,7 +73,29 @@ const TrackingScreen = ({ route }) => {
         droplocationCords: JSON.parse(route?.params?.data?.to_location),
       });
     }
+
+    if (
+      (user && user.roles.includes("driver")) ||
+      (user && user.roles.includes("rider"))
+    ) {
+      getCurrentLocation();
+    }
+
+    // if (
+    //   (user && user.roles.includes("driver") && socket) ||
+    //   (user && user.roles.includes("rider"))
+    // ) {
+    //   socket.emit('tracking')
+    // }
+
+    // if (user && user.roles.includes("user") && socket) {
+    //   socket.on("tracking", (incomingDriverPosition) => {
+    //     console.log("CURRENT DRIVER POSITION====>", incomingDriverPosition);
+    //   });
+    // }
   }, []);
+
+  console.log("SESSION STATE ===>", user.roles);
 
   return (
     <View>
