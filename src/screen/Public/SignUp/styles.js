@@ -30,7 +30,7 @@ export default {
   signUpForm: {
     flex: 1,
     marginHorizontal: 20,
-    marginTop: 50,
+    marginTop: 18,
   },
   signUpImg: {
     width: 50,
@@ -38,14 +38,14 @@ export default {
     alignSelf: "center",
     marginTop: 30,
     marginBottom: 15,
-  },formInput4:{
+  },
+  formInput4: {
     width: "100%",
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_12,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
-  
   },
   signUpTitle: {
     fontFamily: FAMILY.BOLD,
@@ -55,7 +55,7 @@ export default {
   },
   signUpText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_14,
     color: COLOR.LIGHT,
     textAlign: "center",
     lineHeight: 21,
@@ -63,8 +63,7 @@ export default {
   },
   formRow: {
     flexDirection: "row",
-    justifyContent:'space-between',
-    
+    justifyContent: "space-between",
   },
   formInput: {
     // flex: 1,
@@ -76,7 +75,6 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 15,
     marginBottom: 15,
-    
   },
   formInput3: {
     width: "100%",
@@ -108,7 +106,7 @@ export default {
   },
   connectText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -116,18 +114,19 @@ export default {
   },
   connectText11: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.DARK,
+    fontSize: SIZE.SIZE_18,
+    color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
     paddingBottom: 10,
+    textDecorationLine: "underline",
   },
   smnItem: {
     flexDirection: "row",
@@ -154,12 +153,14 @@ export default {
   },
   termText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     textAlign: "center",
-    lineHeight: 19,
-  },accordionBtn: {
+    paddingTop: 5,
+    lineHeight: 25,
+  },
+  accordionBtn: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -184,8 +185,8 @@ export default {
     borderRadius: 5,
   },
   accordion: {
-    width: '100%',
-    marginBottom: 5
+    width: "100%",
+    marginBottom: 5,
   },
   accText: {
     fontFamily: FAMILY.REGULAR,

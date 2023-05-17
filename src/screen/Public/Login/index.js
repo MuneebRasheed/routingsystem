@@ -177,8 +177,8 @@ export default function SignUp() {
                 ref={phoneInput}
                 defaultValue={value}
                 defaultCode="PK"
-                textInputStyle={{ padding: 5 }}
-                containerStyle={{ width: 370, height: 60, borderRadius: 3 }}
+                textInputStyle={{ padding: 2 }}
+                containerStyle={{ width: "100%", height: 60, borderRadius: 3 }}
                 textContainerStyle={styles.formInput4}
                 onChangeFormattedText={(text) => {
                   setValue(text);
@@ -225,14 +225,14 @@ export default function SignUp() {
                     }}
                     style={styles.connectTextLink}
                   >
-                    {__("Signup")}
+                    {__("SIGNUP")}
                   </Text>
                 </Text>
               </View>
               <View
                 style={{
                   justifyContent: "center",
-                  marginLeft: 100,
+                  marginLeft: "24%",
                 }}
               >
                 <CheckBox
@@ -245,10 +245,10 @@ export default function SignUp() {
                   rightText={"SIGN IN AS DRIVER"}
                 />
               </View>
+              <Text style={styles.termText}>
+                {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
+              </Text>
             </View>
-            <Text style={styles.termText}>
-              {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
-            </Text>
           </View>
         </Content>
       </View>

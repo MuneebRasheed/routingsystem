@@ -21,7 +21,7 @@ export default {
   },
   connectText11: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -114,7 +114,7 @@ export default {
   },
   connectText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -122,11 +122,12 @@ export default {
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_18,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
     paddingBottom: 10,
+    textDecorationLine: "underline",
   },
   smnItem: {
     flexDirection: "row",
@@ -153,10 +154,11 @@ export default {
   },
   termText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     textAlign: "center",
-    lineHeight: 19,
+    paddingTop: 12,
+    lineHeight: 25,
   },
 };
