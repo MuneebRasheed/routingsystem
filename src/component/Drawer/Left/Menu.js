@@ -48,13 +48,12 @@ export const Data2 = [
     route: "CustomerNotification",
     iconName: "bell",
     iconType: "Entypo",
-  }
-  ,
+  },
   {
-    name: "Payment",
+    name: "   Payment",
     route: "CustomerAllPayments",
-    iconName: "account",
-    iconType: "MaterialCommunityIcons",
+    iconName: "dollar",
+    iconType: "Fontisto",
   },
   {
     name: "Logout",
@@ -91,14 +90,14 @@ export const Data3 = [
   {
     name: "Transaction History",
     route: "DriverSettlement",
-    iconName: "gears",
-    iconType: "FontAwesome",
+    iconName: "history",
+    iconType: "Fontisto",
   },
   {
     name: "My Routes",
     route: "DriverRoutes",
-    iconName: "gears",
-    iconType: "FontAwesome",
+    iconName: "direction-sign",
+    iconType: "Fontisto",
   },
   {
     name: "Notification",

@@ -81,18 +81,22 @@ const TrackingScreen = ({ route }) => {
       getCurrentLocation();
     }
 
-    // if (
-    //   (user && user.roles.includes("driver") && socket) ||
-    //   (user && user.roles.includes("rider"))
-    // ) {
-    //   socket.emit('tracking')
-    // }
+    if (
+      (user && user.roles.includes("driver")) ||
+      (user && user.roles.includes("rider"))
+    ) {
+      const interval = setInterval(() => {
+        getCurrentLocation();
+      }, 6000);
 
-    // if (user && user.roles.includes("user") && socket) {
-    //   socket.on("tracking", (incomingDriverPosition) => {
-    //     console.log("CURRENT DRIVER POSITION====>", incomingDriverPosition);
-    //   });
-    // }
+      return () => clearInterval(interval);
+    }
+
+    if (user && user.roles.includes("user") && socket) {
+      socket.on("tracking", (incomingDriverPosition) => {
+        console.log("CURRENT DRIVER POSITION====>", incomingDriverPosition);
+      });
+    }
   }, []);
 
   console.log("SESSION STATE ===>", user.roles);
