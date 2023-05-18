@@ -14,11 +14,13 @@ export default {
     alignItems: "center",
     margin: 10,
     marginTop: 20,
+    color: "black",
   },
   formRow: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLOR.LIGHT,
+    backgroundColor: "black",
+
     borderRadius: 3,
     marginBottom: 20,
     marginHorizontal: 20,
