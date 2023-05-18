@@ -136,6 +136,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
         >
           <TextInput
             placeholder="Enter The Bidding"
+            placeholderTextColor="black"
             style={{
               width: 300,
               marginTop: 10,
@@ -143,7 +144,8 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               paddingLeft: 10,
               marginLeft: 20,
               zindex: 1,
-              backgroundColor: COLOR.DARKVOLVET,
+              backgroundColor: "white",
+              color: "black",
             }}
             onChangeText={(e) => {
               setBiddingValue(e);
@@ -161,7 +163,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
             <Icon
               name="send"
               type="FontAwesome"
-              style={[styles.btnIcon, theme.SIZE_25, theme.DARKVOLVET]}
+              style={[styles.btnIcon, theme.SIZE_25]}
             />
           </TouchableOpacity>
         </View>
