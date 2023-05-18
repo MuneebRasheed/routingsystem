@@ -187,10 +187,12 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>
+                <Text style={styles.biddingCardText}>
                   {value?.bidder?.first_name} {value?.bidder?.last_name}
                 </Text>
-                <Text>Fare: {value?.parcel?.fare}</Text>
+                <Text style={styles.biddingCardText}>
+                  Fare: {value?.parcel?.fare}
+                </Text>
               </View>
               <View
                 style={{
@@ -200,8 +202,10 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>Ph: {value?.bidder?.phone}</Text>
-                <Text>25</Text>
+                <Text style={styles.biddingCardText}>
+                  Ph: {value?.bidder?.phone}
+                </Text>
+                <Text style={styles.biddingCardText}>25</Text>
               </View>
               <View
                 style={{
@@ -211,8 +215,10 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>Rating: {value?.bidder?.rating}</Text>
-                <Text>#FFF</Text>
+                <Text style={styles.biddingCardText}>
+                  Rating: {value?.bidder?.rating}
+                </Text>
+                <Text style={styles.biddingCardText}>#FFF</Text>
               </View>
             </View>
           </View>

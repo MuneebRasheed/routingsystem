@@ -156,6 +156,11 @@ export default {
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
+  biddingCardText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_12,
+    color: "black",
+  },
   bookingDeclineBtn: {
     backgroundColor: "#af4035",
     borderRadius: 5,
