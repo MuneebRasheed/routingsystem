@@ -41,17 +41,17 @@ export default function Home({ route }) {
     };
 
     try {
-      const responseOne = await axios.post(
-        "https://testing.explorelogix.com/v1/bid",
-        requestPayload,
-        {
-          headers: {
-            Authorization: `Bearer ${datas.access_token}`,
-          },
-        }
-      );
+      // const responseOne = await axios.post(
+      //   "https://testing.explorelogix.com/v1/bid",
+      //   requestPayload,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${datas.access_token}`,
+      //     },
+      //   }
+      // );
 
-      console.log("SUCCESSFULL RESPONSE ==>", responseOne.data);
+      // console.log("SUCCESSFULL RESPONSE ==>", responseOne.data);
       alert("You successfully bid on this parcel");
       socket.emit("bidding", requestPayload);
     } catch (error) {
