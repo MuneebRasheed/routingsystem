@@ -33,6 +33,12 @@ export default function SignUp() {
   const phoneInput = useRef();
   async function logins() {
     // * USER
+    var cd = {
+      identifier: "+923074461166",
+      password: "1234",
+    };
+
+    // * DRIVER
     // var cd = {
     //   identifier: "+923074461165",
     //   password: "1234",

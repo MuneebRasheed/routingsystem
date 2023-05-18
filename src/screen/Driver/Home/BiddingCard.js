@@ -4,17 +4,40 @@ import { TextInput, Button } from "@component/Form";
 import { Text, Icon } from "@component/Basic";
 import { __ } from "@utility/translation";
 import theme from "@theme/styles";
-
+import { COLOR, FAMILY, SIZE } from "@theme/typography";
 import styles from "./styles";
 
 const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
   const [biddingValue, setBiddingValue] = useState("");
   const [isBidFormShow, setBidFormShow] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  const handleLayout = (event) => {
+    const { height } = event.nativeEvent.layout;
+    setContainerHeight(height);
+  };
 
   return (
-    <View style={{ borderRadius: 50 }}>
+    <View
+      onLayout={handleLayout}
+      style={{
+        width: "90%",
+        paddingBottom: 20,
+        margin: 20,
+        borderRadius: 10,
+        backgroundColor: COLOR.LIGHT,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+      }}
+    >
       <View style={{ flexDirection: "row" }}>
-        <View style={{ width: "20%" }}>
+        <View style={{ width: "20%", marginTop: 20 }}>
           <Image
             source={require("@asset/images/avatar.png")}
             resizeMode="cover"
@@ -26,7 +49,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
             }}
           />
         </View>
-        <View style={{ width: "80%" }}>
+        <View style={{ paddingTop: 30, width: "70%" }}>
           {/* <View
             style={{
               flexDirection: "row",
@@ -100,14 +123,23 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
         </Button>
       </View>
       {isBidFormShow && (
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            paddingBottom: 10,
+          }}
+        >
           <TextInput
             placeholder="Enter The Bidding"
             style={{
               width: 300,
+              marginTop: 10,
               borderRadius: 10,
               paddingLeft: 10,
               marginLeft: 20,
+              zindex: 1,
+              backgroundColor: COLOR.DARKVOLVET,
             }}
             onChangeText={(e) => {
               setBiddingValue(e);
@@ -125,7 +157,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
             <Icon
               name="send"
               type="FontAwesome"
-              style={[theme.SIZE_25, theme.DARKVIOLET]}
+              style={[styles.btnIcon, theme.SIZE_25, theme.DARKVOLVET]}
             />
           </TouchableOpacity>
         </View>
