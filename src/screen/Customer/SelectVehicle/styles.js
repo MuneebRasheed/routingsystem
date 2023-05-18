@@ -158,6 +158,7 @@ export default {
   },
   biddingCardText: {
     fontFamily: FAMILY.BOLD,
+
     fontSize: SIZE.SIZE_12,
     color: "black",
   },
@@ -171,7 +172,7 @@ export default {
   label: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_30,
-    color: COLOR.DARKVOLVENT,
+    color: "black",
     paddingVertical: 10,
     paddingHorizontal: 5,
   },
