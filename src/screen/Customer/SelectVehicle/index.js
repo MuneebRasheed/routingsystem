@@ -191,7 +191,7 @@ function SelectVehicle(params) {
                   {value?.bidder?.first_name} {value?.bidder?.last_name}
                 </Text>
                 <Text style={styles.biddingCardText}>
-                  Fare: {value?.parcel?.fare}
+                  Fare: {value?.bid_amount}
                 </Text>
               </View>
               <View
@@ -414,7 +414,7 @@ function SelectVehicle(params) {
 
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={[styles.selectVehicleContainer, { height: 700 }]}>
+          <View style={[styles.selectVehicleContainer, { height: "80%" }]}>
             <View style={styles.selectVehicleContent}>
               <View style={styles.labelContainer}>
                 <Text style={styles.label}>Book Your Parcel</Text>
