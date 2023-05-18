@@ -59,116 +59,9 @@ export default function Home({ route }) {
     }
   };
 
-  const [mainModel, setMainModel] = useState(true);
+  const [mainModel, setMainModel] = useState(false);
   const [incomingParcelNotifications, setIncomingParcelNotifications] =
-    useState([
-      {
-        __v: 0,
-        _id: "6464aee8cd2192b1901c8ff9",
-        createdAt: "2023-05-17T10:39:36.547Z",
-        customer_id: {
-          ID: "",
-          ID_file: "",
-          __v: 0,
-          _id: "6413665dd905a0bb6e203f2b",
-          account: "acct_1N83WwPpq5EWgCmW",
-          address: "",
-          age: "30",
-          avatar:
-            "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/7b9507be-a6f2-4e67-b229-36273ad7427f.jpg;type=image/png",
-          city: "lahore",
-          country: "Pakistan",
-          cover_image:
-            "      https://www.shutterstock.com/image-vector/motorcyc…rider-icon-design-creativity-260nw-1285907485.jpg",
-          createdAt: "2023-03-16T18:56:29.578Z",
-          driving_license: "",
-          first_name: "Haseeb1",
-          gender: "male",
-          isLoggedIn: true,
-          isVerified: false,
-          is_block: false,
-          last_name: "rasheed",
-          password:
-            "$2b$10$gvhFOvKftqdO105/JilrcucEGf0yt5nZdNs.sSZU8Xjmi78fzk/hC",
-          phone: "+923074461165",
-          rating: 0,
-          role: [Array],
-          status: "active",
-          total_earning: "0",
-          updatedAt: "2023-05-17T10:36:05.058Z",
-          vehicle_no: "",
-        },
-        description: "",
-        fare: "55",
-        from_location:
-          '"{\\"latitude\\":31.5107032,\\"longitude\\":74.3407454}"',
-        from_location_cor: "31.5107032, 74.3407454",
-        height: "100",
-        images: [],
-        length: "7",
-        parcel_type: "wood",
-        status: "pending",
-        time: "2023-10-10T00:00:00.000Z",
-        to_location: '"{\\"latitude\\":31.4270794,\\"longitude\\":74.1833836}"',
-        to_location_cor: "31.4270794, 74.1833836",
-        updatedAt: "2023-05-17T10:39:36.547Z",
-        weight: "15kg",
-        width: "50",
-      },
-      {
-        __v: 0,
-        _id: "6464aee8cd2192b1901c8ff9",
-        createdAt: "2023-05-17T10:39:36.547Z",
-        customer_id: {
-          ID: "",
-          ID_file: "",
-          __v: 0,
-          _id: "6413665dd905a0bb6e203f2b",
-          account: "acct_1N83WwPpq5EWgCmW",
-          address: "",
-          age: "30",
-          avatar:
-            "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/7b9507be-a6f2-4e67-b229-36273ad7427f.jpg;type=image/png",
-          city: "lahore",
-          country: "Pakistan",
-          cover_image:
-            "       https://www.shutterstock.com/image-vector/motorcyc…rider-icon-design-creativity-260nw-1285907485.jpg",
-          createdAt: "2023-03-16T18:56:29.578Z",
-          driving_license: "",
-          first_name: "Haseeb1",
-          gender: "male",
-          isLoggedIn: true,
-          isVerified: false,
-          is_block: false,
-          last_name: "rasheed",
-          password:
-            "$2b$10$gvhFOvKftqdO105/JilrcucEGf0yt5nZdNs.sSZU8Xjmi78fzk/hC",
-          phone: "+923074461165",
-          rating: 0,
-          role: [Array],
-          status: "active",
-          total_earning: "0",
-          updatedAt: "2023-05-17T10:36:05.058Z",
-          vehicle_no: "",
-        },
-        description: "",
-        fare: "55",
-        from_location:
-          '"{\\"latitude\\":31.5107032,\\"longitude\\":74.3407454}"',
-        from_location_cor: "31.5107032, 74.3407454",
-        height: "100",
-        images: [],
-        length: "7",
-        parcel_type: "wood",
-        status: "pending",
-        time: "2023-10-10T00:00:00.000Z",
-        to_location: '"{\\"latitude\\":31.4270794,\\"longitude\\":74.1833836}"',
-        to_location_cor: "31.4270794, 74.1833836",
-        updatedAt: "2023-05-17T10:39:36.547Z",
-        weight: "15kg",
-        width: "50",
-      },
-    ]);
+    useState([]);
   const ModalNotification = useRef();
 
   const getParcelById = async (parcelId) => {
@@ -207,6 +100,7 @@ export default function Home({ route }) {
       getParcelById(id);
     }
   }, []);
+  console.log("INCOMDOMG PARCELS===>", incomingParcelNotifications);
 
   const MainModel = () => {
     return (

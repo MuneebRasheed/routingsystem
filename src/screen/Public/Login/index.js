@@ -34,7 +34,7 @@ export default function SignUp() {
   async function logins() {
     // * USER
     var cd = {
-      identifier: "+923074461166",
+      identifier: "+923074461165",
       password: "1234",
     };
 

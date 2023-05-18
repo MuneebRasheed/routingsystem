@@ -64,6 +64,13 @@ export default function MyTrip() {
     fetchData();
   }, []);
 
+  const handleNavigation = (val) => {
+    alert("navigation");
+    navigate("CustomerDriverTracking", {
+      data: val,
+    });
+  };
+
   function renderAll() {
     return (
       <View>
@@ -172,10 +179,11 @@ export default function MyTrip() {
                           {__("CHAT")}
                         </Text>
                       </Button>
-                      <Button style={{ width: 100 }}>
-                        <Text style={styles.balanceBtnText}>
-                          {__("Cancel")}
-                        </Text>
+                      <Button
+                        style={{ width: 100 }}
+                        onPress={() => handleNavigation(val)}
+                      >
+                        <Text style={styles.balanceBtnText}>Tracking</Text>
                       </Button>
                     </View>
                   </View>

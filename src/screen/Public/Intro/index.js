@@ -24,47 +24,45 @@ export default function Intro({ navigation }) {
     // * HERE GET FCM TOKEN FUNC WAS INVOKING
     // getFCMToken();
 
-    if(user) {
-          messaging().onNotificationOpenedApp((remoteMessage) => {
-            if (remoteMessage && user && user?.roles?.includes("driver")) {
-              console.log(
-                "Notification caused app to open from background state:",
-                remoteMessage.notification
-              );
-              navigation.navigate("PublicHome", {
-                data: remoteMessage.notification.body,
-              });
-            }
+    if (user) {
+      messaging().onNotificationOpenedApp((remoteMessage) => {
+        if (remoteMessage && user && user?.roles?.includes("driver")) {
+          console.log(
+            "Notification caused app to open from background state:",
+            remoteMessage.notification
+          );
+          navigation.navigate("PublicHome", {
+            data: remoteMessage.notification.body,
           });
-          // Check whether an initial notification is available
-          messaging()
-            .getInitialNotification()
-            .then((remoteMessage) => {
-              if (remoteMessage && user && user?.roles?.includes("driver")) {
-                navigation.navigate("PublicHome", {
-                  data: remoteMessage.notification.body,
-                });
-                console.log(
-                  "Notification caused app to open from quit state:",
-                  remoteMessage.notification
-                );
-              }
+        }
+      });
+      // Check whether an initial notification is available
+      messaging()
+        .getInitialNotification()
+        .then((remoteMessage) => {
+          if (remoteMessage && user && user?.roles?.includes("driver")) {
+            navigation.navigate("PublicHome", {
+              data: remoteMessage.notification.body,
             });
-          messaging().onMessage(async (remoteMessage) => {
-            console.log("FOREGOURND===>");
-            if (remoteMessage && user && user?.roles?.includes("driver")) {
-              console.log("MY CURRENT USER===>", user);
-              navigation.navigate("PublicHome", {
-                data: remoteMessage.notification.body,
-              });
-              console.log(
-                "notification on foreground state....",
-                remoteMessage
-              );
-            }
+            console.log(
+              "Notification caused app to open from quit state:",
+              remoteMessage.notification
+            );
+          }
+        });
+      messaging().onMessage(async (remoteMessage) => {
+        console.log("FOREGOURND===>");
+        console.log("MY CURRENT USER123===>", user);
+        if (remoteMessage && user && user?.roles?.includes("driver")) {
+          console.log("MY CURRENT USER===>", user);
+          navigation.navigate("PublicHome", {
+            data: remoteMessage.notification.body,
           });
+          console.log("notification on foreground state....", remoteMessage);
+        }
+      });
 
-          console.log("APP INITIALZED");
+      console.log("APP INITIALZED");
     }
 
     // dispatch(logout());

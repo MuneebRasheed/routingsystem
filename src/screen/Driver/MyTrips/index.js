@@ -30,7 +30,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://testing.explorelogix.com/v1/parcel?page=3&limit=40&sort=-1&rider_id=${datas._id}`,
+        `https://testing.explorelogix.com/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -38,7 +38,6 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("res", data.data);
         setData(data.data.docs);
       })
       .catch((err) => {
@@ -50,6 +49,13 @@ export default function MyTrip() {
   const [selectedParcel, setSelectedParcel] = useState(null);
   const dispatch = useDispatch();
   const { socket } = useSelector((state) => state.socket);
+
+  const handleNavigation = (val) => {
+    alert("navigation");
+    navigate("CustomerDriverTracking", {
+      data: val,
+    });
+  };
 
   useEffect(() => {
     if (socket) {
@@ -64,8 +70,6 @@ export default function MyTrip() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log("CRRENT USERS", users);
 
   function renderAll() {
     return (
@@ -176,10 +180,11 @@ export default function MyTrip() {
                           {__("CHAT")}
                         </Text>
                       </Button>
-                      <Button style={{ width: 100 }}>
-                        <Text style={styles.balanceBtnText}>
-                          {__("Cancel")}
-                        </Text>
+                      <Button
+                        style={{ width: 100 }}
+                        onPress={() => handleNavigation(val)}
+                      >
+                        <Text style={styles.balanceBtnText}>Tracking</Text>
                       </Button>
                     </View>
                   </View>

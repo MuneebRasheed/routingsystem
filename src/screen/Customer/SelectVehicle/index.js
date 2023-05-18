@@ -161,9 +161,14 @@ function SelectVehicle(params) {
         <View style={{ margin: 10, borderRadius: 10 }}>
           <View style={{ flexDirection: "row" }}>
             <View style={{ width: "20%", marginTop: 20 }}>
-              {console.log("CURRENT IMG==>", value.bidder.avatar)}
               <Image
-                source={require("@asset/images/driver.jpeg")}
+                source={
+                  value?.bidder?.avatar
+                    ? {
+                        uri: value?.bidder?.avatar,
+                      }
+                    : require("@asset/images/driver.jpeg")
+                }
                 resizeMode="cover"
                 style={{
                   width: 50,
@@ -182,8 +187,10 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>Mehran</Text>
-                <Text>55</Text>
+                <Text>
+                  {value?.bidder?.first_name} {value?.bidder?.last_name}
+                </Text>
+                <Text>Fare: {value?.parcel?.fare}</Text>
               </View>
               <View
                 style={{
@@ -193,7 +200,7 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>Faisal Ahmad</Text>
+                <Text>Ph: {value?.bidder?.phone}</Text>
                 <Text>25</Text>
               </View>
               <View
@@ -204,7 +211,7 @@ function SelectVehicle(params) {
                   fontSize: 20,
                 }}
               >
-                <Text>Black</Text>
+                <Text>Rating: {value?.bidder?.rating}</Text>
                 <Text>#FFF</Text>
               </View>
             </View>
@@ -401,7 +408,7 @@ function SelectVehicle(params) {
 
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={[styles.selectVehicleContainer, { height: 750 }]}>
+          <View style={[styles.selectVehicleContainer, { height: 700 }]}>
             <View style={styles.selectVehicleContent}>
               <View style={styles.labelContainer}>
                 <Text style={styles.label}>Book Your Parcel</Text>
