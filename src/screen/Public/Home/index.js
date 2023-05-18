@@ -115,6 +115,24 @@ export default function Home() {
           <View style={styles.formRow}>
             <GooglePlacesAutocomplete
               placeholder="Pickup"
+              textInputProps={{
+                placeholderTextColor: "black",
+                returnKeyType: "search",
+              }}
+              styles={{
+                textInput: {
+                  color: "black",
+                },
+                listView: {
+                  color: "black",
+                },
+                description: {
+                  color: "black",
+                },
+                predefinedPlacesDescription: {
+                  color: "black",
+                },
+              }}
               currentLocation={true}
               onPress={(data, details = null) => {
                 let coords = {
@@ -142,6 +160,24 @@ export default function Home() {
           <View style={styles.formRow}>
             <GooglePlacesAutocomplete
               placeholder="Drop Location"
+              textInputProps={{
+                placeholderTextColor: "black",
+                returnKeyType: "search",
+              }}
+              styles={{
+                textInput: {
+                  color: "black",
+                },
+                listView: {
+                  color: "black",
+                },
+                description: {
+                  color: "black",
+                },
+                predefinedPlacesDescription: {
+                  color: "black",
+                },
+              }}
               currentLocation={true}
               onPress={(data, details = null) => {
                 let coords = {
