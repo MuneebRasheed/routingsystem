@@ -61,7 +61,7 @@ export default {
   shareBtnText: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
-    color: COLOR.dar,
+    color: COLOR.LIGHT,
   },
   biddingCardText: {
     fontFamily: FAMILY.BOLD,
