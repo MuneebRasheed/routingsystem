@@ -154,7 +154,7 @@ export default {
   labelContainer: {
     alignItems: "center",
     paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
   },
   biddingCardText: {
     fontFamily: FAMILY.BOLD,
@@ -171,9 +171,9 @@ export default {
   label: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_30,
-    color: COLOR.GRAY,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    color: COLOR.DARKVOLVENT,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   uploadBtnText: {
     fontFamily: FAMILY.BOLD,
