@@ -285,9 +285,7 @@ export default function Home({ route }) {
               setMainModel(true);
             }}
           >
-            <Text style={styles.shareBtnText}>
-              {__("Select Driving Host")} MYHH
-            </Text>
+            <Text style={styles.shareBtnText}>{__("Select Driving Host")}</Text>
           </Button>
         </View>
       </View>

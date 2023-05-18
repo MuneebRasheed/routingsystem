@@ -66,7 +66,7 @@ export default {
   biddingCardText: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
-    color: COLOR.DARKVOLVET,
+    color: "black",
   },
   // --map--//
   mMap: {
