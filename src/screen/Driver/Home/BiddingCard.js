@@ -69,11 +69,11 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               fontSize: 20,
             }}
           >
-            <Text>
+            <Text style={styles.biddingCardText}>
               {val?.customer_id?.first_name} {val?.customer_id?.last_name}
             </Text>
             {/* <Text>{__("2 min)")}</Text> */}
-            <Text>PKR {val?.fare}</Text>
+            <Text style={styles.biddingCardText}>PKR {val?.fare}</Text>
           </View>
           <View
             style={{
@@ -83,8 +83,12 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               fontSize: 20,
             }}
           >
-            <Text>Phone: {val?.customer_id?.phone}</Text>
-            <Text>City: {val?.customer_id?.city}</Text>
+            <Text style={styles.biddingCardText}>
+              Phone: {val?.customer_id?.phone}
+            </Text>
+            <Text style={styles.biddingCardText}>
+              City: {val?.customer_id?.city}
+            </Text>
           </View>
         </View>
       </View>

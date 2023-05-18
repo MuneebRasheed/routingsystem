@@ -104,7 +104,7 @@ export default function SignUp() {
               }) => (
                 <View>
                   <View style={[styles.formRow, { marginTop: -20 }]}>
-                    <View style={{ width: 180 }}>
+                    <View style={{ width: "48%" }}>
                       <TextInput
                         placeholder="First Name"
                         placeholderTextColor="rgba(0,0,0,0.7)"
@@ -126,7 +126,7 @@ export default function SignUp() {
                         </Text>
                       )}
                     </View>
-                    <View style={{ width: 180 }}>
+                    <View style={{ width: "48%" }}>
                       <TextInput
                         placeholder="Last Name"
                         placeholderTextColor="rgba(0,0,0,0.7)"
