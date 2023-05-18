@@ -66,7 +66,6 @@ export default {
     justifyContent: "space-between",
   },
   formInput: {
-    // flex: 1,
     fontFamily: FAMILY.REGULAR,
     fontSize: SIZE.SIZE_12,
     color: COLOR.DARK,
