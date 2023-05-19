@@ -34,6 +34,7 @@ function SelectVehicle(params) {
   const [bids, setBids] = useState([]);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [openD, setOpenD] = useState(false);
   const [images, setImages] = useState();
   const [fare, setfare] = useState();
   const [width, setWidth] = useState();
@@ -42,6 +43,7 @@ function SelectVehicle(params) {
   const [weight, setWeight] = useState();
   const [mainModel, setMainModel] = useState(false);
   const [openModel, setOpenModel] = useState(false);
+  const [opened, setOpened] = useState(false);
   const [items, setItems] = useState([
     { label: "Solid", value: "solid" },
     { label: "Metal", value: "metal" },
@@ -420,14 +422,21 @@ function SelectVehicle(params) {
                 <Text style={styles.label}>Book Your Parcel</Text>
               </View>
               <Accordion
+                setOpened={setOpened}
+                opened={opened}
                 title="Select Time"
                 renderContent={() => (
                   <View style={styles.accOrderInfo}>
-                    <Button>
+                    <Button onPress={() => setOpened(false)}>
                       <Text style={styles.accText}>{__("Now")}</Text>
                     </Button>
-                    <Button>
-                      <Text style={styles.accText}>{__("Range")}</Text>
+                    <Button onPress={() => setOpenD(true)}>
+                      <Text
+                        style={styles.accText}
+                        onPress={() => setOpen(true)}
+                      >
+                        {__("Range")}
+                      </Text>
                     </Button>
                     <Button onPress={() => setOpen(true)}>
                       <Text style={styles.accText}>{__("Time")}</Text>
@@ -436,20 +445,41 @@ function SelectVehicle(params) {
                 )}
               />
 
-              <DatePicker
-                modal
-                mode="time"
-                open={open}
-                date={date}
-                onConfirm={(date) => {
-                  setOpen(false);
-                  setDate(date);
-                  console.log(JSON.stringify(date));
-                }}
-                onCancel={() => {
-                  setOpen(false);
-                }}
-              />
+              {open && (
+                <DatePicker
+                  modal
+                  mode="datetime"
+                  open={open}
+                  date={date}
+                  onConfirm={(date) => {
+                    setOpen(false);
+                    setDate(date);
+                    setOpened(false);
+                    console.log(JSON.stringify(date));
+                  }}
+                  onCancel={() => {
+                    setOpen(false);
+                  }}
+                />
+              )}
+
+              {openD && (
+                <DatePicker
+                  modal
+                  mode="time"
+                  open={openD}
+                  date={date}
+                  onConfirm={(date) => {
+                    setOpenD(false);
+                    setDate(date);
+                    setOpened(false);
+                    console.log(JSON.stringify(date), opened);
+                  }}
+                  onCancel={() => {
+                    setOpenD(false);
+                  }}
+                />
+              )}
 
               <View style={styles.formRow}>
                 <TextInput
@@ -513,23 +543,6 @@ function SelectVehicle(params) {
                 />
               </View>
               <View style={styles.accordion}>
-                <DropDownPicker
-                  open={openModel}
-                  items={items}
-                  setOpen={setOpenModel}
-                  value={itemsType}
-                  onSelectItem={(e) => setItemsType(e.value)}
-                  // setValue={handleChange("gender")}
-                  setItems={setItems}
-                  style={{
-                    paddingVertical: 19,
-                    marginTop: 10,
-                    marginBottom: 5,
-                    borderWidth: 0,
-                  }}
-                />
-              </View>
-              <View style={styles.accordion}>
                 <Button
                   style={styles.uploadBtn}
                   onPress={() => {
@@ -546,6 +559,23 @@ function SelectVehicle(params) {
                     style={[theme.SIZE_24, theme.DARKBLUE]}
                   />
                 </Button>
+              </View>
+              <View style={{ height: 270 }}>
+                <DropDownPicker
+                  open={openModel}
+                  items={items}
+                  setOpen={setOpenModel}
+                  value={itemsType}
+                  onSelectItem={(e) => setItemsType(e.value)}
+                  // setValue={handleChange("gender")}
+                  setItems={setItems}
+                  style={{
+                    paddingVertical: 19,
+                    marginTop: 10,
+                    marginBottom: 5,
+                    borderWidth: 0,
+                  }}
+                />
               </View>
             </View>
           </View>

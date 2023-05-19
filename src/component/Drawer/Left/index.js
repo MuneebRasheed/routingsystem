@@ -33,7 +33,7 @@ function MenuLeft() {
               socket.disconnect();
               dispatch(logout());
               dispatch(removeSocketConnection());
-              alert("Logout successfully!");
+              // alert("Logout successfully!");
               await AsyncStorage.removeItem("response");
               await AsyncStorage.removeItem("role");
             }

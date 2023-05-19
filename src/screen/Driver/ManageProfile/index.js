@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, ScrollView, Image, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  View,
+  ScrollView,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch, Checkbox } from "@component/Form";
 
@@ -18,7 +24,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Hyperlink from "react-native-hyperlink";
 import DocumentPicker from "react-native-document-picker";
-export default function ManageProfile({navigation}) {
+export default function ManageProfile({ navigation }) {
   const [selected, setSelected] = useState("");
   const [value, setValue] = useState();
   const [urlValue, setUrlValue] = useState();
@@ -373,12 +379,18 @@ export default function ManageProfile({navigation}) {
                   </Button>
                 </View>
               </View>
-              <Text >{__("Click on Link to change Permissions")} <TouchableOpacity onPress={()=>{navigation.navigate("DriverPermissions")}}><Text style={{color:'blue'}} >{__("Permission")}</Text></TouchableOpacity></Text> 
-              
+              <Text>
+                {__("Click on Link to change Permissions")}{" "}
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("DriverPermissions");
+                  }}
+                >
+                  <Text style={{ color: "blue" }}>{__("Permission")}</Text>
+                </TouchableOpacity>
+              </Text>
             </View>
-            
           </View>
-          
         </ScrollView>
 
         <Button
@@ -390,6 +402,8 @@ export default function ManageProfile({navigation}) {
       </SafeAreaView>
     );
   }
+
+  console.log("uRLVALUE", urlValue);
   function renderPermission() {
     return (
       <View style={styles.profileContainer}>
@@ -440,8 +454,11 @@ export default function ManageProfile({navigation}) {
           </Button> */}
 
           <View style={styles.profileInputDetail}>
-            <Text style={[styles.permissionText,{fontSize:20}]}>{__("Here is the Payment method button you can click the payment method button and can enable the payment integration with the help of stripe once you click the button in  bottom a ref link is generated you can click the link that send control to stripe you have to full filled your information then your account us acctivated and then you can make payment and recivied the payment from user")}</Text>
-            
+            <Text style={[styles.permissionText, { fontSize: 20 }]}>
+              {__(
+                "Here is the Payment method button you can click the payment method button and can enable the payment integration with the help of stripe once you click the button in  bottom a ref link is generated you can click the link that send control to stripe you have to full filled your information then your account us acctivated and then you can make payment and recivied the payment from user"
+              )}
+            </Text>
           </View>
 
           {urlValue && isEnabled && (
@@ -562,7 +579,7 @@ export default function ManageProfile({navigation}) {
                       : styles.tabTextInactive
                   }
                 >
-                  {__("PERMISSION")}
+                  {__("PAYMENT METHOD")}
                 </Text>
               </Button>
               {/* <Button

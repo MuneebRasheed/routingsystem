@@ -1,24 +1,24 @@
-import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { Container, Content, Text, Icon } from '@component/Basic'
-import { Button } from '@component/Form'
+import React from "react";
+import { View, ScrollView } from "react-native";
+import { Container, Content, Text, Icon } from "@component/Basic";
+import { Button } from "@component/Form";
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import notificationsList from './data/notifications'
-import Notifications from './Notifications'
+import notificationsList from "./data/notifications";
+import Notifications from "./Notifications";
 
-import styles from './styles'
-import theme from '@theme/styles'
+import styles from "./styles";
+import theme from "@theme/styles";
 
-import Modal from 'react-native-modalbox'
-import Header from '@component/Header'
+import Modal from "react-native-modalbox";
+import Header from "@component/Header";
 
-import { navigate } from '@navigation'
-import { __ } from '@utility/translation'
-import request from '@utility/request'
-import { bind } from '@utility/component'
-import { DarkStatusBar } from '@component/StatusBar'
+import { navigate } from "@navigation";
+import { __ } from "@utility/translation";
+import request from "@utility/request";
+import { bind } from "@utility/component";
+import { DarkStatusBar } from "@component/StatusBar";
 
 export default class extends React.Component {
   // constructor(props) {
@@ -53,26 +53,30 @@ export default class extends React.Component {
   //   })
   // }
   render() {
-    return <Container style={theme.layout}>
-      <DarkStatusBar />
-      <Header
-        leftType='back' />
-      <View style={styles.notificationHeader}>
-        <Text style={styles.notificationHeaderTitle}>{__('NOTIFICATIONS')}</Text>
-        <Text style={styles.notificationHeaderText}>{__('MANAGE YOUR NOTIFICATIONS')}</Text>
-      </View>
-      <Content style={theme.layout}>
-        <ScrollView showsVerticalScrollIndicator={false} >
-          <View style={styles.notificationContainer}>
-            <Notifications
+    return (
+      <Container style={theme.layout}>
+        <DarkStatusBar />
+        <Header leftType="back" />
+        <View style={styles.notificationHeader}>
+          <Text style={styles.notificationHeaderTitle}>
+            {__("NOTIFICATIONS")}
+          </Text>
+          <Text style={styles.notificationHeaderText}>
+            {__("MANAGE YOUR NOTIFICATIONSSSSS")}
+          </Text>
+        </View>
+        <Content style={theme.layout}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.notificationContainer}>
+              <Notifications
               // language={this.state.language}
               // list={this.state.notificationsList}
               // fetching={this.state.fetchingNotificationsList}
-            />
-          </View>
-        </ScrollView>
-      </Content>
-      {/* <Modal
+              />
+            </View>
+          </ScrollView>
+        </Content>
+        {/* <Modal
         ref={'ModalNotification'}
         isOpen={this.state.isOpen}
         position={'center'}
@@ -91,6 +95,7 @@ export default class extends React.Component {
           </Button>
         </View>
       </Modal> */}
-    </Container>
+      </Container>
+    );
   }
 }

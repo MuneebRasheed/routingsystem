@@ -75,13 +75,13 @@ export default function MyTrip() {
     return (
       <View>
         <View style={styles.accordionLayout}>
-          <Button onPress={() => socket.disconnect()}>
+          {/* <Button onPress={() => socket.disconnect()}>
             <Text style={styles.openBtnText}>Disconnect</Text>
-          </Button>
+          </Button> */}
           {data.map((val, index) => {
             return (
               <Accordion
-                title={`BOOKING ID ${val?._id}`}
+                title={`TRIPS ID : ${index + 1}`}
                 text="open"
                 key={index}
                 renderContent={() => (
@@ -101,14 +101,12 @@ export default function MyTrip() {
                         {__("PICK UP FROM")}
                       </Text>
                       <Text style={styles.bookingText}>
-                        {__("${JSON.parse(val?.from_location)?.locationName}")}
+                        {__(`${val?.from}`)}
                       </Text>
                     </View>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                      <Text style={styles.bookingText}>
-                        {__("${JSON.parse(val?.to_location)?.locationName}")}
-                      </Text>
+                      <Text style={styles.bookingText}>{__(`${val?.to}`)}</Text>
                     </View>
 
                     <View style={styles.bookingInfo}>
@@ -205,7 +203,7 @@ export default function MyTrip() {
             if (val.status == "pending") {
               return (
                 <Accordion
-                  title={`BOOKING ID ${val?._id}`}
+                  title={`TRIPS ID : ${index + 1}`}
                   text="open"
                   key={index}
                   renderContent={() => (
@@ -229,15 +227,13 @@ export default function MyTrip() {
                           {__("PICK UP FROM")}
                         </Text>
                         <Text style={styles.bookingText}>
-                          {__(
-                            "${JSON.parse(val?.from_location)?.locationName}"
-                          )}
+                          {__(`${val?.from}`)}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
                         <Text style={styles.bookingText}>
-                          {__("${JSON.parse(val?.to_location)?.locationName}")}
+                          {__(`${val?.to}`)}
                         </Text>
                       </View>
 

@@ -20,7 +20,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 
-
 export default function MyTrip() {
   const [tabSelected, setTabSelected] = useState("all");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -28,11 +27,10 @@ export default function MyTrip() {
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
   useEffect(() => {
-    if(isFocused){ 
-      console.log("UseEffect Call")
+    if (isFocused) {
+      console.log("UseEffect Call");
       submit();
-  }
-    
+    }
   }, [isFocused]);
 
   async function submit() {
@@ -40,7 +38,7 @@ export default function MyTrip() {
     var datas = JSON.parse(data);
     const res = axios
       .get(
-        `  https://testing.explorelogix.com/v1/routes?page=1&limit=10
+        `  https://testing.explorelogix.com/v1/routes?page=1&limit=100
         `,
         {
           headers: {
@@ -49,8 +47,30 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("res get all route", data.data.docs.length);
+        console.log("res get all route", data.data.docs[0]);
         setData(data.data.docs);
+      })
+      .catch((err) => {
+        console.log(("error", err));
+      });
+  }
+
+  async function onDelete(id) {
+    console.log("Deleted is call");
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+    const res = axios
+      .delete(
+        `  https://testing.explorelogix.com/v1/routes/${id}
+        `,
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log("route deleted succfully", data);
       })
       .catch((err) => {
         console.log(("error", err));
@@ -62,23 +82,26 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <ScrollView>
-            {data.map((val) => {
+            {data.map((val, index) => {
               return (
                 <View style={styles.accordion}>
                   <Button disabled style={styles.accordionBtn}>
                     <Text style={styles.accordionTitle}>
-                      {"ROUTE ID #X876895"}
+                      {"ROUTE  ID : " + (index + 1)}
                     </Text>
                     <View style={styles.accordionInfo}>
                       <View style={styles.accordionItem}>
-                        <Text style={styles.accordionInactiveText}>
+                        {/* <Text style={styles.accordionInactiveText}>
                           {"Edit"}
-                        </Text>
+                        </Text> */}
                       </View>
                       <Icon
                         name="delete"
                         type="MaterialCommunityIcons"
                         style={[theme.SIZE_20, theme.DARKBLUE]}
+                        onPress={() => {
+                          onDelete(val._id);
+                        }}
                       />
                     </View>
                   </Button>
@@ -96,34 +119,33 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
-          <ScrollView>
-            {data.map((val) => {
-              if(val.isActive){
-                return (
-                  <View style={styles.accordion}>
-                    <Button disabled style={styles.accordionBtn}>
-                      <Text style={styles.accordionTitle}>
-                        {"ROUTE ID #X876895"}
-                      </Text>
-                      <View style={styles.accordionInfo}>
-                        <View style={styles.accordionItem}>
-                          <Text style={styles.accordionInactiveText}>
-                            {"Edit"}
-                          </Text>
+            <ScrollView>
+              {data.map((val) => {
+                if (val.isActive) {
+                  return (
+                    <View style={styles.accordion}>
+                      <Button disabled style={styles.accordionBtn}>
+                        <Text style={styles.accordionTitle}>
+                          {"ROUTE ID #X876895"}
+                        </Text>
+                        <View style={styles.accordionInfo}>
+                          <View style={styles.accordionItem}>
+                            {/* <Text style={styles.accordionInactiveText}>
+                              {"Edit"}
+                            </Text> */}
+                          </View>
+                          <Icon
+                            name="delete"
+                            type="MaterialCommunityIcons"
+                            style={[theme.SIZE_20, theme.DARKBLUE]}
+                          />
                         </View>
-                        <Icon
-                          name="delete"
-                          type="MaterialCommunityIcons"
-                          style={[theme.SIZE_20, theme.DARKBLUE]}
-                        />
-                      </View>
-                    </Button>
-                  </View>
-                );
-              }
-              
-            })}
-          </ScrollView>
+                      </Button>
+                    </View>
+                  );
+                }
+              })}
+            </ScrollView>
           </View>
         </View>
       </View>
@@ -135,8 +157,8 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
-          {data.map((val) => {
-              if(!val.isActive){
+            {data.map((val) => {
+              if (!val.isActive) {
                 return (
                   <View style={styles.accordion}>
                     <Button disabled style={styles.accordionBtn}>
@@ -145,9 +167,9 @@ export default function MyTrip() {
                       </Text>
                       <View style={styles.accordionInfo}>
                         <View style={styles.accordionItem}>
-                          <Text style={styles.accordionInactiveText}>
+                          {/* <Text style={styles.accordionInactiveText}>
                             {"Edit"}
-                          </Text>
+                          </Text> */}
                         </View>
                         <Icon
                           name="delete"
@@ -159,7 +181,6 @@ export default function MyTrip() {
                   </View>
                 );
               }
-              
             })}
           </View>
         </View>

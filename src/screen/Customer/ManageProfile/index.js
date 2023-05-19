@@ -379,7 +379,7 @@ export default function ManageProfile() {
               {__("MANAGE YOUR PROFILE")}
             </Text>
             <View style={styles.tabInfo}>
-              <Button
+              {/* <Button
                 style={
                   tabSelected === "profile"
                     ? styles.tabActive
@@ -396,8 +396,8 @@ export default function ManageProfile() {
                 >
                   {__("PROFILE")}
                 </Text>
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 style={
                   tabSelected === "permission"
                     ? styles.tabActive
@@ -414,8 +414,8 @@ export default function ManageProfile() {
                 >
                   {__("PERMISSION")}
                 </Text>
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 style={
                   tabSelected === "insurance"
                     ? styles.tabActive
@@ -432,14 +432,12 @@ export default function ManageProfile() {
                 >
                   {__("PAYMENT")}
                 </Text>
-              </Button>
+              </Button> */}
             </View>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             {tabSelected === "profile"
               ? renderProfile()
-              : tabSelected === "permission"
-              ? renderPermission()
               : tabSelected === "insurance"
               ? renderInsurance()
               : null}

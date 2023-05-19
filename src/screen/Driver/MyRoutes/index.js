@@ -102,22 +102,20 @@ function MyRoute({ navigation }) {
   const { pickupCords, droplocationCords, coordinate, heading } = state;
 
   async function submit() {
-    // var cd = {
-    //   from: pickupCords.locationName,
-    //   to: droplocationCords.locationName,
-    //   from_cord: `${pickupCords.coordinates.latitude}, ${pickupCords.coordinates.longitude}`,
-    //   to_cord: `${droplocationCords.coordinates.latitude}, ${droplocationCords.coordinates.longitude}`,
-    //   time: "2023-04-16",
-    //   status: true,
-    //   has_diversion: divert,
-    // };
-    console.log("CURRENT VALUE==>", state);
-
-    return;
+    var cd = {
+      from: pickupCords.locationName,
+      to: droplocationCords.locationName,
+      from_cord: `${pickupCords?.latitude}, ${pickupCords?.longitude}`,
+      to_cord: `${droplocationCords?.latitude}, ${droplocationCords?.longitude}`,
+      time: "2023-04-16",
+      status: true,
+      has_diversion: divert,
+    };
+    console.log("CURRENT VALUE==>", cd);
 
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+    console.log("datas", datas);
 
     console.log("POSTING DATA==>", cd);
 
@@ -192,7 +190,14 @@ function MyRoute({ navigation }) {
                   let coords = {
                     latitude: details?.geometry?.location?.lat,
                     longitude: details?.geometry?.location?.lng,
+                    locationName: data?.structured_formatting?.main_text,
                   };
+                  console.log(
+                    "Details",
+                    data?.structured_formatting?.main_text,
+
+                    coords
+                  );
 
                   setState({
                     ...state,
@@ -238,6 +243,7 @@ function MyRoute({ navigation }) {
                   let coords = {
                     latitude: details?.geometry?.location?.lat,
                     longitude: details?.geometry?.location?.lng,
+                    locationName: data?.structured_formatting?.main_text,
                   };
 
                   setState({

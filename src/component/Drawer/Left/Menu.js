@@ -50,7 +50,7 @@ export const Data2 = [
     iconType: "Entypo",
   },
   {
-    name: "   Payment",
+    name: "   Payment Method",
     route: "CustomerAllPayments",
     iconName: "dollar",
     iconType: "Fontisto",

@@ -25,6 +25,7 @@ export default {
   },
   /** Tab */
   myTripTabItems: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -375,11 +376,8 @@ export default {
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
-  
-  
+
   balanceBtnText1: {
-  
     backgroundColor: COLOR.GREEN,
-    
-  }
+  },
 };

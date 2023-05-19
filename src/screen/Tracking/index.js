@@ -101,21 +101,26 @@ const TrackingScreen = ({ route }) => {
     }
 
     if (user && user.roles.includes("user") && socket) {
-      socket.on("tracking", (incomingDriverPosition) => {
-        console.log("CURRENT DRIVER POSITION====>", incomingDriverPosition);
-        const {
-          data: { location },
-        } = incomingDriverPosition;
+      socket.on("tracking", (incomingData) => {
+        // console.log("CURRENT DRIVER POSITION====>", incomingData);
+        // const incomingDriverPosition = JSON.parse(incomingData);
 
-        const [latitude, longitude] = location.split(",");
+        // const {
+        //   data: { location },
+        // } = incomingDriverPosition;
+        console.log("TRACKING===>", incomingData);
 
-        setState({
-          ...state,
-          pickupCords: {
-            latitude: latitude.trim(),
-            longitude: longitude.trim(),
-          },
-        });
+        // console.log("INCOMING DRIVER POS===>", incomingData);
+
+        // const [latitude, longitude] = location.split(",");
+        // console.log("Current longitute ", latitude, longitude);
+        // setState({
+        //   ...state,
+        //   pickupCords: {
+        //     latitude: latitude.trim(),
+        //     longitude: longitude.trim(),
+        //   },
+        // });
       });
     }
   }, []);
