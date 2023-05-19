@@ -5,9 +5,14 @@ import {
   Image,
   SafeAreaView,
   Dimensions,
+  Platform,
+  StyleSheet,
 } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch } from "@component/Form";
+import MapView, { Marker, AnimatedRegion } from "react-native-maps";
+import MapViewDirections from "react-native-maps-directions";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { COLOR } from "@theme/typography";
 
 import CheckBox from "react-native-check-box";
@@ -20,7 +25,6 @@ import CalendarStrip from "react-native-calendar-strip";
 import Support from "@component/Support";
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { DarkStatusBar } from "@component/StatusBar";
 import { connect } from "react-redux";
 import DatePicker from "react-native-date-picker";
@@ -28,9 +32,14 @@ import Accordion from "./Accordion";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import MapView from "react-native-maps";
 
-import MapViewDirections from "react-native-maps-directions";
+const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
+
+const screen = Dimensions.get("window");
+const ASPECT_RATIO = screen.width / screen.height;
+// const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.04;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 function MyRoute({ navigation }) {
   const [opens, setOpens] = useState(false);
@@ -69,47 +78,42 @@ function MyRoute({ navigation }) {
     },
   ];
 
-  const mapRef = useRef();
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const [state, setState] = useState({
+    pickupCords: {
+      // latitude: 31.5204,
+      // longitude: 74.3587,
+    },
+    droplocationCords: {
+      // latitude: 31.4504,
+      // longitude: 73.135,
+    },
+    isLoading: false,
+    coordinate: new AnimatedRegion({
+      latitude: 31.5204,
+      longitude: 74.3587,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }),
+    heading: 0,
+  });
 
-  const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
-  const { width, height } = Dimensions.get("window");
-  const ASPECT_RATIO = width / height;
-
-  const LATITUDE_DELTA = 0.07922;
-  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-  const edgePaddingValue = 70;
-
-  const edgePadding = {
-    top: edgePaddingValue,
-    right: edgePaddingValue,
-    bottom: edgePaddingValue + 70,
-    left: edgePaddingValue,
-  };
-  const traceRoute = () => {
-    if (start && end) {
-      mapRef.current?.fitToCoordinates([start, end], { edgePadding });
-    }
-  };
-  const moveTo = async () => {
-    const camera = await mapRef.current?.getCamera();
-    if (camera) {
-      camera.center = position;
-      mapRef.current?.animateCamera(camera, { duration: 1000 });
-    }
-  };
+  const { pickupCords, droplocationCords, coordinate, heading } = state;
 
   async function submit() {
-    var cd = {
-      from: form.locationName,
-      to: to.locationName,
-      from_cord: `${form.coordinates.latitude}, ${form.coordinates.longitude}`,
-      to_cord: `${to.coordinates.latitude}, ${to.coordinates.longitude}`,
-      time: "2023-04-16",
-      status: true,
-      has_diversion: divert,
-    };
-    console.log(cd);
+    // var cd = {
+    //   from: pickupCords.locationName,
+    //   to: droplocationCords.locationName,
+    //   from_cord: `${pickupCords.coordinates.latitude}, ${pickupCords.coordinates.longitude}`,
+    //   to_cord: `${droplocationCords.coordinates.latitude}, ${droplocationCords.coordinates.longitude}`,
+    //   time: "2023-04-16",
+    //   status: true,
+    //   has_diversion: divert,
+    // };
+    console.log("CURRENT VALUE==>", state);
+
+    return;
 
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
@@ -164,27 +168,39 @@ function MyRoute({ navigation }) {
           <View style={styles.selectVehicleContent}>
             <View style={[styles.formRow]}>
               <GooglePlacesAutocomplete
-                placeholder="Drop"
+                placeholder="Pickup"
+                textInputProps={{
+                  placeholderTextColor: "black",
+                  returnKeyType: "search",
+                }}
+                styles={{
+                  textInput: {
+                    color: "black",
+                  },
+                  listView: {
+                    color: "black",
+                  },
+                  description: {
+                    color: "black",
+                  },
+                  predefinedPlacesDescription: {
+                    color: "black",
+                  },
+                }}
                 currentLocation={true}
                 onPress={(data, details = null) => {
-                  console.log(data, details);
-                  console.log(
-                    "LOcation",
-                    JSON.stringify(details?.geometry?.location)
-                  );
-                  var test = {
+                  let coords = {
                     latitude: details?.geometry?.location?.lat,
                     longitude: details?.geometry?.location?.lng,
                   };
-                  setTo({
-                    coordinates: test,
-                    locationName: data?.structured_formatting?.main_text,
+
+                  setState({
+                    ...state,
+                    pickupCords: coords,
                   });
-                  setEnd(test);
-                  traceRoute();
                 }}
                 query={{
-                  key: "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA",
+                  key: GOOGLE_MAPS_APIKEY,
                   language: "en",
                 }}
                 minLength={2}
@@ -193,43 +209,45 @@ function MyRoute({ navigation }) {
                 returnKeyType={"default"}
                 fetchDetails={true}
                 enablePoweredByContainer={false}
-                currentLocationLabel="Current location"
               />
             </View>
 
             <View style={styles.formRow}>
               <GooglePlacesAutocomplete
-                placeholder="Pickup From"
+                placeholder="Drop Location"
+                textInputProps={{
+                  placeholderTextColor: "black",
+                  returnKeyType: "search",
+                }}
+                styles={{
+                  textInput: {
+                    color: "black",
+                  },
+                  listView: {
+                    color: "black",
+                  },
+                  description: {
+                    color: "black",
+                  },
+                  predefinedPlacesDescription: {
+                    color: "black",
+                  },
+                }}
                 currentLocation={true}
-                currentLocationLabel="Current location"
                 onPress={(data, details = null) => {
-                  // console.log("data", "details");
-                  console.log(
-                    "LOcation",
-                    details,
-                    // data?.structured_formatting.main_text
-                    data
-                  );
-                  var test = {
+                  let coords = {
                     latitude: details?.geometry?.location?.lat,
                     longitude: details?.geometry?.location?.lng,
                   };
-                  mapRef.current.initialRegion = {
-                    latitude: details?.geometry?.location?.lat,
-                    longitude: details?.geometry?.location?.lng,
-                    latitudeDelta: LATITUDE_DELTA,
-                    longitudeDelta: LONGITUDE_DELTA,
-                  };
-                  console.log("Test", test);
-                  setStart(test);
-                  setForm({
-                    coordinates: test,
-                    locationName: data?.structured_formatting?.main_text,
+
+                  setState({
+                    ...state,
+                    droplocationCords: coords,
                   });
-                  moveTo(test);
+                  // moveTo(test)
                 }}
                 query={{
-                  key: "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA",
+                  key: GOOGLE_MAPS_APIKEY,
                   language: "en",
                 }}
                 minLength={2}
@@ -282,52 +300,65 @@ function MyRoute({ navigation }) {
         </View>
       </Content>
 
-      <MapView
-        style={styles.mMapImg}
-        initialRegion={{
-          latitude: start?.latitude == undefined ? 0 : start?.latitude,
-          longitude: start?.longitude == undefined ? 0 : start?.longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}
-        ref={mapRef}
-        region={{
-          latitude: start?.latitude == undefined ? 0 : start?.latitude,
-          longitude: start?.longitude == undefined ? 0 : start?.longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
+      <View
+        style={{
+          flex: 1,
         }}
       >
-        {start && <MapView.Marker key={`coordinate_1`} coordinate={start} />}
-        {end && <MapView.Marker key={`coordinate_2`} coordinate={end} />}
-
-        {start && end && (
-          <MapViewDirections
-            strokeWidth={3}
-            strokeColor="hotpink"
-            optimizeWaypoints={true}
-            timePrecision={"now"}
-            origin={start}
-            waypoints={
-              coordinates.length > 2 ? coordinates.slice(1, -1) : undefined
-            }
-            destination={end}
-            apikey={GOOGLE_MAPS_APIKEY}
-            onStart={(params) => {
-              console.log(
-                `Started routing between "${params.origin}" and "${params.destination}"`
-              );
-            }}
-            onReady={(result) => {
-              console.log(`Distance: ${result.distance} km`);
-              console.log(`Duration: ${result.duration} min.`);
-            }}
-            onError={(errorMessage) => {
-              console.log("GOT AN ERROR");
-            }}
-          />
-        )}
-      </MapView>
+        <MapView
+          ref={mapRef}
+          style={StyleSheet.absoluteFill}
+          initialRegion={
+            Object.values(pickupCords).length > 0
+              ? {
+                  ...pickupCords,
+                  latitudeDelta: LATITUDE_DELTA,
+                  longitudeDelta: LONGITUDE_DELTA,
+                }
+              : null
+          }
+        >
+          {/* {Object.values(state.pickupCords).length > 0 && (
+                <Marker.Animated ref={markerRef} coordinate={coordinate}>
+                  <Image
+                    source={require("../../../../assets/images/bike.png")}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      transform: [{ rotate: `${heading}deg` }],
+                    }}
+                    resizeMode="contain"
+                  />
+                </Marker.Animated>
+              )} */}
+          {Object.values(state.pickupCords).length > 0 && (
+            <Marker
+              coordinate={pickupCords}
+              image={require("../../../../assets/images/Oval2x.png")}
+            />
+          )}
+          {Object.values(state.droplocationCords).length > 0 && (
+            <Marker
+              coordinate={droplocationCords}
+              image={require("../../../../assets/images/greenMarker2x.png")}
+            />
+          )}
+          {Object.values(state.pickupCords).length > 0 &&
+            Object.values(state.droplocationCords).length > 0 && (
+              <MapViewDirections
+                origin={pickupCords}
+                destination={droplocationCords}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeWidth={6}
+                strokeColor="hotpink"
+                optimizeWaypoints={true}
+                onReady={(result) => {
+                  mapRef.current.fitToCoordinates(result.coordinates);
+                }}
+              />
+            )}
+        </MapView>
+      </View>
       <Button
         style={styles.bookingBtn}
         onPress={() => {
