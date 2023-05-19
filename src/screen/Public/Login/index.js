@@ -39,15 +39,15 @@ export default function SignUp() {
     // };
 
     // * DRIVER
-    // var cd = {
-    //   identifier: "+923074461166",
-    //   password: "1234",
-    // };
-
     var cd = {
-      identifier: value,
-      password,
+      identifier: "+923074461166",
+      password: "1234",
     };
+
+    // var cd = {
+    //   identifier: value,
+    //   password,
+    // };
     console.log("PROJECT====>", cd);
 
     axios

@@ -62,6 +62,14 @@ const TrackingScreen = ({ route }) => {
       // });
 
       console.log("CURRENT POSITION=====>", res);
+
+      socket.emit("tracking", {
+        to: route?.params?.data.customer_id,
+        location: `${res.latitude}, ${res.longitude}`,
+        parcel: route?.params?.data._id,
+        riderId: route?.params?.data.rider_id,
+        status: "start",
+      });
     }
   };
 
@@ -95,6 +103,19 @@ const TrackingScreen = ({ route }) => {
     if (user && user.roles.includes("user") && socket) {
       socket.on("tracking", (incomingDriverPosition) => {
         console.log("CURRENT DRIVER POSITION====>", incomingDriverPosition);
+        const {
+          data: { location },
+        } = incomingDriverPosition;
+
+        const [latitude, longitude] = location.split(",");
+
+        setState({
+          ...state,
+          pickupCords: {
+            latitude: latitude.trim(),
+            longitude: longitude.trim(),
+          },
+        });
       });
     }
   }, []);
