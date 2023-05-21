@@ -97,7 +97,7 @@ export default function SignUp() {
           if (temp != 2) {
             Support.showError({
               title: __("OOPs"),
-              message: __("You cant be login"),
+              message: __("You cant be loginss"),
               hideDelay: 2500,
             });
           }

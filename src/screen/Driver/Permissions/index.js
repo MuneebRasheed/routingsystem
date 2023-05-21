@@ -15,6 +15,9 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Permission() {
+  const [accessMessage, setAccessMessage] = useState(false);
+  const [mediaStorage, setMediaStorage] = useState(false);
+  const [location, setLocation] = useState(false);
  
   return (
     <Container>
@@ -35,7 +38,11 @@ export default function Permission() {
             <Text style={styles.permissionText}>{__("MESSAGE")}</Text>
             <View style={styles.switchInfo}>
               <Text style={styles.switchText}>{__("Access your message")}</Text>
-              <ToggleSwitch />
+              <ToggleSwitch 
+               setValue={setAccessMessage}
+               value={accessMessage}
+              />
+
             </View>
           </View>
           <View style={styles.profileInputDetail}>
@@ -44,7 +51,10 @@ export default function Permission() {
               <Text style={styles.switchText}>
                 {__("Access your Media & Storage")}
               </Text>
-              <ToggleSwitch />
+              <ToggleSwitch 
+               setValue={setMediaStorage}
+               value={mediaStorage}
+              />
             </View>
           </View>
            <View style={styles.profileInputDetail}>
@@ -53,7 +63,10 @@ export default function Permission() {
               <Text style={styles.switchText}>
                 {__("Access your location")}
               </Text>
-              <ToggleSwitch />
+              <ToggleSwitch 
+               setValue={setLocation}
+               value={location}
+              />
             </View>
           </View>
 

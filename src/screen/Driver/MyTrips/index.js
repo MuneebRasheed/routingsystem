@@ -6,6 +6,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Modal from "react-native-modalbox";
 import Accordion from "./Accordion";
+import { COLOR, FAMILY, SIZE } from "@theme/typography";
 
 import styles from "./styles";
 import theme from "@theme/styles";
@@ -163,7 +164,7 @@ export default function MyTrip() {
                       </View>
 
                       <Button
-                        style={styles.detailBtn}
+                        style={[styles.detailBtn,,{backgroundColor:COLOR.BLUE}]}
                         onPress={() => {
                           console.log("CURRENT PAR===>", val);
                           setSelectedParcel(val);
@@ -172,19 +173,19 @@ export default function MyTrip() {
                         <Icon
                           name="chat"
                           type="MaterialIcons"
-                          style={[theme.SIZE_14, theme.GREYDARK]}
+                          style={[theme.SIZE_14, theme.LIGHT]}
                         />
-                        <Text style={styles.detailBtnText}>{__("CHAT")}</Text>
+                        <Text style={[styles.detailBtnText,{color:COLOR.LIGHT}]}>{__("CHAT")}</Text>
                       </Button>
                       <Button
-                        style={styles.detailBtn}
+                        style={[styles.detailBtn,{backgroundColor:COLOR.GREEN}]}
                         onPress={() => handleNavigation(val)}
                       >
-                        <Text style={styles.detailBtnText}>Tracking</Text>
+                        <Text style={[styles.detailBtnText,{color:"white"}]}>Tracking</Text>
                       </Button>
                       <Button
                         style={styles.cancelBtn}
-                        onPress={() => handleNavigation(val)}
+                        onPress={() => alert("Ride Cancel")}
                       >
                         <Text style={styles.cancelBtnText}>Cancel</Text>
                       </Button>
@@ -275,34 +276,51 @@ export default function MyTrip() {
                         </Button>
                       </View>
                       <View style={styles.btnInfo}>
-                        <View style={styles.detailTag}>
-                          <Button
-                            style={styles.detailBtn}
-                            onPress={() => {
-                              navigate("CustomerBookingComplete", { val });
-                            }}
-                          >
-                            <Icon
-                              name="search"
-                              type="Feather"
-                              style={[theme.SIZE_14, theme.GREYDARK]}
-                            />
-                            <Text style={styles.detailBtnText}>
-                              {__("DETAILS")}
-                            </Text>
-                          </Button>
-                        </View>
+                      <View style={styles.detailTag}>
                         <Button
-                          style={styles.balanceBtn}
+                          style={styles.detailBtn}
                           onPress={() => {
-                            // setIsOpen(true);
+                            navigate("DriverBookingComplete");
                           }}
                         >
-                          <Text style={styles.balanceBtnText}>
-                            {__("CHAT")}
+                          <Icon
+                            name="search"
+                            type="Feather"
+                            style={[theme.SIZE_14, theme.GREYDARK]}
+                          />
+                          <Text style={styles.detailBtnText}>
+                            {__("DETAILS")}
                           </Text>
                         </Button>
                       </View>
+
+                      <Button
+                        style={[styles.detailBtn,,{backgroundColor:COLOR.BLUE}]}
+                        onPress={() => {
+                          console.log("CURRENT PAR===>", val);
+                          setSelectedParcel(val);
+                        }}
+                      >
+                        <Icon
+                          name="chat"
+                          type="MaterialIcons"
+                          style={[theme.SIZE_14, theme.LIGHT]}
+                        />
+                        <Text style={[styles.detailBtnText,{color:COLOR.LIGHT}]}>{__("CHAT")}</Text>
+                      </Button>
+                      <Button
+                        style={[styles.detailBtn,{backgroundColor:COLOR.GREEN}]}
+                        onPress={() => handleNavigation(val)}
+                      >
+                        <Text style={[styles.detailBtnText,{color:"white"}]}>Tracking</Text>
+                      </Button>
+                      <Button
+                        style={styles.cancelBtn}
+                        onPress={() => alert("Ride Cancel")}
+                      >
+                        <Text style={styles.cancelBtnText}>Cancel</Text>
+                      </Button>
+                    </View>
                     </View>
                   )}
                 />

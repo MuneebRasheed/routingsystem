@@ -51,11 +51,11 @@ export default function Item({ value }) {
         <View style={styles.notificationDetail}>
           <Text style={styles.bookingText}>{value?.item?.body}</Text>
           <Button style={styles.deleteBtn}>
-            <Icon
-              name="check"
-              type="MaterialCommunityIcons"
-              style={[theme.SIZE_20, theme.SMOKEVIOLET]}
-            />
+          <Icon
+            name="checkmark-done"
+            type="Ionicons"
+            style={[theme.SIZE_20, {color:'blue'}]}
+          />
           </Button>
         </View>
       </View>

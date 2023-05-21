@@ -150,7 +150,7 @@ export default {
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
-    backgroundColor: "#af4035",
+    backgroundColor: 'red',
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 10,

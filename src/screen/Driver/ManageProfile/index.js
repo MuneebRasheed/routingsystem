@@ -39,7 +39,7 @@ export default function ManageProfile({ navigation }) {
   const [vehicalNumber, setVehicalNumber] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [drivingLiscence, setDrivingLiscence] = useState("");
-  const [nationalCard, setNationalCard] = useState("");
+  const [nationalCard, setNationalCard] = useState();
 
   // acct_1MwmIbPu2iasesq5
   const [PaymentTabSelected, setPaymentTabSelected] = useState("card");
@@ -92,6 +92,7 @@ export default function ManageProfile({ navigation }) {
         setPhoneNumber(data.data.data.phone);
         setProfileHttp(data.data.data.avatar);
         setEmail(data.data.data.email);
+        setNationalCard(data.data.data.ID_file);
       })
       .catch((err) => {
         console.log("Get data account error");
@@ -364,19 +365,37 @@ export default function ManageProfile({ navigation }) {
                     <Text style={styles.formText}>
                       {__("NATIONAL ID CARD")}
                     </Text>
-                    <TextInput
+                    {/* <TextInput
                       placeholder=""
                       // placeholderTextColor="#000"
                       style={styles.formInput}
+                    /> */}
+
+                    <Image
+                      source={{
+                        uri:
+                          nationalCard ||
+                          "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                      }}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
+                      }}
                     />
                   </View>
+
                   <Button
                     style={styles.uploadBtn}
                     onPress={() => {
                       UploadData(setNationalCard);
                     }}
                   >
-                    <Text style={styles.uploadBtnText}>{__("UPLOAD")}</Text>
+                    {nationalCard ? (
+                      <Text style={styles.uploadBtnText}>{__("UPDATE")}</Text>
+                    ) : (
+                      <Text style={styles.uploadBtnText}>{__("UPLOAD")}</Text>
+                    )}
                   </Button>
                 </View>
               </View>
