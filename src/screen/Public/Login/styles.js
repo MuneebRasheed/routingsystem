@@ -152,6 +152,37 @@ export default {
     backgroundColor: COLOR.LIGHT,
     marginLeft: 15,
   },
+  tabInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  tabActive: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: COLOR.BLUE,
+    borderRadius: 3,
+    paddingVertical: 15,
+    marginHorizontal: 5,
+  },
+  tabInactive: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: COLOR.GREEN,
+    borderRadius: 3,
+    paddingVertical: 15,
+    marginHorizontal: 5,
+  },
+  tabTextActive: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_16,
+    color: COLOR.LIGHT,
+  },
+  tabTextInactive: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_16,
+    color: COLOR.LIGHT,
+  },
   termText: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
