@@ -1,12 +1,16 @@
 import React, { useState, useRef } from "react";
-import { View, Image } from "react-native";
+import { View, Image ,ScrollView} from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import CheckBox from "react-native-check-box";
 import { COLOR } from "@theme/typography";
+
 import styles from "./styles";
+
 import theme from "@theme/styles";
+
 import Header from "@component/Header";
+
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
 import { DarkStatusBar } from "@component/StatusBar";
@@ -20,33 +24,33 @@ import { initilizeSocket } from "../../../store/reducers/socketReducer";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
 
 export default function SignUp() {
-  const [tabSelected, setTabSelected] = useState("User");
-
-  const clearInputFields = () => {
-    setValue("");
-    setPassword("");
-  };
-
   const [isSelected, setSelection] = useState(false);
   const [value, setValue] = useState("");
   const [password, setPassword] = useState("");
   const [valid, setValid] = useState(true);
+  const [tabSelected, setTabSelected] = useState("User");
   const dispatch = useDispatch();
   var temp = 0;
   const phoneInput = useRef();
   async function logins() {
     // * USER
-    var cd = {
-      identifier: "+923074461165",
-      password: "1234",
-    };
+    // var cd = {
+    //   identifier: "+923074461166",
+    //   password: "1234",
+    // };
 
     // * DRIVER
     // var cd = {
     //   identifier: "+923074461166",
     //   password: "1234",
     // };
+
+    var cd = {
+      identifier: value,
+      password,
+    };
     console.log("PROJECT====>", cd);
+
     axios
       .post("https://testing.explorelogix.com/v1/auth/login", cd)
       .then((response) => {
@@ -149,158 +153,7 @@ export default function SignUp() {
       alert("Invalid Phone Number");
     }
   };
-  function User() {
-    return (
-      <Container>
-        <View style={{ marginTop: 30 }}>
-          <PhoneInput
-            ref={phoneInput}
-            defaultValue={value}
-            defaultCode="PK"
-            textInputStyle={{ padding: 2 }}
-            containerStyle={{ width: "100%", height: 60, borderRadius: 3 }}
-            textContainerStyle={styles.formInput4}
-            onChangeFormattedText={(text) => {
-              setValue(text);
-            }}
-            withShadow
-            autoFocus
-          />
 
-          <View>
-            <TextInput
-              placeholder="Password"
-              secureTextEntry={valid}
-              value={password}
-              onChangeText={setPassword}
-              placeholderTextColor="rgba(0,0,0,0.7)"
-              style={[styles.formInput3, { marginTop: 15 }]}
-            />
-
-            <Icon
-              name={valid ? "eye-slash" : "eye"}
-              type="FontAwesome"
-              style={[
-                theme.SIZE_18,
-                theme.PRIMARY,
-                { right: -333, bottom: 52 },
-              ]}
-              onPress={() => {
-                setValid((val) => !val);
-              }}
-            />
-          </View>
-          <Button style={styles.signUpBtn} onPress={onSubmit}>
-            <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
-          </Button>
-        </View>
-        <View style={styles.signUpContent}>
-          <View>
-            <Text style={styles.connectText}>{__("OR")}</Text>
-            <Text style={styles.connectText}>
-              {__("If you not have account ")}
-              <Text
-                onPress={() => {
-                  navigateReset("PublicSignUp");
-                }}
-                style={styles.connectTextLink}
-              >
-                {__("SIGNUP")}
-              </Text>
-            </Text>
-          </View>
-
-          <Text style={styles.termText}>
-            {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
-          </Text>
-        </View>
-      </Container>
-    );
-  }
-
-  function Driver() {
-    return (
-      <Container>
-        <View style={{ marginTop: 30 }}>
-          <PhoneInput
-            ref={phoneInput}
-            defaultValue={value}
-            defaultCode="PK"
-            textInputStyle={{ padding: 2 }}
-            containerStyle={{ width: "100%", height: 60, borderRadius: 3 }}
-            textContainerStyle={styles.formInput4}
-            onChangeFormattedText={(text) => {
-              setValue(text);
-            }}
-            withShadow
-            autoFocus
-          />
-
-          <View>
-            <TextInput
-              placeholder="Password"
-              secureTextEntry={valid}
-              value={password}
-              onChangeText={setPassword}
-              placeholderTextColor="rgba(0,0,0,0.7)"
-              style={[styles.formInput3, { marginTop: 15 }]}
-            />
-
-            <Icon
-              name={valid ? "eye-slash" : "eye"}
-              type="FontAwesome"
-              style={[
-                theme.SIZE_18,
-                theme.PRIMARY,
-                { right: -333, bottom: 52 },
-              ]}
-              onPress={() => {
-                setValid((val) => !val);
-              }}
-            />
-          </View>
-          <Button style={styles.signUpBtn} onPress={onSubmit}>
-            <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
-          </Button>
-        </View>
-        <View style={styles.signUpContent}>
-          <View>
-            <Text style={styles.connectText}>{__("OR")}</Text>
-            <Text style={styles.connectText}>
-              {__("If you not have account ")}
-              <Text
-                onPress={() => {
-                  navigateReset("PublicSignUp");
-                }}
-                style={styles.connectTextLink}
-              >
-                {__("SIGNUP")}
-              </Text>
-            </Text>
-          </View>
-          <View
-            style={{
-              justifyContent: "center",
-              marginLeft: "24%",
-            }}
-          >
-            <CheckBox
-              rightTextStyle={styles.connectText11}
-              checkBoxColor={COLOR.GREEN}
-              onClick={() => {
-                setSelection(!isSelected);
-              }}
-              isChecked={isSelected}
-              rightText={"SIGN IN AS DRIVER"}
-            />
-          </View>
-          <Text style={styles.termText}>
-            {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
-          </Text>
-        </View>
-      </Container>
-    );
-  }
   return (
     <Container>
       <DarkStatusBar />
@@ -326,6 +179,49 @@ export default function SignUp() {
                 {__("Find a easy way to transfer\nyour loads")}
               </Text>
             </View>
+            <View style={styles.tabInfo}>
+              <Button
+                style={
+                  tabSelected === "User" ? styles.tabActive : styles.tabInactive
+                }
+                onPress={() => {setTabSelected("User")
+                setSelection(false);}}
+              >
+                <Text
+                  style={
+                    tabSelected === "User"
+                      ? styles.tabTextActive
+                      : styles.tabTextInactive
+                  }
+                >
+                  {__("User")}
+                </Text>
+              </Button>
+
+              <Button
+                style={
+                  tabSelected === "Driver"
+                    ? styles.tabActive
+                    : styles.tabInactive
+                }
+                onPress={() => {setTabSelected("Driver")
+              
+                  setSelection(true);
+                }}
+              >
+                <Text
+                  style={
+                    tabSelected === "Driver"
+                      ? styles.tabTextActive
+                      : styles.tabTextInactive
+                  }
+                >
+                  {__("Driver")}
+                </Text>
+              </Button>
+            </View>
+
+            <ScrollView>
             <View>
               <PhoneInput
                 ref={phoneInput}
@@ -383,26 +279,12 @@ export default function SignUp() {
                   </Text>
                 </Text>
               </View>
-              <View
-                style={{
-                  justifyContent: "center",
-                  marginLeft: "24%",
-                }}
-              >
-                <CheckBox
-                  rightTextStyle={styles.connectText11}
-                  checkBoxColor={COLOR.GREEN}
-                  onClick={() => {
-                    setSelection(!isSelected);
-                  }}
-                  isChecked={isSelected}
-                  rightText={"SIGN IN AS DRIVER"}
-                />
-              </View>
+              
               <Text style={styles.termText}>
                 {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
               </Text>
             </View>
+            </ScrollView>
           </View>
         </Content>
       </View>

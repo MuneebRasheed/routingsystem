@@ -21,7 +21,7 @@ export default {
   },
   connectText11: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -89,7 +89,7 @@ export default {
   formInput4: {
     width: "100%",
     fontFamily: FAMILY.REGULAR,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_20,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
@@ -118,7 +118,7 @@ export default {
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
-    paddingBottom: 10,
+    
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
@@ -156,6 +156,7 @@ export default {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
+    backgroundColor: "green",
   },
   tabActive: {
     flex: 1,
@@ -168,20 +169,20 @@ export default {
   tabInactive: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: COLOR.GREEN,
+    backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 3,
     paddingVertical: 15,
     marginHorizontal: 5,
   },
   tabTextActive: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
   },
   tabTextInactive: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
-    color: COLOR.LIGHT,
+    fontSize: SIZE.SIZE_12,
+    color: "rgba(255,255,255,0.5)",
   },
   termText: {
     fontFamily: FAMILY.BOLD,
@@ -189,7 +190,7 @@ export default {
     color: COLOR.LIGHT,
     alignSelf: "center",
     textAlign: "center",
-    paddingTop: 12,
-    lineHeight: 25,
+    paddingTop: 2,
+    lineHeight: 20,
   },
 };
