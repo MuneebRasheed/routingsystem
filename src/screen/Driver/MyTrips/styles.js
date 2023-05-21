@@ -146,15 +146,31 @@ export default {
     justifyContent: "space-between",
     margin: 15,
   },
+  cancelBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-start",
+    backgroundColor: "#af4035",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginRight: 10,
+  },
+  cancelBtnText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_12,
+    color: COLOR.LIGHT,
+    marginLeft: 5,
+  },
   detailBtn: {
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
     backgroundColor: COLOR.SMOKELIGHT,
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    marginRight: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginRight: 10,
   },
   detailBtnText: {
     fontFamily: FAMILY.BOLD,
@@ -163,20 +179,21 @@ export default {
     marginLeft: 5,
   },
   detailTag: {
-    flex: 3,
+    flex: 1,
   },
   balanceBtn: {
-    flex: 4,
+    flex: 1,
   },
   balanceBtnText: {
+    backgroundColor: COLOR.GREEN,
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
     textAlign: "center",
     backgroundColor: "rgba(249,64,65,1)",
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   rateBtn: {
     fontFamily: FAMILY.BOLD,
@@ -375,9 +392,5 @@ export default {
     borderRadius: 3,
     paddingHorizontal: 10,
     paddingVertical: 10,
-  },
-
-  balanceBtnText1: {
-    backgroundColor: COLOR.GREEN,
   },
 };
