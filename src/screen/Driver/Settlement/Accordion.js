@@ -27,9 +27,9 @@ const Accordion = ({ title, text, renderContent, onOpened, onClosed, expanded })
       <Button disabled style={styles.accordionBtn} onPress={toggle}>
         <Text style={opened ? styles.accordionTitle : styles.accordionTitle}>{title}</Text>
         <View style={styles.accordionInfo}>
-          <View style={styles.accordionItem}>
+          {/* <View style={styles.accordionItem}>
             <Text style={opened ? styles.accordionActiveText : styles.accordionInactiveText}>{text}</Text>
-          </View>
+          </View> */}
           <Icon name={opened ? 'keyboard-arrow-down' : 'keyboard-arrow-right'} type='MaterialIcons' style={[theme.SIZE_20, theme.DARKBLUE]} />
         </View>
       </Button>

@@ -274,12 +274,7 @@ function MyRoute({ navigation }) {
               </Button>
             </View>
 
-            <View style={styles.switchInfo}>
-              <Text style={styles.switchText}>
-                {__("Are You Divert or Not")}
-              </Text>
-              <ToggleSwitch value={divert} setValue={setDivert} />
-            </View>
+            
 
             <DropDownPicker
               open={opens}
@@ -301,7 +296,14 @@ function MyRoute({ navigation }) {
                 "#00b4d8",
                 "#e9c46a",
               ]}
+              style={{zIndex:5}}
             />
+            <View style={[styles.switchInfo,{marginTop:10}]}>
+              <Text style={styles.switchText}>
+                {__("Are You Divert or Not")}
+              </Text>
+              <ToggleSwitch value={divert} setValue={setDivert} />
+            </View>
           </View>
         </View>
       </Content>
@@ -309,6 +311,7 @@ function MyRoute({ navigation }) {
       <View
         style={{
           flex: 1,
+          zIndex:-2
         }}
       >
         <MapView

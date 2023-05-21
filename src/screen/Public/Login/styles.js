@@ -21,7 +21,7 @@ export default {
   },
   connectText11: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -48,7 +48,7 @@ export default {
   },
   signUpTitle: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_30,
+    fontSize: SIZE.SIZE_20,
     color: COLOR.LIGHT,
     textAlign: "center",
   },
@@ -89,7 +89,7 @@ export default {
   formInput4: {
     width: "100%",
     fontFamily: FAMILY.REGULAR,
-    fontSize: SIZE.SIZE_30,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.DARK,
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
@@ -114,7 +114,7 @@ export default {
   },
   connectText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -122,7 +122,7 @@ export default {
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_18,
+    fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
@@ -154,7 +154,7 @@ export default {
   },
   termText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
     alignSelf: "center",
     textAlign: "center",

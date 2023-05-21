@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, Image } from "react-native";
+import { View, Image,ScrollView } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import CheckBox from "react-native-check-box";
@@ -178,6 +178,7 @@ export default function SignUp() {
                 {__("Find a easy way to transfer\nyour loads")}
               </Text>
             </View>
+            <ScrollView>
             <View>
               <PhoneInput
                 ref={phoneInput}
@@ -255,6 +256,7 @@ export default function SignUp() {
                 {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
               </Text>
             </View>
+            </ScrollView>
           </View>
         </Content>
       </View>
