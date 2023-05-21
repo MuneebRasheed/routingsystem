@@ -163,26 +163,30 @@ export default function MyTrip() {
                       </View>
 
                       <Button
-                        style={{ width: 100, marginRight: 25 }}
+                        style={styles.detailBtn}
                         onPress={() => {
                           console.log("CURRENT PAR===>", val);
                           setSelectedParcel(val);
                         }}
                       >
-                        <Text
-                          style={[
-                            styles.balanceBtnText,
-                            styles.balanceBtnText1,
-                          ]}
-                        >
-                          {__("CHAT")}
-                        </Text>
+                        <Icon
+                          name="chat"
+                          type="MaterialIcons"
+                          style={[theme.SIZE_14, theme.GREYDARK]}
+                        />
+                        <Text style={styles.detailBtnText}>{__("CHAT")}</Text>
                       </Button>
                       <Button
-                        style={{ width: 100 }}
+                        style={styles.detailBtn}
                         onPress={() => handleNavigation(val)}
                       >
-                        <Text style={styles.balanceBtnText}>Tracking</Text>
+                        <Text style={styles.detailBtnText}>Tracking</Text>
+                      </Button>
+                      <Button
+                        style={styles.cancelBtn}
+                        onPress={() => handleNavigation(val)}
+                      >
+                        <Text style={styles.cancelBtnText}>Cancel</Text>
                       </Button>
                     </View>
                   </View>

@@ -4,9 +4,13 @@ import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import CheckBox from "react-native-check-box";
 import { COLOR } from "@theme/typography";
+
 import styles from "./styles";
+
 import theme from "@theme/styles";
+
 import Header from "@component/Header";
+
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
 import { DarkStatusBar } from "@component/StatusBar";
@@ -36,17 +40,23 @@ export default function SignUp() {
   const phoneInput = useRef();
   async function logins() {
     // * USER
-    var cd = {
-      identifier: "+923074461165",
-      password: "1234",
-    };
+    // var cd = {
+    //   identifier: "+923074461166",
+    //   password: "1234",
+    // };
 
     // * DRIVER
     // var cd = {
     //   identifier: "+923074461166",
     //   password: "1234",
     // };
+
+    var cd = {
+      identifier: value,
+      password,
+    };
     console.log("PROJECT====>", cd);
+
     axios
       .post("https://testing.explorelogix.com/v1/auth/login", cd)
       .then((response) => {

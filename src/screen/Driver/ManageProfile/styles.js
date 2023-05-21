@@ -115,12 +115,29 @@ export default {
   profileBtnInfoTwo: {
     borderBottomWidth: 0,
   },
+
+  permissionContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  permissionBtn: {
+    alignSelf: "flex-end",
+    backgroundColor: COLOR.GREYVIOLET,
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
   uploadBtn: {
     alignSelf: "center",
     backgroundColor: COLOR.BLUE,
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 15,
+  },
+  uploadBtnText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_10,
+    color: COLOR.DARKBLUE,
   },
   uploadBtnText: {
     fontFamily: FAMILY.BOLD,
@@ -135,7 +152,6 @@ export default {
     paddingHorizontal: 15,
     paddingVertical: 15,
     margin: 20,
- 
   },
   saveBtnText: {
     fontFamily: FAMILY.BOLD,
@@ -196,7 +212,7 @@ export default {
   },
   /* --Profile-- */
   profileContainer: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 20,
   },
   profileContent: {
@@ -281,21 +297,32 @@ export default {
     paddingVertical: 15,
   },
   /* --permission-- */
+
   profileInputDetail: {
     marginBottom: 20,
-    paddingTop:10
+    paddingTop: 10,
+    alignItems: "center",
   },
-  profileform:{
-    flex : 1,
-    flexDirection: 'column',
-   
-    
+  profileform: {
+    flex: 1,
+    flexDirection: "column",
   },
-  
-  permissionText: {
+  permissionHeader: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.DARKBLUE,
+    fontSize: SIZE.SIZE_30,
+    color: COLOR.DARK,
+    marginBottom: 5,
+  },
+  permissionText: {
+    fontFamily: FAMILY.REGULAR,
+    fontSize: SIZE.SIZE_16,
+    color: COLOR.DARK,
+    marginBottom: 5,
+  },
+  permissionLabel: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_14,
+    color: COLOR.DARK,
     marginBottom: 5,
   },
   switchInfo: {
@@ -309,8 +336,8 @@ export default {
   },
   switchText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_12,
-    color: COLOR.SMOKEVIOLET,
+    fontSize: SIZE.SIZE_20,
+    color: COLOR.DARK,
   },
 
   /* --insurance-- */

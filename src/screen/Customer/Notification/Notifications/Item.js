@@ -24,13 +24,11 @@ export default function Item({ value }) {
         </View>
         <View style={styles.notificationDetail}>
           <Text style={styles.bookingText}>{value?.item?.body}</Text>
-          {/* <Button style={styles.deleteBtn}>
-            <Icon
-              name="delete"
-              type="AntDesign"
-              style={[theme.SIZE_20, theme.SMOKEVIOLET]}
-            />
-          </Button> */}
+          <Icon
+            name="check"
+            type="MaterialCommunityIcons"
+            style={[theme.SIZE_20, theme.SMOKEVIOLET]}
+          />
         </View>
       </View>
     </>
