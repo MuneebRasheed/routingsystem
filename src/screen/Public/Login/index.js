@@ -163,7 +163,7 @@ export default function SignUp() {
           uri: "https://cdn.pixabay.com/photo/2018/08/01/21/49/peterbilt-3578297_960_720.jpg",
         }}
         resizeMode="cover"
-        style={styles.signUpBgImg}
+        style={[styles.signUpBgImg]}
       />
       <View style={styles.signUpBgCover} />
       <View style={styles.signUpBgContainer}>
@@ -171,7 +171,7 @@ export default function SignUp() {
           <View style={styles.signUpForm}>
             <Image
               source={require("@asset/images/trucklogo.png")}
-              style={styles.signUpImg}
+              style={[styles.signUpImg,{marginTop:-20}]}
             />
             <View>
               <Text style={styles.signUpTitle}>{__("Routing System")}</Text>

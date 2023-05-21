@@ -12,7 +12,30 @@ import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
 
 export default function Item({ value }) {
-  console.log("Vaue", value);
+  // console.log("Vaue", value);
+  const TimeCalculate = () => {
+    const date1 = new Date(value?.item?.createdAt);
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString();
+    const IosFormattedString = new Date(formattedDate);
+    const seconds = Math.round((IosFormattedString - date1) / 1000);
+    const minutes =  Math.round(seconds / 60);
+    const hours = Math.round(minutes / 60);
+    const days = Math.round(hours / 24);
+    let stringss = "";
+    if (seconds < 60) {
+      stringss = seconds + "sec";
+    } else if (minutes < 60) {
+      stringss = minutes + "min";
+    } else if (hours < 24) {
+      stringss = hours + "h";
+    } else {
+      stringss = days + "d";
+    }
+
+    // console.log("Dates",stringss)
+    return stringss;
+  };
   return (
     <>
       <View style={styles.notificationContent}>
@@ -20,7 +43,7 @@ export default function Item({ value }) {
           <Text style={styles.notificationTitle}>
             {__("Notification ID")} {value.index + 1}
           </Text>
-          <Text style={styles.notificationText}>{value?.item?.createdAt}</Text>
+          <Text style={styles.notificationText}>{TimeCalculate()}</Text>
         </View>
         <View style={styles.notificationDetail}>
           <Text style={styles.bookingText}>{value?.item?.body}</Text>
