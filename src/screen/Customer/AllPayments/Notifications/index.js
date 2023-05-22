@@ -1,27 +1,26 @@
-import React ,{useEffect,useState}from 'react'
-import { FlatList, View } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { FlatList, View } from "react-native";
 
-import Item from './Item'
-import Placeholder from './Placeholder'
-import { __ } from '@utility/translation'
+import Item from "./Item";
+import Placeholder from "./Placeholder";
+import { __ } from "@utility/translation";
 // import data from '../data/notifications'
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-export default function Notification(){
+export default function Notification() {
+  const [data, setdata] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-const [data,setdata]= useState([])
-  useEffect(()=>{
-    fetchData()
-  },[])
- 
   const fetchData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
     console.log(datas);
-  
+
     const res = axios
       .get(
-        `   https://testing.explorelogix.com/v1/payment?user=${datas._id}`,
+        `   https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/payment?user=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -30,38 +29,29 @@ const [data,setdata]= useState([])
       )
       .then((data) => {
         console.log("res", data.data);
-        setdata(data.data)
-       
-        
+        setdata(data.data);
       })
       .catch((err) => {
         console.log(("error", err));
       });
   };
 
-  const renderTemplate= ()=> {
-    return <Placeholder />
-  }
+  const renderTemplate = () => {
+    return <Placeholder />;
+  };
 
- const  renderItem =(val) =>{
-  console.log("val",val.item)
-    return (
-      <Item value={val.item}
-        
+  const renderItem = (val) => {
+    console.log("val", val.item);
+    return <Item value={val.item} />;
+  };
+
+  return (
+    <>
+      <FlatList
+        data={data}
+        showsHorizontalScrollIndicator={false}
+        renderItem={renderItem}
       />
-    )
-  }
-
-
-    return (
-      <>
-        <FlatList
-          data={data}
-          showsHorizontalScrollIndicator={false}
-          renderItem={renderItem}
-        />
-      </>
-
-    )
-  }
-
+    </>
+  );
+}

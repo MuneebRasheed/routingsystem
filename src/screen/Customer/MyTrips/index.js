@@ -29,7 +29,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://testing.explorelogix.com/v1/parcel?page=1&limit=500&sort=desc&customer_id=${datas._id}`,
+        `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel?page=1&limit=500&sort=desc&customer_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,

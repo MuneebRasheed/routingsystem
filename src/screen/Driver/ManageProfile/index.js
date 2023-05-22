@@ -76,7 +76,7 @@ export default function ManageProfile({ navigation }) {
 
     const res = axios
       .get(
-        `  https://testing.explorelogix.com/v1/users/user-by-id/${datas._id}`,
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/users/user-by-id/${datas._id}`,
 
         {
           headers: {
@@ -131,7 +131,7 @@ export default function ManageProfile({ navigation }) {
   const ConnectingAccount = async (values, datas) => {
     const res = axios
       .post(
-        `  https://testing.explorelogix.com/v1/users/link-account
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/users/link-account
 
       `,
         {
@@ -198,7 +198,7 @@ export default function ManageProfile({ navigation }) {
     };
     try {
       const res = await fetch(
-        "https://testing.explorelogix.com/v1/users/update-user",
+        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/users/update-user",
         requestOptions
       );
       const result = await res.json();

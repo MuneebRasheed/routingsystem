@@ -120,11 +120,15 @@ function MyRoute({ navigation }) {
     console.log("POSTING DATA==>", cd);
 
     const res = axios
-      .post(`  https://testing.explorelogix.com/v1/routes`, cd, {
-        headers: {
-          Authorization: `Bearer ${datas.access_token}`,
-        },
-      })
+      .post(
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/routes`,
+        cd,
+        {
+          headers: {
+            Authorization: `Bearer ${datas.access_token}`,
+          },
+        }
+      )
       .then((data) => {
         console.log("res rout added", data.data);
         Support.showSuccess({
@@ -274,8 +278,6 @@ function MyRoute({ navigation }) {
               </Button>
             </View>
 
-            
-
             <DropDownPicker
               open={opens}
               value={value}
@@ -296,9 +298,9 @@ function MyRoute({ navigation }) {
                 "#00b4d8",
                 "#e9c46a",
               ]}
-              style={{zIndex:5}}
+              style={{ zIndex: 5 }}
             />
-            <View style={[styles.switchInfo,{marginTop:10}]}>
+            <View style={[styles.switchInfo, { marginTop: 10 }]}>
               <Text style={styles.switchText}>
                 {__("Are You Divert or Not")}
               </Text>
@@ -311,7 +313,7 @@ function MyRoute({ navigation }) {
       <View
         style={{
           flex: 1,
-          zIndex:-2
+          zIndex: -2,
         }}
       >
         <MapView

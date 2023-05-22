@@ -29,7 +29,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
 
     try {
       const responseOne = await axios.get(
-        `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedMemberId}`,
+        `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/chat/conversation?member=${selectedMemberId}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -58,7 +58,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
     console.log("COVERSATION ID:", convoId);
     try {
       const response = await axios.get(
-        `https://testing.explorelogix.com/v1/chat?conversationId=${convoId}&page=1&limit=200&sort=createdAt-1`,
+        `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/chat?conversationId=${convoId}&page=1&limit=200&sort=createdAt-1`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -92,7 +92,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
       if (messages.length > 0 && !conversationId) {
         console.log("IN NESTED IF====>");
         const convoResp = await axios.get(
-          `https://testing.explorelogix.com/v1/chat/conversation?member=${selectedMemberId}`,
+          `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/chat/conversation?member=${selectedMemberId}`,
           {
             headers: {
               authorization: `Bearer ${currentLoggedInUserDetails?.token}`,

@@ -25,7 +25,7 @@ export default function TransactionHistory() {
 
     const res = axios
       .post(
-        ` https://testing.explorelogix.com/v1/payment/platform-transactions?limit=100`,
+        ` https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/payment/platform-transactions?limit=100`,
         {},
         {
           headers: {
@@ -56,38 +56,48 @@ export default function TransactionHistory() {
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.settlementContainer}>
-            {data.map((val,index) => {
-              return( <View style={styles.accordionLayout}>
-                <Accordion
-                  title={"TRANSACTION ID #"+ (index+1)}
-                  text="open"
-                  style={{ backgroundColor: "rgba(92,186,71,1)" }}
-                  renderContent={() => (
-                    <View style={styles.accordionContent}>
-                      <View style={[styles.bookingItem, styles.bookingItem2]}>
-                        <Text style={styles.bookingText}>
-                          {__("Transation Amount")}
-                        </Text>
-                        <Text style={styles.bookingCost}>
-                          {__(`${val.amount}`)}
-                        </Text>
+            {data.map((val, index) => {
+              return (
+                <View style={styles.accordionLayout}>
+                  <Accordion
+                    title={"TRANSACTION ID #" + (index + 1)}
+                    text="open"
+                    style={{ backgroundColor: "rgba(92,186,71,1)" }}
+                    renderContent={() => (
+                      <View style={styles.accordionContent}>
+                        <View style={[styles.bookingItem, styles.bookingItem2]}>
+                          <Text style={styles.bookingText}>
+                            {__("Transation Amount")}
+                          </Text>
+                          <Text style={styles.bookingCost}>
+                            {__(`${val.amount}`)}
+                          </Text>
+                        </View>
+                        <View style={[styles.bookingItem, styles.bookingItem2]}>
+                          <Text style={styles.bookingText}>{__("Fee")}</Text>
+                          <Text style={styles.bookingCost}>
+                            {__(`${val.fee} CAD`)}
+                          </Text>
+                        </View>
+                        <View style={[styles.bookingItem, styles.bookingItem2]}>
+                          <Text style={styles.bookingText}>
+                            {__("Net Amount")}
+                          </Text>
+                          <Text style={styles.bookingCost}>
+                            {__(`${val.net} CAD`)}
+                          </Text>
+                        </View>
+                        <View style={styles.bookingItem}>
+                          <Text style={styles.bookingText}>{__("Status")}</Text>
+                          <Text style={styles.bookingCost}>
+                            {__(`${val.status}`)}
+                          </Text>
+                        </View>
                       </View>
-                      <View style={[styles.bookingItem, styles.bookingItem2]}>
-                        <Text style={styles.bookingText}>{__("Fee")}</Text>
-                        <Text style={styles.bookingCost}>{__(`${val.fee} CAD`)}</Text>
-                      </View>
-                      <View style={[styles.bookingItem, styles.bookingItem2]}>
-                        <Text style={styles.bookingText}>{__("Net Amount")}</Text>
-                        <Text style={styles.bookingCost}>{__(`${val.net} CAD`)}</Text>
-                      </View>
-                      <View style={styles.bookingItem}>
-                        <Text style={styles.bookingText}>{__("Status")}</Text>
-                        <Text style={styles.bookingCost}>{__(`${val.status}`)}</Text>
-                      </View>
-                    </View>
-                  )}
-                />
-              </View>)
+                    )}
+                  />
+                </View>
+              );
             })}
           </View>
         </ScrollView>

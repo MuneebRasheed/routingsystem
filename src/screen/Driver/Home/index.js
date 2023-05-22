@@ -42,7 +42,7 @@ export default function Home({ route }) {
 
     try {
       // const responseOne = await axios.post(
-      //   "https://testing.explorelogix.com/v1/bid",
+      //   "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/bid",
       //   requestPayload,
       //   {
       //     headers: {
@@ -70,7 +70,7 @@ export default function Home({ route }) {
 
     try {
       const responseOne = await axios.get(
-        `https://testing.explorelogix.com/v1/parcel/${parcelId}`,
+        `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel/${parcelId}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,

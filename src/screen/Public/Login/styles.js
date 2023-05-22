@@ -118,7 +118,6 @@ export default {
     color: COLOR.LIGHT,
     alignSelf: "center",
     letterSpacing: 0.5,
-    
   },
   connectTextLink: {
     fontFamily: FAMILY.BOLD,
@@ -161,7 +160,7 @@ export default {
   tabActive: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#493F5E",
+    backgroundColor: "green",
     borderRadius: 3,
     paddingVertical: 15,
     marginHorizontal: 5,

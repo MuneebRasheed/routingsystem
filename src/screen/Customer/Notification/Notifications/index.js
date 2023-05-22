@@ -21,7 +21,7 @@ export default function Notification() {
     console.log("NotifcationId", datas?._id);
     const res = axios
       .get(
-        `  https://testing.explorelogix.com/v1/notifications?user=${datas?._id}
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/notifications?user=${datas?._id}
         `,
         {
           headers: {

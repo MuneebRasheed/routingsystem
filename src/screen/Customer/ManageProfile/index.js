@@ -35,15 +35,12 @@ export default function ManageProfile() {
   }, []);
 
   const postData = async () => {
-   
-
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
     const formData = new FormData();
     formData.append("first_name", name);
     formData.append("avatar_file", values);
     formData.append("gender", gender);
-    
 
     console.log("FormData", formData);
 
@@ -57,7 +54,7 @@ export default function ManageProfile() {
     };
     try {
       const res = await fetch(
-        "https://testing.explorelogix.com/v1/users/update-user",
+        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/users/update-user",
         requestOptions
       );
       const result = await res.json();
@@ -65,8 +62,6 @@ export default function ManageProfile() {
     } catch (err) {
       console.log("ERROR");
     }
-
-    
   };
 
   const fetchData = async () => {
@@ -86,7 +81,7 @@ export default function ManageProfile() {
         setInformation(data.data.data);
         setName(data.data.data?.first_name);
         setGender(data.data.data?.gender);
-        setValuesHttp(data.data.data?.avatar)
+        setValuesHttp(data.data.data?.avatar);
       })
       .catch((err) => {
         console.log(("error", err));
@@ -209,7 +204,9 @@ export default function ManageProfile() {
             <View style={styles.profileBgImg}>
               <Image
                 source={{
-                  uri: valuesHttp ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                  uri:
+                    valuesHttp ||
+                    "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
                   // uri: values,
                   // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
                 }}
@@ -219,7 +216,7 @@ export default function ManageProfile() {
               <Button
                 style={styles.iconDetail}
                 onPress={() => {
-                   UploadData(setValues);
+                  UploadData(setValues);
                 }}
               >
                 <Icon

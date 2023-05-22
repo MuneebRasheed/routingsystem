@@ -7,6 +7,7 @@ import Support from "@component/Support";
 import { setLandingScreen, goBack } from "@navigation";
 import Navigator from "@navigation/screen";
 import { store, persistor } from "@store";
+import Toast from "react-native-toast-message";
 
 import { requestUserPermission } from "../helper/pushnotification_helper";
 
@@ -73,6 +74,7 @@ export default class App extends React.Component {
         >
           {this.state.loading ? null : <Navigator />}
         </PersistGate>
+        <Toast visibilityTime={1800} />
         <Support />
       </Provider>
     );

@@ -28,9 +28,7 @@ export default function MyTrip() {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    
-      submit();
-   
+    submit();
   }, [data.length]);
   useEffect(() => {
     if (isFocused) {
@@ -44,7 +42,7 @@ export default function MyTrip() {
     var datas = JSON.parse(data);
     const res = axios
       .get(
-        `  https://testing.explorelogix.com/v1/routes?page=1&limit=100
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/routes?page=1&limit=100
         `,
         {
           headers: {
@@ -67,7 +65,7 @@ export default function MyTrip() {
     var datas = JSON.parse(data);
     const res = axios
       .delete(
-        `  https://testing.explorelogix.com/v1/routes/${id}
+        `  https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/routes/${id}
         `,
         {
           headers: {
@@ -76,9 +74,11 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        setData(pre=>pre.filter(val=>{
-          return val._id!=id
-        }))
+        setData((pre) =>
+          pre.filter((val) => {
+            return val._id != id;
+          })
+        );
         alert("Deleted Succesfully");
 
         // console.log("route deleted succfully", data);

@@ -126,7 +126,7 @@ function SelectVehicle(params) {
           body: formData,
         };
         const resp = await axios.patch(
-          `https://testing.explorelogix.com/v1/parcel/${value.parcel._id}`,
+          `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel/${value.parcel._id}`,
           requestOptions.body,
           {
             headers: {
@@ -280,6 +280,9 @@ function SelectVehicle(params) {
     formData.append("length", length);
     formData.append("weight", weight);
     formData.append("parcel_type", "wood");
+    formData.append("biddingStartTime", "2023-12-06");
+    formData.append("biddingEndTime", "2023-12-06");
+    formData.append("parcel_bidding_type", "now");
 
     console.log("FormData", formData);
 
@@ -293,7 +296,7 @@ function SelectVehicle(params) {
     };
     try {
       const res = await fetch(
-        "https://testing.explorelogix.com/v1/parcel",
+        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel",
         requestOptions
       );
       const result = await res.json();

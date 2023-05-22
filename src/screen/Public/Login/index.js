@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, Image ,ScrollView} from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button } from "@component/Form";
 import CheckBox from "react-native-check-box";
@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { login, updateUser } from "../../../store/reducers/session";
 import { initilizeSocket } from "../../../store/reducers/socketReducer";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
+import { showMessage } from "../../../helper/showAlert";
 
 export default function SignUp() {
   const [isSelected, setSelection] = useState(false);
@@ -35,27 +36,36 @@ export default function SignUp() {
   async function logins() {
     // * USER
     // var cd = {
-    //   identifier: "+923074461166",
+    //   identifier: "+923074461165",
     //   password: "1234",
     // };
 
     // * DRIVER
-    var cd = {
-      identifier: "+923074461166",
-      password: "1234",
-    };
-
     // var cd = {
-    //   identifier: value,
-    //   password,
+    //   identifier: "+923074461166",
+    //   password: "1234",
     // };
-    // console.log("PROJECT====>", cd);
 
-    axios
-      .post("https://testing.explorelogix.com/v1/auth/login", cd)
+    var cd = {
+      identifier: value,
+      password,
+    };
+    // console.log("PROJECT====>", cd);
+    //4d82-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app
+    https: axios
+      .post(
+        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/auth/login",
+        cd
+      )
       .then((response) => {
         if (response.status === 201) {
-          if (isSelected && response?.data.roles[0] != "user") {
+          console.log("CURRET LOGI===>", response.data);
+
+          if (
+            tabSelected === "Driver" &&
+            response?.data.roles[0] != "user" &&
+            isSelected
+          ) {
             temp = 2;
             dispatch(login({}));
             dispatch(updateUser(response.data));
@@ -75,7 +85,11 @@ export default function SignUp() {
             });
           }
 
-          if (!isSelected && response?.data.roles[0] == "user") {
+          if (
+            tabSelected === "User" &&
+            response?.data.roles[0] == "user" &&
+            !isSelected
+          ) {
             dispatch(initilizeSocket(response.data.access_token));
             dispatch(updateUser(response.data));
             temp = 2;
@@ -95,26 +109,28 @@ export default function SignUp() {
             });
           }
           if (temp != 2) {
-            Support.showError({
-              title: __("OOPs"),
-              message: __("You cant be loginss"),
-              hideDelay: 2500,
-            });
+            // Support.showError({
+            //   title: __("OOPs"),
+            //   message: __("You cant be loginss"),
+            //   hideDelay: 2500,
+            // });
+            showMessage("error", "You cant be loginss");
           }
 
           return response.data;
         } else {
-          Support.showError({
-            title: __("OOPs"),
-            message: __("You cant be login"),
-            hideDelay: 2500,
-          });
+          // Support.showError({
+          //   title: __("OOPs"),
+          //   message: __("You cant be login"),
+          //   hideDelay: 2500,
+          // });
+          showMessage("error", "You cant be login.");
         }
       })
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://testing.explorelogix.com/v1/notifications/accept`,
+          `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",
@@ -130,11 +146,12 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("error", err, err.response);
-        Support.showError({
-          title: __("OOPs"),
-          message: __("You cant be login Server Error"),
-          hideDelay: 2500,
-        });
+        // Support.showError({
+        //   title: __("OOPs"),
+        //   message: __("You cant be login Server Error"),
+        //   hideDelay: 2500,
+        // });
+        showMessage("error", "You cant be login. Server Error");
       });
   }
 
@@ -171,7 +188,7 @@ export default function SignUp() {
           <View style={styles.signUpForm}>
             <Image
               source={require("@asset/images/trucklogo.png")}
-              style={[styles.signUpImg,{marginTop:-20}]}
+              style={[styles.signUpImg, { marginTop: -20 }]}
             />
             <View>
               <Text style={styles.signUpTitle}>{__("Routing System")}</Text>
@@ -184,8 +201,10 @@ export default function SignUp() {
                 style={
                   tabSelected === "User" ? styles.tabActive : styles.tabInactive
                 }
-                onPress={() => {setTabSelected("User")
-                setSelection(false);}}
+                onPress={() => {
+                  setTabSelected("User");
+                  setSelection(false);
+                }}
               >
                 <Text
                   style={
@@ -204,8 +223,9 @@ export default function SignUp() {
                     ? styles.tabActive
                     : styles.tabInactive
                 }
-                onPress={() => {setTabSelected("Driver")
-              
+                onPress={() => {
+                  setTabSelected("Driver");
+
                   setSelection(true);
                 }}
               >
@@ -222,68 +242,72 @@ export default function SignUp() {
             </View>
 
             <ScrollView>
-            <View>
-              <PhoneInput
-                ref={phoneInput}
-                defaultValue={value}
-                defaultCode="PK"
-                textInputStyle={{ padding: 2 }}
-                containerStyle={{ width: "100%", height: 60, borderRadius: 3 }}
-                textContainerStyle={styles.formInput4}
-                onChangeFormattedText={(text) => {
-                  setValue(text);
-                }}
-                withShadow
-                autoFocus
-              />
-
               <View>
-                <TextInput
-                  placeholder="Password"
-                  secureTextEntry={valid}
-                  value={password}
-                  onChangeText={setPassword}
-                  placeholderTextColor="rgba(0,0,0,0.7)"
-                  style={[styles.formInput3, { marginTop: 15 }]}
-                />
-
-                <Icon
-                  name={valid ? "eye-slash" : "eye"}
-                  type="FontAwesome"
-                  style={[
-                    theme.SIZE_18,
-                    theme.PRIMARY,
-                    { right: -333, bottom: 52 },
-                  ]}
-                  onPress={() => {
-                    setValid((val) => !val);
+                <PhoneInput
+                  ref={phoneInput}
+                  defaultValue={value}
+                  defaultCode="PK"
+                  textInputStyle={{ padding: 2 }}
+                  containerStyle={{
+                    width: "100%",
+                    height: 60,
+                    borderRadius: 3,
                   }}
+                  textContainerStyle={styles.formInput4}
+                  onChangeFormattedText={(text) => {
+                    setValue(text);
+                  }}
+                  withShadow
+                  autoFocus
                 />
-              </View>
-              <Button style={styles.signUpBtn} onPress={onSubmit}>
-                <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
-              </Button>
-            </View>
-            <View style={styles.signUpContent}>
-              <View>
-                <Text style={styles.connectText}>{__("OR")}</Text>
-                <Text style={styles.connectText}>
-                  {__("If you not have account ")}
-                  <Text
+
+                <View>
+                  <TextInput
+                    placeholder="Password"
+                    secureTextEntry={valid}
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholderTextColor="rgba(0,0,0,0.7)"
+                    style={[styles.formInput3, { marginTop: 15 }]}
+                  />
+
+                  <Icon
+                    name={valid ? "eye-slash" : "eye"}
+                    type="FontAwesome"
+                    style={[
+                      theme.SIZE_18,
+                      theme.PRIMARY,
+                      { right: -333, bottom: 52 },
+                    ]}
                     onPress={() => {
-                      navigateReset("PublicSignUp");
+                      setValid((val) => !val);
                     }}
-                    style={styles.connectTextLink}
-                  >
-                    {__("SIGNUP")}
+                  />
+                </View>
+                <Button style={styles.signUpBtn} onPress={onSubmit}>
+                  <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
+                </Button>
+              </View>
+              <View style={styles.signUpContent}>
+                <View>
+                  <Text style={styles.connectText}>{__("OR")}</Text>
+                  <Text style={styles.connectText}>
+                    {__("If you not have account ")}
+                    <Text
+                      onPress={() => {
+                        navigateReset("PublicSignUp");
+                      }}
+                      style={styles.connectTextLink}
+                    >
+                      {__("SIGNUP")}
+                    </Text>
                   </Text>
+                </View>
+
+                <Text style={styles.termText}>
+                  {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
                 </Text>
               </View>
-              
-              <Text style={styles.termText}>
-                {__("By Sign in I Agree to\nTerms of Use & Privacy Policy")}
-              </Text>
-            </View>
             </ScrollView>
           </View>
         </Content>
