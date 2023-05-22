@@ -55,6 +55,20 @@ export default {
     fontSize: SIZE.SIZE_12,
     color: COLOR.SMOKEVIOLET,
   },
+  saveBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLOR.GREEN,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    margin: 20,
+  },
+  saveBtnText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_12,
+    color: COLOR.LIGHT,
+  },
 
 
   /** Content */

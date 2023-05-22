@@ -56,10 +56,10 @@ export default function TransactionHistory() {
       <Content contentContainerStyle={theme.layoutDf}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.settlementContainer}>
-            {data.map((val) => {
+            {data.map((val,index) => {
               return( <View style={styles.accordionLayout}>
                 <Accordion
-                  title="BOOKING ID #X876895"
+                  title={"TRANSACTION ID #"+ (index+1)}
                   text="open"
                   style={{ backgroundColor: "rgba(92,186,71,1)" }}
                   renderContent={() => (

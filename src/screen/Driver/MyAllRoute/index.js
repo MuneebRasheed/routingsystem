@@ -26,6 +26,12 @@ export default function MyTrip() {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const isFocused = useIsFocused();
+
+  useEffect(() => {
+    
+      submit();
+   
+  }, [data.length]);
   useEffect(() => {
     if (isFocused) {
       console.log("UseEffect Call");
@@ -47,7 +53,7 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("res get all route", data.data.docs[0]);
+        // console.log("res get all route", data.data.docs[0]);
         setData(data.data.docs);
       })
       .catch((err) => {
@@ -56,7 +62,7 @@ export default function MyTrip() {
   }
 
   async function onDelete(id) {
-    console.log("Deleted is call");
+    // console.log("Deleted is call");
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
     const res = axios
@@ -70,7 +76,12 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("route deleted succfully", data);
+        setData(pre=>pre.filter(val=>{
+          return val._id!=id
+        }))
+        alert("Deleted Succesfully");
+
+        // console.log("route deleted succfully", data);
       })
       .catch((err) => {
         console.log(("error", err));

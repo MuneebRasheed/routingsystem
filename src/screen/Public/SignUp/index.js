@@ -33,6 +33,7 @@ export default function SignUp() {
     navigateReset("PublicVerification");
   };
   const [isSelected, setSelection] = useState(false);
+  const [tabSelected, setTabSelected] = useState("User");
   const [valid, setValid] = useState(false);
   const [eye1, setEye1] = useState(true);
   const [eye2, setEye2] = useState(true);
@@ -56,18 +57,62 @@ export default function SignUp() {
       />
       <View style={styles.signUpBgCover} />
       <View style={styles.signUpBgContainer}>
+        <ScrollView>
         <Content contentContainerStyle={theme.layoutDf}>
           <View style={styles.signUpForm}>
             <Image
               source={require("@asset/images/trucklogo.png")}
-              style={styles.signUpImg}
+              style={[styles.signUpImg,{marginTop:0}]}
             />
-            <View>
+            <View style={{marginBottom:-35}}>
               <Text style={styles.signUpTitle}>{__("Routing System")}</Text>
               <Text style={styles.signUpText}>
                 {__("Find a easy way to transfer\nyour loads")}
               </Text>
             </View>
+            <View style={styles.tabInfo}>
+              <Button
+                style={
+                  tabSelected === "User" ? styles.tabActive : styles.tabInactive
+                }
+                onPress={() => {setTabSelected("User")
+                setSelection(false);}}
+              >
+                <Text
+                  style={
+                    tabSelected === "User"
+                      ? styles.tabTextActive
+                      : styles.tabTextInactive
+                  }
+                >
+                  {__("User")}
+                </Text>
+              </Button>
+
+              <Button
+                style={
+                  tabSelected === "Driver"
+                    ? styles.tabActive
+                    : styles.tabInactive
+                }
+                onPress={() => {setTabSelected("Driver")
+              
+                  setSelection(true);
+                }}
+              >
+                <Text
+                  style={
+                    tabSelected === "Driver"
+                      ? styles.tabTextActive
+                      : styles.tabTextInactive
+                  }
+                >
+                  {__("Driver")}
+                </Text>
+              </Button>
+            </View>
+
+
             <Formik
               initialValues={{
                 firstName: "",
@@ -91,6 +136,7 @@ export default function SignUp() {
                 //  }
                 console.log(values, valid);
               }}
+        
             >
               {({
                 values,
@@ -102,7 +148,7 @@ export default function SignUp() {
                 setFieldValue,
                 handleSubmit,
               }) => (
-                <View>
+                <View       style={{marginTop:20}}>
                   <View style={[styles.formRow, { marginTop: -20 }]}>
                     <View style={{ width: "48%" }}>
                       <TextInput
@@ -316,7 +362,7 @@ export default function SignUp() {
                 </Text>
               </View>
 
-              <View
+              {/* <View
                 style={{
                   justifyContent: "center",
                   marginLeft: "24%",
@@ -331,13 +377,14 @@ export default function SignUp() {
                   isChecked={isSelected}
                   rightText={"SIGN UP AS DRIVER"}
                 />
-              </View>
+              </View> */}
               <Text style={styles.termText}>
                 {__("By Sign up I Agree to\nTerms of Use & Privacy Policy")}
               </Text>
             </View>
           </View>
         </Content>
+        </ScrollView>
       </View>
     </Container>
   );

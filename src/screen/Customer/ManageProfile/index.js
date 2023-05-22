@@ -12,6 +12,7 @@ import Header from "@component/Header";
 import Support from "@component/Support";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { navigate, navigateReset } from "@navigation";
+import DocumentPicker from "react-native-document-picker";
 import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
@@ -22,6 +23,7 @@ export default function ManageProfile() {
   const [name, setName] = useState();
   const [gender, setGender] = useState();
   const [values, setValues] = useState();
+  const [valuesHttp, setValuesHttp] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [CardInput, setCardInput] = useState({});
   const [tabSelected, setTabSelected] = useState("profile");
@@ -33,30 +35,38 @@ export default function ManageProfile() {
   }, []);
 
   const postData = async () => {
+   
+
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+    const formData = new FormData();
+    formData.append("first_name", name);
+    formData.append("avatar_file", values);
+    formData.append("gender", gender);
+    
 
-    const res = axios
-      .put(
-        ` http://18.232.210.115:3000/v1/users/update-user`,
-        {
-          first_name: name,
-          gender: gender,
-          avatar_file: values,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${datas.access_token}`,
-          },
-        }
-      )
-      .then((data) => {
-        console.log("res", data.data);
-      })
-      .catch((err) => {
-        console.log(("error", err));
-      });
+    console.log("FormData", formData);
+
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${datas.access_token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    };
+    try {
+      const res = await fetch(
+        "https://testing.explorelogix.com/v1/users/update-user",
+        requestOptions
+      );
+      const result = await res.json();
+      console.log("RESULT", result);
+    } catch (err) {
+      console.log("ERROR");
+    }
+
+    
   };
 
   const fetchData = async () => {
@@ -76,6 +86,7 @@ export default function ManageProfile() {
         setInformation(data.data.data);
         setName(data.data.data?.first_name);
         setGender(data.data.data?.gender);
+        setValuesHttp(data.data.data?.avatar)
       })
       .catch((err) => {
         console.log(("error", err));
@@ -174,6 +185,22 @@ export default function ManageProfile() {
     }
   }
 
+  const UploadData = async (setPath) => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setPath(res[0]);
+      console.log(res[0]);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
+    }
+  };
+
   function renderProfile() {
     return (
       <View style={styles.profileContainer}>
@@ -182,8 +209,8 @@ export default function ManageProfile() {
             <View style={styles.profileBgImg}>
               <Image
                 source={{
-                  // uri: "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
-                  uri: values,
+                  uri: valuesHttp ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                  // uri: values,
                   // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
                 }}
                 // source={require(values)}
@@ -192,14 +219,7 @@ export default function ManageProfile() {
               <Button
                 style={styles.iconDetail}
                 onPress={() => {
-                  ImagePicker.openPicker({
-                    width: 300,
-                    height: 400,
-                    cropping: true,
-                  }).then((image) => {
-                    setValues(image.path);
-                    console.log(image);
-                  });
+                   UploadData(setValues);
                 }}
               >
                 <Icon
