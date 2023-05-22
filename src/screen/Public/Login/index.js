@@ -46,16 +46,16 @@ export default function SignUp() {
     // };
 
     // * DRIVER
-    // var cd = {
-    //   identifier: "+923074461166",
-    //   password: "1234",
-    // };
-
     var cd = {
-      identifier: value,
-      password,
+      identifier: "+923074461166",
+      password: "1234",
     };
-    console.log("PROJECT====>", cd);
+
+    // var cd = {
+    //   identifier: value,
+    //   password,
+    // };
+    // console.log("PROJECT====>", cd);
 
     axios
       .post("https://testing.explorelogix.com/v1/auth/login", cd)
