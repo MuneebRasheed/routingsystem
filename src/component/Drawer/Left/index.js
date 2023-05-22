@@ -30,7 +30,7 @@ function MenuLeft() {
             closeDrawer();
 
             if (menu.route === "PublicIntro") {
-              socket.disconnect();
+              socket?.disconnect();
               dispatch(logout());
               dispatch(removeSocketConnection());
               // alert("Logout successfully!");

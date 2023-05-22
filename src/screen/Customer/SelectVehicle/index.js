@@ -126,7 +126,7 @@ function SelectVehicle(params) {
           body: formData,
         };
         const resp = await axios.patch(
-          `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel/${value.parcel._id}`,
+          `https://26e4-45-117-104-39.ngrok-free.app/v1/parcel/${value.parcel._id}`,
           requestOptions.body,
           {
             headers: {
@@ -296,7 +296,7 @@ function SelectVehicle(params) {
     };
     try {
       const res = await fetch(
-        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/parcel",
+        "https://26e4-45-117-104-39.ngrok-free.app/v1/parcel",
         requestOptions
       );
       const result = await res.json();

@@ -20,7 +20,7 @@ export default function Notification() {
 
     const res = axios
       .get(
-        `   https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/payment?user=${datas._id}`,
+        `   https://26e4-45-117-104-39.ngrok-free.app/v1/payment?user=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,

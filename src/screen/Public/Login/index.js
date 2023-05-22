@@ -33,6 +33,17 @@ export default function SignUp() {
   const dispatch = useDispatch();
   var temp = 0;
   const phoneInput = useRef();
+
+
+  const method=async(response)=>{
+    navigateReset("PublicHome");
+
+    await AsyncStorage.setItem(
+      "response",
+      JSON.stringify(response?.data)
+    );
+    await AsyncStorage.setItem("role", "User");
+  }
   async function logins() {
     // * USER
     // var cd = {
@@ -50,11 +61,10 @@ export default function SignUp() {
       identifier: value,
       password,
     };
-    // console.log("PROJECT====>", cd);
-    //4d82-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app
+  
     https: axios
       .post(
-        "https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/auth/login",
+        "https://26e4-45-117-104-39.ngrok-free.app/v1/auth/login",
         cd
       )
       .then((response) => {
@@ -70,19 +80,8 @@ export default function SignUp() {
             dispatch(login({}));
             dispatch(updateUser(response.data));
             dispatch(initilizeSocket(response.data.access_token));
-            Support.showSuccess({
-              title: __("Thank You"),
-              message: __("Your phone number can be verified Login as driver"),
-              onHide: async () => {
-                navigateReset("PublicHome");
-                await AsyncStorage.setItem(
-                  "response",
-                  JSON.stringify(response?.data)
-                );
-                await AsyncStorage.setItem("role", "User");
-              },
-              hideDelay: 2500,
-            });
+            method(response)
+            showMessage("success", "Login Succefully");
           }
 
           if (
@@ -93,27 +92,12 @@ export default function SignUp() {
             dispatch(initilizeSocket(response.data.access_token));
             dispatch(updateUser(response.data));
             temp = 2;
-            Support.showSuccess({
-              title: __("Thank You"),
-              message: __("Your phone number can be verified Login as user"),
-              onHide: async () => {
-                navigateReset("PublicHome");
-
-                await AsyncStorage.setItem(
-                  "response",
-                  JSON.stringify(response?.data)
-                );
-                await AsyncStorage.setItem("role", "User");
-              },
-              hideDelay: 2500,
-            });
+            method(response)
+            showMessage("success", "Login Succefully");
+           
           }
           if (temp != 2) {
-            // Support.showError({
-            //   title: __("OOPs"),
-            //   message: __("You cant be loginss"),
-            //   hideDelay: 2500,
-            // });
+           
             showMessage("error", "You cant be loginss");
           }
 
@@ -130,7 +114,7 @@ export default function SignUp() {
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/notifications/accept`,
+          `https://26e4-45-117-104-39.ngrok-free.app/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",
@@ -151,7 +135,7 @@ export default function SignUp() {
         //   message: __("You cant be login Server Error"),
         //   hideDelay: 2500,
         // });
-        showMessage("error", "You cant be login. Server Error");
+        // showMessage("error", "You cant be login. Server Error");
       });
   }
 

@@ -25,7 +25,7 @@ export default function TransactionHistory() {
 
     const res = axios
       .post(
-        ` https://5624-2400-adc5-425-a000-38cd-4f9a-ccdb-4dbf.ngrok-free.app/v1/payment/platform-transactions?limit=100`,
+        ` https://26e4-45-117-104-39.ngrok-free.app/v1/payment/platform-transactions?limit=100`,
         {},
         {
           headers: {
