@@ -25,7 +25,7 @@ export default function TransactionHistory() {
 
     const res = axios
       .post(
-        ` https://26e4-45-117-104-39.ngrok-free.app/v1/payment/platform-transactions?limit=100`,
+        ` https://staging.mettlesol.com/v1/payment/platform-transactions?limit=100`,
         {},
         {
           headers: {

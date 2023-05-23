@@ -40,10 +40,10 @@ export default function MyTrip() {
   async function submit() {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas._id)
+    console.log(datas._id);
     const res = axios
       .get(
-        `  https://26e4-45-117-104-39.ngrok-free.app/v1/routes?rider=${datas._id}&page=1&limit=1234
+        `  https://staging.mettlesol.com/v1/routes?rider=${datas._id}&page=1&limit=1234
         `,
         {
           headers: {
@@ -66,7 +66,7 @@ export default function MyTrip() {
     var datas = JSON.parse(data);
     const res = axios
       .delete(
-        `  https://26e4-45-117-104-39.ngrok-free.app/v1/routes/${id}
+        `  https://staging.mettlesol.com/v1/routes/${id}
         `,
         {
           headers: {

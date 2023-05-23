@@ -60,7 +60,7 @@ export default function BookingComplete(props) {
     };
     try {
       const res = await fetch(
-        "https://26e4-45-117-104-39.ngrok-free.app/v1/complaints",
+        "https://staging.mettlesol.com/v1/complaints",
         requestOptions
       );
       const result = await res.json();

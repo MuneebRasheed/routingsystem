@@ -63,31 +63,22 @@ export default function SignUp() {
       address: "lahore",
       ID: "string",
       gender: values.gender,
-      role: [tabSelected=="User"?"user":"rider"],
+      role: [tabSelected == "User" ? "user" : "rider"],
     };
 
-    const method=async(response)=>{
-      await AsyncStorage.setItem(
-        "response",
-        JSON.stringify(response?.data)
-      );
+    const method = async (response) => {
+      await AsyncStorage.setItem("response", JSON.stringify(response?.data));
       await AsyncStorage.setItem("role", "User");
       navigateReset("PublicHome");
-  
-      
-    }
+    };
 
     https: axios
-      .post("https://26e4-45-117-104-39.ngrok-free.app/v1/auth/signup", cd)
+      .post("https://staging.mettlesol.com/v1/auth/signup", cd)
       .then((response) => {
         if (response.status === 201) {
           console.log("CURRET LOGI===>", response.data);
 
-          if (
-            tabSelected === "Driver" &&
-          
-            isSelected
-          ) {
+          if (tabSelected === "Driver" && isSelected) {
             temp = 2;
             dispatch(login({}));
             dispatch(updateUser(response.data));
@@ -96,11 +87,7 @@ export default function SignUp() {
             showMessage("success", "Login Succefully");
           }
 
-          if (
-            tabSelected === "User" &&
-      
-            !isSelected
-          ) {
+          if (tabSelected === "User" && !isSelected) {
             dispatch(initilizeSocket(response.data.access_token));
             dispatch(updateUser(response.data));
             temp = 2;
@@ -113,14 +100,13 @@ export default function SignUp() {
 
           return response.data;
         } else {
-         
           showMessage("error", "You cant be login.");
         }
       })
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://26e4-45-117-104-39.ngrok-free.app/v1/notifications/accept`,
+          `https://staging.mettlesol.com/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",
@@ -136,7 +122,7 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("error", err, err.response);
-        
+
         showMessage("error", "You cant be login. Server Error");
       });
   }
@@ -231,7 +217,7 @@ export default function SignUp() {
                   //  navigateReset("PublicVerification",{values});
                   // setValue(values)
                   console.log(values, valid);
-                  logins(values)
+                  logins(values);
                 }}
               >
                 {({

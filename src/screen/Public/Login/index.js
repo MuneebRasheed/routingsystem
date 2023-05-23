@@ -34,39 +34,32 @@ export default function SignUp() {
   var temp = 0;
   const phoneInput = useRef();
 
-
-  const method=async(response)=>{
+  const method = async (response) => {
     navigateReset("PublicHome");
 
-    await AsyncStorage.setItem(
-      "response",
-      JSON.stringify(response?.data)
-    );
+    await AsyncStorage.setItem("response", JSON.stringify(response?.data));
     await AsyncStorage.setItem("role", "User");
-  }
+  };
   async function logins() {
     // * USER
-    // var cd = {
-    //   identifier: "+923074461165",
-    //   password: "1234",
-    // };
+    var cd = {
+      identifier: "+923074461165",
+      password: "1234",
+    };
 
     // * DRIVER
+    var cd = {
+      identifier: "+923074461166",
+      password: "1234",
+    };
+
     // var cd = {
-    //   identifier: "+923074461166",
-    //   password: "1234",
+    //   identifier: value,
+    //   password,
     // };
 
-    var cd = {
-      identifier: value,
-      password,
-    };
-  
-    https: axios
-      .post(
-        "https://26e4-45-117-104-39.ngrok-free.app/v1/auth/login",
-        cd
-      )
+    axios
+      .post("https://staging.mettlesol.com/v1/auth/login", cd)
       .then((response) => {
         if (response.status === 201) {
           console.log("CURRET LOGI===>", response.data);
@@ -80,7 +73,7 @@ export default function SignUp() {
             dispatch(login({}));
             dispatch(updateUser(response.data));
             dispatch(initilizeSocket(response.data.access_token));
-            method(response)
+            method(response);
             showMessage("success", "Login Succefully");
           }
 
@@ -92,12 +85,10 @@ export default function SignUp() {
             dispatch(initilizeSocket(response.data.access_token));
             dispatch(updateUser(response.data));
             temp = 2;
-            method(response)
+            method(response);
             showMessage("success", "Login Succefully");
-           
           }
           if (temp != 2) {
-           
             showMessage("error", "You cant be loginss");
           }
 
@@ -114,7 +105,7 @@ export default function SignUp() {
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://26e4-45-117-104-39.ngrok-free.app/v1/notifications/accept`,
+          `https://staging.mettlesol.com/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",

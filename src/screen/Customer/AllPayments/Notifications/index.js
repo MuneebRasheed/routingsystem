@@ -19,14 +19,11 @@ export default function Notification() {
     console.log(datas);
 
     const res = axios
-      .get(
-        `   https://26e4-45-117-104-39.ngrok-free.app/v1/payment?user=${datas._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${datas.access_token}`,
-          },
-        }
-      )
+      .get(`   https://staging.mettlesol.com/v1/payment?user=${datas._id}`, {
+        headers: {
+          Authorization: `Bearer ${datas.access_token}`,
+        },
+      })
       .then((data) => {
         console.log("res", data.data);
         setdata(data.data);

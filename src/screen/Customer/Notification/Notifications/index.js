@@ -21,7 +21,7 @@ export default function Notification() {
     console.log("NotifcationId", datas?._id);
     const res = axios
       .get(
-        `  https://26e4-45-117-104-39.ngrok-free.app/v1/notifications?user=${datas?._id}
+        `  https://staging.mettlesol.com/v1/notifications?user=${datas?._id}
         `,
         {
           headers: {

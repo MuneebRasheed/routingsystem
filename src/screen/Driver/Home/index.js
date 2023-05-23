@@ -42,7 +42,7 @@ export default function Home({ route }) {
 
     try {
       // const responseOne = await axios.post(
-      //   "https://26e4-45-117-104-39.ngrok-free.app/v1/bid",
+      //   "https://staging.mettlesol.com/v1/bid",
       //   requestPayload,
       //   {
       //     headers: {
@@ -70,7 +70,7 @@ export default function Home({ route }) {
 
     try {
       const responseOne = await axios.get(
-        `https://26e4-45-117-104-39.ngrok-free.app/v1/parcel/${parcelId}`,
+        `https://staging.mettlesol.com/v1/parcel/${parcelId}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,

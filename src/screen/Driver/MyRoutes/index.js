@@ -120,15 +120,11 @@ function MyRoute({ navigation }) {
     console.log("POSTING DATA==>", cd);
 
     const res = axios
-      .post(
-        `  https://26e4-45-117-104-39.ngrok-free.app/v1/routes`,
-        cd,
-        {
-          headers: {
-            Authorization: `Bearer ${datas.access_token}`,
-          },
-        }
-      )
+      .post(`  https://staging.mettlesol.com/v1/routes`, cd, {
+        headers: {
+          Authorization: `Bearer ${datas.access_token}`,
+        },
+      })
       .then((data) => {
         console.log("res rout added", data.data);
         Support.showSuccess({

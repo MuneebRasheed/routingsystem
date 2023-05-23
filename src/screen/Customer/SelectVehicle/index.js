@@ -126,7 +126,7 @@ function SelectVehicle(params) {
           body: formData,
         };
         const resp = await axios.patch(
-          `https://26e4-45-117-104-39.ngrok-free.app/v1/parcel/${value.parcel._id}`,
+          `https://staging.mettlesol.com/v1/parcel/${value.parcel._id}`,
           requestOptions.body,
           {
             headers: {
@@ -296,7 +296,7 @@ function SelectVehicle(params) {
     };
     try {
       const res = await fetch(
-        "https://26e4-45-117-104-39.ngrok-free.app/v1/parcel",
+        "https://staging.mettlesol.com/v1/parcel",
         requestOptions
       );
       const result = await res.json();

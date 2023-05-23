@@ -31,7 +31,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://26e4-45-117-104-39.ngrok-free.app/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
+        `https://staging.mettlesol.com/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -82,7 +82,7 @@ export default function MyTrip() {
           {data.map((val, index) => {
             return (
               <Accordion
-                title={`TRIPS ID : ${index + 1}`}
+                title={`TRIPS ID : ${index + 1} ${val?._id}`}
                 text="open"
                 key={index}
                 renderContent={() => (
