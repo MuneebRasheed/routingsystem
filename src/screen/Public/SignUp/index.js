@@ -67,13 +67,14 @@ export default function SignUp() {
     };
 
     const method=async(response)=>{
-      navigateReset("PublicHome");
-  
       await AsyncStorage.setItem(
         "response",
         JSON.stringify(response?.data)
       );
       await AsyncStorage.setItem("role", "User");
+      navigateReset("PublicHome");
+  
+      
     }
 
     https: axios

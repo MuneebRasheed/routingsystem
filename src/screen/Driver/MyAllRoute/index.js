@@ -40,9 +40,10 @@ export default function MyTrip() {
   async function submit() {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
+    console.log(datas._id)
     const res = axios
       .get(
-        `  https://26e4-45-117-104-39.ngrok-free.app/v1/routes?page=1&limit=100
+        `  https://26e4-45-117-104-39.ngrok-free.app/v1/routes?rider=${datas._id}&page=1&limit=1234
         `,
         {
           headers: {
