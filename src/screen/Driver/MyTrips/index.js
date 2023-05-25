@@ -146,23 +146,21 @@ export default function MyTrip() {
                     </View>
 
                     <View style={styles.btnInfo}>
-                      <View style={styles.detailTag}>
-                        <Button
-                          style={styles.detailBtn}
-                          onPress={() => {
-                            navigate("DriverBookingComplete");
-                          }}
-                        >
-                          <Icon
-                            name="search"
-                            type="Feather"
-                            style={[theme.SIZE_14, theme.GREYDARK]}
-                          />
-                          <Text style={styles.detailBtnText}>
-                            {__("DETAILS")}
-                          </Text>
-                        </Button>
-                      </View>
+                      <Button
+                        style={styles.detailBtn}
+                        onPress={() => {
+                          navigate("DriverBookingComplete");
+                        }}
+                      >
+                        <Icon
+                          name="search"
+                          type="Feather"
+                          style={[theme.SIZE_14, theme.GREYDARK]}
+                        />
+                        <Text style={styles.detailBtnText}>
+                          {__("DETAILS")}
+                        </Text>
+                      </Button>
 
                       <Button
                         style={[
@@ -199,12 +197,12 @@ export default function MyTrip() {
                           Tracking
                         </Text>
                       </Button>
-                      <Button
+                      {/* <Button
                         style={styles.cancelBtn}
                         onPress={() => alert("Ride Cancel")}
                       >
                         <Text style={styles.cancelBtnText}>Cancel</Text>
-                      </Button>
+                      </Button> */}
                     </View>
                   </View>
                 )}
