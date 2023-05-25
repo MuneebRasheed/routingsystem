@@ -24,7 +24,7 @@ export default function Payment() {
 
     const res = axios
       .post(
-        ` https://routeon.mettlesol.com/v1/payment`,
+        `https://routeon.mettlesol.com/v1/payment`,
         {
           card_number: CardInput.values.number,
           card_exp_month: CardInput.values.expiry.split("/")[0],
@@ -43,7 +43,7 @@ export default function Payment() {
         makePaymentByUser(data.data.payment_method);
       })
       .catch((err) => {
-        console.log(("error", err));
+        console.log(("error", err.response));
       });
   };
 
@@ -72,7 +72,7 @@ export default function Payment() {
         console.log("result to make payment", data.data);
       })
       .catch((err) => {
-        console.log("error", err);
+        console.log("error", err.response);
       });
   };
   async function onSubmit() {
@@ -121,7 +121,7 @@ export default function Payment() {
       <View style={styles.paymentHeader}>
         <Text style={styles.paymentHeaderTitle}>{__("PAYMENT")}</Text>
         <Text style={styles.paymentHeaderText}>
-          {__("CHOOSE YOUR PAYMENT")}
+          {__("CHOOSE YOUR PAYMENT")} hello world
         </Text>
       </View>
       <Container>

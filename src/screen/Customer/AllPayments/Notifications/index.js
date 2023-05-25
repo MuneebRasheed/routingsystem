@@ -7,8 +7,12 @@ import { __ } from "@utility/translation";
 // import data from '../data/notifications'
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { showMessage } from "../../../../helper/showAlert";
+import { useSelector } from "react-redux";
+
 export default function Notification() {
   const [data, setdata] = useState([]);
+  const { user } = useSelector((state) => state.session);
   useEffect(() => {
     fetchData();
   }, []);
@@ -25,7 +29,7 @@ export default function Notification() {
         },
       })
       .then((data) => {
-        console.log("res", data.data);
+        console.log("res", data.data.length);
         setdata(data.data);
       })
       .catch((err) => {
@@ -38,10 +42,35 @@ export default function Notification() {
   };
 
   const renderItem = (val) => {
-    console.log("val", val.item);
-    return <Item value={val.item} />;
+    return (
+      <Item
+        value={val.item}
+        deletePaymentRecordById={deletePaymentRecordById}
+      />
+    );
   };
 
+  const deletePaymentRecordById = async (paymentId) => {
+    try {
+      const res = await axios.delete(
+        `https://routeon.mettlesol.com/v1/payment/${paymentId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        showMessage("success", "Payment method removed successfully");
+        const filteredPayments = data.filter((d) => d._id !== paymentId);
+        setdata(filteredPayments);
+      }
+      console.log("MY RESPONSE", res.status);
+    } catch (err) {
+      showMessage("error", "Something went wrong!");
+    }
+  };
   return (
     <>
       <FlatList
