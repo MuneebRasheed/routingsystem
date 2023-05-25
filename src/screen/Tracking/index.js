@@ -78,7 +78,7 @@ const TrackingScreen = ({ route }) => {
       console.log("CURRENT POSITION=====>", res);
 
       socket.emit("tracking", {
-        to: route?.params?.data.customer_id,
+        to: route?.params?.data.customer_id?._id,
         location: `${res.latitude}, ${res.longitude}`,
         parcel: route?.params?.data._id,
         riderId: route?.params?.data.rider_id,

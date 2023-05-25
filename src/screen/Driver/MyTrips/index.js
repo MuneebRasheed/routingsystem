@@ -31,7 +31,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
+        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id&sort=desc&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -139,7 +139,7 @@ export default function MyTrip() {
                         {__("DRIVER NAME")}
                       </Text>
                       <Text style={styles.bookingText}>
-                        {__("DANIEL VETORI")}
+                        {__(`${val?.customer_id?.first_name}`)}
                       </Text>
                     </View>
                     <View style={styles.bookingInfo}>
@@ -153,7 +153,7 @@ export default function MyTrip() {
                         {__("CALL DRIVER")}
                       </Text>
                       <Text style={styles.bookingText}>
-                        {__("@ 64576348763")}
+                        {__(`${val?.customer_id?.phone}`)}
                       </Text>
                     </View>
 
@@ -164,7 +164,9 @@ export default function MyTrip() {
                           navigate("CustomerBookingComplete");
                         }}
                       >
-                        <Text style={styles.openBtnText}>{__("OPEN")}</Text>
+                        <Text style={styles.openBtnText}>
+                          {__(`${val?.status}`)}
+                        </Text>
                       </Button>
                     </View>
 
@@ -172,7 +174,7 @@ export default function MyTrip() {
                       <Button
                         style={styles.detailBtn}
                         onPress={() => {
-                          navigate("DriverBookingComplete");
+                          navigate("DriverBookingComplete", { data: val });
                         }}
                       >
                         <Icon
