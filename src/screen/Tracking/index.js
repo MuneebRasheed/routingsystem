@@ -26,18 +26,18 @@ const TrackingScreen = ({ route }) => {
   const markerRef = useRef(null);
   const [state, setState] = useState({
     pickupCords: route?.params?.data?.from_location
-      ? JSON.parse(route?.params?.data?.from_location)
+      ? route?.params?.data?.from_location
       : {},
     droplocationCords: route?.params?.data?.to_location
-      ? JSON.parse(route?.params?.data?.to_location)
+      ? route?.params?.data?.to_location
       : {},
     isLoading: false,
     coordinate: new AnimatedRegion({
       latitude: route?.params?.data?.from_location
-        ? JSON.parse(route?.params?.data?.from_location).latitude
+        ? route?.params?.data?.from_location.latitude
         : "",
       longitude: route?.params?.data?.from_location
-        ? JSON.parse(route?.params?.data?.from_location).longitude
+        ? route?.params?.data?.from_location.longitude
         : "",
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,

@@ -66,17 +66,39 @@ export default function MyTrip() {
   }, []);
 
   const handleNavigation = (val) => {
-    alert("navigation");
+    const [from_location_latitude, from_location_longitude] =
+      val.from_location_cor.split(",");
+
+    const [to_location_latitude, to_location_longitude] =
+      val.to_location_cor.split(",");
+
+    const from_location = {
+      latitude: +from_location_latitude.trim(),
+      longitude: +from_location_longitude.trim(),
+    };
+
+    const to_location = {
+      latitude: +to_location_latitude.trim(),
+      longitude: +to_location_longitude.trim(),
+    };
+
+    const customObject = {
+      ...val,
+      from_location,
+      to_location,
+    };
+
     navigate("CustomerDriverTracking", {
-      data: val,
+      data: customObject,
     });
   };
+
+  console.log("trips===>", data);
 
   function renderAll() {
     return (
       <View>
         <View style={styles.accordionLayout}>
-          
           {data?.map((val, index) => {
             return (
               <Accordion
@@ -98,11 +120,15 @@ export default function MyTrip() {
                         {__("PICK UP FROM")}
                       </Text>
 
-                      <Text style={styles.bookingText}>{`${val?.to_location}`}</Text>
+                      <Text
+                        style={styles.bookingText}
+                      >{`${val?.to_location}`}</Text>
                     </View>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                      <Text style={styles.bookingText}>{`${val?.from_location}`}</Text>
+                      <Text
+                        style={styles.bookingText}
+                      >{`${val?.from_location}`}</Text>
                     </View>
 
                     <View style={styles.bookingInfo}>
@@ -135,26 +161,28 @@ export default function MyTrip() {
                           navigate("CustomerBookingComplete");
                         }}
                       >
-                        <Text style={styles.openBtnText}>{__(`${val?.status}`)}</Text>
+                        <Text style={styles.openBtnText}>
+                          {__(`${val?.status}`)}
+                        </Text>
                       </Button>
                     </View>
 
                     <View style={styles.btnInfo}>
-                    <Button
-                          style={styles.detailBtn}
-                          onPress={() => {
-                            navigate("DriverBookingComplete",{data:val});
-                          }}
-                        >
-                          <Icon
-                            name="search"
-                            type="Feather"
-                            style={[theme.SIZE_14, theme.GREYDARK]}
-                          />
-                          <Text style={styles.detailBtnText}>
-                            {__("DETAILS")}
-                          </Text>
-                        </Button>
+                      <Button
+                        style={styles.detailBtn}
+                        onPress={() => {
+                          navigate("DriverBookingComplete", { data: val });
+                        }}
+                      >
+                        <Icon
+                          name="search"
+                          type="Feather"
+                          style={[theme.SIZE_14, theme.GREYDARK]}
+                        />
+                        <Text style={styles.detailBtnText}>
+                          {__("DETAILS")}
+                        </Text>
+                      </Button>
 
                       <Button
                         style={[
@@ -188,7 +216,7 @@ export default function MyTrip() {
                         <Text
                           style={[styles.detailBtnText, { color: "white" }]}
                         >
-                          Tracking
+                          Tracking123
                         </Text>
                       </Button>
                     </View>
