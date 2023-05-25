@@ -46,6 +46,7 @@ export default function Home() {
     heading: 0,
   });
 
+  // const { pickupCords, droplocationCords, coordinate, heading } = state;
   const { pickupCords, droplocationCords, coordinate, heading } = state;
 
   const getCurrentLocation = async () => {
@@ -140,7 +141,14 @@ export default function Home() {
                 let coords = {
                   latitude: details?.geometry?.location?.lat,
                   longitude: details?.geometry?.location?.lng,
+                  locationName: data?.structured_formatting?.main_text,
                 };
+                console.log(
+                  "Details",
+                  data?.structured_formatting?.main_text,
+
+                  coords
+                );
 
                 setState({
                   ...state,
@@ -185,6 +193,7 @@ export default function Home() {
                 let coords = {
                   latitude: details?.geometry?.location?.lat,
                   longitude: details?.geometry?.location?.lng,
+                  locationName: data?.structured_formatting?.main_text,
                 };
 
                 setState({

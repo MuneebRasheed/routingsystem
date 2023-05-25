@@ -18,7 +18,7 @@ import { DarkStatusBar } from "@component/StatusBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DocumentPicker from "react-native-document-picker";
 export default function BookingComplete(props) {
-  console.log(props.route.params.val);
+  console.log("data",props.route.params);
   const val = props.route.params.val;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);

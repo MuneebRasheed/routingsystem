@@ -29,7 +29,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&sort=desc&customer_id=${datas._id}`,
+        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id&sort=desc&customer_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -75,10 +75,8 @@ export default function MyTrip() {
     return (
       <View>
         <View style={styles.accordionLayout}>
-          {/* <Button onPress={() => socket.disconnect()}>
-            <Text style={styles.openBtnText}>Disconnect</Text>
-          </Button> */}
-          {data.map((val, index) => {
+          
+          {data?.map((val, index) => {
             return (
               <Accordion
                 title={`TRIPS ID ${index + 1} ${val?._id}`}
@@ -99,11 +97,11 @@ export default function MyTrip() {
                         {__("PICK UP FROM")}
                       </Text>
 
-                      <Text style={styles.bookingText}>{`${val?.to}`}</Text>
+                      <Text style={styles.bookingText}>{`${val?.to_location}`}</Text>
                     </View>
                     <View style={styles.bookingInfo}>
                       <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                      <Text style={styles.bookingText}>{`${val?.from}`}</Text>
+                      <Text style={styles.bookingText}>{`${val?.from_location}`}</Text>
                     </View>
 
                     <View style={styles.bookingInfo}>
@@ -136,7 +134,7 @@ export default function MyTrip() {
                           navigate("CustomerBookingComplete");
                         }}
                       >
-                        <Text style={styles.openBtnText}>{__("OPEN")}</Text>
+                        <Text style={styles.openBtnText}>{__(`${val?.status}`)}</Text>
                       </Button>
                     </View>
 
@@ -145,7 +143,7 @@ export default function MyTrip() {
                         <Button
                           style={styles.detailBtn}
                           onPress={() => {
-                            navigate("DriverBookingComplete");
+                            navigate("DriverBookingComplete",{data:val});
                           }}
                         >
                           <Icon

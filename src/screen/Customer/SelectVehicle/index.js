@@ -20,6 +20,7 @@ import messaging from "@react-native-firebase/messaging";
 import { DarkStatusBar } from "@component/StatusBar";
 import { connect } from "react-redux";
 import DatePicker from "react-native-date-picker";
+import { showMessage } from "../../../helper/showAlert";
 // import ImagePicker from "react-native-image-crop-picker";
 // import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 
@@ -263,8 +264,8 @@ function SelectVehicle(params) {
 
     const formData = new FormData();
     formData.append("files", images);
-    formData.append("from_location", JSON.stringify(params.route.params.form));
-    formData.append("to_location", JSON.stringify(params.route.params.to));
+    formData.append("from_location", JSON.stringify(params.route.params.form.locationName));
+    formData.append("to_location", JSON.stringify(params.route.params.to.locationName));
     formData.append(
       "from_location_cor",
       `${params.route.params.form.latitude}, ${params.route.params.form.longitude}`
@@ -300,10 +301,12 @@ function SelectVehicle(params) {
         requestOptions
       );
       const result = await res.json();
-      alert("Parcel Created Successfully!. Wait for drivers to bid");
+      showMessage("success", "Parcel Created Successfully!. Wait for drivers to bid");
+      // alert();
       console.log("RESULT", result);
     } catch (err) {
-      console.log("ERROR");
+      showMessage("error", "Error in Created parcel");
+      // console.log("ERROR");
     }
   };
 

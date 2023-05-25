@@ -17,7 +17,8 @@ import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
-// import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
+import { showMessage } from "../../../helper/showAlert";
+
 export default function ManageProfile() {
   const [information, setInformation] = useState({});
   const [name, setName] = useState();
@@ -32,6 +33,7 @@ export default function ManageProfile() {
 
   useEffect(() => {
     fetchData();
+    console.log("Muneeb");
   }, []);
 
   const postData = async () => {
@@ -59,7 +61,9 @@ export default function ManageProfile() {
       );
       const result = await res.json();
       console.log("RESULT", result);
+      showMessage("success", "Profile is Updated SuccessFully");
     } catch (err) {
+      showMessage("Error", "Error While Updating Profile");
       console.log("ERROR");
     }
   };
@@ -67,10 +71,10 @@ export default function ManageProfile() {
   const fetchData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+    // console.log(datas);
 
     const res = axios
-      .get(`  http://18.232.210.115:3000/v1/users/user-by-id/${datas._id}`, {
+      .get(`  https://routeon.mettlesol.com/v1/users/user-by-id/${datas._id}`, {
         headers: {
           Authorization: `Bearer ${datas.access_token}`,
         },
@@ -84,7 +88,7 @@ export default function ManageProfile() {
         setValuesHttp(data.data.data?.avatar);
       })
       .catch((err) => {
-        console.log(("error", err));
+        console.log(("errors", err));
       });
   };
 
@@ -205,7 +209,7 @@ export default function ManageProfile() {
               <Image
                 source={{
                   uri:
-                    valuesHttp ||
+                  values?.uri|| valuesHttp || 
                     "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
                   // uri: values,
                   // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,

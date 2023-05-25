@@ -17,8 +17,8 @@ import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 
 export default function BookingComplete(props) {
-  console.log(props.route.params.val);
-  const val = props.route.params.val;
+  console.log("Value",props.route.params.data);
+  const val = props.route.params.data;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [images, setImages] = useState([]);
@@ -55,10 +55,10 @@ export default function BookingComplete(props) {
             <View style={styles.bookingContent}>
               <View style={styles.bookingDetail}>
                 <Text style={styles.bookingIdText}>
-                  {__(`BOOKING ID:${val?._id}`)}
+                  {__(`BOOKING ID : ${(val?._id).substr(0,15)}`)}
                 </Text>
                 <Button>
-                  <Text style={styles.completeBtn}>{__("Complete")}</Text>
+                  <Text style={styles.completeBtn}>{__(`${val?.status}`)}</Text>
                 </Button>
               </View>
               <View style={styles.bookingItem}>
@@ -81,7 +81,7 @@ export default function BookingComplete(props) {
                 <Text style={styles.bookingTitle}>{__("DELIVERY FLOOR")}</Text>
                 <Text style={styles.bookingText}>{__("1")}</Text>
               </View> */}
-              <View style={styles.bookingItem}>
+              {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>
                   {__("UNLOADING MANPOWER")}
                 </Text>
@@ -94,7 +94,7 @@ export default function BookingComplete(props) {
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("TOTAL PACKAGES")}</Text>
                 <Text style={styles.bookingText}>{__("5")}</Text>
-              </View>
+              </View> */}
             </View>
             <View style={styles.documentInfo}>
               <Text style={styles.documentText}>{__("PACKAGES")}</Text>
@@ -113,16 +113,16 @@ export default function BookingComplete(props) {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTextDark}>
-                  {__("5.2 ft * 4/7 ft* 2 ft")}
+                {__(`${val?.length} ft * ${val?.weight}ft*1 ft`)}
                 </Text>
                 <Text style={styles.bookingTextDark}>{__("10 Nos")}</Text>
               </View>
-              <View style={styles.bookingItem}>
+              {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTextDark}>
                   {__("TOTAL PACKAGES")}
                 </Text>
                 <Text style={styles.bookingTextDark}>{__("30 Nos")}</Text>
-              </View>
+              </View> */}
             </View>
             <View style={styles.driverDetail}>
               <View style={styles.driverInfo}>
@@ -139,7 +139,7 @@ export default function BookingComplete(props) {
                 >
                   <Image
                     source={{
-                      uri: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                      uri:val?.customer_id?.avatar|| "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                     }}
                     style={styles.driverImg}
                   />
@@ -149,12 +149,12 @@ export default function BookingComplete(props) {
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("NAME")}</Text>
                   <Text style={styles.bookingTextDark}>
-                    {__("DANI VETORI")}
+                    {__(`${val?.customer_id?.first_name}`)}
                   </Text>
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("Parcel ID")}</Text>
-                  <Text style={styles.bookingTextDark}>{__("NY 6746")}</Text>
+                  <Text style={styles.bookingTextDark}>{__(`${(val?._id).substr(0,15)}`)}</Text>
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("RATING")}</Text>
