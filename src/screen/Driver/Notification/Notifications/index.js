@@ -21,7 +21,7 @@ export default function Notification() {
     console.log("NotifcationId", datas?._id);
     const res = axios
       .get(
-        `  https://staging.mettlesol.com/v1/notifications?user=${datas?._id}
+        `  https://routeon.mettlesol.com/v1/notifications?user=${datas?._id}
         `,
         {
           headers: {

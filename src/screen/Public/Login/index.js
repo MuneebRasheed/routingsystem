@@ -42,24 +42,24 @@ export default function SignUp() {
   };
   async function logins() {
     // * USER
-    var cd = {
-      identifier: "+923074461165",
-      password: "1234",
-    };
-
-    // * DRIVER
-    var cd = {
-      identifier: "+923074461166",
-      password: "1234",
-    };
-
     // var cd = {
-    //   identifier: value,
-    //   password,
+    //   identifier: "+923074461165",
+    //   password: "1234",
     // };
 
+    // // * DRIVER
+    // var cd = {
+    //   identifier: "+923074461166",
+    //   password: "1234",
+    // };
+
+    var cd = {
+      identifier: value,
+      password,
+    };
+
     axios
-      .post("https://staging.mettlesol.com/v1/auth/login", cd)
+      .post("https://routeon.mettlesol.com/v1/auth/login", cd)
       .then((response) => {
         if (response.status === 201) {
           console.log("CURRET LOGI===>", response.data);
@@ -105,7 +105,7 @@ export default function SignUp() {
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://staging.mettlesol.com/v1/notifications/accept`,
+          `https://routeon.mettlesol.com/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",

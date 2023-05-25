@@ -73,7 +73,7 @@ export default function SignUp() {
     };
 
     https: axios
-      .post("https://staging.mettlesol.com/v1/auth/signup", cd)
+      .post("https://routeon.mettlesol.com/v1/auth/signup", cd)
       .then((response) => {
         if (response.status === 201) {
           console.log("CURRET LOGI===>", response.data);
@@ -106,7 +106,7 @@ export default function SignUp() {
       .then(async (userDetails) => {
         const firebaseToken = await getFCMToken();
         const notificationResponse = await axios.post(
-          `https://staging.mettlesol.com/v1/notifications/accept`,
+          `https://routeon.mettlesol.com/v1/notifications/accept`,
           {
             notification_token: firebaseToken,
             device_type: "mobile_device",

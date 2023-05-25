@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { io } from "socket.io-client";
 
 // const ENDPOINT = "http://192.168.18.254:3000";
-const ENDPOINT = "https://staging.mettlesol.com";
+const ENDPOINT = "https://routeon.mettlesol.com";
 
 const initialState = {
   socket: "",

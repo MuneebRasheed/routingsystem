@@ -86,8 +86,10 @@ export default function Home() {
       Object.values(state.droplocationCords).length > 0
     ) {
       navigate("CustomerSelectVehicle", {
-        to: state.pickupCords,
-        form: state.droplocationCords,
+        // to: state.pickupCords,
+        // form: state.droplocationCords,
+        to: state.droplocationCords,
+        form: state.pickupCords,
       });
     } else {
       alert("Please Fill the Start and Destination Location");

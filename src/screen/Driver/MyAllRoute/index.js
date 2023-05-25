@@ -43,7 +43,7 @@ export default function MyTrip() {
     console.log(datas._id);
     const res = axios
       .get(
-        `  https://staging.mettlesol.com/v1/routes?rider=${datas._id}&page=1&limit=1234
+        `  https://routeon.mettlesol.com/v1/routes?rider=${datas._id}&page=1&limit=1234
         `,
         {
           headers: {
@@ -66,7 +66,7 @@ export default function MyTrip() {
     var datas = JSON.parse(data);
     const res = axios
       .delete(
-        `  https://staging.mettlesol.com/v1/routes/${id}
+        `  https://routeon.mettlesol.com/v1/routes/${id}
         `,
         {
           headers: {

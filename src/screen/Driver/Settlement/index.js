@@ -25,7 +25,7 @@ export default function TransactionHistory() {
 
     const res = axios
       .post(
-        ` https://staging.mettlesol.com/v1/payment/platform-transactions?limit=100`,
+        ` https://routeon.mettlesol.com/v1/payment/platform-transactions?limit=100`,
         {},
         {
           headers: {

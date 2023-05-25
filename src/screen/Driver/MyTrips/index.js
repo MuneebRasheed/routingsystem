@@ -31,7 +31,7 @@ export default function MyTrip() {
     //  6412f0faf432ae2f820d4f6d
     const res = axios
       .get(
-        `https://staging.mettlesol.com/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
+        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&sort=desc&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -39,6 +39,7 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
+        console.log("TRIPS", data.data.docs);
         setData(data.data.docs);
       })
       .catch((err) => {

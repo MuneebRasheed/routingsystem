@@ -42,7 +42,7 @@ export default function Home({ route }) {
 
     try {
       // const responseOne = await axios.post(
-      //   "https://staging.mettlesol.com/v1/bid",
+      //   "https://routeon.mettlesol.com/v1/bid",
       //   requestPayload,
       //   {
       //     headers: {
@@ -70,7 +70,7 @@ export default function Home({ route }) {
 
     try {
       const responseOne = await axios.get(
-        `https://staging.mettlesol.com/v1/parcel/${parcelId}`,
+        `https://routeon.mettlesol.com/v1/parcel/${parcelId}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,

@@ -24,7 +24,7 @@ export default function Payment() {
 
     const res = axios
       .post(
-        ` https://staging.mettlesol.com/v1/payment`,
+        ` https://routeon.mettlesol.com/v1/payment`,
         {
           card_number: CardInput.values.number,
           card_exp_month: CardInput.values.expiry.split("/")[0],
@@ -55,7 +55,7 @@ export default function Payment() {
 
     axios
       .post(
-        ` https://staging.mettlesol.com/v1/payment/transfer`,
+        ` https://routeon.mettlesol.com/v1/payment/transfer`,
         {
           paymentMethod: method,
           currency: "cad",

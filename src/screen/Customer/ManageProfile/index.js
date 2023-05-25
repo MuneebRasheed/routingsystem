@@ -54,7 +54,7 @@ export default function ManageProfile() {
     };
     try {
       const res = await fetch(
-        "https://staging.mettlesol.com/v1/users/update-user",
+        "https://routeon.mettlesol.com/v1/users/update-user",
         requestOptions
       );
       const result = await res.json();

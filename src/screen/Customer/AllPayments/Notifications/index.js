@@ -19,7 +19,7 @@ export default function Notification() {
     console.log(datas);
 
     const res = axios
-      .get(`   https://staging.mettlesol.com/v1/payment?user=${datas._id}`, {
+      .get(`   https://routeon.mettlesol.com/v1/payment?user=${datas._id}`, {
         headers: {
           Authorization: `Bearer ${datas.access_token}`,
         },

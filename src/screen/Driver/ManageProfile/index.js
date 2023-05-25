@@ -76,7 +76,7 @@ export default function ManageProfile({ navigation }) {
 
     const res = axios
       .get(
-        `  https://staging.mettlesol.com/v1/users/user-by-id/${datas._id}`,
+        `  https://routeon.mettlesol.com/v1/users/user-by-id/${datas._id}`,
 
         {
           headers: {
@@ -131,7 +131,7 @@ export default function ManageProfile({ navigation }) {
   const ConnectingAccount = async (values, datas) => {
     const res = axios
       .post(
-        `  https://staging.mettlesol.com/v1/users/link-account
+        `  https://routeon.mettlesol.com/v1/users/link-account
 
       `,
         {
@@ -198,7 +198,7 @@ export default function ManageProfile({ navigation }) {
     };
     try {
       const res = await fetch(
-        "https://staging.mettlesol.com/v1/users/update-user",
+        "https://routeon.mettlesol.com/v1/users/update-user",
         requestOptions
       );
       const result = await res.json();

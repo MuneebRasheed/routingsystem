@@ -34,7 +34,7 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
 
     try {
       const responseOne = await axios.get(
-        `https://staging.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
+        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -63,7 +63,7 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
     console.log("COVERSATION ID:", convoId);
     try {
       const response = await axios.get(
-        `https://staging.mettlesol.com/v1/chat?conversationId=${convoId}&page=1&limit=200&sort=createdAt-1`,
+        `https://routeon.mettlesol.com/v1/chat?conversationId=${convoId}&page=1&limit=200&sort=createdAt-1`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -97,7 +97,7 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
       if (messages.length > 0 && !conversationId) {
         console.log("IN NESTED IF====>");
         const convoResp = await axios.get(
-          `https://staging.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
+          `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
           {
             headers: {
               authorization: `Bearer ${currentLoggedInUserDetails?.token}`,

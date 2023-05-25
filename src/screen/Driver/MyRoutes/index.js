@@ -120,7 +120,7 @@ function MyRoute({ navigation }) {
     console.log("POSTING DATA==>", cd);
 
     const res = axios
-      .post(`  https://staging.mettlesol.com/v1/routes`, cd, {
+      .post(`  https://routeon.mettlesol.com/v1/routes`, cd, {
         headers: {
           Authorization: `Bearer ${datas.access_token}`,
         },
