@@ -59,10 +59,10 @@ export default function ManageProfile({ navigation }) {
     }
   };
   useEffect(() => {
-    if (isEnabled) {
+   
       fetchData();
-      ConnectingAccount();
-    }
+      
+    
   }, [isEnabled]);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function ManageProfile({ navigation }) {
   const getData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+    // console.log(datas);
 
     const res = axios
       .get(
@@ -102,11 +102,11 @@ export default function ManageProfile({ navigation }) {
   const fetchData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas);
+    console.log("datas");
 
     const res = axios
       .post(
-        `  http://18.232.210.115:3000/v1/users/connect-account
+        `  https://routeon.mettlesol.com/v1/users/connect-account
       `,
         {
           type: "express",
@@ -129,6 +129,7 @@ export default function ManageProfile({ navigation }) {
   };
 
   const ConnectingAccount = async (values, datas) => {
+    console.log("datas.access",datas)
     const res = axios
       .post(
         `  https://routeon.mettlesol.com/v1/users/link-account
@@ -142,7 +143,7 @@ export default function ManageProfile({ navigation }) {
         },
         {
           headers: {
-            Authorization: `Bearer ${datas.access_token}`,
+            Authorization: `Bearer ${datas?.access_token}`,
           },
         }
       )
@@ -423,7 +424,7 @@ export default function ManageProfile({ navigation }) {
     );
   }
 
-  console.log("uRLVALUE", urlValue);
+  // console.log("uRLVALUE", urlValue);
   function renderPermission() {
     return (
       <View style={styles.profileContainer}>

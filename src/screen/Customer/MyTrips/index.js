@@ -110,7 +110,7 @@ export default function MyTrip() {
                         {__("DRIVER NAME")}
                       </Text>
                       <Text style={styles.bookingText}>
-                        {__("DANIEL VETORI")}
+                        {__(`${val?.customer_id?.first_name}`)}
                       </Text>
                     </View>
                     <View style={styles.bookingInfo}>
@@ -143,7 +143,7 @@ export default function MyTrip() {
                     <Button
                           style={styles.detailBtn}
                           onPress={() => {
-                            navigate("DriverBookingComplete",{data:val});
+                            navigate("CustomerBookingComplete",{data:val});
                           }}
                         >
                           <Icon
