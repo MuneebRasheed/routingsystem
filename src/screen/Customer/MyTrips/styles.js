@@ -10,9 +10,7 @@ export default {
     paddingBottom: 20,
   },
   balanceBtnText1: {
-  
     backgroundColor: COLOR.GREEN,
-    
   },
   myTripHeaderTitle: {
     fontFamily: FAMILY.BOLD,
@@ -156,9 +154,9 @@ export default {
     alignSelf: "flex-start",
     backgroundColor: COLOR.SMOKELIGHT,
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    marginRight: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginRight: 10,
   },
   detailBtnText: {
     fontFamily: FAMILY.BOLD,

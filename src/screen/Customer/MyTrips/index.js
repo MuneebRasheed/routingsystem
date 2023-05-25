@@ -6,6 +6,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Modal from "react-native-modalbox";
 import Accordion from "./Accordion";
+import { COLOR } from "@theme/typography";
 
 import styles from "./styles";
 import theme from "@theme/styles";
@@ -139,8 +140,7 @@ export default function MyTrip() {
                     </View>
 
                     <View style={styles.btnInfo}>
-                      <View style={styles.detailTag}>
-                        <Button
+                    <Button
                           style={styles.detailBtn}
                           onPress={() => {
                             navigate("DriverBookingComplete",{data:val});
@@ -155,29 +155,41 @@ export default function MyTrip() {
                             {__("DETAILS")}
                           </Text>
                         </Button>
-                      </View>
 
                       <Button
-                        style={{ width: 100, marginRight: 25 }}
+                        style={[
+                          styles.detailBtn,
+                          ,
+                          { backgroundColor: COLOR.BLUE },
+                        ]}
                         onPress={() => {
-                          console.log("CURRENT PARCEL==>", val);
+                          console.log("CURRENT PAR===>", val);
                           setSelectedParcel(val);
                         }}
                       >
+                        <Icon
+                          name="chat"
+                          type="MaterialIcons"
+                          style={[theme.SIZE_14, theme.LIGHT]}
+                        />
                         <Text
-                          style={[
-                            styles.balanceBtnText,
-                            styles.balanceBtnText1,
-                          ]}
+                          style={[styles.detailBtnText, { color: COLOR.LIGHT }]}
                         >
                           {__("CHAT")}
                         </Text>
                       </Button>
                       <Button
-                        style={{ width: 100 }}
+                        style={[
+                          styles.detailBtn,
+                          { backgroundColor: COLOR.GREEN },
+                        ]}
                         onPress={() => handleNavigation(val)}
                       >
-                        <Text style={styles.balanceBtnText}>Tracking</Text>
+                        <Text
+                          style={[styles.detailBtnText, { color: "white" }]}
+                        >
+                          Tracking
+                        </Text>
                       </Button>
                     </View>
                   </View>
