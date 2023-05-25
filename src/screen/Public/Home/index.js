@@ -114,7 +114,7 @@ export default function Home() {
       <Header leftType="menu" title={"TRUCKIE"} />
       <Content>
         <View style={styles.homeContainer}>
-          {/* <View style={styles.formRow}>
+          <View style={styles.formRow}>
             <GooglePlacesAutocomplete
               placeholder="Pickup"
               textInputProps={{
@@ -204,7 +204,7 @@ export default function Home() {
               fetchDetails={true}
               enablePoweredByContainer={false}
             />
-          </View> */}
+          </View>
           <View style={styles.mMap}>
             <MapView
               ref={mapRef}
