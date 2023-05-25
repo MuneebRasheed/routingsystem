@@ -31,7 +31,7 @@ export default {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: 15,
   },
   tabActive: {
     flex: 1,
@@ -39,8 +39,8 @@ export default {
     alignItems: "center",
     backgroundColor: COLOR.BLUE,
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: 6,
+    paddingVertical: 12,
     margin: 5,
   },
   tabInactive: {
@@ -49,8 +49,8 @@ export default {
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,0.2)",
     borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: 6,
+    paddingVertical: 12 ,
     margin: 5,
   },
   tabActiveText: {
@@ -75,7 +75,7 @@ export default {
     justifyContent: "space-between",
     backgroundColor: COLOR.LIGHT,
     borderRadius: 5,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     marginTop: 10,
   },
   accordionTabText: {
