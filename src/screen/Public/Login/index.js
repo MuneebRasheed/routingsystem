@@ -267,7 +267,7 @@ export default function SignUp() {
                 <View>
                   <Text style={styles.connectText}>{__("OR")}</Text>
                   <Text style={styles.connectText}>
-                    {__("If you not have account ")}
+                    {__("If you don't have an account ")}
                     <Text
                       onPress={() => {
                         navigateReset("PublicSignUp");

@@ -236,5 +236,6 @@ export default {
     textAlign: "center",
     paddingTop: 2,
     lineHeight: 20,
+    marginTop: 20,
   },
 };

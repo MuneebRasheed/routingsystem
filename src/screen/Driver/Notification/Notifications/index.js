@@ -30,7 +30,7 @@ export default function Notification() {
         }
       )
       .then((data) => {
-        console.log("get notification", data?.data?.docs);
+        console.log("get notification driver", data?.data?.docs);
         setNotification(data?.data?.docs);
       })
       .catch((err) => {

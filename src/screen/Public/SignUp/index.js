@@ -28,8 +28,13 @@ export default function SignUp() {
     lastName: Yup.string().required("Required"),
     gender: Yup.string().required("Please Select the gender"),
     phonenum: Yup.string().required("Please Enter Your Mobile Number"),
-    password: Yup.string().required("Please Enter Your Password"),
-    newPassword: Yup.string().required("Please Enter Your Confirm Password"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+    newPassword: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Passwords must match"
+    ),
   });
   const phoneInput = useRef();
   const [value, setValue] = useState("");
@@ -66,17 +71,23 @@ export default function SignUp() {
       role: [tabSelected == "User" ? "user" : "rider"],
     };
 
+    console.log("HELLO WORLD", cd);
+
     const method = async (response) => {
       await AsyncStorage.setItem("response", JSON.stringify(response?.data));
       await AsyncStorage.setItem("role", "User");
       navigateReset("PublicHome");
     };
 
-    https: axios
+    axios
       .post("https://routeon.mettlesol.com/v1/auth/signup", cd)
       .then((response) => {
         if (response.status === 201) {
-          console.log("CURRET LOGI===>", response.data);
+          console.log("CURRET LOGI===>", response);
+
+          if (response?.data?.status === 500) {
+            return showMessage("error", "Duplicate account exists");
+          }
 
           if (tabSelected === "Driver" && isSelected) {
             temp = 2;
@@ -84,7 +95,7 @@ export default function SignUp() {
             dispatch(updateUser(response.data));
             dispatch(initilizeSocket(response.data.access_token));
             method(response);
-            showMessage("success", "Login Succefully");
+            showMessage("success", "Signup Successfully");
           }
 
           if (tabSelected === "User" && !isSelected) {
@@ -92,15 +103,15 @@ export default function SignUp() {
             dispatch(updateUser(response.data));
             temp = 2;
             method(response);
-            showMessage("success", "Login Succefully");
+            showMessage("success", "Signup Successfully");
           }
           if (temp != 2) {
-            showMessage("error", "You cant be loginss");
+            showMessage("error", "Something went wrong");
           }
 
           return response.data;
         } else {
-          showMessage("error", "You cant be login.");
+          showMessage("error", "Something went wrong");
         }
       })
       .then(async (userDetails) => {
@@ -121,9 +132,9 @@ export default function SignUp() {
         console.log("CURRENT USER YAY!!! ===>", notificationResponse.data);
       })
       .catch((err) => {
-        console.log("error", err, err.response);
+        console.log("error", err.response.data);
 
-        showMessage("error", "You cant be login. Server Error");
+        showMessage("error", err?.response?.data?.message[0]);
       });
   }
 
