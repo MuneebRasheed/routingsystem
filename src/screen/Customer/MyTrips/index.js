@@ -102,7 +102,7 @@ export default function MyTrip() {
           {data?.map((val, index) => {
             return (
               <Accordion
-                title={`TRIPS ID ${index + 1} ${val?._id}`}
+                title={`TRIPS ID ${index + 1}`}
                 // text="open"
                 key={index}
                 renderContent={() => (
@@ -235,11 +235,11 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           {data.map((val, index) => {
-            if (val.status == "pending") {
+            if (val.status == "in_progress") {
               return (
                 <Accordion
-                  title={`TRIP ID ${index + 1}`}
-                  text="open"
+                  title={`TRIPS ID ${index + 1}`}
+                  // text="open"
                   key={index}
                   renderContent={() => (
                     <View style={styles.accordionContent}>
@@ -247,9 +247,7 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>
                           {__("TRIP COST")}
                         </Text>
-                        <Text style={styles.bookingText}>
-                          {__(`${val?.fare} USD`)}
-                        </Text>
+                        <Text style={styles.bookingText}>{val?.fare}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
@@ -261,11 +259,16 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>
                           {__("PICK UP FROM")}
                         </Text>
-                        <Text style={styles.bookingText}>{`${val?.from}`}</Text>
+
+                        <Text
+                          style={styles.bookingText}
+                        >{`${val?.from_location}`}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                        <Text style={styles.bookingText}>{`${val?.to}`}</Text>
+                        <Text
+                          style={styles.bookingText}
+                        >{`${val?.to_location}`}</Text>
                       </View>
 
                       <View style={styles.bookingInfo}>
@@ -273,7 +276,7 @@ export default function MyTrip() {
                           {__("DRIVER NAME")}
                         </Text>
                         <Text style={styles.bookingText}>
-                          {__("DANIEL VETORI")}
+                          {__(`${val?.customer_id?.first_name}`)}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>
@@ -298,30 +301,65 @@ export default function MyTrip() {
                             navigate("CustomerBookingComplete");
                           }}
                         >
-                          <Text style={styles.openBtnText}>{__("OPEN")}</Text>
+                          <Text style={styles.openBtnText}>
+                            {__(`${val?.status}`)}
+                          </Text>
                         </Button>
                       </View>
+
                       <View style={styles.btnInfo}>
-                        <View style={styles.detailTag}>
-                          <Button
-                            style={styles.detailBtn}
-                            onPress={() => {
-                              navigate("CustomerBookingComplete", { val });
-                            }}
+                        <Button
+                          style={styles.detailBtn}
+                          onPress={() => {
+                            navigate("CustomerBookingComplete", { data: val });
+                          }}
+                        >
+                          <Icon
+                            name="search"
+                            type="Feather"
+                            style={[theme.SIZE_14, theme.GREYDARK]}
+                          />
+                          <Text style={styles.detailBtnText}>
+                            {__("DETAILS")}
+                          </Text>
+                        </Button>
+
+                        <Button
+                          style={[
+                            styles.detailBtn,
+                            ,
+                            { backgroundColor: COLOR.BLUE },
+                          ]}
+                          onPress={() => {
+                            console.log("CURRENT PAR===>", val);
+                            setSelectedParcel(val);
+                          }}
+                        >
+                          <Icon
+                            name="chat"
+                            type="MaterialIcons"
+                            style={[theme.SIZE_14, theme.LIGHT]}
+                          />
+                          <Text
+                            style={[
+                              styles.detailBtnText,
+                              { color: COLOR.LIGHT },
+                            ]}
                           >
-                            <Icon
-                              name="search"
-                              type="Feather"
-                              style={[theme.SIZE_14, theme.GREYDARK]}
-                            />
-                            <Text style={styles.detailBtnText}>
-                              {__("DETAILS")}
-                            </Text>
-                          </Button>
-                        </View>
-                        <Button style={styles.balanceBtn} onPress={() => {}}>
-                          <Text style={styles.balanceBtnText}>
                             {__("CHAT")}
+                          </Text>
+                        </Button>
+                        <Button
+                          style={[
+                            styles.detailBtn,
+                            { backgroundColor: COLOR.GREEN },
+                          ]}
+                          onPress={() => handleNavigation(val)}
+                        >
+                          <Text
+                            style={[styles.detailBtnText, { color: "white" }]}
+                          >
+                            Tracking
                           </Text>
                         </Button>
                       </View>
@@ -339,7 +377,143 @@ export default function MyTrip() {
   function renderCompleted() {
     return (
       <View>
-        <View style={styles.accordionLayout}></View>
+        <View style={styles.accordionLayout}>
+          {data.map((val, index) => {
+            if (val.status == "completed") {
+              return (
+                <Accordion
+                  title={`TRIPS ID ${index + 1}`}
+                  // text="open"
+                  key={index}
+                  renderContent={() => (
+                    <View style={styles.accordionContent}>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>
+                          {__("TRIP COST")}
+                        </Text>
+                        <Text style={styles.bookingText}>{val?.fare}</Text>
+                      </View>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
+                        <Text style={styles.bookingDetail}>
+                          {__(val?.time)}
+                        </Text>
+                      </View>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>
+                          {__("PICK UP FROM")}
+                        </Text>
+
+                        <Text
+                          style={styles.bookingText}
+                        >{`${val?.from_location}`}</Text>
+                      </View>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
+                        <Text
+                          style={styles.bookingText}
+                        >{`${val?.to_location}`}</Text>
+                      </View>
+
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>
+                          {__("DRIVER NAME")}
+                        </Text>
+                        <Text style={styles.bookingText}>
+                          {__(`${val?.customer_id?.first_name}`)}
+                        </Text>
+                      </View>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>
+                          {__("VEHICLE NUMBER")}
+                        </Text>
+                        <Text style={styles.bookingText}>{__("NY 47568")}</Text>
+                      </View>
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>
+                          {__("CALL DRIVER")}
+                        </Text>
+                        <Text style={styles.bookingText}>
+                          {__("@ 64576348763")}
+                        </Text>
+                      </View>
+
+                      <View style={styles.bookingInfo}>
+                        <Text style={styles.bookingTitle}>{__("STATUS")}</Text>
+                        <Button
+                          onPress={() => {
+                            navigate("CustomerBookingComplete");
+                          }}
+                        >
+                          <Text style={styles.openBtnText}>
+                            {__(`${val?.status}`)}
+                          </Text>
+                        </Button>
+                      </View>
+
+                      <View style={styles.btnInfo}>
+                        <Button
+                          style={styles.detailBtn}
+                          onPress={() => {
+                            navigate("CustomerBookingComplete", { data: val });
+                          }}
+                        >
+                          <Icon
+                            name="search"
+                            type="Feather"
+                            style={[theme.SIZE_14, theme.GREYDARK]}
+                          />
+                          <Text style={styles.detailBtnText}>
+                            {__("DETAILS")}
+                          </Text>
+                        </Button>
+
+                        <Button
+                          style={[
+                            styles.detailBtn,
+                            ,
+                            { backgroundColor: COLOR.BLUE },
+                          ]}
+                          onPress={() => {
+                            console.log("CURRENT PAR===>", val);
+                            setSelectedParcel(val);
+                          }}
+                        >
+                          <Icon
+                            name="chat"
+                            type="MaterialIcons"
+                            style={[theme.SIZE_14, theme.LIGHT]}
+                          />
+                          <Text
+                            style={[
+                              styles.detailBtnText,
+                              { color: COLOR.LIGHT },
+                            ]}
+                          >
+                            {__("CHAT")}
+                          </Text>
+                        </Button>
+                        <Button
+                          style={[
+                            styles.detailBtn,
+                            { backgroundColor: COLOR.GREEN },
+                          ]}
+                          onPress={() => handleNavigation(val)}
+                        >
+                          <Text
+                            style={[styles.detailBtnText, { color: "white" }]}
+                          >
+                            Tracking
+                          </Text>
+                        </Button>
+                      </View>
+                    </View>
+                  )}
+                />
+              );
+            }
+          })}
+        </View>
       </View>
     );
   }

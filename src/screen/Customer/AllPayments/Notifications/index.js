@@ -29,7 +29,7 @@ export default function Notification() {
         },
       })
       .then((data) => {
-        console.log("res", data.data.length);
+        console.log("res", data.data);
         setdata(data.data);
       })
       .catch((err) => {
