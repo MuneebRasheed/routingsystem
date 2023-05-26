@@ -28,13 +28,13 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
   const getConversationId = async (userInfo) => {
     console.log("UUUUU =>", selectedParcel);
     const selectedMemberId =
-      userInfo._id.toString() === selectedParcel.customer_id.toString()
+      userInfo._id.toString() === selectedParcel.customer_id?._id.toString()
         ? selectedParcel.rider_id
-        : selectedParcel.customer_id;
+        : selectedParcel.customer_id?._id;
 
     try {
       const responseOne = await axios.get(
-        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
+        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -80,9 +80,9 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
   const sendMessage = async () => {
     const selectedMemberId =
       currentLoggedInUserDetails._id.toString() ===
-      selectedParcel.customer_id.toString()
+      selectedParcel.customer_id?._id.toString()
         ? selectedParcel.rider_id
-        : selectedParcel.customer_id;
+        : selectedParcel.customer_id?._id;
 
     let sendMsg = {
       to: selectedMemberId,

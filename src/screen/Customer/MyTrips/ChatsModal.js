@@ -23,13 +23,17 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
   const getConversationId = async (userInfo) => {
     console.log(currentLoggedInUserDetails);
     const selectedMemberId =
-      userInfo._id.toString() === selectedParcel.customer_id.toString()
+      userInfo._id.toString() === selectedParcel.customer_id?._id.toString()
         ? selectedParcel.rider_id
-        : selectedParcel.customer_id;
+        : selectedParcel.customer_id?._id;
 
     try {
+      console.log(
+        "CURRENT URL===>",
+        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`
+      );
       const responseOne = await axios.get(
-        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}`,
+        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -50,7 +54,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
         setMessages(responseTwo?.data?.docs || []);
       }
     } catch (err) {
-      console.log("ERROR IN GET CONVERSATION ID", err.response.data);
+      console.log("ERROR IN GET CONVERSATION ID CUS", err.response.data);
     }
   };
 
@@ -75,9 +79,9 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
   const sendMessage = async () => {
     const selectedMemberId =
       currentLoggedInUserDetails._id.toString() ===
-      selectedParcel.customer_id.toString()
+      selectedParcel.customer_id?._id.toString()
         ? selectedParcel.rider_id
-        : selectedParcel.customer_id;
+        : selectedParcel.customer_id?._id;
 
     let sendMsg = {
       to: selectedMemberId,
@@ -153,9 +157,6 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
 
   useEffect(() => {
     intializeChatFunctionality();
-    // getCurrentLoggedInUserDetails();
-    // console.log("REQUEST INTIATE==> IN FIRST UNCOMMENT BELOW API");
-    // getConversationId("64391ae4b2594bc183f86d47");
 
     socket.on("receive_message", (incomingMsg) => {
       console.log("NEW MESS", incomingMsg);
@@ -164,6 +165,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
   }, []);
 
   console.log("CURRENT MESSAGES", messages?.length);
+  console.log("SELECTED PARCEL===>", selectedParcel);
   return (
     <Modal
       position={"center"}
