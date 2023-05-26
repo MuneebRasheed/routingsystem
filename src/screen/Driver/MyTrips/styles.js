@@ -150,7 +150,7 @@ export default {
     flexDirection: "row",
     alignItems: "center",
     alignSelf: "flex-start",
-    backgroundColor: 'red',
+    backgroundColor: "red",
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 10,
@@ -392,5 +392,16 @@ export default {
     borderRadius: 3,
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+
+  noTripsFoundContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  noTripsFoundText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 };

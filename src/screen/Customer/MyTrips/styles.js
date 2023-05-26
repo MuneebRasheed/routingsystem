@@ -50,7 +50,7 @@ export default {
     backgroundColor: "rgba(255,255,255,0.2)",
     borderRadius: 5,
     paddingHorizontal: 6,
-    paddingVertical: 12 ,
+    paddingVertical: 12,
     margin: 5,
   },
   tabActiveText: {
@@ -344,5 +344,15 @@ export default {
     borderRadius: 3,
     paddingHorizontal: 10,
     paddingVertical: 10,
+  },
+  noTripsFoundContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  noTripsFoundText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 };
