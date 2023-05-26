@@ -6,7 +6,7 @@ import CheckBox from "react-native-check-box";
 import { COLOR } from "@theme/typography";
 
 import styles from "./styles";
-
+import AppSpinner from "../../../component/AppSpinner";
 import theme from "@theme/styles";
 
 import Header from "@component/Header";
@@ -25,6 +25,7 @@ import { getFCMToken } from "../../../helper/pushnotification_helper";
 import { showMessage } from "../../../helper/showAlert";
 
 export default function SignUp() {
+  const [loading, setLoading] = useState(false);
   const [isSelected, setSelection] = useState(false);
   const [value, setValue] = useState("");
   const [password, setPassword] = useState("");
@@ -58,7 +59,9 @@ export default function SignUp() {
       password,
     };
 
-    axios.post("https://routeon.mettlesol.com/v1/auth/login", cd)
+    setLoading(true);
+    axios
+      .post("https://routeon.mettlesol.com/v1/auth/login", cd)
       .then((response) => {
         console.log("CURRET LOGI===>");
         if (response.status === 201) {
@@ -92,7 +95,7 @@ export default function SignUp() {
           if (temp != 2) {
             showMessage("error", "You cant be loginss");
           }
-
+          setLoading(false);
           return response.data;
         } else {
           // Support.showError({
@@ -122,13 +125,7 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("error", err, err.response);
-        
-        // Support.showError({
-        //   title: __("OOPs"),
-        //   message: __("You cant be login Server Error"),
-        //   hideDelay: 2500,
-        // });
-        // showMessage("error", "You cant be login. Server Error");
+        setLoading(false);
       });
   }
 
@@ -261,8 +258,19 @@ export default function SignUp() {
                     }}
                   />
                 </View>
-                <Button style={styles.signUpBtn} onPress={onSubmit}>
-                  <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
+                <Button
+                  style={styles.signUpBtn}
+                  onPress={() => {
+                    if (!loading) {
+                      onSubmit();
+                    }
+                  }}
+                >
+                  {!loading ? (
+                    <Text style={styles.signUpBtnText}>{__("LOGIN")}</Text>
+                  ) : (
+                    <AppSpinner />
+                  )}
                 </Button>
               </View>
               <View style={styles.signUpContent}>

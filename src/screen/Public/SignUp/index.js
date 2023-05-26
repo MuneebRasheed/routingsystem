@@ -21,6 +21,7 @@ import { __ } from "@utility/translation";
 import { DarkStatusBar } from "@component/StatusBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
+import AppSpinner from "../../../component/AppSpinner";
 
 export default function SignUp() {
   const SignupSchema = Yup.object().shape({
@@ -46,6 +47,7 @@ export default function SignUp() {
   const [valid, setValid] = useState(false);
   const [eye1, setEye1] = useState(true);
   const [eye2, setEye2] = useState(true);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   var temp = 0;
   // const [values, setValues] = useState(true);
@@ -81,6 +83,7 @@ export default function SignUp() {
 
    
 
+    setLoading(true);
     axios
       .post("https://routeon.mettlesol.com/v1/auth/signup", cd)
       .then((response) => {
@@ -110,7 +113,7 @@ export default function SignUp() {
           if (temp != 2) {
             showMessage("error", "Something went wrong");
           }
-
+          setLoading(false);
           return response.data;
         } else {
           showMessage("error", "Something went wrong");
@@ -134,9 +137,9 @@ export default function SignUp() {
         console.log("CURRENT USER YAY!!! ===>", notificationResponse.data);
       })
       .catch((err) => {
-        console.log("error", err?.response);
-
-        showMessage("error", "Error in creating user");
+        console.log("error", err.response.data);
+        setLoading(false);
+        showMessage("error", err?.response?.data?.message[0]);
       });
 
       console.log("Muneeb")
@@ -437,7 +440,13 @@ export default function SignUp() {
                       style={[styles.signUpBtn, { marginTop: -18 }]}
                       onPress={handleSubmit}
                     >
-                      <Text style={styles.signUpBtnText}>{__("SIGN UP")}</Text>
+                      {!loading ? (
+                        <Text style={styles.signUpBtnText}>
+                          {__("SIGN UP")}
+                        </Text>
+                      ) : (
+                        <AppSpinner />
+                      )}
                     </Button>
                     {/* <Button onPress={handleSubmit} title="Submit" /> */}
                   </View>

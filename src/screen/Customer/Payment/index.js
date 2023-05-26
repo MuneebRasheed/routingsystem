@@ -43,7 +43,7 @@ export default function Payment() {
         makePaymentByUser(data.data.payment_method);
       })
       .catch((err) => {
-        console.log(("error", err.response));
+        console.log("CURRENT ERROR===>", err.response.data);
       });
   };
 
@@ -72,7 +72,7 @@ export default function Payment() {
         console.log("result to make payment", data.data);
       })
       .catch((err) => {
-        console.log("error", err.response);
+        console.log("error546", err.response);
       });
   };
   async function onSubmit() {
