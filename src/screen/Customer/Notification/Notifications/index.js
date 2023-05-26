@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 
 import Item from "./Item";
 import Placeholder from "./Placeholder";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-export default function Notification() {
+export default function Notification({ showLoading, loading }) {
   const [notification, setNotification] = useState([]);
   useEffect(() => {
     getNotification();
@@ -32,9 +32,11 @@ export default function Notification() {
       .then((data) => {
         console.log("get notification", data?.data?.docs);
         setNotification(data?.data?.docs);
+        showLoading(false);
       })
       .catch((err) => {
         console.log(("error", err));
+        showLoading(false);
       });
   }
 
@@ -51,6 +53,28 @@ export default function Notification() {
       />
     );
   };
+
+  if (!loading && notification?.length === 0) {
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            color: "#000",
+            fontWeight: "bold",
+          }}
+        >
+          No notifications Found
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <>

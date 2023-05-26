@@ -19,39 +19,18 @@ import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
+import { COLOR } from "@theme/typography";
+import AppSpinner from "../../../component/AppSpinner";
 
 export default class extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     selected: '',
-  //     language: 'en',
-  //     notificationsList: [],
-  //     fetchingNotificationsList: true
-  //   }
-  //   bind(this)
+  state = {
+    loading: true,
+  };
 
-  //   this.fetchNotificationsList = this.fetchNotificationsList.bind(this)
-  // }
+  showLoading = (val) => {
+    this.setState({ loading: val });
+  };
 
-  // async componentDidMount() {
-  //   const language = await AsyncStorage.getItem('language')
-  //   await this.promisedSetState({
-  //     language
-  //   })
-  //   await this.fetchNotificationsList()
-  // }
-
-  // async fetchNotificationsList() {
-  //   await this.promisedSetState({
-  //     fetchingNotificationsList: true
-  //   })
-  //   const list = await request(notificationsList)
-  //   await this.promisedSetState({
-  //     notificationsList: list,
-  //     fetchingNotificationsList: false
-  //   })
-  // }
   render() {
     return (
       <Container style={theme.layout}>
@@ -62,16 +41,28 @@ export default class extends React.Component {
             {__("NOTIFICATIONS")}
           </Text>
           <Text style={styles.notificationHeaderText}>
-            {__("MANAGE YOUR NOTIFICATIONSSSSS")}
+            {__("MANAGE YOUR NOTIFICATIONS")}
           </Text>
         </View>
-        <Content style={theme.layout}>
+        {this.state.loading && (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <AppSpinner size="large" color={COLOR.PRIMARY} />
+          </View>
+        )}
+        <Content
+          style={[theme.layout, this.state.loading ? { display: "none" } : {}]}
+        >
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.notificationContainer}>
               <Notifications
-              // language={this.state.language}
-              // list={this.state.notificationsList}
-              // fetching={this.state.fetchingNotificationsList}
+                showLoading={this.showLoading}
+                loading={this.state.loading}
               />
             </View>
           </ScrollView>
