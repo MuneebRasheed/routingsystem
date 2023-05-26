@@ -40,7 +40,7 @@ export default function Payment() {
       .then((data) => {
         console.log("res", data.data.payment_method);
 
-        makePaymentByUser(data.data.payment_method);
+        // makePaymentByUser(data.data.payment_method);
       })
       .catch((err) => {
         console.log("CURRENT ERROR===>", err.response.data);
