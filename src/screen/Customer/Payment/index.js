@@ -11,10 +11,10 @@ import Support from "@component/Support";
 import axios from "axios";
 import { navigate, navigateReset } from "@navigation";
 import { __ } from "@utility/translation";
-
+import { showMessage } from "../../../helper/showAlert";
 import { DarkStatusBar } from "@component/StatusBar";
 
-export default function Payment() {
+export default function Payment({ navigation }) {
   const [CardInput, setCardInput] = useState({});
 
   const postData = async () => {
@@ -39,10 +39,13 @@ export default function Payment() {
       )
       .then((data) => {
         console.log("res", data.data.payment_method);
+        showMessage("success", "Payment Method is Added Succefully");
+        navigation.pop();
 
         // makePaymentByUser(data.data.payment_method);
       })
       .catch((err) => {
+        showMessage("error", "Error in added payment method");
         console.log("CURRENT ERROR===>", err.response.data);
       });
   };
@@ -80,18 +83,19 @@ export default function Payment() {
       alert("Invalid Credit Card");
       return false;
     } else {
-      await Support.showSuccess({
-        title: __("Success!"),
-        message: __("Transaction success"),
-        onHide: () => {
-          console.log(CardInput);
-          // makePaymentByUser();
-          postData();
-          // onDisplayNotification();
-          // navigateReset("PublicHome");
-        },
-        hideDelay: 2500,
-      });
+      // await Support.showSuccess({
+      //   title: __("Success!"),
+      //   message: __("Transaction success"),
+      //   onHide: () => {
+      //     console.log(CardInput);
+      //     // makePaymentByUser();
+      //     postData();
+      //     // onDisplayNotification();
+      //     // navigateReset("PublicHome");
+      //   },
+      //   hideDelay: 2500,
+      // });
+      postData();
     }
   }
 
