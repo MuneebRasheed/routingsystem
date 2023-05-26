@@ -28,12 +28,8 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
         : selectedParcel.customer_id?._id;
 
     try {
-      console.log(
-        "CURRENT URL===>",
-        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`
-      );
       const responseOne = await axios.get(
-        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`,
+        `https://routeon.mettlesol.com/v1/chat/conversation?parcel=${selectedParcel?._id}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -113,6 +109,7 @@ const ChatsModal = ({ setSelectedParcel, selectedParcel }) => {
         setMessages((prevMessages) => [...prevMessages, sendMsg]);
         setText("");
       } else {
+        sendMsg.parcel = selectedParcel._id;
         socket.emit("send_message", sendMsg);
         sendMsg._id = Math.random();
         sendMsg.sender = currentLoggedInUserDetails?._id;

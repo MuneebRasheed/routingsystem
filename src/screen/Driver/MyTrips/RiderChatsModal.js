@@ -34,7 +34,7 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
 
     try {
       const responseOne = await axios.get(
-        `https://routeon.mettlesol.com/v1/chat/conversation?member=${selectedMemberId}&parcel=${selectedParcel?._id}`,
+        `https://routeon.mettlesol.com/v1/chat/conversation?parcel=${selectedParcel?._id}`,
         {
           headers: {
             authorization: `Bearer ${userInfo?.token}`,
@@ -114,6 +114,7 @@ const RiderChatsModal = ({ setSelectedParcel, selectedParcel }) => {
         setMessages((prevMessages) => [...prevMessages, sendMsg]);
         setText("");
       } else {
+        sendMsg.parcel = selectedParcel._id;
         socket.emit("send_message", sendMsg);
         sendMsg._id = Math.random();
         sendMsg.sender = currentLoggedInUserDetails?._id;
