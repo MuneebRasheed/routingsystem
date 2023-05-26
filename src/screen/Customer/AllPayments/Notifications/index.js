@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 
 import Item from "./Item";
 import Placeholder from "./Placeholder";
@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "../../../../helper/showAlert";
 import { useSelector } from "react-redux";
 
-export default function Notification() {
+export default function Notification({ showLoading, loading }) {
   const [data, setdata] = useState([]);
   const { user } = useSelector((state) => state.session);
   useEffect(() => {
@@ -31,9 +31,11 @@ export default function Notification() {
       .then((data) => {
         console.log("res", data.data);
         setdata(data.data);
+        showLoading(false);
       })
       .catch((err) => {
         console.log(("error", err));
+        showLoading(false);
       });
   };
 
@@ -71,6 +73,29 @@ export default function Notification() {
       showMessage("error", "Something went wrong!");
     }
   };
+
+  if (!loading && data?.length === 0) {
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 18,
+            color: "#000",
+            fontWeight: "bold",
+          }}
+        >
+          No Payment Methods Found
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <>
       <FlatList
