@@ -32,7 +32,7 @@ import Accordion from "./Accordion";
 import DropDownPicker from "react-native-dropdown-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
+import { showMessage } from "../../../helper/showAlert";
 const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 
 const screen = Dimensions.get("window");
@@ -116,6 +116,8 @@ function MyRoute({ navigation }) {
       time: "2023-04-16",
       status: true,
       has_diversion: divert,
+      start_time:startDate,
+      end_time:endDate
     };
     console.log("CURRENT VALUE==>", cd);
 
@@ -133,17 +135,20 @@ function MyRoute({ navigation }) {
       })
       .then((data) => {
         console.log("res rout added", data.data);
-        Support.showSuccess({
-          title: __("Thank You"),
-          message: __("Route Has Been Added Succefully!"),
-          onHide: async () => {
-            navigation.pop();
-          },
-          hideDelay: 2500,
-        });
+        showMessage("success", "Route Has Been Added Succefully!");
+        navigation.pop();
+        // Support.showSuccess({
+        //   title: __("Thank You"),
+        //   message: __("Route Has Been Added Succefully!"),
+        //   onHide: async () => {
+          
+        //   },
+        //   hideDelay: 2500,
+        // });
       })
       .catch((err) => {
         console.log("ERROR WHILE ADDING ROUTE", err.response.data);
+        showMessage("error", "Error in Creating Routes");
       });
   }
 
@@ -182,7 +187,7 @@ function MyRoute({ navigation }) {
             setEndDate(date);
             setEt("Done")
           }}
-          timeZoneOffsetInMinutes
+       
           onCancel={() => {
             setOpenEndTime(false);
           }}

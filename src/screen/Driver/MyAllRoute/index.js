@@ -20,6 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 
+import { showMessage } from "../../../helper/showAlert";
 export default function MyTrip() {
   const [tabSelected, setTabSelected] = useState("all");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -80,12 +81,14 @@ export default function MyTrip() {
             return val._id != id;
           })
         );
-        alert("Deleted Succesfully");
+        showMessage("success", "Route Has Been Deleted Succefully!");
+        
 
         // console.log("route deleted succfully", data);
       })
       .catch((err) => {
         console.log(("error", err));
+        showMessage("error", "Error in  Deleted Routes!");
       });
   }
 
@@ -132,13 +135,13 @@ export default function MyTrip() {
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
             <ScrollView>
-              {data.map((val) => {
+              {data.map((val,index) => {
                 if (val.isActive) {
                   return (
                     <View style={styles.accordion}>
                       <Button disabled style={styles.accordionBtn}>
                         <Text style={styles.accordionTitle}>
-                          {"ROUTE ID #X876895"}
+                          {`ROUTE ID ${index+1}`}
                         </Text>
                         <View style={styles.accordionInfo}>
                           <View style={styles.accordionItem}>
@@ -150,6 +153,9 @@ export default function MyTrip() {
                             name="delete"
                             type="MaterialCommunityIcons"
                             style={[theme.SIZE_20, theme.DARKBLUE]}
+                            onPress={() => {
+                              onDelete(val._id);
+                            }}
                           />
                         </View>
                       </Button>
