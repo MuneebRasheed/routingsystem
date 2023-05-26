@@ -57,7 +57,13 @@ function MyRoute({ navigation }) {
     { label: "Saturday", value: "saturday" },
     { label: "Sunday", value: "sunday" },
   ]);
-  const [date, setDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const [st, setSt] = useState();
+  const [et, setEt] = useState();
+  const [openStartTime, setOpenStartTime] = useState(false);
+  const [openEndTime, setOpenEndTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [divert, setDivert] = useState(false);
   const [start, setStart] = useState();
@@ -149,16 +155,38 @@ function MyRoute({ navigation }) {
         <DatePicker
           modal
           mode="time"
-          open={open}
-          date={date}
+          open={openStartTime}
+          date={startDate}
           onConfirm={(date) => {
-            setOpen(false);
-            setDate(date);
+            setOpenStartTime(false);
+            console.log("Date",date.toTimeString())
+       
+            setStartDate(date);
+            setSt("done")
           }}
+          // timeZoneOffsetInMinutes
           onCancel={() => {
-            setOpen(false);
+            setOpenStartTime(false);
           }}
-          style={{ backgroundColor: "red" }}
+        
+        />
+        <DatePicker
+          modal
+          mode="time"
+          open={openEndTime}
+          date={endDate}
+          onConfirm={(date) => {
+            setOpenEndTime(false);
+            console.log("Date",date.toTimeString())
+           
+            setEndDate(date);
+            setEt("Done")
+          }}
+          timeZoneOffsetInMinutes
+          onCancel={() => {
+            setOpenEndTime(false);
+          }}
+          
         />
       </View>
       <Content contentContainerStyle={theme.layoutDf}>
@@ -266,11 +294,11 @@ function MyRoute({ navigation }) {
             </View>
 
             <View style={styles.formRow11}>
-              <Button style={styles.formRow2} onPress={() => setOpen(true)}>
-                <Text style={styles.formInput}>{__("START TIME")}</Text>
+              <Button style={styles.formRow2} onPress={() => setOpenStartTime(true)}>
+                <Text style={[styles.formInput,{color:'black'}]}>{__(st?`${startDate.toTimeString().split("G")[0]}`:"START TIME")}</Text>
               </Button>
-              <Button style={styles.formRow2} onPress={() => setOpen(true)}>
-                <Text style={styles.formInput}>{__("END TIME")}</Text>
+              <Button style={styles.formRow2} onPress={() => setOpenEndTime(true)}>
+                <Text style={[styles.formInput,{color:'black'}]}>{__(et?`${endDate.toTimeString().split("G")[0]}`:"END TIME")}</Text>
               </Button>
             </View>
 
@@ -281,6 +309,7 @@ function MyRoute({ navigation }) {
               setOpen={setOpens}
               setValue={setValue}
               setItems={setItems}
+              placeholder="Select your days"
               onSelectItem={(e) => console.log(e.value)}
               theme="LIGHT"
               multiple={true}
@@ -298,7 +327,7 @@ function MyRoute({ navigation }) {
             />
             <View style={[styles.switchInfo, { marginTop: 10 }]}>
               <Text style={styles.switchText}>
-                {__("Are You Divert or Not")}
+                {__("What You Want To Divert or Not")}
               </Text>
               <ToggleSwitch value={divert} setValue={setDivert} />
             </View>

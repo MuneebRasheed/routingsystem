@@ -71,10 +71,10 @@ export default function ManageProfile() {
   const fetchData = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    // console.log(datas);
+    console.log("datas",datas);
 
     const res = axios
-      .get(`  https://routeon.mettlesol.com/v1/users/user-by-id/${datas._id}`, {
+      .get(`  https://routeon.mettlesol.com/v1/users/user-by-id/${datas._id || datas.userId }`, {
         headers: {
           Authorization: `Bearer ${datas.access_token}`,
         },
@@ -88,7 +88,7 @@ export default function ManageProfile() {
         setValuesHttp(data.data.data?.avatar);
       })
       .catch((err) => {
-        console.log(("errors", err));
+        console.log(("errors", err.response.data));
       });
   };
 

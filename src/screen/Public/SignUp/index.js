@@ -56,6 +56,7 @@ export default function SignUp() {
     { label: "Female", value: "female" },
   ]);
   const method = async (response) => {
+    console.log("response in method",response)
     await AsyncStorage.setItem("response", JSON.stringify(response?.data));
     await AsyncStorage.setItem("role", "User");
     navigateReset("PublicHome");

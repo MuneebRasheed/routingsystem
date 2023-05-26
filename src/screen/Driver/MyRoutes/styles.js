@@ -25,7 +25,7 @@ export default {
   },
   formInput: {
     flex: 1,
-    fontFamily: FAMILY.BOLD,
+    // fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
     color: COLOR.DARKBLUE,
     paddingVertical: 15,
