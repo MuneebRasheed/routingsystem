@@ -21,7 +21,7 @@ import { DarkStatusBar } from "@component/StatusBar";
 import { connect } from "react-redux";
 import DatePicker from "react-native-date-picker";
 import { showMessage } from "../../../helper/showAlert";
-// import ImagePicker from "react-native-image-crop-picker";
+import ImagePicker from "react-native-image-crop-picker";
 // import notifee, { AndroidImportance, EventType } from "@notifee/react-native";
 
 function SelectVehicle(params) {
@@ -73,6 +73,7 @@ function SelectVehicle(params) {
       cropping: true,
     }).then((image) => {
       console.log(image);
+      setImages(image);
     });
   };
   const UploadData = async () => {
@@ -80,8 +81,9 @@ function SelectVehicle(params) {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
+      console.log("Image frm galaery",res[0]);
       setImages(res[0]);
-      console.log(res[0]);
+     
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -118,6 +120,7 @@ function SelectVehicle(params) {
 
         const formData = new FormData();
         formData.append("rider_id", value.bidder._id);
+        formData.append("status", "in_progress");
 
         const requestOptions = {
           headers: {
@@ -255,7 +258,7 @@ function SelectVehicle(params) {
     );
   };
   const getPhotoFromGallery = () => {
-    UploadData();
+    getPhotoFromCamera();
   };
 
   const fetchData = async () => {
