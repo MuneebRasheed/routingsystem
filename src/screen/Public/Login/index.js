@@ -58,10 +58,11 @@ export default function SignUp() {
       password,
     };
 
-    axios
-      .post("https://routeon.mettlesol.com/v1/auth/login", cd)
+    axios.post("https://routeon.mettlesol.com/v1/auth/login", cd)
       .then((response) => {
+        console.log("CURRET LOGI===>");
         if (response.status === 201) {
+
           console.log("CURRET LOGI===>", response.data);
 
           if (
@@ -121,6 +122,7 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("error", err, err.response);
+        
         // Support.showError({
         //   title: __("OOPs"),
         //   message: __("You cant be login Server Error"),

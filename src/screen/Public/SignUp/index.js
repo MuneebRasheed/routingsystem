@@ -55,6 +55,11 @@ export default function SignUp() {
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
   ]);
+  const method = async (response) => {
+    await AsyncStorage.setItem("response", JSON.stringify(response?.data));
+    await AsyncStorage.setItem("role", "User");
+    navigateReset("PublicHome");
+  };
 
   async function logins(values) {
     var cd = {
@@ -73,11 +78,7 @@ export default function SignUp() {
 
     console.log("HELLO WORLD", cd);
 
-    const method = async (response) => {
-      await AsyncStorage.setItem("response", JSON.stringify(response?.data));
-      await AsyncStorage.setItem("role", "User");
-      navigateReset("PublicHome");
-    };
+   
 
     axios
       .post("https://routeon.mettlesol.com/v1/auth/signup", cd)
@@ -132,10 +133,12 @@ export default function SignUp() {
         console.log("CURRENT USER YAY!!! ===>", notificationResponse.data);
       })
       .catch((err) => {
-        console.log("error", err.response.data);
+        console.log("error", err?.response);
 
-        showMessage("error", err?.response?.data?.message[0]);
+        showMessage("error", "Error in creating user");
       });
+
+      console.log("Muneeb")
   }
 
   return (
@@ -227,7 +230,7 @@ export default function SignUp() {
 
                   //  navigateReset("PublicVerification",{values});
                   // setValue(values)
-                  console.log(values, valid);
+                  // console.log(values, valid);
                   logins(values);
                 }}
               >
@@ -303,6 +306,7 @@ export default function SignUp() {
                           onSelectItem={(e) => setFieldValue("gender", e.value)}
                           // setValue={handleChange("gender")}
                           setItems={setItems}
+                          placeholder="Select your gender"
                           style={{ marginBottom: 5 }}
                         />
                         {errors.gender && (
