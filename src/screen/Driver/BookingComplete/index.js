@@ -8,7 +8,7 @@ import theme from "@theme/styles";
 import Accordion from "./Accordion";
 
 import Header from "@component/Header";
-// import ImagePicker from "react-native-image-crop-picker";
+import ImagePicker from "react-native-image-crop-picker";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
@@ -17,7 +17,7 @@ import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 
 export default function BookingComplete(props) {
-  console.log("Value",props.route.params.data);
+  console.log("Value", props.route.params.data);
   const val = props.route.params.data;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -55,7 +55,7 @@ export default function BookingComplete(props) {
             <View style={styles.bookingContent}>
               <View style={styles.bookingDetail}>
                 <Text style={styles.bookingIdText}>
-                  {__(`BOOKING ID : ${(val?._id).substr(0,15)}`)}
+                  {__(`BOOKING ID : ${(val?._id).substr(0, 15)}`)}
                 </Text>
                 <Button>
                   <Text style={styles.completeBtn}>{__(`${val?.status}`)}</Text>
@@ -66,8 +66,10 @@ export default function BookingComplete(props) {
                 <Text style={styles.bookingText}>{__(`${val?.fare} USD`)}</Text>
               </View>
               <View style={styles.bookingItem}>
-                <Text style={styles.bookingTitle}>{__("PICKUP")}</Text>
-                <Text style={styles.bookingText}>{__(val?.time)}</Text>
+                <Text style={styles.bookingTitle}>{__("PICKUP TIME")}</Text>
+                <Text style={styles.bookingText}>
+                  {__(val?.time.substr(0, 10))}
+                </Text>
               </View>
               {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("VEHICLE TYPE")}</Text>
@@ -106,16 +108,28 @@ export default function BookingComplete(props) {
                 <Text style={styles.bookingTitle}>{__("QUANTITY")}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Width")}</Text>
                 <Text style={styles.bookingTextDark}>
-                  {__(`${val?.width} ft * ${val?.height}ft*1 ft`)}
+                  {__(`${val?.width}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__("20 Nos")}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Height")}</Text>
                 <Text style={styles.bookingTextDark}>
-                {__(`${val?.length} ft * ${val?.weight}ft*1 ft`)}
+                  {__(`${val?.height}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__("10 Nos")}</Text>
+              </View>
+              <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Length")}</Text>
+                <Text style={styles.bookingTextDark}>
+                  {__(`${val?.length}`)}
+                </Text>
+              </View>
+              <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Weight")}</Text>
+                <Text style={styles.bookingTextDark}>
+                  {__(`${val?.weight}`)}
+                </Text>
               </View>
               {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTextDark}>
@@ -139,7 +153,9 @@ export default function BookingComplete(props) {
                 >
                   <Image
                     source={{
-                      uri:val?.customer_id?.avatar|| "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                      uri:
+                        val?.customer_id?.avatar ||
+                        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                     }}
                     style={styles.driverImg}
                   />
@@ -154,7 +170,9 @@ export default function BookingComplete(props) {
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("Parcel ID")}</Text>
-                  <Text style={styles.bookingTextDark}>{__(`${(val?._id).substr(0,15)}`)}</Text>
+                  <Text style={styles.bookingTextDark}>
+                    {__(`${(val?._id).substr(0, 15)}`)}
+                  </Text>
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("RATING")}</Text>
@@ -217,29 +235,30 @@ export default function BookingComplete(props) {
               textAlignVertical={"top"}
               // placeholder='Please write your comments'
               // onChangeText={(v) => this.onChangeText("comment", v)}
-              style={styles.formInput}
+              style={[styles.formInput,{backgroundColor:'#ededed'}]}
             />
           </View>
-
-          <View style={{ width: "100%", height: 50 }}>
-            <Button
-              style={styles.mailBtn}
-              onPress={() => {
-                getPhotoFromGallery();
-              }}
-            >
-              <Text style={styles.tripText}>{__("ATTACH FILE HERE")}</Text>
-            </Button>
-          </View>
-          <View style={{ width: "100%", height: 50, marginTop: 10 }}>
-            <Button
-              style={styles.mailBtn}
-              onPress={() => {
-                setIsOpen(false);
-              }}
-            >
-              <Text style={styles.tripText}>{__("SEND")}</Text>
-            </Button>
+          <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-between' ,marginTop:60}}>
+            <View style={{ width: "47%", height: 50}}>
+              <Button
+                style={styles.mailBtn}
+                onPress={() => {
+                  getPhotoFromGallery();
+                }}
+              >
+                <Text style={styles.tripText}>{__("ATTACH FILE HERE")}</Text>
+              </Button>
+            </View>
+            <View style={{ width: "47%", height: 50 }}>
+              <Button
+                style={styles.mailBtn}
+                onPress={() => {
+                  setIsOpen(false);
+                }}
+              >
+                <Text style={styles.tripText}>{__("SEND")}</Text>
+              </Button>
+            </View>
           </View>
 
           {/* <View
@@ -264,14 +283,14 @@ export default function BookingComplete(props) {
           </View> */}
         </View>
       </Modal>
-      <View style={styles.mailBtnInfo}>
+      <View style={[styles.mailBtnInfo]}>
         <Button
-          style={styles.mailBtn}
+          style={[styles.mailBtn, { backgroundColor: "red" }]}
           onPress={() => {
-            navigate("CustomerWriteUs");
+            // navigate("CustomerWriteUs");
           }}
         >
-          <Text style={styles.tripText}>{__("MAIL\nACKNOWLEDGEMENT")}</Text>
+          <Text style={styles.tripText}>{__("CANCEL")}</Text>
         </Button>
         <Button
           style={styles.mailInvoiceBtn}

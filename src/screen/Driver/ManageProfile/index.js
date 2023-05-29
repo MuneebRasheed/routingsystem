@@ -429,7 +429,7 @@ export default function ManageProfile({ navigation }) {
     return (
       <View style={styles.profileContainer}>
         <View style={styles.profileContent}>
-          <View style={styles.profileInputDetail}>
+          <View style={[styles.profileInputDetail,{backgroundColor:'red',paddingBottom:-100}]}>
             {/* <Text style={styles.permissionHeader}>{__("PAYMENT PROCESS")}</Text> */}
             <View style={styles.switchInfo}>
               <Text style={styles.switchText}>{__("Connect your stripe account")}</Text>

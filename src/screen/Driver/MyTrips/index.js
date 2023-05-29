@@ -34,7 +34,7 @@ export default function MyTrip() {
 
     const res = axios
       .get(
-        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id&sort=desc&rider_id=${datas._id}`,
+        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id%20rider_id&sort=desc&rider_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -112,52 +112,51 @@ export default function MyTrip() {
                   key={index}
                   renderContent={() => (
                     <View style={styles.accordionContent}>
-                      <View style={styles.bookingInfo}>
+                     <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
                           {__("TRIP COST")}
                         </Text>
-                        <Text style={styles.bookingText}>
-                          {__(`${val?.fare} USD`)}
-                        </Text>
+                        <Text style={styles.bookingText}>{val?.fare}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
                         <Text style={styles.bookingDetail}>
-                          {__(val?.time)}
+                          {__(val?.time.substr(0,10))}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
                           {__("PICK UP FROM")}
                         </Text>
-                        <Text style={styles.bookingText}>
-                          {__(`${val?.from_location}`)}
-                        </Text>
+
+                        <Text
+                          style={styles.bookingText}
+                        >{`${(val?.from_location).length>30?val?.from_location.substr(0,30):val?.from_location}`}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                        <Text style={styles.bookingText}>
-                          {__(`${val?.to_location}`)}
-                        </Text>
+                        <Text
+                          style={styles.bookingText}
+                        >{`${(val?.to_location).length>30?val?.to_location.substr(0,30):val?.to_location}`}</Text>
                       </View>
 
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
-                          {__("DRIVER NAME")}
+                          {__("CUSTOMER NAME")}
                         </Text>
                         <Text style={styles.bookingText}>
                           {__(`${val?.customer_id?.first_name}`)}
                         </Text>
                       </View>
-                      <View style={styles.bookingInfo}>
+                      {/* <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
                           {__("VEHICLE NUMBER")}
                         </Text>
-                        <Text style={styles.bookingText}>{__("NY 47568")}</Text>
-                      </View>
+                        <Text style={styles.bookingText}>{__(`${val?.rider_id?.vehicle_no}`)}</Text>
+                      </View> */}
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
-                          {__("CALL DRIVER")}
+                          {__("CALL CUSTOMER")}
                         </Text>
                         <Text style={styles.bookingText}>
                           {__(`${val?.customer_id?.phone}`)}
@@ -168,7 +167,7 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>{__("STATUS")}</Text>
                         <Button
                           onPress={() => {
-                            navigate("CustomerBookingComplete");
+                            // navigate("CustomerBookingComplete");
                           }}
                         >
                           <Text style={styles.openBtnText}>

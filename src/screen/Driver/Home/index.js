@@ -111,7 +111,8 @@ export default function Home({ route }) {
         swipeToClose={false}
         style={{
           borderRadius: 10,
-          alignItems: "center",
+          // alignItems: "center",
+          minHeight:'100%'
         }}
         backdropPressToClose={false}
       >
@@ -131,13 +132,12 @@ export default function Home({ route }) {
   console.log("STATET ===>", incomingParcelNotifications);
   return (
     <Container>
-      <DarkStatusBar />
-
-      <Header leftType="menu" title={"Dashboard"} />
-      <Modal isOpen={mainModel} entry={"top"} backdropOpacity={0.3}>
+       <Modal isOpen={mainModel} entry={"top"} backdropOpacity={0.3}     swipeToClose={false} >
         <View
           style={{
             flex: 1,
+            backgroundColor:'red'
+         
           }}
         >
           <MainModel />
@@ -152,6 +152,10 @@ export default function Home({ route }) {
           <Text style={styles.bookingBtnText}>{__("Cancel")}</Text>
         </Button>
       </Modal>
+      <DarkStatusBar />
+
+      <Header leftType="menu" title={"Dashboard"} />
+     
       <Content>
         <ScrollView>
           <View
