@@ -24,13 +24,13 @@ export default {
     marginLeft: 15,
   },
   profileContainer: {
-    paddingVertical: 10,
+    // paddingVertical: 10,
   },
   profileContent: {
     backgroundColor: COLOR.LIGHT,
     borderRadius: 5,
     marginHorizontal: 20,
-    marginVertical: 5,
+    // marginVertical: 5,
   },
   profileImgItem: {
     alignItems: "center",
@@ -38,7 +38,7 @@ export default {
   },
   profileImgDetail: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    // paddingVertical: 10,
   },
   avatarImg: {
     width: 105,
@@ -55,7 +55,7 @@ export default {
     shadowOpacity: 0.9,
     shadowRadius: 0,
     backgroundColor: COLOR.LIGHT,
-    marginTop: 15,
+    // marginTop: 15,
   },
   profileImg: {
     width: 100,
@@ -85,7 +85,7 @@ export default {
     borderBottomWidth: 1,
     borderColor: COLOR.LIGHTVIOLET,
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   formRow2: {
     flex: 1,
@@ -331,12 +331,13 @@ export default {
     justifyContent: "space-between",
     borderBottomWidth: 1,
     borderColor: COLOR.SMOKELIGHT,
-    paddingBottom: 20,
-    marginBottom: 10,
+    // backgroundColor:'red',
+    width:340 
+  
   },
   switchText: {
     fontFamily: FAMILY.BOLD,
-    fontSize: SIZE.SIZE_20,
+    fontSize: SIZE.SIZE_16,
     color: COLOR.DARK,
   },
 

@@ -31,7 +31,7 @@ export default function ManageProfile({ navigation }) {
   const [urlValue, setUrlValue] = useState();
   const [tabSelected, setTabSelected] = useState("profile");
   const [isEnabled, setIsEnabled] = useState(false);
-
+  const [idCardCheck, setIdCardCheck] = useState();
   const [profile, setProfile] = useState("");
   const [profileHttp, setProfileHttp] = useState("");
   const [name, setName] = useState("");
@@ -181,7 +181,7 @@ export default function ManageProfile({ navigation }) {
     const formData = new FormData();
     formData.append("first_name", name);
     formData.append("avatar_file", profile);
-    formData.append("national_ID_file", nationalCard);
+    formData.append("national_ID_file", idCardCheck);
     formData.append("phone", phoneNumber);
     formData.append("vehicle_no", vehicalNumber);
     formData.append("driving_license", drivingLiscence);
@@ -273,7 +273,7 @@ export default function ManageProfile({ navigation }) {
 
   function renderProfile() {
     return (
-      <SafeAreaView style={{ width: "100%", height: "80%" }}>
+      <SafeAreaView style={{ width: "100%", height: "79%" }}>
         <ScrollView showsVerticalScrollIndicator={true}>
           <View style={styles.profileContainer}>
             <View style={styles.profileContent}>
@@ -283,7 +283,7 @@ export default function ManageProfile({ navigation }) {
                     <Image
                       source={{
                         uri:
-                          profileHttp ||
+                        profile?.uri ||profileHttp ||
                           "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                       }}
                       style={styles.profileImg}
@@ -375,7 +375,7 @@ export default function ManageProfile({ navigation }) {
                     <Image
                       source={{
                         uri:
-                          nationalCard ||
+                       idCardCheck?.uri|| nationalCard ||
                           "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                       }}
                       style={{
@@ -389,7 +389,7 @@ export default function ManageProfile({ navigation }) {
                   <Button
                     style={styles.uploadBtn}
                     onPress={() => {
-                      UploadData(setNationalCard);
+                      UploadData(setIdCardCheck);
                     }}
                   >
                     {nationalCard ? (
@@ -415,7 +415,7 @@ export default function ManageProfile({ navigation }) {
         </ScrollView>
 
         <Button
-          style={[styles.saveBtn, { marginLeft: 20, marginRight: 20 }]}
+          style={[styles.saveBtn, { marginLeft: 20, marginRight: 20 ,marginTop:5}]}
           onPress={submit}
         >
           <Text style={styles.saveBtnText}>{__("SAVE")}</Text>
@@ -429,7 +429,7 @@ export default function ManageProfile({ navigation }) {
     return (
       <View style={styles.profileContainer}>
         <View style={styles.profileContent}>
-          <View style={[styles.profileInputDetail,{backgroundColor:'red',paddingBottom:-100}]}>
+          <View style={[styles.profileInputDetail,{paddingBottom:-100}]}>
             {/* <Text style={styles.permissionHeader}>{__("PAYMENT PROCESS")}</Text> */}
             <View style={styles.switchInfo}>
               <Text style={styles.switchText}>{__("Connect your stripe account")}</Text>
