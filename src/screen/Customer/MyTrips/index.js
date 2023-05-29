@@ -117,12 +117,16 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>
                           {__("TRIP COST")}
                         </Text>
-                        <Text style={styles.bookingText}>{val?.fare}</Text>
+                        <Text style={styles.bookingText}>
+                          {val?.pay_amount
+                            ? __(`${val?.pay_amount} USD`)
+                            : __(`${val?.fare} USD`)}
+                        </Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
                         <Text style={styles.bookingDetail}>
-                          {__(val?.time.substr(0,10))}
+                          {__(val?.time.substr(0, 10))}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>
@@ -130,15 +134,19 @@ export default function MyTrip() {
                           {__("PICK UP FROM")}
                         </Text>
 
-                        <Text
-                          style={styles.bookingText}
-                        >{`${(val?.from_location).length>30?val?.from_location.substr(0,30):val?.from_location}`}</Text>
+                        <Text style={styles.bookingText}>{`${
+                          (val?.from_location).length > 30
+                            ? val?.from_location.substr(0, 30)
+                            : val?.from_location
+                        }`}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
-                        <Text
-                          style={styles.bookingText}
-                        >{`${(val?.to_location).length>30?val?.to_location.substr(0,30):val?.to_location}`}</Text>
+                        <Text style={styles.bookingText}>{`${
+                          (val?.to_location).length > 30
+                            ? val?.to_location.substr(0, 30)
+                            : val?.to_location
+                        }`}</Text>
                       </View>
 
                       <View style={styles.bookingInfo}>
@@ -153,7 +161,9 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>
                           {__("VEHICLE NUMBER")}
                         </Text>
-                        <Text style={styles.bookingText}>{__(`${val?.rider_id?.vehicle_no}`)}</Text>
+                        <Text style={styles.bookingText}>
+                          {__(`${val?.rider_id?.vehicle_no}`)}
+                        </Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
@@ -268,7 +278,11 @@ export default function MyTrip() {
                           <Text style={styles.bookingTitle}>
                             {__("TRIP COST")}
                           </Text>
-                          <Text style={styles.bookingText}>{val?.fare}</Text>
+                          <Text style={styles.bookingText}>
+                            {val?.pay_amount
+                              ? __(`${val?.pay_amount} USD`)
+                              : __(`${val?.fare} USD`)}
+                          </Text>
                         </View>
                         <View style={styles.bookingInfo}>
                           <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
@@ -428,7 +442,11 @@ export default function MyTrip() {
                           <Text style={styles.bookingTitle}>
                             {__("TRIP COST")}
                           </Text>
-                          <Text style={styles.bookingText}>{val?.fare}</Text>
+                          <Text style={styles.bookingText}>
+                            {val?.pay_amount
+                              ? __(`${val?.pay_amount} USD`)
+                              : __(`${val?.fare} USD`)}
+                          </Text>
                         </View>
                         <View style={styles.bookingInfo}>
                           <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
