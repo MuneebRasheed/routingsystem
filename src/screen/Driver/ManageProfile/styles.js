@@ -315,7 +315,7 @@ export default {
   },
   permissionText: {
     fontFamily: FAMILY.REGULAR,
-    fontSize: SIZE.SIZE_16,
+    fontSize: SIZE.SIZE_14,
     color: COLOR.DARK,
     marginBottom: 5,
   },
