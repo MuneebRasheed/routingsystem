@@ -355,4 +355,14 @@ export default {
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
+  noTripsFoundContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  noTripsFoundText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 };

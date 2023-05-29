@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
-import { Button, Picker, TextInput } from "@component/Form";
+import { Button, TextInput } from "@component/Form";
+import { COLOR } from "@theme/typography";
 
 import Modal from "react-native-modalbox";
 
@@ -12,20 +13,20 @@ import Header from "@component/Header";
 
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
-import request from "@utility/request";
-import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
-
+import AppSpinner from "../../../component/AppSpinner";
 import { showMessage } from "../../../helper/showAlert";
+
 export default function MyTrip() {
   const [tabSelected, setTabSelected] = useState("all");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -42,7 +43,8 @@ export default function MyTrip() {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
     console.log(datas._id);
-    const res = axios
+
+    axios
       .get(
         `  https://routeon.mettlesol.com/v1/routes?rider=${datas._id}&page=1&limit=1234
         `,
@@ -55,9 +57,11 @@ export default function MyTrip() {
       .then((data) => {
         // console.log("res get all route", data.data.docs[0]);
         setData(data.data.docs);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(("error", err));
+        setLoading(false);
       });
   }
 
@@ -82,7 +86,6 @@ export default function MyTrip() {
           })
         );
         showMessage("success", "Route Has Been Deleted Succefully!");
-        
 
         // console.log("route deleted succfully", data);
       })
@@ -97,32 +100,38 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <ScrollView>
-            {data.map((val, index) => {
-              return (
-                <View style={styles.accordion}>
-                  <Button disabled style={styles.accordionBtn}>
-                    <Text style={styles.accordionTitle}>
-                      {"ROUTE  ID : " + (index + 1)}
-                    </Text>
-                    <View style={styles.accordionInfo}>
-                      <View style={styles.accordionItem}>
-                        {/* <Text style={styles.accordionInactiveText}>
+            {data && data.length > 0 ? (
+              data.map((val, index) => {
+                return (
+                  <View style={styles.accordion}>
+                    <Button disabled style={styles.accordionBtn}>
+                      <Text style={styles.accordionTitle}>
+                        {"ROUTE  ID : " + (index + 1)}
+                      </Text>
+                      <View style={styles.accordionInfo}>
+                        <View style={styles.accordionItem}>
+                          {/* <Text style={styles.accordionInactiveText}>
                           {"Edit"}
                         </Text> */}
+                        </View>
+                        <Icon
+                          name="delete"
+                          type="MaterialCommunityIcons"
+                          style={[theme.SIZE_20, theme.DARKBLUE]}
+                          onPress={() => {
+                            onDelete(val._id);
+                          }}
+                        />
                       </View>
-                      <Icon
-                        name="delete"
-                        type="MaterialCommunityIcons"
-                        style={[theme.SIZE_20, theme.DARKBLUE]}
-                        onPress={() => {
-                          onDelete(val._id);
-                        }}
-                      />
-                    </View>
-                  </Button>
-                </View>
-              );
-            })}
+                    </Button>
+                  </View>
+                );
+              })
+            ) : (
+              <View style={styles.noTripsFoundContainer}>
+                <Text style={styles.noTripsFoundText}>No Routes Found</Text>
+              </View>
+            )}
           </ScrollView>
         </View>
       </View>
@@ -135,34 +144,44 @@ export default function MyTrip() {
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
             <ScrollView>
-              {data.map((val,index) => {
-                if (val.isActive) {
-                  return (
-                    <View style={styles.accordion}>
-                      <Button disabled style={styles.accordionBtn}>
-                        <Text style={styles.accordionTitle}>
-                          {`ROUTE ID ${index+1}`}
-                        </Text>
-                        <View style={styles.accordionInfo}>
-                          <View style={styles.accordionItem}>
-                            {/* <Text style={styles.accordionInactiveText}>
+              {data &&
+              data.length > 0 &&
+              data.filter((d) => d.isActive)?.length > 0 ? (
+                data.map((val, index) => {
+                  if (val.isActive) {
+                    return (
+                      <View style={styles.accordion}>
+                        <Button disabled style={styles.accordionBtn}>
+                          <Text style={styles.accordionTitle}>
+                            {`ROUTE ID ${index + 1}`}
+                          </Text>
+                          <View style={styles.accordionInfo}>
+                            <View style={styles.accordionItem}>
+                              {/* <Text style={styles.accordionInactiveText}>
                               {"Edit"}
                             </Text> */}
+                            </View>
+                            <Icon
+                              name="delete"
+                              type="MaterialCommunityIcons"
+                              style={[theme.SIZE_20, theme.DARKBLUE]}
+                              onPress={() => {
+                                onDelete(val._id);
+                              }}
+                            />
                           </View>
-                          <Icon
-                            name="delete"
-                            type="MaterialCommunityIcons"
-                            style={[theme.SIZE_20, theme.DARKBLUE]}
-                            onPress={() => {
-                              onDelete(val._id);
-                            }}
-                          />
-                        </View>
-                      </Button>
-                    </View>
-                  );
-                }
-              })}
+                        </Button>
+                      </View>
+                    );
+                  }
+                })
+              ) : (
+                <View style={styles.noTripsFoundContainer}>
+                  <Text style={styles.noTripsFoundText}>
+                    No Open Routes Found
+                  </Text>
+                </View>
+              )}
             </ScrollView>
           </View>
         </View>
@@ -175,31 +194,41 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <View style={styles.accordion}>
-            {data.map((val) => {
-              if (!val.isActive) {
-                return (
-                  <View style={styles.accordion}>
-                    <Button disabled style={styles.accordionBtn}>
-                      <Text style={styles.accordionTitle}>
-                        {"ROUTE ID #X876895"}
-                      </Text>
-                      <View style={styles.accordionInfo}>
-                        <View style={styles.accordionItem}>
-                          {/* <Text style={styles.accordionInactiveText}>
+            {data &&
+            data.length > 0 &&
+            data.filter((d) => !d.isActive)?.length > 0 ? (
+              data.map((val) => {
+                if (!val.isActive) {
+                  return (
+                    <View style={styles.accordion}>
+                      <Button disabled style={styles.accordionBtn}>
+                        <Text style={styles.accordionTitle}>
+                          {"ROUTE ID #X876895"}
+                        </Text>
+                        <View style={styles.accordionInfo}>
+                          <View style={styles.accordionItem}>
+                            {/* <Text style={styles.accordionInactiveText}>
                             {"Edit"}
                           </Text> */}
+                          </View>
+                          <Icon
+                            name="delete"
+                            type="MaterialCommunityIcons"
+                            style={[theme.SIZE_20, theme.DARKBLUE]}
+                          />
                         </View>
-                        <Icon
-                          name="delete"
-                          type="MaterialCommunityIcons"
-                          style={[theme.SIZE_20, theme.DARKBLUE]}
-                        />
-                      </View>
-                    </Button>
-                  </View>
-                );
-              }
-            })}
+                      </Button>
+                    </View>
+                  );
+                }
+              })
+            ) : (
+              <View style={styles.noTripsFoundContainer}>
+                <Text style={styles.noTripsFoundText}>
+                  No Block Routes Found
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -283,19 +312,28 @@ export default function MyTrip() {
           </Button>
         </View>
       </View>
-      <Content contentContainerStyle={theme.layoutDf}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.myTripContainer}>
-            {tabSelected === "all"
-              ? renderAll()
-              : tabSelected === "open"
-              ? renderOpen()
-              : tabSelected === "completed"
-              ? renderCompleted()
-              : null}
-          </View>
-        </ScrollView>
-      </Content>
+      {loading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <AppSpinner color={COLOR.PRIMARY} size="large" />
+        </View>
+      ) : (
+        <Content contentContainerStyle={theme.layoutDf}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.myTripContainer}>
+              {tabSelected === "all"
+                ? renderAll()
+                : tabSelected === "open"
+                ? renderOpen()
+                : tabSelected === "completed"
+                ? renderCompleted()
+                : null}
+            </View>
+          </ScrollView>
+        </Content>
+      )}
+
       {/* <Modal isOpen={true} position={"center"}>
         <Text>muneeb</Text>
       </Modal> */}
