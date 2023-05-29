@@ -33,7 +33,7 @@ export default function MyTrip() {
 
     const res = axios
       .get(
-        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id&sort=desc&customer_id=${datas._id}`,
+        `https://routeon.mettlesol.com/v1/parcel?page=1&limit=500&populate=customer_id%20rider_id&sort=desc&customer_id=${datas._id}`,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
@@ -41,7 +41,7 @@ export default function MyTrip() {
         }
       )
       .then((data) => {
-        console.log("res", data?.data?.docs);
+        console.log("res", data?.data?.docs[0]);
         setData(data.data.docs);
         setLoading(false);
       })
@@ -122,7 +122,7 @@ export default function MyTrip() {
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("TRIP")}</Text>
                         <Text style={styles.bookingDetail}>
-                          {__(val?.time)}
+                          {__(val?.time.substr(0,10))}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>
@@ -132,13 +132,13 @@ export default function MyTrip() {
 
                         <Text
                           style={styles.bookingText}
-                        >{`${val?.from_location}`}</Text>
+                        >{`${(val?.from_location).length>30?val?.from_location.substr(0,30):val?.from_location}`}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>{__("DROP AT")}</Text>
                         <Text
                           style={styles.bookingText}
-                        >{`${val?.to_location}`}</Text>
+                        >{`${(val?.to_location).length>30?val?.to_location.substr(0,30):val?.to_location}`}</Text>
                       </View>
 
                       <View style={styles.bookingInfo}>
@@ -153,14 +153,14 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>
                           {__("VEHICLE NUMBER")}
                         </Text>
-                        <Text style={styles.bookingText}>{__("NY 47568")}</Text>
+                        <Text style={styles.bookingText}>{__(`${val?.rider_id?.vehicle_no}`)}</Text>
                       </View>
                       <View style={styles.bookingInfo}>
                         <Text style={styles.bookingTitle}>
                           {__("CALL DRIVER")}
                         </Text>
                         <Text style={styles.bookingText}>
-                          {__("@ 64576348763")}
+                          {__(`${val?.rider_id?.phone}`)}
                         </Text>
                       </View>
 
@@ -168,7 +168,7 @@ export default function MyTrip() {
                         <Text style={styles.bookingTitle}>{__("STATUS")}</Text>
                         <Button
                           onPress={() => {
-                            navigate("CustomerBookingComplete");
+                            // navigate("CustomerBookingComplete");
                           }}
                         >
                           <Text style={styles.openBtnText}>
