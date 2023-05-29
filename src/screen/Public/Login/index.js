@@ -65,7 +65,6 @@ export default function SignUp() {
       .then((response) => {
         console.log("CURRET LOGI===>");
         if (response.status === 201) {
-
           console.log("CURRET LOGI===>", response.data);
 
           if (
@@ -125,6 +124,9 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log("error", err, err.response);
+        if (err.response.status === 401) {
+          showMessage("error", err?.response?.data?.message);
+        }
         setLoading(false);
       });
   }
@@ -141,7 +143,7 @@ export default function SignUp() {
       console.log(password, value);
       logins();
     } else {
-      alert("Invalid Phone Number");
+      showMessage("error", "Invalid Phone Number");
     }
   };
 
