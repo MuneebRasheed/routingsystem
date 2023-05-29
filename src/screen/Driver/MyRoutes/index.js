@@ -14,6 +14,7 @@ import MapView, { Marker, AnimatedRegion } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { COLOR } from "@theme/typography";
+import AppSpinner from "../../../component/AppSpinner";
 
 import CheckBox from "react-native-check-box";
 import styles from "./styles";
@@ -72,6 +73,7 @@ function MyRoute({ navigation }) {
   const [form, setForm] = useState();
   const [to, setTo] = useState();
   const [region, setRegion] = useState();
+  const [loading, setLoading] = useState(false);
 
   const coordinates = [
     {
@@ -108,6 +110,7 @@ function MyRoute({ navigation }) {
   const { pickupCords, droplocationCords, coordinate, heading } = state;
 
   async function submit() {
+    setLoading(true);
     var cd = {
       from: pickupCords.locationName,
       to: droplocationCords.locationName,
@@ -116,8 +119,8 @@ function MyRoute({ navigation }) {
       time: "2023-04-16",
       status: true,
       has_diversion: divert,
-      start_time:startDate,
-      end_time:endDate
+      start_time: startDate,
+      end_time: endDate,
     };
     console.log("CURRENT VALUE==>", cd);
 
@@ -136,18 +139,12 @@ function MyRoute({ navigation }) {
       .then((data) => {
         console.log("res rout added", data.data);
         showMessage("success", "Route Has Been Added Succefully!");
+        setLoading(false);
         navigation.pop();
-        // Support.showSuccess({
-        //   title: __("Thank You"),
-        //   message: __("Route Has Been Added Succefully!"),
-        //   onHide: async () => {
-          
-        //   },
-        //   hideDelay: 2500,
-        // });
       })
       .catch((err) => {
         console.log("ERROR WHILE ADDING ROUTE", err.response.data);
+        setLoading(false);
         showMessage("error", "Error in Creating Routes");
       });
   }
@@ -164,16 +161,15 @@ function MyRoute({ navigation }) {
           date={startDate}
           onConfirm={(date) => {
             setOpenStartTime(false);
-            console.log("Date",date.toTimeString())
-       
+            console.log("Date", date.toTimeString());
+
             setStartDate(date);
-            setSt("done")
+            setSt("done");
           }}
           // timeZoneOffsetInMinutes
           onCancel={() => {
             setOpenStartTime(false);
           }}
-        
         />
         <DatePicker
           modal
@@ -182,16 +178,14 @@ function MyRoute({ navigation }) {
           date={endDate}
           onConfirm={(date) => {
             setOpenEndTime(false);
-            console.log("Date",date.toTimeString())
-           
+            console.log("Date", date.toTimeString());
+
             setEndDate(date);
-            setEt("Done")
+            setEt("Done");
           }}
-       
           onCancel={() => {
             setOpenEndTime(false);
           }}
-          
         />
       </View>
       <Content contentContainerStyle={theme.layoutDf}>
@@ -299,11 +293,27 @@ function MyRoute({ navigation }) {
             </View>
 
             <View style={styles.formRow11}>
-              <Button style={styles.formRow2} onPress={() => setOpenStartTime(true)}>
-                <Text style={[styles.formInput,{color:'black'}]}>{__(st?`${startDate.toTimeString().split("G")[0]}`:"START TIME")}</Text>
+              <Button
+                style={styles.formRow2}
+                onPress={() => setOpenStartTime(true)}
+              >
+                <Text style={[styles.formInput, { color: "black" }]}>
+                  {__(
+                    st
+                      ? `${startDate.toTimeString().split("G")[0]}`
+                      : "START TIME"
+                  )}
+                </Text>
               </Button>
-              <Button style={styles.formRow2} onPress={() => setOpenEndTime(true)}>
-                <Text style={[styles.formInput,{color:'black'}]}>{__(et?`${endDate.toTimeString().split("G")[0]}`:"END TIME")}</Text>
+              <Button
+                style={styles.formRow2}
+                onPress={() => setOpenEndTime(true)}
+              >
+                <Text style={[styles.formInput, { color: "black" }]}>
+                  {__(
+                    et ? `${endDate.toTimeString().split("G")[0]}` : "END TIME"
+                  )}
+                </Text>
               </Button>
             </View>
 
@@ -403,10 +413,18 @@ function MyRoute({ navigation }) {
       <Button
         style={styles.bookingBtn}
         onPress={() => {
-          submit();
+          if (!loading) {
+            submit();
+          }
         }}
       >
-        <Text style={styles.bookingBtnText}>{__("ADD ROUTE")}</Text>
+        {!loading ? (
+          <Text style={styles.bookingBtnText}>{__("ADD ROUTE")}</Text>
+        ) : (
+          <View style={styles.bookingBtnText}>
+            <AppSpinner />
+          </View>
+        )}
       </Button>
     </Container>
   );
