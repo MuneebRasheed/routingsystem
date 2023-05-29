@@ -26,7 +26,7 @@ export default function Intro({ navigation }) {
 
     if (user) {
       messaging().onNotificationOpenedApp((remoteMessage) => {
-        if (remoteMessage && user && user?.roles?.includes("driver")) {
+        if (remoteMessage && user && user?.roles?.includes("rider")) {
           console.log(
             "Notification caused app to open from background state:",
             remoteMessage.notification
@@ -40,7 +40,7 @@ export default function Intro({ navigation }) {
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
-          if (remoteMessage && user && user?.roles?.includes("driver")) {
+          if (remoteMessage && user && user?.roles?.includes("rider")) {
             navigation.navigate("PublicHome", {
               data: remoteMessage.notification.body,
             });
@@ -53,7 +53,7 @@ export default function Intro({ navigation }) {
       messaging().onMessage(async (remoteMessage) => {
         console.log("FOREGOURND===>");
         console.log("MY CURRENT USER123===>", user);
-        if (remoteMessage && user && user?.roles?.includes("driver")) {
+        if (remoteMessage && user && user?.roles?.includes("rider")) {
           console.log("MY CURRENT USER===>", user);
           navigation.navigate("PublicHome", {
             data: remoteMessage.notification.body,

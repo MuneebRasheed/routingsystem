@@ -430,9 +430,9 @@ export default function ManageProfile({ navigation }) {
       <View style={styles.profileContainer}>
         <View style={styles.profileContent}>
           <View style={styles.profileInputDetail}>
-            <Text style={styles.permissionHeader}>{__("PAYMENT PROCESS")}</Text>
+            {/* <Text style={styles.permissionHeader}>{__("PAYMENT PROCESS")}</Text> */}
             <View style={styles.switchInfo}>
-              <Text style={styles.switchText}>{__("Connect for payment")}</Text>
+              <Text style={styles.switchText}>{__("Connect your stripe account")}</Text>
               <ToggleSwitch
                 setValue={setIsEnabled}
                 value={isEnabled}
@@ -477,7 +477,7 @@ export default function ManageProfile({ navigation }) {
           <View style={styles.profileInputDetail}>
             <Text style={[styles.permissionText]}>
               {__(
-                "Here is the Payment method button you can click the payment method button and can enable the payment integration with the help of stripe once you click the button in  bottom a ref link is generated you can click the link that send control to stripe you have to full filled your information then your account us acctivated and then you can make payment and recivied the payment from user"
+                "Here is the Payment method button you can click the connect account button and can enable the payment integration with the help of stripe.\n Once you click the button in  bottom a ref link is generated you can click the link that send control to stripe you have to full filled your information then your account us acctivated and then you can make payment and recivied the payment from user"
               )}
             </Text>
           </View>
@@ -604,7 +604,7 @@ export default function ManageProfile({ navigation }) {
                       : styles.tabTextInactive
                   }
                 >
-                  {__("PAYMENT METHOD")}
+                  {__(" RECIEVE PAYMENT")}
                 </Text>
               </Button>
               {/* <Button
