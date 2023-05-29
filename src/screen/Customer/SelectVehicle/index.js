@@ -73,10 +73,17 @@ function SelectVehicle(params) {
       height: 400,
       cropping: true,
     }).then((image) => {
-      
-      var format={ "fileCopyUri": null, "name": image.path.split('/')[(image.path.split('/').length)-1], "height": image?.height,"width": image?.width,"size": image?.size, "type": image.mime, "uri": image?.path}
+      var format = {
+        fileCopyUri: null,
+        name: image.path.split("/")[image.path.split("/").length - 1],
+        height: image?.height,
+        width: image?.width,
+        size: image?.size,
+        type: image.mime,
+        uri: image?.path,
+      };
       setImages(format);
-       console.log(format);
+      console.log(format);
     });
   };
   const UploadData = async () => {
@@ -84,9 +91,8 @@ function SelectVehicle(params) {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
       });
-      console.log("Image frm galaery",res[0]);
+      console.log("Image frm galaery", res[0]);
       setImages(res[0]);
-     
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -124,6 +130,7 @@ function SelectVehicle(params) {
         const formData = new FormData();
         formData.append("rider_id", value.bidder._id);
         formData.append("status", "in_progress");
+        formData.append("pay_amount", value?.bid_amount);
 
         const requestOptions = {
           headers: {
@@ -261,7 +268,7 @@ function SelectVehicle(params) {
     );
   };
   const getPhotoFromGallery = () => {
-    setBottomModal(true)
+    setBottomModal(true);
     // getPhotoFromCamera();
     // setImages({ "fileCopyUri": null, "name": "e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg", "height": 400,"width": 300,"size": 71776, "type": "image/jpeg", "uri": "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg"})
     // UploadData()
@@ -273,8 +280,14 @@ function SelectVehicle(params) {
 
     const formData = new FormData();
     formData.append("files", images);
-    formData.append("from_location", JSON.stringify(params.route.params.form.locationName));
-    formData.append("to_location", JSON.stringify(params.route.params.to.locationName));
+    formData.append(
+      "from_location",
+      JSON.stringify(params.route.params.form.locationName)
+    );
+    formData.append(
+      "to_location",
+      JSON.stringify(params.route.params.to.locationName)
+    );
     formData.append(
       "from_location_cor",
       `${params.route.params.form.latitude}, ${params.route.params.form.longitude}`
@@ -310,12 +323,15 @@ function SelectVehicle(params) {
         requestOptions
       );
       const result = await res.json();
-      showMessage("success", "Parcel Created Successfully!. Wait for drivers to bid");
+      showMessage(
+        "success",
+        "Parcel Created Successfully!. Wait for drivers to bid"
+      );
       // alert();
       console.log("RESULT", result);
     } catch (err) {
       showMessage("error", "Error in Created parcel");
-      console.log("ERROR",err);
+      console.log("ERROR", err);
     }
   };
 
@@ -398,7 +414,6 @@ function SelectVehicle(params) {
 
   return (
     <Container style={theme.layoutFx}>
-      
       <Modal
         isOpen={mainModel}
         entry={"top"}
@@ -602,7 +617,6 @@ function SelectVehicle(params) {
         onPress={() => {
           fetchData();
           // setMainModel(true);
-       
         }}
       >
         <Text style={styles.bookingBtnText}>{__("BOOK NOW")}</Text>
@@ -614,38 +628,38 @@ function SelectVehicle(params) {
         backdropOpacity={0.3}
         swipeToClose={false}
         position="bottom"
-        style={{height:200,borderTopLeftRadius:30,borderTopRightRadius:30}}
+        style={{
+          height: 200,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+        }}
       >
         <Button
-        style={[styles.bookingBtn,{backgroundColor:'purple'}]}
-        onPress={() => {
-          getPhotoFromCamera();
-          setBottomModal(false)
-        }}
-      >
-        <Text style={styles.bookingBtnText}>{__("OPEN CAMERA")}</Text>
-      </Button>
-      <Button
-        style={styles.bookingBtn}
-        onPress={() => {
-        
-          UploadData();
-          setBottomModal(false)
-        }}
-      >
-        <Text style={styles.bookingBtnText}>{__("SELECT FROM FILES")}</Text>
-      </Button>
-      <Button
-        style={[styles.bookingBtn,{backgroundColor:'red'}]}
-        onPress={() => {
-       
-       
-          setBottomModal(false)
-        }}
-      >
-        <Text style={styles.bookingBtnText}>{__("CANCLE")}</Text>
-      </Button>
-          
+          style={[styles.bookingBtn, { backgroundColor: "purple" }]}
+          onPress={() => {
+            getPhotoFromCamera();
+            setBottomModal(false);
+          }}
+        >
+          <Text style={styles.bookingBtnText}>{__("OPEN CAMERA")}</Text>
+        </Button>
+        <Button
+          style={styles.bookingBtn}
+          onPress={() => {
+            UploadData();
+            setBottomModal(false);
+          }}
+        >
+          <Text style={styles.bookingBtnText}>{__("SELECT FROM FILES")}</Text>
+        </Button>
+        <Button
+          style={[styles.bookingBtn, { backgroundColor: "red" }]}
+          onPress={() => {
+            setBottomModal(false);
+          }}
+        >
+          <Text style={styles.bookingBtnText}>{__("CANCLE")}</Text>
+        </Button>
       </Modal>
     </Container>
   );
