@@ -100,36 +100,42 @@ export default function MyTrip() {
       <View>
         <View style={styles.accordionLayout}>
           <ScrollView>
-            {data && data.length > 0 ? (
+            {data &&
+            data.length > 0 &&
+            data.filter((d) => d.isActive)?.length > 0 ? (
               data.map((val, index) => {
-                return (
-                  <View style={styles.accordion}>
-                    <Button disabled style={styles.accordionBtn}>
-                      <Text style={styles.accordionTitle}>
-                        {"ROUTE  ID : " + (index + 1)}
-                      </Text>
-                      <View style={styles.accordionInfo}>
-                        <View style={styles.accordionItem}>
-                          {/* <Text style={styles.accordionInactiveText}>
-                          {"Edit"}
-                        </Text> */}
+                if (val.isActive) {
+                  return (
+                    <View style={styles.accordion}>
+                      <Button disabled style={styles.accordionBtn}>
+                        <Text style={styles.accordionTitle}>
+                          {`ROUTE ID ${index + 1}`}
+                        </Text>
+                        <View style={styles.accordionInfo}>
+                          <View style={styles.accordionItem}>
+                            {/* <Text style={styles.accordionInactiveText}>
+                              {"Edit"}
+                            </Text> */}
+                          </View>
+                          <Icon
+                            name="delete"
+                            type="MaterialCommunityIcons"
+                            style={[theme.SIZE_20, theme.DARKBLUE]}
+                            onPress={() => {
+                              onDelete(val._id);
+                            }}
+                          />
                         </View>
-                        <Icon
-                          name="delete"
-                          type="MaterialCommunityIcons"
-                          style={[theme.SIZE_20, theme.DARKBLUE]}
-                          onPress={() => {
-                            onDelete(val._id);
-                          }}
-                        />
-                      </View>
-                    </Button>
-                  </View>
-                );
+                      </Button>
+                    </View>
+                  );
+                }
               })
             ) : (
               <View style={styles.noTripsFoundContainer}>
-                <Text style={styles.noTripsFoundText}>No Routes Found</Text>
+                <Text style={styles.noTripsFoundText}>
+                  No Active Routes Found
+                </Text>
               </View>
             )}
           </ScrollView>
@@ -146,9 +152,9 @@ export default function MyTrip() {
             <ScrollView>
               {data &&
               data.length > 0 &&
-              data.filter((d) => d.isActive)?.length > 0 ? (
+              data.filter((d) => !d.isActive)?.length > 0 ? (
                 data.map((val, index) => {
-                  if (val.isActive) {
+                  if (!val.isActive) {
                     return (
                       <View style={styles.accordion}>
                         <Button disabled style={styles.accordionBtn}>
@@ -183,52 +189,6 @@ export default function MyTrip() {
                 </View>
               )}
             </ScrollView>
-          </View>
-        </View>
-      </View>
-    );
-  }
-
-  function renderCompleted() {
-    return (
-      <View>
-        <View style={styles.accordionLayout}>
-          <View style={styles.accordion}>
-            {data &&
-            data.length > 0 &&
-            data.filter((d) => !d.isActive)?.length > 0 ? (
-              data.map((val) => {
-                if (!val.isActive) {
-                  return (
-                    <View style={styles.accordion}>
-                      <Button disabled style={styles.accordionBtn}>
-                        <Text style={styles.accordionTitle}>
-                          {"ROUTE ID #X876895"}
-                        </Text>
-                        <View style={styles.accordionInfo}>
-                          <View style={styles.accordionItem}>
-                            {/* <Text style={styles.accordionInactiveText}>
-                            {"Edit"}
-                          </Text> */}
-                          </View>
-                          <Icon
-                            name="delete"
-                            type="MaterialCommunityIcons"
-                            style={[theme.SIZE_20, theme.DARKBLUE]}
-                          />
-                        </View>
-                      </Button>
-                    </View>
-                  );
-                }
-              })
-            ) : (
-              <View style={styles.noTripsFoundContainer}>
-                <Text style={styles.noTripsFoundText}>
-                  No Block Routes Found
-                </Text>
-              </View>
-            )}
           </View>
         </View>
       </View>
@@ -273,7 +233,7 @@ export default function MyTrip() {
                   : styles.tabInactiveText
               }
             >
-              {__("ALL")}
+              ACTIVE
             </Text>
           </Button>
           <Button
@@ -289,25 +249,7 @@ export default function MyTrip() {
                   : styles.tabInactiveText
               }
             >
-              {__("OPEN")}
-            </Text>
-          </Button>
-          <Button
-            style={
-              tabSelected === "completed"
-                ? styles.tabActive
-                : styles.tabInactive
-            }
-            onPress={() => setTabSelected("completed")}
-          >
-            <Text
-              style={
-                tabSelected === "completed"
-                  ? styles.tabActiveText
-                  : styles.tabInactiveText
-              }
-            >
-              {__("BLOCKED")}
+              IN-ACTIVE
             </Text>
           </Button>
         </View>
@@ -322,13 +264,7 @@ export default function MyTrip() {
         <Content contentContainerStyle={theme.layoutDf}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.myTripContainer}>
-              {tabSelected === "all"
-                ? renderAll()
-                : tabSelected === "open"
-                ? renderOpen()
-                : tabSelected === "completed"
-                ? renderCompleted()
-                : null}
+              {tabSelected === "all" ? renderAll() : renderOpen()}
             </View>
           </ScrollView>
         </Content>
