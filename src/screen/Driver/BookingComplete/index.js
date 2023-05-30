@@ -63,7 +63,9 @@ export default function BookingComplete(props) {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PAID")}</Text>
-                <Text style={styles.bookingText}>{__(`${val?.fare} USD`)}</Text>
+                <Text style={styles.bookingText}>      {val?.pay_amount
+                            ? __(`${val?.pay_amount} USD`)
+                            : __(`${val?.fare} USD`)}</Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PICKUP TIME")}</Text>

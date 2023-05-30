@@ -154,7 +154,7 @@ export default function MyTrip() {
                           {__("DRIVER NAME")}
                         </Text>
                         <Text style={styles.bookingText}>
-                          {__(`${val?.customer_id?.first_name}`)}
+                          {__(`${val?.rider_id?.first_name}`)}
                         </Text>
                       </View>
                       <View style={styles.bookingInfo}>

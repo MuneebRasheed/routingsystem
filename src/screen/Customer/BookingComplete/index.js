@@ -6,16 +6,16 @@ import Modal from "react-native-modalbox";
 import styles from "./styles";
 import theme from "@theme/styles";
 import Accordion from "./Accordion";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "@component/Header";
 import ImagePicker from "react-native-image-crop-picker";
-
+import { showMessage } from "../../../helper/showAlert";
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
-
+import DocumentPicker from "react-native-document-picker";
 export default function BookingComplete(props) {
   console.log("Value",props.route.params.data);
   const val = props.route.params.data;
@@ -23,22 +23,69 @@ export default function BookingComplete(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [images, setImages] = useState([]);
 
-  const getPhotoFromGallery = () => {
-    // ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true
-    // }).then(image => {
-    //   console.log(image);
-    // });
+  const [description,setDescription]=useState("")
 
-    ImagePicker.openPicker({
-      multiple: true,
-    }).then((image) => {
-      console.log(image);
-      setImages(image);
-    });
+  const getPhotoFromGallery = async() => {
+    try {
+      const res = await DocumentPicker.pick({
+        allowMultiSelection:true,
+        type: [DocumentPicker.types.allFiles]
+      });
+      console.log("Image frm galaery", res);
+      setImages(res[0]);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
+    }
+
+
   };
+
+  const postComplain= async()=>{
+  
+      var data = await AsyncStorage.getItem("response");
+      var datas = JSON.parse(data);
+  
+      const formData = new FormData();
+      formData.append("files", images);
+      
+      formData.append("complain_against",val?.rider_id?._id);
+      formData.append("parcel", val?._id);
+      formData.append("description", description);
+     
+
+  
+      console.log("FormData", formData);
+  
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${datas.access_token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+      };
+      try {
+        const res = await fetch(
+          "https://routeon.mettlesol.com/v1/complaints",
+          requestOptions
+        );
+        const result = await res.json();
+        showMessage(
+          "success",
+          "Complain Created Successfully!"
+        );
+        // alert();
+        console.log("RESULT", result);
+      } catch (err) {
+        showMessage("error", "Error in Posted Complain");
+        console.log("ERROR", err?.resonpse);
+      }
+  
+  }
   return (
     <Container>
       <DarkStatusBar />
@@ -63,7 +110,9 @@ export default function BookingComplete(props) {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PAID")}</Text>
-                <Text style={styles.bookingText}>{__(`${val?.fare} USD`)}</Text>
+                <Text style={styles.bookingText}>{__(`${val?.pay_amount
+                              ? __(`${val?.pay_amount} USD`)
+                              : __(`${val?.fare} USD`)}`)}</Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PICKUP TIME")}</Text>
@@ -224,12 +273,15 @@ export default function BookingComplete(props) {
           <View style={styles.formRow}>
             <Text style={styles.formText}>{__("DESCRIPTION")}</Text>
             <TextInput
-              placeholder=""
+               placeholder='Please write your comments'
               placeholderTextColor="#ccc"
               multiline
               numberOfLines={7}
+
               textAlignVertical={"top"}
-              // placeholder='Please write your comments'
+              value={description}
+              onChangeText={(e)=>{setDescription(e)}}
+           
               // onChangeText={(v) => this.onChangeText("comment", v)}
               style={[styles.formInput,{backgroundColor:'#ededed'}]}
             />
@@ -249,6 +301,7 @@ export default function BookingComplete(props) {
               <Button
                 style={styles.mailBtn}
                 onPress={() => {
+                  postComplain();
                   setIsOpen(false);
                 }}
               >
