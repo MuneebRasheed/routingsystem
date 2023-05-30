@@ -109,7 +109,7 @@ export default function MyTrip() {
               return (
                 <Accordion
                   title={`TRIPS ID ${index + 1}`}
-                  // text="open"
+                  trip={val}
                   key={index}
                   renderContent={() => (
                     <View style={styles.accordionContent}>
@@ -270,7 +270,7 @@ export default function MyTrip() {
                 return (
                   <Accordion
                     title={`TRIPS ID ${index + 1}`}
-                    // text="open"
+                    trip={val}
                     key={index}
                     renderContent={() => (
                       <View style={styles.accordionContent}>
@@ -434,7 +434,7 @@ export default function MyTrip() {
                 return (
                   <Accordion
                     title={`TRIPS ID ${index + 1}`}
-                    // text="open"
+                    trip={val}
                     key={index}
                     renderContent={() => (
                       <View style={styles.accordionContent}>

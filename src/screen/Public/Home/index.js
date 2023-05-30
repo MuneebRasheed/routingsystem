@@ -11,10 +11,6 @@ import MapView, { Marker, AnimatedRegion } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Header from "@component/Header";
-import {
-  getUserCurrentPosition,
-  locationPermission,
-} from "../../../helper/getCurrentLocation";
 
 const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 
@@ -24,18 +20,18 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export default function Home() {
+export default function Home(params) {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
+  const pickupRef = useRef(null);
+  const droplocationRef = useRef(null);
   const [state, setState] = useState({
-    pickupCords: {
-      // latitude: 31.5204,
-      // longitude: 74.3587,
-    },
-    droplocationCords: {
-      // latitude: 31.4504,
-      // longitude: 73.135,
-    },
+    pickupCords: params?.route?.params?.data
+      ? params.route?.params?.data.pickupCords
+      : {},
+    droplocationCords: params?.route?.params?.data
+      ? params?.route?.params?.data.droplocationCords
+      : {},
     isLoading: false,
     coordinate: new AnimatedRegion({
       latitude: 31.5204,
@@ -46,40 +42,7 @@ export default function Home() {
     heading: 0,
   });
 
-  // const { pickupCords, droplocationCords, coordinate, heading } = state;
-  const { pickupCords, droplocationCords, coordinate, heading } = state;
-
-  const getCurrentLocation = async () => {
-    const isLocationOn = await locationPermission();
-    if (isLocationOn) {
-      const res = await getUserCurrentPosition();
-      console.log("GET LIVE LOCATION AFTER 5 SEC");
-      animate(res.latitude, res.longitude);
-      setState({
-        ...state,
-        pickupCords: res,
-        coordinate: {
-          ...res,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        },
-        heading: res.heading,
-      });
-
-      console.log("CURRENT POSITION=====>", res);
-    }
-  };
-
-  const animate = (latitude, longitude) => {
-    const newCoordinate = { latitude, longitude };
-    if (Platform.OS === "android") {
-      if (markerRef.current) {
-        markerRef.current.animateMarkerToCoordinate(newCoordinate, 7000);
-      }
-    } else {
-      coordinate.timing(newCoordinate).start();
-    }
-  };
+  const { pickupCords, droplocationCords, coordinate } = state;
 
   const handleNavigation = () => {
     if (
@@ -87,8 +50,6 @@ export default function Home() {
       Object.values(state.droplocationCords).length > 0
     ) {
       navigate("CustomerSelectVehicle", {
-        // to: state.pickupCords,
-        // form: state.droplocationCords,
         to: state.droplocationCords,
         form: state.pickupCords,
       });
@@ -97,18 +58,21 @@ export default function Home() {
     }
   };
 
-  // useEffect(() => {
-  //   getCurrentLocation();
-  // }, []);
+  useEffect(() => {
+    if (
+      params.route?.params?.data.pickupCords &&
+      params?.route?.params?.data.droplocationCords
+    ) {
+      pickupRef.current?.setAddressText(
+        params.route?.params?.data.pickupCords?.locationName
+      );
+      droplocationRef?.current?.setAddressText(
+        params.route?.params?.data.droplocationCords?.locationName
+      );
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getCurrentLocation();
-  //   }, 6000);
-
-  //   return () => clearInterval(interval);
-  // });
-
+  console.log("CURRENT PARAMS 007 ===>", params?.route?.params);
   return (
     <Container>
       <DarkStatusBar />
@@ -117,6 +81,7 @@ export default function Home() {
         <View style={styles.homeContainer}>
           <View style={styles.formRow}>
             <GooglePlacesAutocomplete
+              ref={pickupRef}
               placeholder="Pickup"
               textInputProps={{
                 placeholderTextColor: "black",
@@ -169,6 +134,7 @@ export default function Home() {
           </View>
           <View style={styles.formRow}>
             <GooglePlacesAutocomplete
+              ref={droplocationRef}
               placeholder="Drop Location"
               textInputProps={{
                 placeholderTextColor: "black",

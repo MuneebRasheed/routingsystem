@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import styles from "./styles";
 import theme from "@theme/styles";
 
 import { Icon } from "@component/Basic";
 import { Button } from "@component/Form";
+import { navigate } from "@navigation";
 
 const Accordion = ({
   title,
@@ -14,6 +15,7 @@ const Accordion = ({
   onOpened,
   onClosed,
   expanded,
+  trip,
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -27,6 +29,31 @@ const Accordion = ({
 
   const toggle = () => {
     setOpened(!opened);
+  };
+
+  const handleNavigation = () => {
+    const [fromLatitude, fromLongitude] = trip?.from_location_cor?.split(",");
+    const [toLatitude, toLongitude] = trip?.to_location_cor?.split(",");
+
+    const data = {
+      pickupCords: {
+        latitude: +fromLatitude.trim(),
+        longitude: +fromLongitude.trim(),
+        locationName: trip?.from_location.replace(/^"(.*)"$/, "$1"),
+      },
+      droplocationCords: {
+        latitude: +toLatitude.trim(),
+        longitude: +toLongitude.trim(),
+        locationName: trip?.to_location.replace(/^"(.*)"$/, "$1"),
+      },
+    };
+
+    navigate("DrawerNav", {
+      screen: "PublicHome",
+      params: {
+        data,
+      },
+    });
   };
 
   return (
@@ -47,6 +74,13 @@ const Accordion = ({
               {text}
             </Text> */}
           </View>
+          <TouchableOpacity onPress={handleNavigation}>
+            <Icon
+              name="content-copy"
+              type="MaterialCommunityIcons"
+              style={[theme.SIZE_20, theme.DARKBLUE, { marginRight: 5 }]}
+            />
+          </TouchableOpacity>
           <Icon
             name={opened ? "keyboard-arrow-down" : "keyboard-arrow-right"}
             type="MaterialIcons"
