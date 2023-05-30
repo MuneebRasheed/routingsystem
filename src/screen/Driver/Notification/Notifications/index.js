@@ -21,8 +21,8 @@ export default function Notification({ showLoading, loading }) {
     console.log("NotifcationId", datas?._id);
     const res = axios
       .get(
-        `  https://routeon.mettlesol.com/v1/notifications?user=${datas?._id}
-        `,
+        `https://routeon.mettlesol.com/v1/notifications?user=${datas?._id}&page=1&limit=50&sort=-createdAt`
+        ,
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
