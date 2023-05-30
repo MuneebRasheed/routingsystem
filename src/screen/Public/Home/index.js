@@ -81,6 +81,7 @@ export default function Home(params) {
         <View style={styles.homeContainer}>
           <View style={styles.formRow}>
             <GooglePlacesAutocomplete
+              nearbyPlacesAPI="GoogleReverseGeocoding"
               ref={pickupRef}
               placeholder="Pickup"
               textInputProps={{
