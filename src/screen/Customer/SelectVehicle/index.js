@@ -46,6 +46,7 @@ function SelectVehicle(params) {
   const [openModel, setOpenModel] = useState(false);
   const [opened, setOpened] = useState(false);
   const [bottomModal, setBottomModal] = useState(false);
+  const [dateOneTimeSelect, setDateOneTimeSelect] = useState(false);
   const [items, setItems] = useState([
     { label: "Solid", value: "solid" },
     { label: "Metal", value: "metal" },
@@ -53,6 +54,10 @@ function SelectVehicle(params) {
     { label: "Fragile", value: "fragile" },
     { label: "Other Items", value: "otherItems" },
   ]);
+
+
+
+  const [pracelTimeType, setPracelTimeType] = useState("");
   const [itemsType, setItemsType] = useState("solid");
   const { socket } = useSelector((state) => state.socket);
 
@@ -89,9 +94,10 @@ function SelectVehicle(params) {
   const UploadData = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        allowMultiSelection:true,
+        type: [DocumentPicker.types.allFiles]
       });
-      console.log("Image frm galaery", res[0]);
+      console.log("Image frm galaery", res);
       setImages(res[0]);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
@@ -299,13 +305,13 @@ function SelectVehicle(params) {
     formData.append("height", height);
     formData.append("fare", fare);
     formData.append("width", width);
-    formData.append("time", "2023-12-06");
+    formData.append("time", JSON.stringify(date).substr(1,10));
     formData.append("length", length);
     formData.append("weight", weight);
-    formData.append("parcel_type", "wood");
-    formData.append("biddingStartTime", "2023-12-06");
-    formData.append("biddingEndTime", "2023-12-06");
-    formData.append("parcel_bidding_type", "now");
+    formData.append("parcel_type",itemsType);
+    // formData.append("biddingStartTime", "2023-12-06");
+    // formData.append("biddingEndTime", "2023-12-06");
+    formData.append("parcel_bidding_type", pracelTimeType);
 
     console.log("FormData", formData);
 
@@ -331,7 +337,7 @@ function SelectVehicle(params) {
       console.log("RESULT", result);
     } catch (err) {
       showMessage("error", "Error in Created parcel");
-      console.log("ERROR", err);
+      console.log("ERROR", err?.resonpse);
     }
   };
 
@@ -455,13 +461,20 @@ function SelectVehicle(params) {
               <Accordion
                 setOpened={setOpened}
                 opened={opened}
-                title="Select Time"
+                title= {dateOneTimeSelect?JSON.stringify(date).substr(1,10):"Select Time"}
                 renderContent={() => (
                   <View style={styles.accOrderInfo}>
-                    <Button onPress={() => setOpened(false)}>
+                    <Button onPress={() => {setOpened(false)
+                    setDate(new Date())
+                    setPracelTimeType("now")
+                    setDateOneTimeSelect(true)
+                    }}>
                       <Text style={styles.accText}>{__("Now")}</Text>
                     </Button>
-                    <Button onPress={() => setOpenD(true)}>
+                    <Button onPress={() => {setOpenD(true)
+                 
+                     setDateOneTimeSelect(true)
+                    }}>
                       <Text
                         style={styles.accText}
                         onPress={() => setOpen(true)}
@@ -469,9 +482,9 @@ function SelectVehicle(params) {
                         {__("Range")}
                       </Text>
                     </Button>
-                    <Button onPress={() => setOpen(true)}>
+                    {/* <Button onPress={() => setOpen(true)}>
                       <Text style={styles.accText}>{__("Time")}</Text>
-                    </Button>
+                    </Button> */}
                   </View>
                 )}
               />
@@ -486,6 +499,7 @@ function SelectVehicle(params) {
                     setOpen(false);
                     setDate(date);
                     setOpened(false);
+                    setPracelTimeType("range")
                     console.log(JSON.stringify(date));
                   }}
                   onCancel={() => {
@@ -494,7 +508,7 @@ function SelectVehicle(params) {
                 />
               )}
 
-              {openD && (
+              {/* {openD && (
                 <DatePicker
                   modal
                   mode="time"
@@ -510,7 +524,7 @@ function SelectVehicle(params) {
                     setOpenD(false);
                   }}
                 />
-              )}
+              )} */}
 
               <View style={styles.formRow}>
                 <TextInput
@@ -590,7 +604,17 @@ function SelectVehicle(params) {
                     style={[theme.SIZE_24, theme.DARKBLUE]}
                   />
                 </Button>
+                
               </View>
+             { images?.uri && <Image
+                source={{
+                  uri: images?.uri ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                  // uri: values,
+                  // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
+                }}
+                // source={require(values)}
+                style={{width:50,height:50,borderRadius:25}}
+              />}
               <View style={{ height: 270 }}>
                 <DropDownPicker
                   open={openModel}

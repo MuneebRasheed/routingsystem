@@ -92,81 +92,62 @@ export default function ManageProfile() {
       });
   };
 
-  async function onDisplayNotification() {
-    console.log("name", name);
-    const channelId = await notifee.createChannel({
-      id: "important",
-      name: "Important Notifications",
-      importance: AndroidImportance.HIGH,
-    });
+  // async function onDisplayNotification() {
+  //   console.log("name", name);
+  //   const channelId = await notifee.createChannel({
+  //     id: "important",
+  //     name: "Important Notifications",
+  //     importance: AndroidImportance.HIGH,
+  //   });
 
-    // await notifee.displayNotification({
-    //   title: 'Your account requires attention',
-    //   body: 'You are overdue payment on one or more of your accounts!',
-    //   android: {
-    //     channelId,
-    //       largeIcon: require('../../../../assets/images/fb.png'),
-    //     importance: AndroidImportance.HIGH,
-    //     // ongoing: true,
-    //   },
-    // });
-    // notifee.displayNotification({
-    //   title: 'New notification',
-    //   android: {
-    //     channelId,
-    //     pressAction: {
-    //       id: 'default',
-    //       launchActivity: 'com.awesome.app.CustomActivity',
-    //     },
-    //   },
-    // });
+    
 
-    notifee.displayNotification({
-      title: "Suzuki Wagon R",
-      body: "Muzafar \n 4.8(613)",
-      data: {
-        chatId: "123",
-      },
-      android: {
-        largeIcon: require("../../../../assets/images/avatar.png"),
-        importance: AndroidImportance.HIGH,
-        channelId,
-        actions: [
-          {
-            title: "Accept",
-            icon: "https://my-cdn.com/icons/open-chat.png",
-            pressAction: {
-              id: "Accept",
-              launchActivity: "default",
-            },
-          },
-          {
-            title: "Delete",
-            icon: "https://my-cdn.com/icons/open-chat.png",
-            pressAction: {
-              id: "Delete",
-              launchActivity: "default",
-            },
-          },
-        ],
-      },
-    });
+  //   notifee.displayNotification({
+  //     title: "Suzuki Wagon R",
+  //     body: "Muzafar \n 4.8(613)",
+  //     data: {
+  //       chatId: "123",
+  //     },
+  //     android: {
+  //       largeIcon: require("../../../../assets/images/avatar.png"),
+  //       importance: AndroidImportance.HIGH,
+  //       channelId,
+  //       actions: [
+  //         {
+  //           title: "Accept",
+  //           icon: "https://my-cdn.com/icons/open-chat.png",
+  //           pressAction: {
+  //             id: "Accept",
+  //             launchActivity: "default",
+  //           },
+  //         },
+  //         {
+  //           title: "Delete",
+  //           icon: "https://my-cdn.com/icons/open-chat.png",
+  //           pressAction: {
+  //             id: "Delete",
+  //             launchActivity: "default",
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   });
 
-    notifee.onForegroundEvent(({ type, detail }) => {
-      if (type === EventType.ACTION_PRESS && detail.pressAction.id) {
-        console.log(
-          "User pressed an action with the id: ",
-          detail.pressAction.id
-        );
-        if (detail.pressAction.id == "Accept") {
-          // fetchData();
-          navigate("CustomerPayment");
-        } else {
-          alert("you decline");
-        }
-      }
-    });
-  }
+  //   notifee.onForegroundEvent(({ type, detail }) => {
+  //     if (type === EventType.ACTION_PRESS && detail.pressAction.id) {
+  //       console.log(
+  //         "User pressed an action with the id: ",
+  //         detail.pressAction.id
+  //       );
+  //       if (detail.pressAction.id == "Accept") {
+  //         // fetchData();
+  //         navigate("CustomerPayment");
+  //       } else {
+  //         alert("you decline");
+  //       }
+  //     }
+  //   });
+  // }
 
   async function onSubmit() {
     if (CardInput.valid == false || typeof CardInput.valid == "undefined") {
