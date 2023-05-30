@@ -13,6 +13,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import Header from "@component/Header";
 
 const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
+navigator.geolocation = require("react-native-geolocation-service");
 
 const screen = Dimensions.get("window");
 const ASPECT_RATIO = screen.width / screen.height;
@@ -72,7 +73,6 @@ export default function Home(params) {
     }
   }, []);
 
-  console.log("CURRENT PARAMS 007 ===>", params?.route?.params);
   return (
     <Container>
       <DarkStatusBar />
@@ -101,7 +101,8 @@ export default function Home(params) {
                   color: "black",
                 },
               }}
-              currentLocation={true}
+              currentLocation
+              currentLocationLabel="Current location"
               onPress={(data, details = null) => {
                 let coords = {
                   latitude: details?.geometry?.location?.lat,
@@ -154,7 +155,8 @@ export default function Home(params) {
                   color: "black",
                 },
               }}
-              currentLocation={true}
+              currentLocation
+              currentLocationLabel="Current location"
               onPress={(data, details = null) => {
                 let coords = {
                   latitude: details?.geometry?.location?.lat,
