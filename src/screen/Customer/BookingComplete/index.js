@@ -16,20 +16,24 @@ import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 import DocumentPicker from "react-native-document-picker";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 export default function BookingComplete(props) {
-  console.log("Value",props.route.params.data);
+  console.log("Value", props.route.params.data);
   const val = props.route.params.data;
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [images, setImages] = useState([]);
+  const { user } = useSelector((state) => state.session);
 
-  const [description,setDescription]=useState("")
+  const [description, setDescription] = useState("");
 
-  const getPhotoFromGallery = async() => {
+  const getPhotoFromGallery = async () => {
     try {
       const res = await DocumentPicker.pick({
-        allowMultiSelection:true,
-        type: [DocumentPicker.types.allFiles]
+        allowMultiSelection: true,
+        type: [DocumentPicker.types.allFiles],
       });
       console.log("Image frm galaery", res);
       setImages(res[0]);
@@ -40,52 +44,65 @@ export default function BookingComplete(props) {
         throw err;
       }
     }
-
-
   };
 
-  const postComplain= async()=>{
-  
-      var data = await AsyncStorage.getItem("response");
-      var datas = JSON.parse(data);
-  
-      const formData = new FormData();
-      formData.append("files", images);
-      
-      formData.append("complain_against",val?.rider_id?._id);
-      formData.append("parcel", val?._id);
-      formData.append("description", description);
-     
+  const postComplain = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
 
-  
-      console.log("FormData", formData);
-  
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${datas.access_token}`,
-          "Content-Type": "multipart/form-data",
+    const formData = new FormData();
+    formData.append("files", images);
+
+    formData.append("complain_against", val?.rider_id?._id);
+    formData.append("parcel", val?._id);
+    formData.append("description", description);
+
+    console.log("FormData", formData);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${datas.access_token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    };
+    try {
+      const res = await fetch(
+        "https://routeon.mettlesol.com/v1/complaints",
+        requestOptions
+      );
+      const result = await res.json();
+      showMessage("success", "Complain Created Successfully!");
+      // alert();
+      console.log("RESULT", result);
+    } catch (err) {
+      showMessage("error", "Error in Posted Complain");
+      console.log("ERROR", err?.resonpse);
+    }
+  };
+
+  const cancelTrip = async () => {
+    try {
+      const resp = await axios.post(
+        `https://routeon.mettlesol.com/v1/parcel/cancel`,
+        {
+          parcel: val?._id,
         },
-        body: formData,
-      };
-      try {
-        const res = await fetch(
-          "https://routeon.mettlesol.com/v1/complaints",
-          requestOptions
-        );
-        const result = await res.json();
-        showMessage(
-          "success",
-          "Complain Created Successfully!"
-        );
-        // alert();
-        console.log("RESULT", result);
-      } catch (err) {
-        showMessage("error", "Error in Posted Complain");
-        console.log("ERROR", err?.resonpse);
-      }
-  
-  }
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      );
+
+      showMessage("success", resp.data);
+    } catch (err) {
+      console.log(err);
+      showMessage("error", "Something went wrong while cancelling the trip");
+    }
+  };
+
   return (
     <Container>
       <DarkStatusBar />
@@ -102,7 +119,7 @@ export default function BookingComplete(props) {
             <View style={styles.bookingContent}>
               <View style={styles.bookingDetail}>
                 <Text style={styles.bookingIdText}>
-                  {__(`BOOKING ID : ${(val?._id).substr(0,15)}`)}
+                  {__(`BOOKING ID : ${(val?._id).substr(0, 15)}`)}
                 </Text>
                 <Button>
                   <Text style={styles.completeBtn}>{__(`${val?.status}`)}</Text>
@@ -110,13 +127,21 @@ export default function BookingComplete(props) {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PAID")}</Text>
-                <Text style={styles.bookingText}>{__(`${val?.pay_amount
-                              ? __(`${val?.pay_amount} USD`)
-                              : __(`${val?.fare} USD`)}`)}</Text>
+                <Text style={styles.bookingText}>
+                  {__(
+                    `${
+                      val?.pay_amount
+                        ? __(`${val?.pay_amount} USD`)
+                        : __(`${val?.fare} USD`)
+                    }`
+                  )}
+                </Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PICKUP TIME")}</Text>
-                <Text style={styles.bookingText}>{__(val?.time.substr(0,10))}</Text>
+                <Text style={styles.bookingText}>
+                  {__(val?.time.substr(0, 10))}
+                </Text>
               </View>
               {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("VEHICLE TYPE")}</Text>
@@ -155,31 +180,30 @@ export default function BookingComplete(props) {
                 <Text style={styles.bookingTitle}>{__("QUANTITY")}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Width")}</Text>
                 <Text style={styles.bookingTextDark}>
-             
-                  {__("Width")}
+                  {__(`${val?.width}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__(`${val?.width}`)}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Height")}</Text>
                 <Text style={styles.bookingTextDark}>
-                  {__("Height")}
+                  {__(`${val?.height}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__(`${val?.height}`)}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Length")}</Text>
                 <Text style={styles.bookingTextDark}>
-                  {__("Length")}
+                  {__(`${val?.length}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__(`${val?.length}`)}</Text>
               </View>
               <View style={styles.bookingItem}>
+                <Text style={styles.bookingTextDark}>{__("Weight")}</Text>
                 <Text style={styles.bookingTextDark}>
-                  {__("Weight")}
+                  {__(`${val?.weight}`)}
                 </Text>
-                <Text style={styles.bookingTextDark}>{__(`${val?.weight}`)}</Text>
               </View>
-             
+
               {/* <View style={styles.bookingItem}>
                 <Text style={styles.bookingTextDark}>
                   {__("TOTAL PACKAGES")}
@@ -202,7 +226,9 @@ export default function BookingComplete(props) {
                 >
                   <Image
                     source={{
-                      uri:val?.rider_id?.avatar|| "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                      uri:
+                        val?.rider_id?.avatar ||
+                        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                     }}
                     style={styles.driverImg}
                   />
@@ -217,7 +243,9 @@ export default function BookingComplete(props) {
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("VEHICAL NO")}</Text>
-                  <Text style={styles.bookingTextDark}>{__(`${val?.rider_id?.vehicle_no}`)}</Text>
+                  <Text style={styles.bookingTextDark}>
+                    {__(`${val?.rider_id?.vehicle_no}`)}
+                  </Text>
                 </View>
                 <View style={styles.bookingItem}>
                   <Text style={styles.bookingTitle}>{__("RATING")}</Text>
@@ -273,20 +301,27 @@ export default function BookingComplete(props) {
           <View style={styles.formRow}>
             <Text style={styles.formText}>{__("DESCRIPTION")}</Text>
             <TextInput
-               placeholder='Please write your comments'
+              placeholder="Please write your comments"
               placeholderTextColor="#ccc"
               multiline
               numberOfLines={7}
-
               textAlignVertical={"top"}
               value={description}
-              onChangeText={(e)=>{setDescription(e)}}
-           
+              onChangeText={(e) => {
+                setDescription(e);
+              }}
               // onChangeText={(v) => this.onChangeText("comment", v)}
-              style={[styles.formInput,{backgroundColor:'#ededed'}]}
+              style={[styles.formInput, { backgroundColor: "#ededed" }]}
             />
           </View>
-          <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-between' ,marginTop:60}}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 60,
+            }}
+          >
             <View style={{ width: "47%", height: 50 }}>
               <Button
                 style={styles.mailBtn}
@@ -334,12 +369,13 @@ export default function BookingComplete(props) {
       </Modal>
       <View style={styles.mailBtnInfo}>
         <Button
-          style={[styles.mailBtn,{backgroundColor:'red'}]}
+          style={[styles.mailBtn, { backgroundColor: "red" }]}
           onPress={() => {
             // navigate("CustomerWriteUs");
+            cancelTrip();
           }}
         >
-          <Text style={styles.tripText}>{__("CANCEL")}</Text>
+          <Text style={styles.tripText}>CANCEL</Text>
         </Button>
         <Button
           style={styles.mailInvoiceBtn}

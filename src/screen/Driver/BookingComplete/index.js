@@ -15,6 +15,9 @@ import { __ } from "@utility/translation";
 import request from "@utility/request";
 import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
+import axios from "axios";
+import { showMessage } from "../../../helper/showAlert";
+import { useSelector } from "react-redux";
 
 export default function BookingComplete(props) {
   console.log("Value", props.route.params.data);
@@ -22,6 +25,7 @@ export default function BookingComplete(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [images, setImages] = useState([]);
+  const { user } = useSelector((state) => state.session);
 
   const getPhotoFromGallery = () => {
     // ImagePicker.openPicker({
@@ -39,6 +43,27 @@ export default function BookingComplete(props) {
       setImages(image);
     });
   };
+
+  const cancelTrip = async () => {
+    try {
+      const resp = await axios.post(
+        `https://routeon.mettlesol.com/v1/parcel/cancel`,
+        {
+          parcel: val?._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      );
+
+      showMessage("success", resp.data);
+    } catch (err) {
+      showMessage("error", "Something went wrong while cancelling the trip");
+    }
+  };
+
   return (
     <Container>
       <DarkStatusBar />
@@ -63,9 +88,12 @@ export default function BookingComplete(props) {
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PAID")}</Text>
-                <Text style={styles.bookingText}>      {val?.pay_amount
-                            ? __(`${val?.pay_amount} USD`)
-                            : __(`${val?.fare} USD`)}</Text>
+                <Text style={styles.bookingText}>
+                  {" "}
+                  {val?.pay_amount
+                    ? __(`${val?.pay_amount} USD`)
+                    : __(`${val?.fare} USD`)}
+                </Text>
               </View>
               <View style={styles.bookingItem}>
                 <Text style={styles.bookingTitle}>{__("PICKUP TIME")}</Text>
@@ -237,11 +265,18 @@ export default function BookingComplete(props) {
               textAlignVertical={"top"}
               // placeholder='Please write your comments'
               // onChangeText={(v) => this.onChangeText("comment", v)}
-              style={[styles.formInput,{backgroundColor:'#ededed'}]}
+              style={[styles.formInput, { backgroundColor: "#ededed" }]}
             />
           </View>
-          <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-between' ,marginTop:60}}>
-            <View style={{ width: "47%", height: 50}}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 60,
+            }}
+          >
+            <View style={{ width: "47%", height: 50 }}>
               <Button
                 style={styles.mailBtn}
                 onPress={() => {
@@ -290,9 +325,10 @@ export default function BookingComplete(props) {
           style={[styles.mailBtn, { backgroundColor: "red" }]}
           onPress={() => {
             // navigate("CustomerWriteUs");
+            cancelTrip();
           }}
         >
-          <Text style={styles.tripText}>{__("CANCEL")}</Text>
+          <Text style={styles.tripText}>CANCEL</Text>
         </Button>
         <Button
           style={styles.mailInvoiceBtn}
