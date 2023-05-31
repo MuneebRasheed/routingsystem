@@ -78,7 +78,7 @@ export default function BookingComplete(props) {
       console.log("RESULT", result);
     } catch (err) {
       showMessage("error", "Error in Posted Complain");
-      console.log("ERROR", err?.resonpse);
+      console.log("ERROR", err);
     }
   };
 
