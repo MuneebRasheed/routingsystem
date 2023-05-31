@@ -51,7 +51,7 @@ const Accordion = ({
     navigate("DrawerNav", {
       screen: "PublicHome",
       params: {
-        data,
+        mydata: data,
       },
     });
   };

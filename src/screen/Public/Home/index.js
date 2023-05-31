@@ -27,11 +27,11 @@ export default function Home(params) {
   const pickupRef = useRef(null);
   const droplocationRef = useRef(null);
   const [state, setState] = useState({
-    pickupCords: params?.route?.params?.data
-      ? params.route?.params?.data.pickupCords
+    pickupCords: params?.route?.params?.mydata
+      ? params.route?.params?.mydata.pickupCords
       : {},
-    droplocationCords: params?.route?.params?.data
-      ? params?.route?.params?.data.droplocationCords
+    droplocationCords: params?.route?.params?.mydata
+      ? params?.route?.params?.mydata.droplocationCords
       : {},
     isLoading: false,
     coordinate: new AnimatedRegion({
@@ -60,15 +60,18 @@ export default function Home(params) {
   };
 
   useEffect(() => {
+    console.log("CURRENT PARAMS ==>", params);
     if (
-      params.route?.params?.data.pickupCords &&
-      params?.route?.params?.data.droplocationCords
+      params?.route?.params?.mydata &&
+      params?.route?.params?.mydata.pickupCords &&
+      params &&
+      params?.route?.params?.mydata.droplocationCords
     ) {
       pickupRef.current?.setAddressText(
-        params.route?.params?.data.pickupCords?.locationName
+        params.route?.params?.mydata.pickupCords?.locationName
       );
       droplocationRef?.current?.setAddressText(
-        params.route?.params?.data.droplocationCords?.locationName
+        params.route?.params?.mydata.droplocationCords?.locationName
       );
     }
   }, []);
