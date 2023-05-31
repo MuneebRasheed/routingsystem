@@ -9,6 +9,7 @@ import {
 import { COLOR, FAMILY, SIZE } from "@theme/typography";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch, Checkbox } from "@component/Form";
+import DatePicker from "react-native-date-picker";
 
 import styles from "./styles";
 import theme from "@theme/styles";
@@ -41,6 +42,13 @@ export default function ManageProfile({ navigation }) {
   const [drivingLiscence, setDrivingLiscence] = useState("");
   const [nationalCard, setNationalCard] = useState();
 
+  const [licenseProofCheck, setLicenseProofCheck] = useState("");
+  const [license, setLicense] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [displayDate, setDisplayDate] = useState("");
+  const [isDateExist, setIsDateExist] = useState(false);
+  const [open, setOpen] = useState(false);
+
   // acct_1MwmIbPu2iasesq5
   const [PaymentTabSelected, setPaymentTabSelected] = useState("card");
   const UploadData = async (setPath) => {
@@ -59,10 +67,7 @@ export default function ManageProfile({ navigation }) {
     }
   };
   useEffect(() => {
-   
-      fetchData();
-      
-    
+    fetchData();
   }, [isEnabled]);
 
   useEffect(() => {
@@ -88,7 +93,12 @@ export default function ManageProfile({ navigation }) {
         console.log("res account no", data.data.data);
         setName(data.data.data.first_name);
         setVehicalNumber(data.data.data.vehicle_no);
-        setDrivingLiscence(data.data.data.driving_license);
+        // setDrivingLiscence(data.data.data.driving_license);
+        setLicense(data?.data.data.driving_license);
+        setDisplayDate(data?.data?.data?.driving_license_expiry);
+        if (data?.data?.data?.driving_license_expiry) {
+          setIsDateExist(true);
+        }
         setPhoneNumber(data.data.data.phone);
         setProfileHttp(data.data.data.avatar);
         setEmail(data.data.data.email);
@@ -129,7 +139,7 @@ export default function ManageProfile({ navigation }) {
   };
 
   const ConnectingAccount = async (values, datas) => {
-    console.log("datas.access",datas)
+    console.log("datas.access", datas);
     const res = axios
       .post(
         `  https://routeon.mettlesol.com/v1/users/link-account
@@ -184,7 +194,9 @@ export default function ManageProfile({ navigation }) {
     formData.append("national_ID_file", idCardCheck);
     formData.append("phone", phoneNumber);
     formData.append("vehicle_no", vehicalNumber);
-    formData.append("driving_license", drivingLiscence);
+    // formData.append("driving_license", drivingLiscence);
+    formData.append("driving_license_file", licenseProofCheck);
+    formData.append("driving_license_expiry", displayDate);
     formData.append("email", email);
 
     console.log("FormData", formData);
@@ -283,7 +295,8 @@ export default function ManageProfile({ navigation }) {
                     <Image
                       source={{
                         uri:
-                        profile?.uri ||profileHttp ||
+                          profile?.uri ||
+                          profileHttp ||
                           "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                       }}
                       style={styles.profileImg}
@@ -346,21 +359,53 @@ export default function ManageProfile({ navigation }) {
                   />
                 </View>
 
-                <View style={styles.profileBtnInfo}>
+                <View style={[styles.profileBtnInfo, styles.profileBtnInfoTwo]}>
                   <View style={styles.formRow2}>
-                    {/* <Text style={styles.formText}>{__("DRIVING LICENSE")}</Text> */}
+                    <Text style={styles.formText}>LICENSE EXPIRY DATE:</Text>
+                    <DatePicker
+                      modal
+                      open={open}
+                      date={date}
+                      onConfirm={(date) => {
+                        setOpen(false);
+                        setDate(date);
+                        setDisplayDate(date.toISOString());
+                      }}
+                      onCancel={() => {
+                        setOpen(false);
+                      }}
+                    />
+                    <Text>
+                      {displayDate ? displayDate.substr(0, 10) : "NO DATE"}
+                    </Text>
+                  </View>
+                  {(!displayDate || !isDateExist) && (
+                    <Button
+                      style={styles.uploadBtn}
+                      onPress={() => {
+                        setOpen(true);
+                      }}
+                    >
+                      <Text style={styles.uploadBtnText}>SELECT DATE</Text>
+                    </Button>
+                  )}
+                </View>
+
+                {/* <View style={styles.profileBtnInfo}>
+                  <View style={styles.formRow2}>
+                     <Text style={styles.formText}>{__("DRIVING LICENSE")}</Text> 
                     <TextInput
                       placeholder="Enter Your Driving License"
-                      // placeholderTextColor="#000"
+                      placeholderTextColor="#000"
                       style={styles.formInput}
                       value={drivingLiscence}
                       onChangeText={setDrivingLiscence}
                     />
                   </View>
-                  {/* <Button style={styles.uploadBtn}>
+                  <Button style={styles.uploadBtn}>
                     <Text style={styles.uploadBtnText}>{__("VIEW")}</Text>
-                  </Button> */}
-                </View>
+                  </Button>
+                </View> */}
                 <View style={[styles.profileBtnInfo, styles.profileBtnInfoTwo]}>
                   <View style={styles.formRow2}>
                     <Text style={styles.formText}>
@@ -375,7 +420,8 @@ export default function ManageProfile({ navigation }) {
                     <Image
                       source={{
                         uri:
-                       idCardCheck?.uri|| nationalCard ||
+                          idCardCheck?.uri ||
+                          nationalCard ||
                           "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                       }}
                       style={{
@@ -399,6 +445,38 @@ export default function ManageProfile({ navigation }) {
                     )}
                   </Button>
                 </View>
+                <View style={[styles.profileBtnInfo, styles.profileBtnInfoTwo]}>
+                  <View style={styles.formRow2}>
+                    <Text style={styles.formText}>UPLOAD DRIVER LICENSE</Text>
+
+                    <Image
+                      source={{
+                        uri:
+                          licenseProofCheck?.uri ||
+                          license ||
+                          "https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                      }}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
+                      }}
+                    />
+                  </View>
+
+                  <Button
+                    style={styles.uploadBtn}
+                    onPress={() => {
+                      UploadData(setLicenseProofCheck);
+                    }}
+                  >
+                    {license ? (
+                      <Text style={styles.uploadBtnText}>{__("UPDATE")}</Text>
+                    ) : (
+                      <Text style={styles.uploadBtnText}>{__("UPLOAD")}</Text>
+                    )}
+                  </Button>
+                </View>
               </View>
               <Text style={styles.permissionLabel}>
                 {__("Click on Link to change Permissions")}{" "}
@@ -415,7 +493,10 @@ export default function ManageProfile({ navigation }) {
         </ScrollView>
 
         <Button
-          style={[styles.saveBtn, { marginLeft: 20, marginRight: 20 ,marginTop:5}]}
+          style={[
+            styles.saveBtn,
+            { marginLeft: 20, marginRight: 20, marginTop: 5 },
+          ]}
           onPress={submit}
         >
           <Text style={styles.saveBtnText}>{__("SAVE")}</Text>
@@ -429,10 +510,12 @@ export default function ManageProfile({ navigation }) {
     return (
       <View style={styles.profileContainer}>
         <View style={styles.profileContent}>
-          <View style={[styles.profileInputDetail,{paddingBottom:-100}]}>
+          <View style={[styles.profileInputDetail, { paddingBottom: -100 }]}>
             {/* <Text style={styles.permissionHeader}>{__("PAYMENT PROCESS")}</Text> */}
             <View style={styles.switchInfo}>
-              <Text style={styles.switchText}>{__("Connect your stripe account")}</Text>
+              <Text style={styles.switchText}>
+                {__("Connect your stripe account")}
+              </Text>
               <ToggleSwitch
                 setValue={setIsEnabled}
                 value={isEnabled}
