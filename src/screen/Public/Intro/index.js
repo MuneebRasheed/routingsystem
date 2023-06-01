@@ -53,12 +53,21 @@ export default function Intro({ navigation }) {
       messaging().onMessage(async (remoteMessage) => {
         console.log("FOREGOURND===>");
         console.log("MY CURRENT USER123===>", user);
-        if (remoteMessage && user && user?.roles?.includes("rider")) {
+        if (
+          remoteMessage &&
+          user &&
+          user?.roles?.includes("rider") &&
+          remoteMessage?.data.type === "parcel_notify"
+        ) {
           console.log("MY CURRENT USER===>", user);
           navigation.navigate("PublicHome", {
             data: remoteMessage.notification.body,
           });
-          console.log("notification on foreground state....", remoteMessage);
+          console.log(
+            "notification on foreground state....",
+            remoteMessage,
+            remoteMessage?.data.type === "parcel_notify"
+          );
         }
       });
 
