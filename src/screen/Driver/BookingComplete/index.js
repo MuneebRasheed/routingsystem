@@ -18,7 +18,8 @@ import { DarkStatusBar } from "@component/StatusBar";
 import axios from "axios";
 import { showMessage } from "../../../helper/showAlert";
 import { useSelector } from "react-redux";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DocumentPicker from "react-native-document-picker";
 export default function BookingComplete(props) {
   console.log("Value", props.route.params.data);
   const val = props.route.params.data;
@@ -26,22 +27,59 @@ export default function BookingComplete(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [images, setImages] = useState([]);
   const { user } = useSelector((state) => state.session);
+  const [description, setDescription] = useState("");
 
-  const getPhotoFromGallery = () => {
-    // ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true
-    // }).then(image => {
-    //   console.log(image);
-    // });
+  const getPhotoFromGallery = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        allowMultiSelection: true,
+        type: [DocumentPicker.types.allFiles],
+      });
+      console.log("Image frm galaery", res);
+      setImages(res[0]);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker, exit any dialogs or menus and move on
+      } else {
+        throw err;
+      }
+    }
+  };
 
-    ImagePicker.openPicker({
-      multiple: true,
-    }).then((image) => {
-      console.log(image);
-      setImages(image);
-    });
+  const postComplain = async () => {
+    var data = await AsyncStorage.getItem("response");
+    var datas = JSON.parse(data);
+
+    const formData = new FormData();
+    formData.append("files", images);
+
+    formData.append("complain_against", val?.customer_id?._id);
+    formData.append("parcel", val?._id);
+    formData.append("description", description);
+
+    console.log("FormData", formData);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${datas.access_token}`,
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    };
+    try {
+      const res = await fetch(
+        "https://routeon.mettlesol.com/v1/complaints",
+        requestOptions
+      );
+      const result = await res.json();
+      showMessage("success", "Complain Created Successfully!");
+      // alert();
+      console.log("RESULT", result);
+    } catch (err) {
+      showMessage("error", "Error in Posted Complain");
+      console.log("ERROR", err?.resonpse);
+    }
   };
 
   const cancelTrip = async () => {
@@ -178,7 +216,7 @@ export default function BookingComplete(props) {
                 </View>
                 <Button
                   onPress={() => {
-                    navigate("CustomerManageProfile");
+                    // navigate("CustomerManageProfile");
                   }}
                 >
                   <Image
@@ -258,13 +296,15 @@ export default function BookingComplete(props) {
           <View style={styles.formRow}>
             <Text style={styles.formText}>{__("DESCRIPTION")}</Text>
             <TextInput
-              placeholder=""
+              placeholder="Please write your comments"
               placeholderTextColor="#ccc"
               multiline
               numberOfLines={7}
               textAlignVertical={"top"}
               // placeholder='Please write your comments'
-              // onChangeText={(v) => this.onChangeText("comment", v)}
+              onChangeText={(e) => {
+                setDescription(e);
+              }}
               style={[styles.formInput, { backgroundColor: "#ededed" }]}
             />
           </View>
@@ -290,6 +330,7 @@ export default function BookingComplete(props) {
               <Button
                 style={styles.mailBtn}
                 onPress={() => {
+                  postComplain();
                   setIsOpen(false);
                 }}
               >

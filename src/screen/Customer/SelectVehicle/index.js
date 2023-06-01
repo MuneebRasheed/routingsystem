@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image,TouchableOpacity } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch } from "@component/Form";
 import axios from "axios";
@@ -33,6 +33,7 @@ function SelectVehicle(params) {
   const to_location_cor = `${params.route.params.to.latitude}, ${params.route.params.to.longitude}`;
 
   const [bids, setBids] = useState([]);
+  const [imageForShow,setImageForShow]=useState([])
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [openD, setOpenD] = useState(false);
@@ -87,6 +88,9 @@ function SelectVehicle(params) {
         type: image.mime,
         uri: image?.path,
       };
+      setImageForShow(pre=>{
+        return[...pre,format]
+      })
       setImages(format);
       console.log(format);
     });
@@ -274,8 +278,13 @@ function SelectVehicle(params) {
     );
   };
   const getPhotoFromGallery = () => {
-    setBottomModal(true);
-    // getPhotoFromCamera();
+    // setBottomModal(true);
+    if(imageForShow.length>=3){
+      showMessage("error", "You can't uploaded more than three images");
+    }else{
+      getPhotoFromCamera();
+    }
+   
     // setImages({ "fileCopyUri": null, "name": "e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg", "height": 400,"width": 300,"size": 71776, "type": "image/jpeg", "uri": "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg"})
     // UploadData()
   };
@@ -285,7 +294,9 @@ function SelectVehicle(params) {
     var datas = JSON.parse(data);
 
     const formData = new FormData();
-    formData.append("files", images);
+  ( imageForShow[0]?.uri && formData.append("files", imageForShow[0]));
+  ( imageForShow[1]?.uri && formData.append("files", imageForShow[1]));
+  ( imageForShow[2]?.uri && formData.append("files", imageForShow[2]));
     formData.append(
       "from_location",
       JSON.stringify(params.route.params.form.locationName)
@@ -341,82 +352,16 @@ function SelectVehicle(params) {
     }
   };
 
-  async function onDisplayNotification() {
-    const channelId = await notifee.createChannel({
-      id: "important",
-      name: "Important Notifications",
-      importance: AndroidImportance.HIGH,
-    });
 
-    // await notifee.displayNotification({
-    //   title: 'Your account requires attention',
-    //   body: 'You are overdue payment on one or more of your accounts!',
-    //   android: {
-    //     channelId,
-    //       largeIcon: require('../../../../assets/images/fb.png'),
-    //     importance: AndroidImportance.HIGH,
-    //     // ongoing: true,
-    //   },
-    // });
-    // notifee.displayNotification({
-    //   title: 'New notification',
-    //   android: {
-    //     channelId,
-    //     pressAction: {
-    //       id: 'default',
-    //       launchActivity: 'com.awesome.app.CustomActivity',
-    //     },
-    //   },
-    // });
 
-    notifee.displayNotification({
-      title: "Suzuki Wagon R",
-      body: "Muzafar \n 4.8(613)",
-      data: {
-        chatId: "123",
-      },
-      android: {
-        largeIcon: require("../../../../assets/images/avatar.png"),
-        importance: AndroidImportance.HIGH,
-        channelId,
-        actions: [
-          {
-            title: "Accept",
-            icon: "https://my-cdn.com/icons/open-chat.png",
-            pressAction: {
-              id: "Accept",
-              launchActivity: "default",
-            },
-          },
-          {
-            title: "Delete",
-            icon: "https://my-cdn.com/icons/open-chat.png",
-            pressAction: {
-              id: "Delete",
-              launchActivity: "default",
-            },
-          },
-        ],
-      },
-    });
-
-    notifee.onForegroundEvent(({ type, detail }) => {
-      if (type === EventType.ACTION_PRESS && detail.pressAction.id) {
-        console.log(
-          "User pressed an action with the id: ",
-          detail.pressAction.id
-        );
-        if (detail.pressAction.id == "Accept") {
-          // fetchData();
-          navigate("CustomerPayment");
-        } else {
-          alert("you decline");
-        }
-      }
-    });
+  const deleteShowImage=(value)=>{
+    // console.log("press")
+    setImageForShow(previous=>previous.filter(val=>val?.uri!=value?.uri))
+    showMessage(
+      "success",
+      "Image Delete Successfully"
+    );
   }
-
-  console.log("BIDD====>", bids);
 
   return (
     <Container style={theme.layoutFx}>
@@ -606,15 +551,34 @@ function SelectVehicle(params) {
                 </Button>
                 
               </View>
-             { images?.uri && <Image
+             { imageForShow.length >0 && 
+             
+             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',maxWidth:'70%'}}>
+
+         
+             {imageForShow.map(val=>{
+
+              return(
+                <TouchableOpacity onPress={()=>{
+                  deleteShowImage(val);
+                  console.log("image is press")
+                  }}>
+                <Image
                 source={{
-                  uri: images?.uri ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                  uri: val?.uri ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
                   // uri: values,
                   // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
                 }}
                 // source={require(values)}
-                style={{width:50,height:50,borderRadius:25}}
-              />}
+                style={{width:75,height:75,borderRadius:35}}
+                
+              />
+              </TouchableOpacity>
+              )
+             })}
+                 </View>
+             
+             }
               <View style={{ height: 270 }}>
                 <DropDownPicker
                   open={openModel}
