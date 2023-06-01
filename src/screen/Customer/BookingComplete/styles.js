@@ -139,7 +139,7 @@ export default {
     flex: 5,
     alignItems: "flex-start",
     justifyContent: "center",
-    alignItems:'center',
+    alignItems: "center",
     backgroundColor: COLOR.GREEN,
     borderRadius: 5,
     paddingLeft: 15,
@@ -172,7 +172,7 @@ export default {
     fontSize: SIZE.SIZE_20,
     color: COLOR.SMOKEDARK,
     paddingHorizontal: 2,
-    dingVertical: 2,
+    // dingVertical: 2,
   },
   modalRating: {
     width: "90%",
