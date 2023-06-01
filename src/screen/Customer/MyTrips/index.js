@@ -60,7 +60,6 @@ export default function MyTrip() {
     if (socket) {
       console.log("RJUNN");
       socket.on("connectedUsers", (data) => {
-        console.log("DATA", data);
         setUsers(data);
       });
     }
