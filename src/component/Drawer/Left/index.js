@@ -17,6 +17,7 @@ import { logout } from "../../../store/reducers/session";
 function MenuLeft() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
+  console.log("data",data)
   const { socket } = useSelector((state) => state.socket);
 
   function renderMenuList(menus) {
@@ -93,7 +94,7 @@ function MenuLeft() {
             {/* {this.renderMenuList(MENU.Data1)} */}
             {/* <Text style={styles.navHeader}>Customer</Text> */}
             {data.session.bool
-              ? renderMenuList(MENU.Data3)
+              ?data.session.isVerified? renderMenuList(MENU.Data3):renderMenuList(MENU.Data4)
               : renderMenuList(MENU.Data2)}
 
             {/* <Text style={styles.navHeader}>Driver</Text> */}

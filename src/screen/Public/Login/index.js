@@ -19,7 +19,7 @@ import Support from "@component/Support";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { login, updateUser } from "../../../store/reducers/session";
+import { login, updateUser, verfied } from "../../../store/reducers/session";
 import { initilizeSocket } from "../../../store/reducers/socketReducer";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
 import { showMessage } from "../../../helper/showAlert";
@@ -41,6 +41,25 @@ export default function SignUp() {
     await AsyncStorage.setItem("response", JSON.stringify(response?.data));
     await AsyncStorage.setItem("role", "User");
   };
+
+  const getInformation =async(datas)=>{
+    try{
+      const data=await axios.get(`https://routeon.mettlesol.com/v1/users/user-by-id/${datas?._id}`,{
+        headers: {
+          Authorization: `Bearer ${datas.access_token}`,
+        },
+      })
+
+      if(data.data.data?.isVerified){
+        dispatch(verfied({}))
+      }
+      console.log("dataSS",data.data.data?.isVerified)
+    }catch(e){
+      console.log("error",e)
+    }
+ 
+
+  }
   async function logins() {
     // * USER
     // var cd = {
@@ -73,8 +92,9 @@ export default function SignUp() {
             isSelected
           ) {
             temp = 2;
+            getInformation(response?.data)
             dispatch(login({}));
-            dispatch(updateUser(response.data));
+          dispatch(updateUser(response.data));
             dispatch(initilizeSocket(response.data.access_token));
             method(response);
             showMessage("success", "Login Succefully");
@@ -97,11 +117,7 @@ export default function SignUp() {
           setLoading(false);
           return response.data;
         } else {
-          // Support.showError({
-          //   title: __("OOPs"),
-          //   message: __("You cant be login"),
-          //   hideDelay: 2500,
-          // });
+       
           showMessage("error", "You cant be login.");
         }
       })

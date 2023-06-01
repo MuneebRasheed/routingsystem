@@ -9,6 +9,7 @@ const initialState = {
     billing: {},
     shipping: {},
   },
+  isVerified:false
 };
 
 const updateToken_ = (state, action) => {
@@ -18,8 +19,13 @@ const updateToken_ = (state, action) => {
 const login_ = (state, action) => {
   state.isLoggedIn = true;
   // state.user = action.payload.user
+
   state.bool = true;
 };
+
+const verfied_=(state, action)=>{
+  state.isVerified=true
+}
 
 const logout_ = (state, action) => {
   // return { ...initialState, token: state.token };
@@ -58,6 +64,7 @@ const slice = createSlice({
     logout1: logout1_,
     updateUser: updateUser_,
     updateAddress: updateAddress_,
+    verfied:verfied_
   },
 });
 
@@ -70,6 +77,7 @@ export const {
   logout1,
   updateUser,
   updateAddress,
+  verfied,
 } = actions;
 
 export default reducer;
