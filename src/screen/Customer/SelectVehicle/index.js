@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, ScrollView, Image,TouchableOpacity } from "react-native";
+import { View, ScrollView, Image, TouchableOpacity } from "react-native";
 import { Container, Content, Text, Icon } from "@component/Basic";
 import { TextInput, Button, ToggleSwitch } from "@component/Form";
 import axios from "axios";
@@ -33,7 +33,7 @@ function SelectVehicle(params) {
   const to_location_cor = `${params.route.params.to.latitude}, ${params.route.params.to.longitude}`;
 
   const [bids, setBids] = useState([]);
-  const [imageForShow,setImageForShow]=useState([])
+  const [imageForShow, setImageForShow] = useState([]);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [openD, setOpenD] = useState(false);
@@ -55,8 +55,6 @@ function SelectVehicle(params) {
     { label: "Fragile", value: "fragile" },
     { label: "Other Items", value: "otherItems" },
   ]);
-
-
 
   const [pracelTimeType, setPracelTimeType] = useState("");
   const [itemsType, setItemsType] = useState("solid");
@@ -88,9 +86,9 @@ function SelectVehicle(params) {
         type: image.mime,
         uri: image?.path,
       };
-      setImageForShow(pre=>{
-        return[...pre,format]
-      })
+      setImageForShow((pre) => {
+        return [...pre, format];
+      });
       setImages(format);
       console.log(format);
     });
@@ -98,8 +96,8 @@ function SelectVehicle(params) {
   const UploadData = async () => {
     try {
       const res = await DocumentPicker.pick({
-        allowMultiSelection:true,
-        type: [DocumentPicker.types.allFiles]
+        allowMultiSelection: true,
+        type: [DocumentPicker.types.allFiles],
       });
       console.log("Image frm galaery", res);
       setImages(res[0]);
@@ -279,12 +277,12 @@ function SelectVehicle(params) {
   };
   const getPhotoFromGallery = () => {
     // setBottomModal(true);
-    if(imageForShow.length>=3){
+    if (imageForShow.length >= 3) {
       showMessage("error", "You can't uploaded more than three images");
-    }else{
+    } else {
       getPhotoFromCamera();
     }
-   
+
     // setImages({ "fileCopyUri": null, "name": "e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg", "height": 400,"width": 300,"size": 71776, "type": "image/jpeg", "uri": "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/e3a0266f-a831-4a63-a18f-52e1c2ffaf92.jpg"})
     // UploadData()
   };
@@ -294,9 +292,9 @@ function SelectVehicle(params) {
     var datas = JSON.parse(data);
 
     const formData = new FormData();
-  ( imageForShow[0]?.uri && formData.append("files", imageForShow[0]));
-  ( imageForShow[1]?.uri && formData.append("files", imageForShow[1]));
-  ( imageForShow[2]?.uri && formData.append("files", imageForShow[2]));
+    imageForShow[0]?.uri && formData.append("files", imageForShow[0]);
+    imageForShow[1]?.uri && formData.append("files", imageForShow[1]);
+    imageForShow[2]?.uri && formData.append("files", imageForShow[2]);
     formData.append(
       "from_location",
       JSON.stringify(params.route.params.form.locationName)
@@ -316,10 +314,10 @@ function SelectVehicle(params) {
     formData.append("height", height);
     formData.append("fare", fare);
     formData.append("width", width);
-    formData.append("time", JSON.stringify(date).substr(1,10));
+    formData.append("time", JSON.stringify(date).substr(1, 10));
     formData.append("length", length);
     formData.append("weight", weight);
-    formData.append("parcel_type",itemsType);
+    formData.append("parcel_type", itemsType);
     // formData.append("biddingStartTime", "2023-12-06");
     // formData.append("biddingEndTime", "2023-12-06");
     formData.append("parcel_bidding_type", pracelTimeType);
@@ -340,10 +338,16 @@ function SelectVehicle(params) {
         requestOptions
       );
       const result = await res.json();
-      showMessage(
-        "success",
-        "Parcel Created Successfully!. Wait for drivers to bid"
-      );
+
+      if (result.statusCode === 400) {
+        showMessage("error", result.message);
+      } else {
+        showMessage(
+          "success",
+          "Parcel Created Successfully!. Wait for drivers to bid"
+        );
+      }
+
       // alert();
       console.log("RESULT", result);
     } catch (err) {
@@ -352,16 +356,13 @@ function SelectVehicle(params) {
     }
   };
 
-
-
-  const deleteShowImage=(value)=>{
+  const deleteShowImage = (value) => {
     // console.log("press")
-    setImageForShow(previous=>previous.filter(val=>val?.uri!=value?.uri))
-    showMessage(
-      "success",
-      "Image Delete Successfully"
+    setImageForShow((previous) =>
+      previous.filter((val) => val?.uri != value?.uri)
     );
-  }
+    showMessage("success", "Image Delete Successfully");
+  };
 
   return (
     <Container style={theme.layoutFx}>
@@ -406,20 +407,30 @@ function SelectVehicle(params) {
               <Accordion
                 setOpened={setOpened}
                 opened={opened}
-                title= {dateOneTimeSelect?JSON.stringify(date).substr(1,10):"Select Time"}
+                title={
+                  dateOneTimeSelect
+                    ? JSON.stringify(date).substr(1, 10)
+                    : "Select Time"
+                }
                 renderContent={() => (
                   <View style={styles.accOrderInfo}>
-                    <Button onPress={() => {setOpened(false)
-                    setDate(new Date())
-                    setPracelTimeType("now")
-                    setDateOneTimeSelect(true)
-                    }}>
+                    <Button
+                      onPress={() => {
+                        setOpened(false);
+                        setDate(new Date());
+                        setPracelTimeType("now");
+                        setDateOneTimeSelect(true);
+                      }}
+                    >
                       <Text style={styles.accText}>{__("Now")}</Text>
                     </Button>
-                    <Button onPress={() => {setOpenD(true)
-                 
-                     setDateOneTimeSelect(true)
-                    }}>
+                    <Button
+                      onPress={() => {
+                        setOpenD(true);
+
+                        setDateOneTimeSelect(true);
+                      }}
+                    >
                       <Text
                         style={styles.accText}
                         onPress={() => setOpen(true)}
@@ -444,7 +455,7 @@ function SelectVehicle(params) {
                     setOpen(false);
                     setDate(date);
                     setOpened(false);
-                    setPracelTimeType("range")
+                    setPracelTimeType("range");
                     console.log(JSON.stringify(date));
                   }}
                   onCancel={() => {
@@ -549,36 +560,40 @@ function SelectVehicle(params) {
                     style={[theme.SIZE_24, theme.DARKBLUE]}
                   />
                 </Button>
-                
               </View>
-             { imageForShow.length >0 && 
-             
-             <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',maxWidth:'70%'}}>
-
-         
-             {imageForShow.map(val=>{
-
-              return(
-                <TouchableOpacity onPress={()=>{
-                  deleteShowImage(val);
-                  console.log("image is press")
-                  }}>
-                <Image
-                source={{
-                  uri: val?.uri ||"https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
-                  // uri: values,
-                  // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
-                }}
-                // source={require(values)}
-                style={{width:75,height:75,borderRadius:35}}
-                
-              />
-              </TouchableOpacity>
-              )
-             })}
-                 </View>
-             
-             }
+              {imageForShow.length > 0 && (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    maxWidth: "70%",
+                  }}
+                >
+                  {imageForShow.map((val) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => {
+                          deleteShowImage(val);
+                          console.log("image is press");
+                        }}
+                      >
+                        <Image
+                          source={{
+                            uri:
+                              val?.uri ||
+                              "https://cdn.pixabay.com/photo/2016/01/10/22/07/beauty-1132617__340.jpg",
+                            // uri: values,
+                            // uri: "file:///storage/emulated/0/Android/data/com.wditechy.truckie/files/Pictures/fb3506d2-0efc-49f7-9dfc-dc6f5897d544.jpg" ,
+                          }}
+                          // source={require(values)}
+                          style={{ width: 75, height: 75, borderRadius: 35 }}
+                        />
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              )}
               <View style={{ height: 270 }}>
                 <DropDownPicker
                   open={openModel}

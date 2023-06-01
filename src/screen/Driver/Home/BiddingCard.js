@@ -90,6 +90,16 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               City: {val?.customer_id?.city}
             </Text>
           </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              margin: 5,
+              fontSize: 20,
+            }}
+          >
+            <Text style={styles.biddingCardText}>Delivery Time: Now</Text>
+          </View>
         </View>
       </View>
       <View

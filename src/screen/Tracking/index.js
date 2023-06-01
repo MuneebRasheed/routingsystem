@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, StyleSheet, Dimensions, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import MapView, { Marker, AnimatedRegion } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { useSelector } from "react-redux";
@@ -7,8 +14,10 @@ import {
   getUserCurrentPosition,
   locationPermission,
 } from "../../helper/getCurrentLocation";
-
-import { COLOR } from "@theme/typography";
+import { COLOR, FAMILY, SIZE } from "@theme/typography";
+import AppSpinner from "../../component/AppSpinner";
+import { showMessage } from "../../helper/showAlert";
+import axios from "axios";
 
 const GOOGLE_MAPS_APIKEY = "AIzaSyABbE8m9cfg-OspSdVkr58Lo5SplQ_XFLA";
 const screen = Dimensions.get("window");
@@ -17,11 +26,16 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const TrackingScreen = ({ route }) => {
-  console.log("COMPLETE DATA===>", route?.params?.data);
+  // console.log("COMPLETE DATA===>", route?.params?.data);
 
   const [isTrackingStart, setIsTrackingStart] = useState(false);
+  const [currentTripStatus, setCurrentTripStatus] = useState(
+    route?.params?.data?.status
+  );
+  const [tripStatusLoading, setTripStatusLoading] = useState(false);
   const { user } = useSelector((state) => state.session);
   const { socket } = useSelector((state) => state.socket);
+
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [state, setState] = useState({
@@ -85,6 +99,35 @@ const TrackingScreen = ({ route }) => {
         status: "start",
         heading: res.heading,
       });
+    }
+  };
+
+  const handleTripStatus = async (status) => {
+    setTripStatusLoading(true);
+    try {
+      const resp = await axios.patch(
+        `https://routeon.mettlesol.com/v1/parcel/${route?.params?.data?._id}`,
+        {
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.access_token}`,
+          },
+        }
+      );
+
+      if (resp.status === 200) {
+        console.log("DUMYY STATUS ===>", status);
+        console.log("API STATUS ===>", resp.data.status);
+        setCurrentTripStatus(resp.data.status);
+        showMessage("success", `You marked the parcel as ${resp.data.status}`);
+        setTripStatusLoading(false);
+      }
+    } catch (err) {
+      console.log("ERROR===>", err.response);
+      showMessage("error", "Something went wrong while changing trip status");
+      setTripStatusLoading(false);
     }
   };
 
@@ -152,7 +195,7 @@ const TrackingScreen = ({ route }) => {
     }
   }, []);
 
-  console.log("CURRENT STATE=>", state);
+  // console.log("CURRENT STATE=>", currentTripStatus);
 
   return (
     <View>
@@ -222,6 +265,50 @@ const TrackingScreen = ({ route }) => {
               />
             )}
         </MapView>
+        {user && user.roles.includes("rider") && (
+          <View style={styles.outerContainerForDriver}>
+            <TouchableOpacity
+              onPress={() => {
+                if (!tripStatusLoading && currentTripStatus !== "done") {
+                  const identifyStatus =
+                    currentTripStatus === "in_progress"
+                      ? "started"
+                      : currentTripStatus === "started"
+                      ? "pickup"
+                      : currentTripStatus === "pickup"
+                      ? "done"
+                      : null;
+
+                  handleTripStatus(identifyStatus);
+                }
+              }}
+            >
+              <View style={styles.innerContainerForDriver}>
+                <View
+                  style={{
+                    backgroundColor: COLOR.PRIMARY,
+                  }}
+                >
+                  {tripStatusLoading ? (
+                    <View style={styles.shareBtnText}>
+                      <AppSpinner />
+                    </View>
+                  ) : (
+                    <Text style={styles.shareBtnText}>
+                      {currentTripStatus === "in_progress"
+                        ? "START TRIP"
+                        : currentTripStatus === "started"
+                        ? "PICK UP"
+                        : currentTripStatus === "pickup"
+                        ? "DONE"
+                        : "TRIP COMPLETED"}
+                    </Text>
+                  )}
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -252,6 +339,40 @@ const styles = StyleSheet.create({
     color: COLOR.LIGHT,
     lineHeight: 20,
     fontWeight: "bold",
+  },
+  outerContainerForDriver: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    zIndex: 2,
+    width: "100%",
+    padding: 20,
+  },
+  innerContainerForDriver: {
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  textStylesForDriver: {
+    color: COLOR.LIGHT,
+    lineHeight: 20,
+    fontWeight: "bold",
+  },
+
+  shareBtn: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLOR.BLUE,
+    borderRadius: 3,
+    paddingVertical: 15,
+    marginLeft: 5,
+  },
+  shareBtnText: {
+    fontFamily: FAMILY.BOLD,
+    fontSize: SIZE.SIZE_12,
+    paddingVertical: 15,
+    color: COLOR.LIGHT,
+    textAlign: "center",
   },
 });
 

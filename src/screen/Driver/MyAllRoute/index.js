@@ -184,7 +184,7 @@ export default function MyTrip() {
               ) : (
                 <View style={styles.noTripsFoundContainer}>
                   <Text style={styles.noTripsFoundText}>
-                    No Open Routes Found
+                    No In-Active Routes Found
                   </Text>
                 </View>
               )}
