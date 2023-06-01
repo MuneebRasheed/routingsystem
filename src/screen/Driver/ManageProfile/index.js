@@ -26,6 +26,8 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Hyperlink from "react-native-hyperlink";
 import DocumentPicker from "react-native-document-picker";
+import { showMessage } from "../../../helper/showAlert";
+
 export default function ManageProfile({ navigation }) {
   const [selected, setSelected] = useState("");
   const [value, setValue] = useState();
@@ -215,6 +217,7 @@ export default function ManageProfile({ navigation }) {
         requestOptions
       );
       const result = await res.json();
+      showMessage("success", "Profile Updated Successfully");
       console.log("RESULT", result);
     } catch (err) {
       console.log("ERROR");
