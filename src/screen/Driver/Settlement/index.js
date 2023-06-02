@@ -22,38 +22,37 @@ export default function TransactionHistory() {
   const getTransactionHistory = async () => {
     var data = await AsyncStorage.getItem("response");
     var datas = JSON.parse(data);
-    console.log(datas)
-
+    console.log(datas);
 
     const ress = axios
       .get(
         ` https://routeon.mettlesol.com/v1/users/user-by-id/${datas._id}`,
-        
-        {
-          headers: {
-            Authorization: `Bearer ${datas.access_token}`,
-          },
-        }
-      ).then((response)=>{
-        console.log(response.data.data.customerId)
-        const res = axios
-      .get(
-        ` https://routeon.mettlesol.com/v1/payment/get-stripe-user-transactions?customer=${response?.data?.data?.customerId}`,
-        
+
         {
           headers: {
             Authorization: `Bearer ${datas.access_token}`,
           },
         }
       )
-      .then((data) => {
-        console.log("history", data.data.data);
-        setData(data.data.data);
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
+      .then((response) => {
+        console.log(response.data.data.customerId);
+        const res = axios
+          .get(
+            ` https://routeon.mettlesol.com/v1/payment/get-stripe-user-transactions?user=${response?.data?.data?.customerId}`,
 
+            {
+              headers: {
+                Authorization: `Bearer ${datas.access_token}`,
+              },
+            }
+          )
+          .then((data) => {
+            console.log("history", data.data.data);
+            setData(data.data.data);
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
       })
       .catch((err) => {
         console.log("error", err);

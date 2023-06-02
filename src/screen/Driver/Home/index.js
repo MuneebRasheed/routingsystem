@@ -112,7 +112,7 @@ export default function Home({ route }) {
         style={{
           borderRadius: 10,
           // alignItems: "center",
-          minHeight:'100%'
+          minHeight: "100%",
         }}
         backdropPressToClose={false}
       >
@@ -120,6 +120,7 @@ export default function Home({ route }) {
           return (
             <BiddingCard
               val={val}
+              key={val?._id}
               CloseModelBaseOnId={closeModelBaseOnId}
               handleBid={handleBid}
             />
@@ -132,12 +133,16 @@ export default function Home({ route }) {
   console.log("STATET ===>", incomingParcelNotifications);
   return (
     <Container>
-       <Modal isOpen={mainModel} entry={"top"} backdropOpacity={0.3}     swipeToClose={false} >
+      <Modal
+        isOpen={mainModel}
+        entry={"top"}
+        backdropOpacity={0.3}
+        swipeToClose={false}
+      >
         <View
           style={{
             flex: 1,
-            backgroundColor:'red'
-         
+            backgroundColor: "red",
           }}
         >
           <MainModel />
@@ -155,7 +160,7 @@ export default function Home({ route }) {
       <DarkStatusBar />
 
       <Header leftType="menu" title={"Dashboard"} />
-     
+
       <Content>
         <ScrollView>
           <View

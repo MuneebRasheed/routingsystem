@@ -15,6 +15,7 @@ import { bind } from "@utility/component";
 import { DarkStatusBar } from "@component/StatusBar";
 import { logout } from "../../../store/reducers/session";
 import { getFCMToken } from "../../../helper/pushnotification_helper";
+import { showMessage } from "../../../helper/showAlert";
 
 export default function Intro({ navigation }) {
   const dispatch = useDispatch();
@@ -26,7 +27,12 @@ export default function Intro({ navigation }) {
 
     if (user) {
       messaging().onNotificationOpenedApp((remoteMessage) => {
-        if (remoteMessage && user && user?.roles?.includes("rider")) {
+        if (
+          remoteMessage &&
+          user &&
+          user?.roles?.includes("rider") &&
+          remoteMessage?.data.notificationType === "parcel_notify"
+        ) {
           console.log(
             "Notification caused app to open from background state:",
             remoteMessage.notification
@@ -35,12 +41,30 @@ export default function Intro({ navigation }) {
             data: remoteMessage.notification.body,
           });
         }
+
+        if (
+          remoteMessage &&
+          user &&
+          user?.roles?.includes("user") &&
+          remoteMessage?.data.notificationType === "parcel_reboot"
+        ) {
+          console.log(
+            "Notification caused app to open from background state:",
+            remoteMessage.notification
+          );
+          navigation.navigate("PublicHome");
+        }
       });
       // Check whether an initial notification is available
       messaging()
         .getInitialNotification()
         .then((remoteMessage) => {
-          if (remoteMessage && user && user?.roles?.includes("rider")) {
+          if (
+            remoteMessage &&
+            user &&
+            user?.roles?.includes("rider") &&
+            remoteMessage?.data.notificationType === "parcel_notify"
+          ) {
             navigation.navigate("PublicHome", {
               data: remoteMessage.notification.body,
             });
@@ -53,21 +77,31 @@ export default function Intro({ navigation }) {
       messaging().onMessage(async (remoteMessage) => {
         console.log("FOREGOURND===>");
         console.log("MY CURRENT USER123===>", user);
+        console.log("REMOTE MESAGE===>", remoteMessage);
         if (
           remoteMessage &&
           user &&
           user?.roles?.includes("rider") &&
-          remoteMessage?.data.type === "parcel_notify"
+          remoteMessage?.data.notificationType === "parcel_notify"
         ) {
-          console.log("MY CURRENT USER===>", user);
+          console.log("PARCEL-TYPE===>", remoteMessage?.data.type);
           navigation.navigate("PublicHome", {
             data: remoteMessage.notification.body,
           });
+          console.log("notification on foreground state....", remoteMessage);
+        }
+
+        if (
+          remoteMessage &&
+          user &&
+          user?.roles?.includes("user") &&
+          remoteMessage?.data.notificationType === "parcel_reboot"
+        ) {
           console.log(
-            "notification on foreground state....",
-            remoteMessage,
-            remoteMessage?.data.type === "parcel_notify"
+            "notification on foreground state.... USER",
+            remoteMessage
           );
+          showMessage("success", remoteMessage.notification.body);
         }
       });
 
