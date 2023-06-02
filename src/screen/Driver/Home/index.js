@@ -136,8 +136,6 @@ export default function Home({ route }) {
         <View
           style={{
             flex: 1,
-            backgroundColor:'red'
-         
           }}
         >
           <MainModel />

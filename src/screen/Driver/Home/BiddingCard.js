@@ -98,7 +98,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               fontSize: 20,
             }}
           >
-            <Text style={styles.biddingCardText}>Delivery Time: {val?.bidding_type}</Text>
+            <Text style={styles.biddingCardText}>Delivery Time: {`${val?.bidding_type}(${JSON.stringify(val?.time).substr(1,10)})`}</Text>
           </View>
         </View>
       </View>
