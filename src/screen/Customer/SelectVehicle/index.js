@@ -320,8 +320,7 @@ function SelectVehicle(params) {
     formData.append("parcel_type", itemsType);
     // formData.append("biddingStartTime", "2023-12-06");
     // formData.append("biddingEndTime", "2023-12-06");
-    // formData.append("bidding_type", pracelTimeType);
-    formData.append("bidding_type", "range");
+    formData.append("bidding_type", pracelTimeType);
 
     console.log("FormData", formData);
 
@@ -427,8 +426,8 @@ function SelectVehicle(params) {
                     </Button>
                     <Button
                       onPress={() => {
-                        setOpen(true)
-                   
+                        setOpen(true);
+
                         setDateOneTimeSelect(true);
                       }}
                     >
@@ -439,12 +438,13 @@ function SelectVehicle(params) {
                         {__("Range")}
                       </Text>
                     </Button>
-                    <Button onPress={() => {
-                    
-                    setOpenD(true);
-                
-                    setDateOneTimeSelect(true);
-                    }}>
+                    <Button
+                      onPress={() => {
+                        setOpenD(true);
+
+                        setDateOneTimeSelect(true);
+                      }}
+                    >
                       <Text style={styles.accText}>{__("Time")}</Text>
                     </Button>
                   </View>
