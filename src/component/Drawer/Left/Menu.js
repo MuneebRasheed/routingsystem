@@ -69,12 +69,7 @@ export const Data3 = [
     iconName: "home",
     iconType: "FontAwesome",
   },
-  // {
-  //   name: "My Bookings",
-  //   route: "DriverBooking",
-  //   iconName: "calendar-check-o",
-  //   iconType: "FontAwesome",
-  // },
+ 
   {
     name: "Profile",
     route: "DriverManageProfile",
@@ -111,10 +106,29 @@ export const Data3 = [
     iconName: "logout",
     iconType: "AntDesign",
   },
-  // {
-  //   name: "Payments",
-  //   route: "CustomerAllPayments",
-  //   iconName: "logout",
-  //   iconType: "AntDesign",
-  // },
+ 
+];
+
+
+export const Data4 = [
+  {
+    name: "Home",
+    route: "PublicHome",
+    iconName: "home",
+    iconType: "FontAwesome",
+  },
+ 
+  {
+    name: "Profile",
+    route: "DriverManageProfile",
+    iconName: "account",
+    iconType: "MaterialCommunityIcons",
+  },
+  {
+    name: "Logout",
+    route: "PublicIntro",
+    iconName: "logout",
+    iconType: "AntDesign",
+  },
+ 
 ];

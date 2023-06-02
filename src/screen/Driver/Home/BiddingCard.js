@@ -98,7 +98,7 @@ const BiddingCard = ({ val, CloseModelBaseOnId, handleBid }) => {
               fontSize: 20,
             }}
           >
-            <Text style={styles.biddingCardText}>Delivery Time: Now</Text>
+            <Text style={styles.biddingCardText}>Delivery Time: {val?.bidding_type}</Text>
           </View>
         </View>
       </View>

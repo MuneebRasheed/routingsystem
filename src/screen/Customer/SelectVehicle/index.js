@@ -320,7 +320,8 @@ function SelectVehicle(params) {
     formData.append("parcel_type", itemsType);
     // formData.append("biddingStartTime", "2023-12-06");
     // formData.append("biddingEndTime", "2023-12-06");
-    formData.append("parcel_bidding_type", pracelTimeType);
+    // formData.append("bidding_type", pracelTimeType);
+    formData.append("bidding_type", "range");
 
     console.log("FormData", formData);
 
@@ -426,21 +427,26 @@ function SelectVehicle(params) {
                     </Button>
                     <Button
                       onPress={() => {
-                        setOpenD(true);
-
+                        setOpen(true)
+                   
                         setDateOneTimeSelect(true);
                       }}
                     >
                       <Text
                         style={styles.accText}
-                        onPress={() => setOpen(true)}
+                        // onPress={() => setOpen(true)}
                       >
                         {__("Range")}
                       </Text>
                     </Button>
-                    {/* <Button onPress={() => setOpen(true)}>
+                    <Button onPress={() => {
+                    
+                    setOpenD(true);
+                
+                    setDateOneTimeSelect(true);
+                    }}>
                       <Text style={styles.accText}>{__("Time")}</Text>
-                    </Button> */}
+                    </Button>
                   </View>
                 )}
               />
@@ -464,7 +470,7 @@ function SelectVehicle(params) {
                 />
               )}
 
-              {/* {openD && (
+              {openD && (
                 <DatePicker
                   modal
                   mode="time"
@@ -473,6 +479,7 @@ function SelectVehicle(params) {
                   onConfirm={(date) => {
                     setOpenD(false);
                     setDate(date);
+                    setPracelTimeType("time");
                     setOpened(false);
                     console.log(JSON.stringify(date), opened);
                   }}
@@ -480,7 +487,7 @@ function SelectVehicle(params) {
                     setOpenD(false);
                   }}
                 />
-              )} */}
+              )}
 
               <View style={styles.formRow}>
                 <TextInput
