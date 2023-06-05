@@ -332,7 +332,7 @@ export default {
     borderBottomWidth: 1,
     borderColor: COLOR.SMOKELIGHT,
     // backgroundColor:'red',
-    width:340 
+    width:'92%'
   
   },
   switchText: {

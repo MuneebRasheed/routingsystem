@@ -194,6 +194,7 @@ export default function ManageProfile({ navigation }) {
     formData.append("first_name", name);
     formData.append("avatar_file", profile);
     formData.append("national_ID_file", idCardCheck);
+    // formData.append("national_ID_file", idCardCheck);
     formData.append("phone", phoneNumber);
     formData.append("vehicle_no", vehicalNumber);
     // formData.append("driving_license", drivingLiscence);
