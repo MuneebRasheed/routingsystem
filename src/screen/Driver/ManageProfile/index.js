@@ -35,7 +35,7 @@ export default function ManageProfile({ navigation }) {
   const [tabSelected, setTabSelected] = useState("profile");
   const [isEnabled, setIsEnabled] = useState(false);
   const [idCardCheck, setIdCardCheck] = useState();
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState();
   const [profileHttp, setProfileHttp] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,7 +44,7 @@ export default function ManageProfile({ navigation }) {
   const [drivingLiscence, setDrivingLiscence] = useState("");
   const [nationalCard, setNationalCard] = useState();
 
-  const [licenseProofCheck, setLicenseProofCheck] = useState("");
+  const [licenseProofCheck, setLicenseProofCheck] = useState();
   const [license, setLicense] = useState("");
   const [date, setDate] = useState(new Date());
   const [displayDate, setDisplayDate] = useState("");
@@ -96,7 +96,7 @@ export default function ManageProfile({ navigation }) {
         setName(data.data.data.first_name);
         setVehicalNumber(data.data.data.vehicle_no);
         // setDrivingLiscence(data.data.data.driving_license);
-        setLicense(data?.data.data.driving_license);
+        setLicense(data?.data.data?.driving_license[0]);
         setDisplayDate(data?.data?.data?.driving_license_expiry);
         if (data?.data?.data?.driving_license_expiry) {
           setIsDateExist(true);
@@ -104,7 +104,7 @@ export default function ManageProfile({ navigation }) {
         setPhoneNumber(data.data.data.phone);
         setProfileHttp(data.data.data.avatar);
         setEmail(data.data.data.email);
-        setNationalCard(data.data.data.ID_file);
+        setNationalCard(data.data.data.ID_file[0]);
       })
       .catch((err) => {
         console.log("Get data account error");
