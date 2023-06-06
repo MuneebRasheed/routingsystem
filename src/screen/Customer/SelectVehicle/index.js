@@ -112,17 +112,27 @@ function SelectVehicle(params) {
 
   useEffect(() => {
     socket.on("bidding", (incomingBid) => {
-      console.log("CURRENT BIDDING", incomingBid);
       const incomingBidId = incomingBid.bidder._id;
 
-      const updatedBids =
-        bids.length > 0
-          ? bids.map((bid) =>
-              bid.bidder._id === incomingBidId ? incomingBid : bid
-            )
-          : [incomingBid];
+      setBids((prevBids) => {
+        if (prevBids?.length > 0) {
+          const isBidFound = prevBids?.find(
+            (bid) => bid?.bidder?._id === incomingBidId
+          );
 
-      setBids(updatedBids);
+          if (isBidFound) {
+            const filteredBids = prevBids?.filter(
+              (bid) => bid?.bidder?._id !== incomingBidId
+            );
+
+            return [incomingBid, ...filteredBids];
+          } else {
+            return [incomingBid, ...prevBids];
+          }
+        } else {
+          return [incomingBid, ...prevBids];
+        }
+      });
       if (!mainModel) {
         setMainModel(true);
       }
@@ -374,7 +384,7 @@ function SelectVehicle(params) {
       >
         {bids.map((val) => {
           return (
-            <View style={{ height: "28%" }}>
+            <View style={{ height: "28%" }} key={val?.bidder?._id}>
               <MainModel value={val} />
             </View>
           );
