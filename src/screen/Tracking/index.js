@@ -26,8 +26,6 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const TrackingScreen = ({ route }) => {
-  console.log("COMPLETE DATA===>", route?.params?.data);
-
   const [isTrackingStart, setIsTrackingStart] = useState(false);
   const [currentTripStatus, setCurrentTripStatus] = useState(
     route?.params?.data?.status
@@ -72,24 +70,42 @@ const TrackingScreen = ({ route }) => {
     }
   };
 
-  const getCurrentLocation = async () => {
+  const getCurrentLocation = async (status) => {
     const isLocationOn = await locationPermission();
     if (isLocationOn) {
       const res = await getUserCurrentPosition();
-      console.log("GET LIVE LOCATION AFTER 5 SEC");
+      console.log("GET LIVE LOCATION AFTER 5 SEC", res);
       animate(res.latitude, res.longitude);
-      setState({
-        ...state,
-        pickupCords: res,
-        coordinate: {
-          ...res,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        },
-        heading: res.heading,
-      });
 
-      console.log("CURRENT POSITION=====>", res);
+      if (status === "started") {
+        setState({
+          ...state,
+          pickupCords: res,
+          coordinate: {
+            ...res,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          },
+          droplocationCords: route?.params?.data?.from_location
+            ? route?.params?.data?.from_location
+            : {},
+          heading: res.heading,
+        });
+      } else if (status === "pickup") {
+        setState({
+          ...state,
+          pickupCords: res,
+          coordinate: {
+            ...res,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          },
+          droplocationCords: route?.params?.data?.to_location
+            ? route?.params?.data?.to_location
+            : {},
+          heading: res.heading,
+        });
+      }
 
       socket.emit("tracking", {
         to: route?.params?.data.customer_id?._id,
@@ -133,18 +149,22 @@ const TrackingScreen = ({ route }) => {
 
   useEffect(() => {
     if (
-      (user && user.roles.includes("driver")) ||
-      (user && user.roles.includes("rider"))
+      ((user && user.roles.includes("driver")) ||
+        (user && user.roles.includes("rider"))) &&
+      currentTripStatus !== "in_progress" &&
+      currentTripStatus !== "done"
     ) {
-      getCurrentLocation();
+      getCurrentLocation(currentTripStatus);
     }
 
     if (
-      (user && user.roles.includes("driver")) ||
-      (user && user.roles.includes("rider"))
+      ((user && user.roles.includes("driver")) ||
+        (user && user.roles.includes("rider"))) &&
+      currentTripStatus !== "in_progress" &&
+      currentTripStatus !== "done"
     ) {
       const interval = setInterval(() => {
-        getCurrentLocation();
+        getCurrentLocation(currentTripStatus);
       }, 6000);
 
       return () => clearInterval(interval);
@@ -194,7 +214,7 @@ const TrackingScreen = ({ route }) => {
         });
       });
     }
-  }, []);
+  }, [currentTripStatus]);
 
   return (
     <View>
@@ -300,7 +320,7 @@ const TrackingScreen = ({ route }) => {
                         ? "PICK UP"
                         : currentTripStatus === "pickup"
                         ? "DONE"
-                        : "TRIP COMPLETED"}
+                        : "TRIP COMPLETED!"}
                     </Text>
                   )}
                 </View>
