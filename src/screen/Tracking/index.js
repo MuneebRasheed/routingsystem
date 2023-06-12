@@ -26,7 +26,7 @@ const LATITUDE_DELTA = 0.04;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const TrackingScreen = ({ route }) => {
-  // console.log("COMPLETE DATA===>", route?.params?.data);
+  console.log("COMPLETE DATA===>", route?.params?.data);
 
   const [isTrackingStart, setIsTrackingStart] = useState(false);
   const [currentTripStatus, setCurrentTripStatus] = useState(
@@ -95,7 +95,7 @@ const TrackingScreen = ({ route }) => {
         to: route?.params?.data.customer_id?._id,
         location: `${res.latitude}, ${res.longitude}`,
         parcel: route?.params?.data._id,
-        riderId: route?.params?.data.rider_id,
+        riderId: route?.params?.data.rider_id?._id,
         status: "start",
         heading: res.heading,
       });
@@ -152,10 +152,21 @@ const TrackingScreen = ({ route }) => {
 
     if (user && user.roles.includes("user") && socket) {
       socket.on("tracking", (incomingData) => {
-        if (!isTrackingStart) {
+        if (
+          !isTrackingStart &&
+          route?.params?.data?._id.toString() ===
+            incomingData.data.parcel.toString()
+        ) {
           setIsTrackingStart(true);
         }
         console.log("INCOMING DRIVER POS===>", incomingData);
+
+        if (
+          route?.params?.data?._id.toString() !==
+          incomingData.data.parcel.toString()
+        ) {
+          return;
+        }
 
         const [latitude, longitude] = incomingData.data.location.split(",");
         console.log(
@@ -181,21 +192,9 @@ const TrackingScreen = ({ route }) => {
           },
           heading: headingPoints,
         });
-
-        // const [latitude, longitude] = location.split(",");
-        // console.log("Current longitute ", latitude, longitude);
-        // setState({
-        //   ...state,
-        //   pickupCords: {
-        //     latitude: latitude.trim(),
-        //     longitude: longitude.trim(),
-        //   },
-        // });
       });
     }
   }, []);
-
-  // console.log("CURRENT STATE=>", currentTripStatus);
 
   return (
     <View>
