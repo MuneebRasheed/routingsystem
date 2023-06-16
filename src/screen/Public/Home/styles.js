@@ -1,45 +1,44 @@
-import { COLOR, FAMILY, SIZE } from '@theme/typography'
+import { COLOR, FAMILY, SIZE } from "@theme/typography";
 
-const React = require('react-native')
-const { Platform } = React
+const React = require("react-native");
+const { Platform } = React;
 
 export default {
-
   // --content--//
 
   homeContainer: {
     backgroundColor: COLOR.PRIMARY,
-    paddingVertical: 20
+    flex: 1,
   },
   formRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: COLOR.LIGHT,
     borderRadius: 3,
     marginBottom: 20,
     marginHorizontal: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
   },
   formInput: {
     flex: 1,
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
     color: COLOR.PRIMARY,
-    marginLeft: 5
+    marginLeft: 5,
   },
   footerBtn: {
-    backgroundColor: COLOR.PRIMARY
+    backgroundColor: COLOR.PRIMARY,
   },
   footerBtnInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    margin: 20
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: 20,
   },
   selectBtn: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: COLOR.GREEN,
     borderRadius: 3,
     marginRight: 5,
@@ -47,26 +46,38 @@ export default {
   },
   shareBtn: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: COLOR.BLUE,
     borderRadius: 3,
     paddingVertical: 15,
-    marginLeft: 5
+    marginLeft: 5,
   },
   shareBtnText: {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
-    color: COLOR.LIGHT
+    color: COLOR.LIGHT,
   },
   // --map--//
   mMap: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    flex: 1,
     borderColor: COLOR.LIGHT,
-    borderWidth: 1
+    borderWidth: 1,
   },
   mMapImg: {
-    flex: 1
-  }
-}
+    flex: 1,
+  },
+
+  // * NEW STYLES FOR UBER LIKE FUNCTIONALITY
+  marker: {
+    width: 40,
+    height: 40,
+  },
+  closeIconStyles: {
+    marginTop: 10,
+    marginRight: 3,
+    color: COLOR.DARKLIGHT,
+    fontSize: 24,
+  },
+};

@@ -1,10 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, StyleSheet, Dimensions, Platform, Image } from "react-native";
-import { Container, Content, Text } from "@component/Basic";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Platform,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { Container, Content, Text, Icon } from "@component/Basic";
 import { DarkStatusBar } from "@component/StatusBar";
 import { Button } from "@component/Form";
 import { navigate } from "@navigation";
 import { __ } from "@utility/translation";
+import { COLOR, SIZE } from "@theme/typography";
 import styles from "./styles";
 
 import MapView, { Marker, AnimatedRegion } from "react-native-maps";
@@ -47,6 +55,13 @@ export default function Home(params) {
 
   const { pickupCords, droplocationCords, coordinate } = state;
 
+  const defaultLocation = {
+    latitude: 30.375321,
+    latitudeDelta: 13.4496069226905,
+    longitude: 69.34511599999999,
+    longitudeDelta: 8.096753331385585,
+  };
+
   const handleNavigation = () => {
     if (
       Object.values(state.pickupCords).length > 0 &&
@@ -81,6 +96,25 @@ export default function Home(params) {
     }
   };
 
+  const showClearInputButton = (clearInput) => {
+    return (
+      <Icon
+        name="ios-close-circle-outline"
+        type="Ionicons"
+        style={styles.closeIconStyles}
+        onPress={clearInput}
+      />
+    );
+  };
+
+  const handleClearPickupInput = () => {
+    pickupRef?.current?.setAddressText("");
+    setState({
+      ...state,
+      pickupCords: {},
+    });
+  };
+
   useEffect(() => {
     console.log("CURRENT PARAMS ==>", params);
     askForLocationPermission();
@@ -98,6 +132,8 @@ export default function Home(params) {
       );
     }
   }, []);
+
+  console.log("LATEST PICKUP COORDS===>", pickupCords);
 
   return (
     <Container>
@@ -170,6 +206,12 @@ export default function Home(params) {
               returnKeyType={"default"}
               fetchDetails={true}
               enablePoweredByContainer={false}
+              renderRightButton={() => {
+                return pickupRef?.current?.getAddressText() &&
+                  state.pickupCords?.latitude
+                  ? showClearInputButton(handleClearPickupInput)
+                  : null;
+              }}
             />
           </View>
           <View style={styles.formRow}>
@@ -236,30 +278,37 @@ export default function Home(params) {
           <View style={styles.mMap}>
             <MapView
               ref={mapRef}
-              style={StyleSheet.absoluteFill}
-              initialRegion={
+              style={[StyleSheet.absoluteFill, { elevation: -1 }]}
+              initialRegion={defaultLocation}
+              region={
                 Object.values(pickupCords).length > 0
                   ? {
-                      ...pickupCords,
                       latitudeDelta: LATITUDE_DELTA,
                       longitudeDelta: LONGITUDE_DELTA,
+                      ...pickupCords,
                     }
                   : null
               }
+              onRegionChangeComplete={async (coords, { isGesture }) => {
+                if (isGesture && !pickupCords?.latitude) {
+                  const returnedAddress = await handleReverseGeocoding(
+                    coords?.latitude,
+                    coords?.longitude
+                  );
+
+                  coords.locationName = returnedAddress;
+                  pickupRef.current?.setAddressText(coords.locationName);
+                  pickupRef.current?.blur();
+
+                  console.log("LAST COORDS===>", coords);
+
+                  setState({
+                    ...state,
+                    pickupCords: coords,
+                  });
+                }
+              }}
             >
-              {/* {Object.values(state.pickupCords).length > 0 && (
-                <Marker.Animated ref={markerRef} coordinate={coordinate}>
-                  <Image
-                    source={require("../../../../assets/images/bike.png")}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      transform: [{ rotate: `${heading}deg` }],
-                    }}
-                    resizeMode="contain"
-                  />
-                </Marker.Animated>
-              )} */}
               {Object.values(state.pickupCords).length > 0 && (
                 <Marker
                   coordinate={pickupCords}
@@ -287,6 +336,24 @@ export default function Home(params) {
                   />
                 )}
             </MapView>
+            {!state?.pickupCords?.latitude && (
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  style={styles.marker}
+                  source={require("../../../../assets/images/pinpoint.png")}
+                />
+              </View>
+            )}
           </View>
         </View>
       </Content>
