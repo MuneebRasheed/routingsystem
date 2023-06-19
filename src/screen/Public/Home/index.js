@@ -52,14 +52,15 @@ export default function Home(params) {
     }),
     heading: 0,
   });
+  const [temporaryPickUpCords, setTemporaryPickUpCords] = useState({});
 
   const { pickupCords, droplocationCords, coordinate } = state;
 
   const defaultLocation = {
-    latitude: 30.375321,
-    latitudeDelta: 13.4496069226905,
-    longitude: 69.34511599999999,
-    longitudeDelta: 8.096753331385585,
+    latitude: 31.522592971963892,
+    latitudeDelta: 0.039999248406068943,
+    longitude: 74.35437122359872,
+    longitudeDelta: 0.05085300654172897,
   };
 
   const handleNavigation = () => {
@@ -84,6 +85,7 @@ export default function Home(params) {
       return address;
     } catch (err) {
       console.log("ERROR WHILE GEOCODING ADDRESS", err);
+      throw err;
     }
   };
 
@@ -115,6 +117,49 @@ export default function Home(params) {
     });
   };
 
+  const handleRegionChangeComplete = async () => {
+    try {
+      if (!temporaryPickUpCords?.latitude) {
+        const temporaryPickUpCords = {
+          ...defaultLocation,
+        };
+        const returnedAddress = await handleReverseGeocoding(
+          temporaryPickUpCords?.latitude,
+          temporaryPickUpCords?.longitude
+        );
+        temporaryPickUpCords.locationName = returnedAddress;
+
+        pickupRef.current?.setAddressText(temporaryPickUpCords.locationName);
+        pickupRef.current?.blur();
+        setState({
+          ...state,
+          pickupCords: temporaryPickUpCords,
+        });
+      } else {
+        const temporaryPickUpCordsObj = {
+          ...temporaryPickUpCords,
+        };
+        const returnedAddress = await handleReverseGeocoding(
+          temporaryPickUpCordsObj?.latitude,
+          temporaryPickUpCordsObj?.longitude
+        );
+        temporaryPickUpCordsObj.locationName = returnedAddress;
+
+        pickupRef.current?.setAddressText(temporaryPickUpCordsObj.locationName);
+        pickupRef.current?.blur();
+        setState({
+          ...state,
+          pickupCords: temporaryPickUpCordsObj,
+        });
+      }
+    } catch (err) {
+      console.log("ERROR==>", err);
+      alert(
+        "Something went wrong while setting location through on region complete!"
+      );
+    }
+  };
+
   useEffect(() => {
     console.log("CURRENT PARAMS ==>", params);
     askForLocationPermission();
@@ -133,7 +178,7 @@ export default function Home(params) {
     }
   }, []);
 
-  console.log("LATEST PICKUP COORDS===>", pickupCords);
+  console.log("LATEST TEMP COORDS===>", temporaryPickUpCords);
 
   return (
     <Container>
@@ -291,21 +336,7 @@ export default function Home(params) {
               }
               onRegionChangeComplete={async (coords, { isGesture }) => {
                 if (isGesture && !pickupCords?.latitude) {
-                  const returnedAddress = await handleReverseGeocoding(
-                    coords?.latitude,
-                    coords?.longitude
-                  );
-
-                  coords.locationName = returnedAddress;
-                  pickupRef.current?.setAddressText(coords.locationName);
-                  pickupRef.current?.blur();
-
-                  console.log("LAST COORDS===>", coords);
-
-                  setState({
-                    ...state,
-                    pickupCords: coords,
-                  });
+                  setTemporaryPickUpCords(coords);
                 }
               }}
             >
@@ -362,10 +393,16 @@ export default function Home(params) {
           <Button
             style={styles.selectBtn}
             onPress={() => {
-              handleNavigation();
+              if (!pickupCords?.latitude) {
+                handleRegionChangeComplete();
+              } else {
+                handleNavigation();
+              }
             }}
           >
-            <Text style={styles.shareBtnText}>{__("Select Driving Host")}</Text>
+            <Text style={styles.shareBtnText}>
+              {!pickupCords?.latitude ? "DONE" : __("Select Driving Host")}
+            </Text>
           </Button>
         </View>
       </View>
