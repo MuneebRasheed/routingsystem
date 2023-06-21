@@ -112,7 +112,7 @@ const TrackingScreen = ({ route }) => {
         location: `${res.latitude}, ${res.longitude}`,
         parcel: route?.params?.data._id,
         riderId: route?.params?.data.rider_id?._id,
-        status: "start",
+        status,
         heading: res.heading,
       });
     }
@@ -198,20 +198,44 @@ const TrackingScreen = ({ route }) => {
         const headingPoints = +incomingData.data.heading;
 
         animate(latitudePoints, longitudePoints);
-        setState({
-          ...state,
-          pickupCords: {
-            latitude: latitudePoints,
-            longitude: longitudePoints,
-          },
-          coordinate: {
-            latitude: latitudePoints,
-            longitude: longitudePoints,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          },
-          heading: headingPoints,
-        });
+        if (incomingData?.data?.status === "started") {
+          setState({
+            ...state,
+            pickupCords: {
+              latitude: latitudePoints,
+              longitude: longitudePoints,
+            },
+            coordinate: {
+              latitude: latitudePoints,
+              longitude: longitudePoints,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            },
+            droplocationCords: route?.params?.data?.from_location
+              ? route?.params?.data?.from_location
+              : {},
+            heading: headingPoints,
+          });
+        } else if (incomingData?.data?.status === "pickup") {
+          console.log("IN PICKUP===>", incomingData?.data?.status);
+          setState({
+            ...state,
+            pickupCords: {
+              latitude: latitudePoints,
+              longitude: longitudePoints,
+            },
+            coordinate: {
+              latitude: latitudePoints,
+              longitude: longitudePoints,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA,
+            },
+            droplocationCords: route?.params?.data?.to_location
+              ? route?.params?.data?.to_location
+              : {},
+            heading: headingPoints,
+          });
+        }
       });
     }
   }, [currentTripStatus]);
