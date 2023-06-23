@@ -332,8 +332,7 @@ export default {
     borderBottomWidth: 1,
     borderColor: COLOR.SMOKELIGHT,
     // backgroundColor:'red',
-    width:'92%'
-  
+    width: "92%",
   },
   switchText: {
     fontFamily: FAMILY.BOLD,
@@ -524,5 +523,11 @@ export default {
     fontFamily: FAMILY.BOLD,
     fontSize: SIZE.SIZE_12,
     color: COLOR.LIGHT,
+  },
+  loaderContainerStyles: {
+    width: "100%",
+    height: 500,
+    alignItems: "center",
+    justifyContent: "center",
   },
 };

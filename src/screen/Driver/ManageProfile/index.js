@@ -27,6 +27,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Hyperlink from "react-native-hyperlink";
 import DocumentPicker from "react-native-document-picker";
 import { showMessage } from "../../../helper/showAlert";
+import AppSpinner from "../../../component/AppSpinner";
 
 export default function ManageProfile({ navigation }) {
   const [selected, setSelected] = useState("");
@@ -50,6 +51,7 @@ export default function ManageProfile({ navigation }) {
   const [displayDate, setDisplayDate] = useState("");
   const [isDateExist, setIsDateExist] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // acct_1MwmIbPu2iasesq5
   const [PaymentTabSelected, setPaymentTabSelected] = useState("card");
@@ -93,6 +95,7 @@ export default function ManageProfile({ navigation }) {
       )
       .then((data) => {
         console.log("res account no", data.data.data);
+
         setName(data.data.data.first_name);
         setVehicalNumber(data.data.data.vehicle_no);
         // setDrivingLiscence(data.data.data.driving_license);
@@ -104,11 +107,14 @@ export default function ManageProfile({ navigation }) {
         setPhoneNumber(data.data.data.phone);
         setProfileHttp(data.data.data.avatar);
         setEmail(data.data.data.email);
+
+        setLoading(false);
         setNationalCard(data.data.data.ID_file[0]);
       })
       .catch((err) => {
         console.log("Get data account error");
         console.log("error", err);
+        setLoading(false);
       });
   };
   const fetchData = async () => {
@@ -288,7 +294,11 @@ export default function ManageProfile({ navigation }) {
   }
 
   function renderProfile() {
-    return (
+    return loading ? (
+      <View style={styles.loaderContainerStyles}>
+        <AppSpinner size="large" color={COLOR.PRIMARY} />
+      </View>
+    ) : (
       <SafeAreaView style={{ width: "100%", height: "79%" }}>
         <ScrollView showsVerticalScrollIndicator={true}>
           <View style={styles.profileContainer}>
