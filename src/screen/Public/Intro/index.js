@@ -37,8 +37,11 @@ export default function Intro({ navigation }) {
             "Notification caused app to open from background state:",
             remoteMessage.notification
           );
-          navigation.navigate("PublicHome", {
-            data: remoteMessage.notification.body,
+          navigate("DrawerNav", {
+            screen: "PublicHome",
+            params: {
+              data: remoteMessage.notification.body,
+            },
           });
         }
 
@@ -52,7 +55,9 @@ export default function Intro({ navigation }) {
             "Notification caused app to open from background state:",
             remoteMessage.notification
           );
-          navigation.navigate("PublicHome");
+          navigate("DrawerNav", {
+            screen: "PublicHome",
+          });
         }
       });
       // Check whether an initial notification is available
@@ -65,28 +70,31 @@ export default function Intro({ navigation }) {
             user?.roles?.includes("rider") &&
             remoteMessage?.data.notificationType === "parcel_notify"
           ) {
-            navigation.navigate("PublicHome", {
-              data: remoteMessage.notification.body,
-            });
             console.log(
               "Notification caused app to open from quit state:",
               remoteMessage.notification
             );
+            navigate("DrawerNav", {
+              screen: "PublicHome",
+              params: {
+                data: remoteMessage.notification.body,
+              },
+            });
           }
         });
       messaging().onMessage(async (remoteMessage) => {
         console.log("FOREGOURND===>");
-        console.log("MY CURRENT USER123===>", user);
-        console.log("REMOTE MESAGE===>", remoteMessage);
         if (
           remoteMessage &&
           user &&
           user?.roles?.includes("rider") &&
           remoteMessage?.data.notificationType === "parcel_notify"
         ) {
-          console.log("PARCEL-TYPE===>", remoteMessage?.data.type);
-          navigation.navigate("PublicHome", {
-            data: remoteMessage.notification.body,
+          navigate("DrawerNav", {
+            screen: "PublicHome",
+            params: {
+              data: remoteMessage.notification.body,
+            },
           });
           console.log("notification on foreground state....", remoteMessage);
         }
